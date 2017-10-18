@@ -17,7 +17,7 @@ public class Customer {
         return this.bookings;
     }
 
-    public Booking createBooking() {
-        return new Booking();
+    public Booking createBooking(boolean paidFor, Seat seat) {
+        return new Booking(paidFor, seat;
     }
 }

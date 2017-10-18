@@ -8,6 +8,10 @@ public class Cinema {
     public Cinema() {
     }
 
+    public static ArrayList<Film> getFilms() {
+        return films;
+    }
+
     static boolean createFilm() {
         return false;
     }

@@ -1,2 +1,2 @@
 # cinego
-The **world's best** cinema booking system/
+The **world's best** cinema booking system.

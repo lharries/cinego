@@ -5,23 +5,26 @@ import java.util.ArrayList;
 public class Cinema {
     public static ArrayList<Film> films = new ArrayList<Film>();
 
-    public static boolean createFilm() {
+    public Cinema() {
+    }
+
+    static boolean createFilm() {
         return false;
     }
 
-    public static boolean deleteFilm() {
+    static boolean deleteFilm() {
         return false;
     }
 
-    public static boolean createScreening() {
+    static boolean createScreening() {
         return false;
     }
 
-    public static boolean deleteScreening() {
+    static boolean deleteScreening() {
         return false;
     }
 
-    public static boolean exportFilms() {
-        return false;
+    static void exportFilms() {
+        // TODO: Open the CSV
     }
 }

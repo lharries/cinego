@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Customer {
     private ArrayList<Booking> bookings = new ArrayList<Booking>();
 
+    public Customer() {
+    }
+
     public ArrayList<Booking> getBookings() {
         return this.bookings;
     }

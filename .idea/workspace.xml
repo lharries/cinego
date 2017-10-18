@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e4aeae8-d13b-4c8a-913c-cc76ad8058d1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Booking.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Cinema.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Customer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Employee.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Film.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Screening.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/User.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Booking.java" afterPath="$PROJECT_DIR$/src/main/Booking.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cinema.java" afterPath="$PROJECT_DIR$/src/main/Cinema.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Customer.java" afterPath="$PROJECT_DIR$/src/main/Customer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Employee.java" afterPath="$PROJECT_DIR$/src/main/Employee.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Film.java" afterPath="$PROJECT_DIR$/src/main/Film.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Screening.java" afterPath="$PROJECT_DIR$/src/main/Screening.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/User.java" afterPath="$PROJECT_DIR$/src/main/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -41,73 +42,115 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cinema.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Cinema.java">
+      <file leaf-file-name="Cinema.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Cinema.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+            <state relative-caret-position="405">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
-                <element signature="e#92#98#0" expanded="true" />
+                <element signature="e#121#127#0" expanded="true" />
+                <element signature="e#171#172#0" expanded="true" />
+                <element signature="e#199#200#0" expanded="true" />
+                <element signature="e#241#242#0" expanded="true" />
+                <element signature="e#269#270#0" expanded="true" />
+                <element signature="e#316#317#0" expanded="true" />
+                <element signature="e#344#345#0" expanded="true" />
+                <element signature="e#391#392#0" expanded="true" />
+                <element signature="e#419#420#0" expanded="true" />
+                <element signature="e#462#463#0" expanded="true" />
+                <element signature="e#490#491#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Film.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Film.java">
+        <entry file="file://$PROJECT_DIR$/src/main/Film.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="225">
+              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+              <folding>
+                <element signature="e#318#319#0" expanded="true" />
+                <element signature="e#346#347#0" expanded="true" />
+                <element signature="e#388#389#0" expanded="true" />
+                <element signature="e#422#423#0" expanded="true" />
+                <element signature="e#454#455#0" expanded="true" />
+                <element signature="e#482#483#0" expanded="true" />
+                <element signature="e#524#525#0" expanded="true" />
+                <element signature="e#558#559#0" expanded="true" />
+                <element signature="e#596#597#0" expanded="true" />
+                <element signature="e#630#631#0" expanded="true" />
+                <element signature="e#684#685#0" expanded="true" />
+                <element signature="e#730#731#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Screening.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Screening.java">
+        <entry file="file://$PROJECT_DIR$/src/main/Screening.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+            <state relative-caret-position="30">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/User.java">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="90">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding>
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#358#359#0" expanded="true" />
+                <element signature="e#408#409#0" expanded="true" />
+                <element signature="e#450#451#0" expanded="true" />
+                <element signature="e#486#487#0" expanded="true" />
+                <element signature="e#517#518#0" expanded="true" />
+                <element signature="e#565#566#0" expanded="true" />
+                <element signature="e#605#606#0" expanded="true" />
+                <element signature="e#638#639#0" expanded="true" />
+                <element signature="e#666#667#0" expanded="true" />
+                <element signature="e#708#709#0" expanded="true" />
+                <element signature="e#742#743#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Customer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Customer.java">
+        <entry file="file://$PROJECT_DIR$/src/main/Customer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="210">
+              <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+              <folding>
+                <element signature="e#123#132#0" expanded="true" />
+                <element signature="e#181#182#0" expanded="true" />
+                <element signature="e#217#218#0" expanded="true" />
+                <element signature="e#362#363#0" expanded="true" />
+                <element signature="e#398#399#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Employee.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Employee.java">
+        <entry file="file://$PROJECT_DIR$/src/main/Employee.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+            <state relative-caret-position="30">
+              <caret line="2" column="23" lean-forward="true" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Booking.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Booking.java">
+        <entry file="file://$PROJECT_DIR$/src/main/Booking.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="22" lean-forward="true" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -135,6 +178,15 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Cinema.java" />
+        <option value="$PROJECT_DIR$/src/Users/Employee.java" />
+        <option value="$PROJECT_DIR$/src/Users/User.java" />
+        <option value="$PROJECT_DIR$/src/main/Screening.java" />
+        <option value="$PROJECT_DIR$/src/main/Users/User.java" />
+        <option value="$PROJECT_DIR$/src/main/Employee.java" />
+        <option value="$PROJECT_DIR$/src/main/Cinema.java" />
+        <option value="$PROJECT_DIR$/src/main/Customer.java" />
+        <option value="$PROJECT_DIR$/src/main/Film.java" />
+        <option value="$PROJECT_DIR$/src/main/User.java" />
       </list>
     </option>
   </component>
@@ -170,6 +222,12 @@
               <item name="cinego" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="cinego" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cinego" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -182,6 +240,9 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.XSLT" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -370,14 +431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Film.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -386,55 +439,180 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screening.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Booking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/User.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Screening.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+        <state relative-caret-position="30">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Customer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Cinema.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Employee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Booking.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="true" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cinema.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        <state relative-caret-position="405">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#92#98#0" expanded="true" />
+            <element signature="e#121#127#0" expanded="true" />
+            <element signature="e#171#172#0" expanded="true" />
+            <element signature="e#199#200#0" expanded="true" />
+            <element signature="e#241#242#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
+            <element signature="e#462#463#0" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Customer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="e#123#132#0" expanded="true" />
+            <element signature="e#181#182#0" expanded="true" />
+            <element signature="e#217#218#0" expanded="true" />
+            <element signature="e#362#363#0" expanded="true" />
+            <element signature="e#398#399#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Film.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#346#347#0" expanded="true" />
+            <element signature="e#388#389#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#596#597#0" expanded="true" />
+            <element signature="e#630#631#0" expanded="true" />
+            <element signature="e#684#685#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="23" lean-forward="true" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#358#359#0" expanded="true" />
+            <element signature="e#408#409#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+            <element signature="e#517#518#0" expanded="true" />
+            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#666#667#0" expanded="true" />
+            <element signature="e#708#709#0" expanded="true" />
+            <element signature="e#742#743#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>cinego</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

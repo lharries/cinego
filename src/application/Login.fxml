@@ -3,10 +3,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400" prefWidth="400" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9">
+<AnchorPane prefHeight="400" prefWidth="400" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutX="67.0" layoutY="62.0" prefHeight="276.0" prefWidth="267.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -14,14 +14,23 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="104.0" layoutY="182.0" mnemonicParsing="false" text="Login" />
+                        <Button fx:id="loginButton" layoutX="108.0" layoutY="187.0" mnemonicParsing="false" text="Login" />
+                        <TextField fx:id="Email" layoutX="50.0" layoutY="36.0" text="E-Mail address" />
+                        <TextField fx:id="password" layoutX="50.0" layoutY="88.0" text="Password" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Register">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="registerButton" layoutX="104.0" layoutY="196.0" mnemonicParsing="false" text="Register" />
+                        <TextField layoutX="50.0" layoutY="14.0" text="Enter E-Mail" />
+                        <TextField layoutX="50.0" layoutY="54.0" text="Re-type E-Mail" />
+                        <TextField layoutX="50.0" layoutY="122.0" text="Enter password" />
+                        <TextField layoutX="50.0" layoutY="161.0" text="Re-type password" />
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.BottomNavigation?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Movie">
+   <children>
+      <ScrollPane layoutX="12.0" layoutY="16.0" prefHeight="369.0" prefWidth="201.0">
+         <content>
+            <AnchorPane prefHeight="174.0" prefWidth="228.0">
+               <children>
+                  <ImageView fitHeight="95.0" fitWidth="150.0" layoutX="74.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/moonlight%20poster.jpg" />
+                     </image>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="51.0" layoutY="106.0" prefHeight="28.0" prefWidth="119.0" text="Moonlight" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <BottomNavigation layoutX="305.0" layoutY="226.0" />
+   </children>
+</AnchorPane>

@@ -6,40 +6,36 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="513.0" fitWidth="758.0" layoutX="-26.0" layoutY="-7.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="513.0" fitWidth="758.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/films.jpg" />
          </image>
       </ImageView>
-      <Pane layoutX="180.0" layoutY="100.0" prefHeight="309.0" prefWidth="345.0" style="-fx-position-shape: center;">
+  <AnchorPane layoutX="200.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" opacity="0.93" prefHeight="308.0" prefWidth="330.0" style="-fx-background-color: ffffff;">
          <children>
-        <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.93" prefHeight="308.0" prefWidth="340.0" style="-fx-background-color: ffffff;">
-               <children>
-                  <Button fx:id="loginButton" layoutX="141.0" layoutY="253.0" mnemonicParsing="false" text="Login" />
-                  <TextField fx:id="Email" layoutX="28.0" layoutY="207.0" prefHeight="27.0" prefWidth="132.0" text="E-Mail address" />
-                  <TextField fx:id="password" layoutX="194.0" layoutY="207.0" prefHeight="27.0" prefWidth="127.0" text="Password" />
-                  <ImageView fitHeight="91.0" fitWidth="88.0" layoutX="128.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Cinestar.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="53.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to CineGo">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </AnchorPane>
+            <Button fx:id="loginButton" layoutX="180.0" layoutY="254.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text=" Employee Login" />
+            <TextField fx:id="Email" layoutX="63.0" layoutY="169.0" prefHeight="27.0" prefWidth="218.0" text="Username" />
+            <TextField fx:id="password" layoutX="63.0" layoutY="209.0" prefHeight="27.0" prefWidth="218.0" text="Password" />
+            <ImageView fitHeight="91.0" fitWidth="88.0" layoutX="128.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Cinestar.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="53.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to CineGo">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Button fx:id="loginButton1" layoutX="35.0" layoutY="254.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text=" Customer Login" />
          </children>
-      </Pane>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </AnchorPane>
    </children>
 </AnchorPane>

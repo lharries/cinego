@@ -1,2 +1,2 @@
 # cinego
-Test
+The **world's best** cinema booking system.

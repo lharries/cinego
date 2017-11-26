@@ -1,18 +1,27 @@
 package main;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class User {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private String userName;
 
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password, String userName) {
         this.firstName = firstName;
         this.lastName = lastName;
         // TODO: Validate email
         this.email = email;
-        // TODO: Validate password difficult;
+        // TODO: Validate password difficulty;
         this.password = password;
+
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -42,8 +51,18 @@ public class User {
     }
 
 
-    public void login() {
+    public static void login(String username, String password) {
+        Path p = Paths.get("../../data/users.txt");
 
+        try {
+            List<String> lines = Files.readAllLines(p);
+
+            for (String line : lines) {
+                System.out.println(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void logout() {

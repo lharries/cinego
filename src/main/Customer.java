@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Customer extends User {
     private ArrayList<Booking> bookings = new ArrayList<Booking>();
 
-    public Customer(String firstName, String lastName, String email, String password) {
-        super(firstName, lastName, email, password);
+    public Customer(String firstName, String lastName, String email, String password, String username) {
+        super(firstName, lastName, email, password, username);
     }
 
     public ArrayList<Booking> getBookings() {
@@ -19,6 +19,6 @@ public class Customer extends User {
     }
 
     public Booking createBooking(boolean paidFor, Seat seat) {
-        return new Booking(paidFor, seat;
+        return new Booking(paidFor, seat);
     }
 }

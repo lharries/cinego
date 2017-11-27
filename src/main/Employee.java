@@ -2,8 +2,8 @@ package main;
 
 public class Employee extends User {
 
-    public Employee(String firstName, String lastName, String email, String password) {
-        super(firstName, lastName, email, password);
+    public Employee(String firstName, String lastName, String email, String password, String username) {
+        super(firstName, lastName, email, password, username);
     }
     
     public boolean createFilm() {

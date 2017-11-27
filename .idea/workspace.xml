@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e4aeae8-d13b-4c8a-913c-cc76ad8058d1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/Seat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Booking.java" afterPath="$PROJECT_DIR$/src/main/Booking.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Cinema.java" afterPath="$PROJECT_DIR$/src/main/Cinema.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Customer.java" afterPath="$PROJECT_DIR$/src/main/Customer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Employee.java" afterPath="$PROJECT_DIR$/src/main/Employee.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Screening.java" afterPath="$PROJECT_DIR$/src/main/Screening.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/User.java" afterPath="$PROJECT_DIR$/src/main/User.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,122 +15,283 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cinego.iml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cinego.iml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cinema.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Cinema.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-              <folding>
-                <element signature="e#121#127#0" expanded="true" />
-                <element signature="e#193#194#0" expanded="true" />
-                <element signature="e#221#222#0" expanded="true" />
-                <element signature="e#256#257#0" expanded="true" />
-                <element signature="e#284#285#0" expanded="true" />
-                <element signature="e#324#325#0" expanded="true" />
-                <element signature="e#352#353#0" expanded="true" />
-                <element signature="e#392#393#0" expanded="true" />
-                <element signature="e#420#421#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Film.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Film.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-              <folding>
-                <element signature="e#318#319#0" expanded="true" />
-                <element signature="e#346#347#0" expanded="true" />
-                <element signature="e#388#389#0" expanded="true" />
-                <element signature="e#422#423#0" expanded="true" />
-                <element signature="e#454#455#0" expanded="true" />
-                <element signature="e#482#483#0" expanded="true" />
-                <element signature="e#524#525#0" expanded="true" />
-                <element signature="e#558#559#0" expanded="true" />
-                <element signature="e#596#597#0" expanded="true" />
-                <element signature="e#630#631#0" expanded="true" />
-                <element signature="e#684#685#0" expanded="true" />
-                <element signature="e#730#731#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Screening.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Screening.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#141#147#0" expanded="true" />
-                <element signature="e#208#209#0" expanded="true" />
-                <element signature="e#240#241#0" expanded="true" />
-                <element signature="e#269#270#0" expanded="true" />
-                <element signature="e#296#297#0" expanded="true" />
-                <element signature="e#334#335#0" expanded="true" />
-                <element signature="e#366#367#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Seat.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Seat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="27" lean-forward="true" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
-              <folding>
-                <element signature="e#109#110#0" expanded="true" />
-                <element signature="e#151#152#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+            <state relative-caret-position="120">
+              <caret line="8" column="83" lean-forward="false" selection-start-line="8" selection-start-column="83" selection-end-line="8" selection-end-column="83" />
               <folding>
-                <element signature="e#484#485#0" expanded="true" />
-                <element signature="e#516#517#0" expanded="true" />
-                <element signature="e#566#567#0" expanded="true" />
-                <element signature="e#608#609#0" expanded="true" />
-                <element signature="e#644#645#0" expanded="true" />
-                <element signature="e#675#676#0" expanded="true" />
-                <element signature="e#723#724#0" expanded="true" />
-                <element signature="e#763#764#0" expanded="true" />
-                <element signature="e#796#797#0" expanded="true" />
-                <element signature="e#824#825#0" expanded="true" />
-                <element signature="e#866#867#0" expanded="true" />
-                <element signature="e#900#901#0" expanded="true" />
-                <element signature="e#1018#1019#0" expanded="true" />
-                <element signature="e#1058#1059#0" expanded="true" />
+                <marker date="1511805687000" expanded="true" signature="930:936" ph="{...}" />
+                <marker date="1511805687000" expanded="true" signature="963:971" ph="{}" />
+                <marker date="1511805687000" expanded="false" signature="1017:1028" ph=" { " />
+                <marker date="1511805687000" expanded="false" signature="1053:1059" ph=" }" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Paths.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/nio/file/Paths.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-864">
+              <caret line="57" column="51" lean-forward="false" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+              <folding>
+                <element signature="e#2673#2674#0" expanded="true" />
+                <element signature="e#2741#2742#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResultSet.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/sql/ResultSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7590">
+              <caret line="2954" column="0" lean-forward="false" selection-start-line="2954" selection-start-column="0" selection-end-line="2954" selection-end-column="0" />
+              <folding>
+                <element signature="docComment;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#next#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#close#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#wasNull#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getString#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBoolean#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getByte#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getShort#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getInt#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getLong#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getFloat#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getDouble#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBigDecimal#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBytes#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getDate#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTime#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTimestamp#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getAsciiStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getUnicodeStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBinaryStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getString#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBoolean#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getByte#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getShort#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getInt#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getLong#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getFloat#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getDouble#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBigDecimal#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBytes#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getDate#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTime#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTimestamp#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getAsciiStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getUnicodeStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBinaryStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getWarnings#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#clearWarnings#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getCursorName#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getMetaData#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getObject#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getObject#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#findColumn#0;class#ResultSet#0" expanded="false" />
+                <element signature="e#45217#45288#0" expanded="false" />
+                <element signature="docComment;method#getCharacterStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getCharacterStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBigDecimal#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBigDecimal#3;class#ResultSet#0" expanded="false" />
+                <element signature="e#48561#48632#0" expanded="false" />
+                <element signature="docComment;method#isBeforeFirst#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#isAfterLast#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#isFirst#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#isLast#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#beforeFirst#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#afterLast#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#first#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#last#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getRow#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#absolute#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#relative#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#previous#0;class#ResultSet#0" expanded="false" />
+                <element signature="e#59570#59641#0" expanded="false" />
+                <element signature="docComment;field#FETCH_FORWARD#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#FETCH_REVERSE#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#FETCH_UNKNOWN#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#setFetchDirection#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getFetchDirection#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#setFetchSize#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getFetchSize#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#TYPE_FORWARD_ONLY#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#TYPE_SCROLL_INSENSITIVE#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#TYPE_SCROLL_SENSITIVE#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getType#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#CONCUR_READ_ONLY#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#CONCUR_UPDATABLE#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getConcurrency#0;class#ResultSet#0" expanded="false" />
+                <element signature="e#65537#65608#0" expanded="false" />
+                <element signature="docComment;method#rowUpdated#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#rowInserted#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#rowDeleted#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNull#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBoolean#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateByte#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateShort#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateInt#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateLong#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateFloat#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateDouble#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBigDecimal#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateString#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBytes#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateDate#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateTime#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateTimestamp#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateAsciiStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBinaryStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateCharacterStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNull#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBoolean#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateByte#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateShort#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateInt#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateLong#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateFloat#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateDouble#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBigDecimal#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateString#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBytes#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateDate#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateTime#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateTimestamp#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateAsciiStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBinaryStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateCharacterStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#insertRow#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateRow#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#deleteRow#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#refreshRow#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#cancelRowUpdates#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#moveToInsertRow#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#moveToCurrentRow#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getStatement#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getObject#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getRef#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBlob#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getClob#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getArray#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getObject#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getRef#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getBlob#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getClob#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getArray#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getDate#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getDate#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTime#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTime#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTimestamp#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getTimestamp#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#HOLD_CURSORS_OVER_COMMIT#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;field#CLOSE_CURSORS_AT_COMMIT#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getURL#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getURL#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateRef#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateRef#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBlob#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBlob#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateClob#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateClob#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateArray#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateArray#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getRowId#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getRowId#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateRowId#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateRowId#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getHoldability#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#isClosed#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNString#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNString#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNClob#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNClob#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getNClob#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getNClob#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getSQLXML#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getSQLXML#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateSQLXML#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateSQLXML#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getNString#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getNString#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getNCharacterStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getNCharacterStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNCharacterStream#0;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNCharacterStream#1;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateAsciiStream#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBinaryStream#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateCharacterStream#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateAsciiStream#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBinaryStream#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateCharacterStream#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBlob#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBlob#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateClob#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateClob#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNClob#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNClob#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNCharacterStream#2;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNCharacterStream#3;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateAsciiStream#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBinaryStream#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateCharacterStream#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateAsciiStream#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBinaryStream#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateCharacterStream#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBlob#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateBlob#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateClob#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateClob#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNClob#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateNClob#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getObject#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#getObject#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#4;class#ResultSet#0" expanded="false" />
+                <element signature="method#updateObject#4;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#5;class#ResultSet#0" expanded="false" />
+                <element signature="method#updateObject#5;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#6;class#ResultSet#0" expanded="false" />
+                <element signature="method#updateObject#6;class#ResultSet#0" expanded="false" />
+                <element signature="docComment;method#updateObject#7;class#ResultSet#0" expanded="false" />
+                <element signature="method#updateObject#7;class#ResultSet#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DriverManager.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/sql/DriverManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3510">
+              <caret line="265" column="29" lean-forward="false" selection-start-line="265" selection-start-column="29" selection-end-line="265" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,14 +299,10 @@
       <file leaf-file-name="Customer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Customer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+            <state relative-caret-position="120">
+              <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
               <folding>
-                <element signature="e#123#132#0" expanded="true" />
-                <element signature="e#212#213#0" expanded="true" />
-                <element signature="e#248#249#0" expanded="true" />
-                <element signature="e#393#394#0" expanded="true" />
-                <element signature="e#429#430#0" expanded="true" />
+                <marker date="1511805687000" expanded="true" signature="424:430" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -160,30 +311,33 @@
       <file leaf-file-name="Employee.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Employee.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+            <state relative-caret-position="255">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
-                <element signature="e#107#108#0" expanded="true" />
-                <element signature="e#149#150#0" expanded="true" />
-                <element signature="e#184#185#0" expanded="true" />
-                <element signature="e#226#227#0" expanded="true" />
-                <element signature="e#266#267#0" expanded="true" />
-                <element signature="e#313#314#0" expanded="true" />
-                <element signature="e#353#354#0" expanded="true" />
-                <element signature="e#400#401#0" expanded="true" />
-                <element signature="e#433#434#0" expanded="true" />
-                <element signature="e#469#470#0" expanded="true" />
+                <marker date="1511805687000" expanded="true" signature="63:69" ph="{...}" />
+                <marker date="1511805687000" expanded="false" signature="106:117" ph=" { " />
+                <marker date="1511805687000" expanded="false" signature="144:150" ph=" }" />
+                <marker date="1511805687000" expanded="false" signature="183:194" ph=" { " />
+                <marker date="1511805687000" expanded="false" signature="221:227" ph=" }" />
+                <marker date="1511805687000" expanded="false" signature="265:276" ph=" { " />
+                <marker date="1511805687000" expanded="false" signature="308:314" ph=" }" />
+                <marker date="1511805687000" expanded="false" signature="352:363" ph=" { " />
+                <marker date="1511805687000" expanded="false" signature="395:401" ph=" }" />
+                <marker date="1511805687000" expanded="false" signature="432:443" ph=" { " />
+                <marker date="1511805687000" expanded="false" signature="464:470" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Booking.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Booking.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Booking.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="8" lean-forward="false" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="60">
+              <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+              <folding>
+                <marker date="1511805687000" expanded="false" signature="189:195" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -199,6 +353,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -208,7 +367,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Cinema.java" />
         <option value="$PROJECT_DIR$/src/Users/Employee.java" />
         <option value="$PROJECT_DIR$/src/Users/User.java" />
@@ -221,6 +379,7 @@
         <option value="$PROJECT_DIR$/src/main/Customer.java" />
         <option value="$PROJECT_DIR$/src/main/Cinema.java" />
         <option value="$PROJECT_DIR$/src/main/Booking.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -243,7 +402,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,19 +418,10 @@
               <item name="cinego" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="cinego" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cinego" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -387,7 +540,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <frame x="0" y="0" width="1680" height="1046" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -397,12 +550,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32887974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12210012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12576313" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -410,11 +563,31 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12210012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -425,35 +598,75 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="930:936" ph="{...}" />
+            <marker date="1511805687000" expanded="true" signature="963:971" ph="{}" />
+            <marker date="1511805687000" expanded="false" signature="1017:1028" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="1053:1059" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/nio/file/Paths.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="82" column="23" lean-forward="false" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="23" />
+          <folding>
+            <element signature="e#2673#2674#0" expanded="true" />
+            <element signature="e#2741#2742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/users.txt" />
+    <entry file="file://$PROJECT_DIR$/src/main/Customer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="424:430" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="63:69" ph="{...}" />
+            <marker date="1511805687000" expanded="false" signature="106:117" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="144:150" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="183:194" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="221:227" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="265:276" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="308:314" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="352:363" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="395:401" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="432:443" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="464:470" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Booking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding>
+            <marker date="1511805687000" expanded="false" signature="189:195" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cinego.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -461,15 +674,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Cinema.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="165">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#121#127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Film.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#346#347#0" expanded="true" />
+            <element signature="e#388#389#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#596#597#0" expanded="true" />
+            <element signature="e#630#631#0" expanded="true" />
+            <element signature="e#684#685#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Screening.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#141#147#0" expanded="true" />
+            <element signature="e#208#209#0" expanded="true" />
+            <element signature="e#240#241#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#334#335#0" expanded="true" />
+            <element signature="e#366#367#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -486,23 +738,522 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="285">
           <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding>
-            <element signature="e#484#485#0" expanded="true" />
-            <element signature="e#516#517#0" expanded="true" />
-            <element signature="e#566#567#0" expanded="true" />
-            <element signature="e#608#609#0" expanded="true" />
-            <element signature="e#644#645#0" expanded="true" />
-            <element signature="e#675#676#0" expanded="true" />
-            <element signature="e#723#724#0" expanded="true" />
-            <element signature="e#763#764#0" expanded="true" />
-            <element signature="e#796#797#0" expanded="true" />
-            <element signature="e#824#825#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
-            <element signature="e#900#901#0" expanded="true" />
-            <element signature="e#1018#1019#0" expanded="true" />
-            <element signature="e#1058#1059#0" expanded="true" />
+            <marker date="1511805687000" expanded="true" signature="930:936" ph="{...}" />
+            <marker date="1511805687000" expanded="true" signature="963:971" ph="{}" />
+            <marker date="1511805687000" expanded="false" signature="1017:1028" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="1053:1059" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="63:69" ph="{...}" />
+            <marker date="1511805687000" expanded="false" signature="106:117" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="144:150" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="183:194" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="221:227" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="265:276" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="308:314" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="352:363" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="395:401" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="432:443" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="464:470" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Booking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding>
+            <marker date="1511805687000" expanded="false" signature="189:195" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Customer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="36" lean-forward="false" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="424:430" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cinego.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cinego.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Film.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#346#347#0" expanded="true" />
+            <element signature="e#388#389#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#596#597#0" expanded="true" />
+            <element signature="e#630#631#0" expanded="true" />
+            <element signature="e#684#685#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Cinema.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#121#127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Seat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+          <folding>
+            <element signature="e#109#110#0" expanded="true" />
+            <element signature="e#151#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Screening.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#141#147#0" expanded="true" />
+            <element signature="e#208#209#0" expanded="true" />
+            <element signature="e#240#241#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#334#335#0" expanded="true" />
+            <element signature="e#366#367#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Booking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="14" lean-forward="false" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding>
+            <marker date="1511805687000" expanded="false" signature="189:195" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/users.txt" />
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="97" lean-forward="false" selection-start-line="15" selection-start-column="82" selection-end-line="15" selection-end-column="97" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="930:936" ph="{...}" />
+            <marker date="1511805687000" expanded="true" signature="963:971" ph="{}" />
+            <marker date="1511805687000" expanded="false" signature="1017:1028" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="1053:1059" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Customer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="60" lean-forward="false" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="424:430" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="63:69" ph="{...}" />
+            <marker date="1511805687000" expanded="false" signature="106:117" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="144:150" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="183:194" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="221:227" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="265:276" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="308:314" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="352:363" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="395:401" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="432:443" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="464:470" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/sql/DriverManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3510">
+          <caret line="265" column="29" lean-forward="false" selection-start-line="265" selection-start-column="29" selection-end-line="265" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/sql/ResultSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7590">
+          <caret line="2954" column="0" lean-forward="false" selection-start-line="2954" selection-start-column="0" selection-end-line="2954" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#next#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#close#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#wasNull#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getString#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBoolean#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getByte#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getShort#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getInt#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getLong#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getFloat#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getDouble#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBigDecimal#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBytes#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getDate#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTime#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTimestamp#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getAsciiStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getUnicodeStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBinaryStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getString#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBoolean#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getByte#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getShort#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getInt#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getLong#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getFloat#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getDouble#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBigDecimal#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBytes#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getDate#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTime#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTimestamp#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getAsciiStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getUnicodeStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBinaryStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getWarnings#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#clearWarnings#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getCursorName#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getMetaData#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getObject#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getObject#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#findColumn#0;class#ResultSet#0" expanded="false" />
+            <element signature="e#45217#45288#0" expanded="false" />
+            <element signature="docComment;method#getCharacterStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getCharacterStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBigDecimal#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBigDecimal#3;class#ResultSet#0" expanded="false" />
+            <element signature="e#48561#48632#0" expanded="false" />
+            <element signature="docComment;method#isBeforeFirst#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#isAfterLast#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#isFirst#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#isLast#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#beforeFirst#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#afterLast#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#first#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#last#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getRow#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#absolute#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#relative#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#previous#0;class#ResultSet#0" expanded="false" />
+            <element signature="e#59570#59641#0" expanded="false" />
+            <element signature="docComment;field#FETCH_FORWARD#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#FETCH_REVERSE#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#FETCH_UNKNOWN#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#setFetchDirection#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getFetchDirection#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#setFetchSize#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getFetchSize#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#TYPE_FORWARD_ONLY#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#TYPE_SCROLL_INSENSITIVE#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#TYPE_SCROLL_SENSITIVE#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getType#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#CONCUR_READ_ONLY#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#CONCUR_UPDATABLE#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getConcurrency#0;class#ResultSet#0" expanded="false" />
+            <element signature="e#65537#65608#0" expanded="false" />
+            <element signature="docComment;method#rowUpdated#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#rowInserted#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#rowDeleted#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNull#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBoolean#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateByte#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateShort#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateInt#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateLong#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateFloat#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateDouble#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBigDecimal#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateString#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBytes#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateDate#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateTime#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateTimestamp#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateAsciiStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBinaryStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateCharacterStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNull#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBoolean#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateByte#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateShort#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateInt#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateLong#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateFloat#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateDouble#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBigDecimal#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateString#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBytes#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateDate#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateTime#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateTimestamp#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateAsciiStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBinaryStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateCharacterStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#insertRow#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateRow#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#deleteRow#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#refreshRow#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#cancelRowUpdates#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#moveToInsertRow#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#moveToCurrentRow#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getStatement#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getObject#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getRef#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBlob#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getClob#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getArray#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getObject#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getRef#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getBlob#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getClob#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getArray#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getDate#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getDate#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTime#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTime#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTimestamp#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getTimestamp#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#HOLD_CURSORS_OVER_COMMIT#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;field#CLOSE_CURSORS_AT_COMMIT#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getURL#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getURL#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateRef#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateRef#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBlob#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBlob#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateClob#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateClob#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateArray#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateArray#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getRowId#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getRowId#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateRowId#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateRowId#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getHoldability#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#isClosed#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNString#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNString#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNClob#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNClob#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getNClob#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getNClob#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getSQLXML#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getSQLXML#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateSQLXML#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateSQLXML#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getNString#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getNString#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getNCharacterStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getNCharacterStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNCharacterStream#0;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNCharacterStream#1;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateAsciiStream#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBinaryStream#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateCharacterStream#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateAsciiStream#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBinaryStream#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateCharacterStream#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBlob#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBlob#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateClob#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateClob#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNClob#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNClob#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNCharacterStream#2;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNCharacterStream#3;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateAsciiStream#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBinaryStream#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateCharacterStream#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateAsciiStream#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBinaryStream#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateCharacterStream#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBlob#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateBlob#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateClob#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateClob#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNClob#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateNClob#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getObject#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#getObject#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#4;class#ResultSet#0" expanded="false" />
+            <element signature="method#updateObject#4;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#5;class#ResultSet#0" expanded="false" />
+            <element signature="method#updateObject#5;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#6;class#ResultSet#0" expanded="false" />
+            <element signature="method#updateObject#6;class#ResultSet#0" expanded="false" />
+            <element signature="docComment;method#updateObject#7;class#ResultSet#0" expanded="false" />
+            <element signature="method#updateObject#7;class#ResultSet#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/db/SQLiteJDBC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cinego.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cinego.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Seat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="27" lean-forward="true" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+          <folding>
+            <element signature="e#109#110#0" expanded="true" />
+            <element signature="e#151#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="83" lean-forward="false" selection-start-line="8" selection-start-column="83" selection-end-line="8" selection-end-column="83" />
+          <folding>
+            <marker date="1511805687000" expanded="true" signature="930:936" ph="{...}" />
+            <marker date="1511805687000" expanded="true" signature="963:971" ph="{}" />
+            <marker date="1511805687000" expanded="false" signature="1017:1028" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="1053:1059" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -547,33 +1298,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Employee.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        <state relative-caret-position="255">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#107#108#0" expanded="true" />
-            <element signature="e#149#150#0" expanded="true" />
-            <element signature="e#184#185#0" expanded="true" />
-            <element signature="e#226#227#0" expanded="true" />
-            <element signature="e#266#267#0" expanded="true" />
-            <element signature="e#313#314#0" expanded="true" />
-            <element signature="e#353#354#0" expanded="true" />
-            <element signature="e#400#401#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
+            <marker date="1511805687000" expanded="true" signature="63:69" ph="{...}" />
+            <marker date="1511805687000" expanded="false" signature="106:117" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="144:150" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="183:194" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="221:227" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="265:276" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="308:314" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="352:363" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="395:401" ph=" }" />
+            <marker date="1511805687000" expanded="false" signature="432:443" ph=" { " />
+            <marker date="1511805687000" expanded="false" signature="464:470" ph=" }" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        <state relative-caret-position="120">
+          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
           <folding>
-            <element signature="e#123#132#0" expanded="true" />
-            <element signature="e#212#213#0" expanded="true" />
-            <element signature="e#248#249#0" expanded="true" />
-            <element signature="e#393#394#0" expanded="true" />
-            <element signature="e#429#430#0" expanded="true" />
+            <marker date="1511805687000" expanded="true" signature="424:430" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -584,22 +1332,35 @@
           <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
           <folding>
             <element signature="e#121#127#0" expanded="true" />
-            <element signature="e#193#194#0" expanded="true" />
-            <element signature="e#221#222#0" expanded="true" />
-            <element signature="e#256#257#0" expanded="true" />
-            <element signature="e#284#285#0" expanded="true" />
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#352#353#0" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
-            <element signature="e#420#421#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Booking.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="8" lean-forward="false" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        <state relative-caret-position="60">
+          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding>
+            <marker date="1511805687000" expanded="false" signature="189:195" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/nio/file/Paths.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-864">
+          <caret line="57" column="51" lean-forward="false" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+          <folding>
+            <element signature="e#2673#2674#0" expanded="true" />
+            <element signature="e#2741#2742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
           <folding />
         </state>
       </provider>

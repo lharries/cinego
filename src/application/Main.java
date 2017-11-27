@@ -15,23 +15,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {	
-			//BorderPane root = new BorderPane();
 
 			//launches the login view upon running program
 			Parent root = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			
-			
+
 			final ImageView backgroundImage = new ImageView();
 			Image image1 = new Image(new FileInputStream("/Users/kai/code/CineGo/src/Images/films.jpg"));
-			
 			backgroundImage.setImage(image1);
-			
-
 			//add image to background of Login.fxml
-
-			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

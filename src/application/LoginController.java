@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 public class  LoginController implements Initializable {
 
     public LoginModel loginModel = new LoginModel();
+
 
     @FXML
     private Label isConnected;
@@ -42,7 +44,6 @@ public class  LoginController implements Initializable {
             isConnected.setText("Not Connected");
         }
     }
-
     public void login(javafx.event.ActionEvent event) {
         try {
             if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
@@ -81,4 +82,15 @@ public class  LoginController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void goMoviesView(ActionEvent event){
+        
+
+    }
+
+
+
+
+
+
 }

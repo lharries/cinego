@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="513.0" fitWidth="758.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/films.jpg" />
+            <Image url="@../resources/films.jpg" />
          </image>
       </ImageView>
   <AnchorPane layoutX="200.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" opacity="0.93" prefHeight="308.0" prefWidth="330.0" style="-fx-background-color: ffffff;">
@@ -27,7 +27,7 @@
             <Button fx:id="loginButton" layoutX="180.0" layoutY="254.0" mnemonicParsing="false" onAction="#login" prefHeight="27.0" prefWidth="120.0" text=" Employee Login" />
             <ImageView fitHeight="91.0" fitWidth="88.0" layoutX="128.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/Cinestar.png" />
+                  <Image url="@../resources/Cinestar.png" />
                </image>
             </ImageView>
             <Text layoutX="53.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to CineGo">
@@ -35,6 +35,7 @@
                   <Font size="25.0" />
                </font>
             </Text>
+            <Button fx:id="customer" layoutX="53.0" layoutY="281.0" mnemonicParsing="false" text="Customer" />
          </children>
          <opaqueInsets>
             <Insets />

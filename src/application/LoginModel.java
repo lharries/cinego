@@ -8,10 +8,10 @@ public class LoginModel{
     Connection connection;
 
     public LoginModel(){
-        connection = SQLiteConnection.connector();
-        if(connection == null){
-            System.exit(1);
-        }
+//        connection = SQLiteConnection.connector();
+//        if(connection == null){
+//            System.exit(1);
+//        }
     }
 
     public boolean isDbConnected(){

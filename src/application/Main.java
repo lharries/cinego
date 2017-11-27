@@ -6,15 +6,25 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
+
+	Stage window;
+	Scene login, movies, seating;
+
 	@Override
 	public void start(Stage primaryStage) {
-		try {	
+
+		window = primaryStage;
+		Button button1 = new Button("Go to 'Movies' ");
+		button1.setOnAction(event -> window.setScene(movies));
+
+		try {
 
 			//launches the login view upon running program
 			Parent root = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));

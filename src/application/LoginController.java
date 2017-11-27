@@ -22,7 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-public class  LoginController implements Initializable {
+public class LoginController implements Initializable {
 
     public LoginModel loginModel = new LoginModel();
 
@@ -44,33 +44,32 @@ public class  LoginController implements Initializable {
             isConnected.setText("Not Connected");
         }
     }
+
     public void login(javafx.event.ActionEvent event) {
         try {
-            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
+            if (loginModel.isLoggedIn(txtUsername.getText(), txtPassword.getText())) {
                 isConnected.setText("Username & password is correct");
 
-            Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
+                Stage primaryStage = new Stage();
+                FXMLLoader loader = new FXMLLoader();
+                //launches the login view upon running program
+                Pane root = loader.load(getClass().getResource("/application/Movies.fxml").openStream());
+                MoviesController moviesController = (MoviesController) loader.getController();
+                moviesController.getMovies(txtUsername.getText());
 
 
-            //launches the login view upon running program
-            Pane root = loader.load(getClass().getResource("/application/Movies.fxml").openStream());
-            MoviesController moviesController = (MoviesController) loader.getController();
-            moviesController.getMovies(txtUsername.getText());
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+                final ImageView backgroundImage = new ImageView();
+                Image image1 = new Image(new FileInputStream("/Users/kai/code/CineGo/src/resources/films.jpg"));
+                backgroundImage.setImage(image1);
+                //add image to background of Login.fxml
+                primaryStage.setScene(scene);
+                primaryStage.show();
 
 
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-            final ImageView backgroundImage = new ImageView();
-            Image image1 = new Image(new FileInputStream("/Users/kai/code/CineGo/src/resources/films.jpg"));
-            backgroundImage.setImage(image1);
-            //add image to background of Login.fxml
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-
-            }else{
+            } else {
                 isConnected.setText("Username & password is not correct");
             }
         } catch (SQLException e) {
@@ -83,14 +82,35 @@ public class  LoginController implements Initializable {
         }
     }
 
-    public void goMoviesView(ActionEvent event){
-        
+    @FXML
+    public void goMoviesView(ActionEvent event) {
+
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            //launches the movies view upon running program
+            Pane root = loader.load(getClass().getResource("application/Movies.fxml").openStream());
+
+            MoviesController moviesController = (MoviesController) loader.getController();
+            moviesController.getMovies(txtUsername.getText());
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+            final ImageView backgroundImage = new ImageView();
+            Image image1 = new Image(new FileInputStream("/Users/kai/code/CineGo/src/resources/films.jpg"));
+            backgroundImage.setImage(image1);
+
+            //add image to background of Login.fxml
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
-
-
-
-
 
 
 }

@@ -1,4 +1,4 @@
-package main;
+package models;
 
 public class Seat {
     private boolean avaliable = true;

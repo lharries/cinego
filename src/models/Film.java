@@ -1,4 +1,4 @@
-package main;
+package models;
 
 public class Film {
     private String title;

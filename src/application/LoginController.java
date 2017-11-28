@@ -65,6 +65,7 @@ public class  LoginController implements Initializable {
             Image image1 = new Image(new FileInputStream("resources/films.jpg"));
             backgroundImage.setImage(image1);
             //add image to background of Login.fxml
+
             primaryStage.setScene(scene);
             primaryStage.show();
 

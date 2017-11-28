@@ -22,7 +22,9 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			final ImageView backgroundImage = new ImageView();
-			Image image1 = new Image(new FileInputStream("/Users/kai/code/CineGo/src/resources/films.jpg"));
+			System.out.println(System.getProperty("user.dir"));
+
+			Image image1 = new Image(new FileInputStream("src/resources/films.jpg"));
 			backgroundImage.setImage(image1);
 			//add image to background of Login.fxml
 			primaryStage.setScene(scene);

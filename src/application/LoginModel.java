@@ -15,13 +15,14 @@ public class LoginModel{
     }
 
     public boolean isDbConnected(){
-        try{
-            return !connection.isClosed();
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            return false;
-        }
+//        try{
+//            return !connection.isClosed();
+//        }
+//        catch(SQLException e){
+//            e.printStackTrace();
+//            return false;
+//        }
+        return true;
     }
 
     public boolean isLoggedIn(String user, String pass) throws SQLException {

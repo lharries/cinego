@@ -36,11 +36,11 @@ public class  LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (loginModel.isDbConnected()) {
-            isConnected.setText("Connected");
-        } else {
-            isConnected.setText("Not Connected");
-        }
+//        if (loginModel.isDbConnected()) {
+//            isConnected.setText("Connected");
+//        } else {
+//            isConnected.setText("Not Connected");
+//        }
     }
 
     public void login(javafx.event.ActionEvent event) {
@@ -62,7 +62,7 @@ public class  LoginController implements Initializable {
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             final ImageView backgroundImage = new ImageView();
-            Image image1 = new Image(new FileInputStream("/Users/kai/code/CineGo/src/resources/films.jpg"));
+            Image image1 = new Image(new FileInputStream("/resources/films.jpg"));
             backgroundImage.setImage(image1);
             //add image to background of Login.fxml
             primaryStage.setScene(scene);

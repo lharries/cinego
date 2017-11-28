@@ -4,14 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -53,7 +51,7 @@ public class  LoginController implements Initializable {
 
 
             //launches the login view upon running program
-            Pane root = loader.load(getClass().getResource("/application/Movies.fxml").openStream());
+            Pane root = loader.load(getClass().getResource("/views/Movies.fxml").openStream());
             MoviesController moviesController = (MoviesController) loader.getController();
             moviesController.getMovies(txtUsername.getText());
 

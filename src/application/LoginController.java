@@ -41,6 +41,7 @@ public class  LoginController implements Initializable {
 //        }
     }
 
+   @FXML
     public void login(javafx.event.ActionEvent event) {
         try {
 //            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){

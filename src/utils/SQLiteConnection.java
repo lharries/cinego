@@ -15,12 +15,11 @@ import java.sql.*;
  */
 public class SQLiteConnection {
 
-    private static Connection connection;
+    public static Connection connection;
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         connect();
-
     }
 
     private static void connect() throws SQLException, ClassNotFoundException {
@@ -38,7 +37,6 @@ public class SQLiteConnection {
         if (connection != null && !connection.isClosed()) {
             connection.close();
         }
-
     }
 
     public static void execute(String query) throws SQLException, ClassNotFoundException {

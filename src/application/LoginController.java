@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 
 public class  LoginController implements Initializable {
 
-    public LoginModel loginModel = new LoginModel();
+    //public LoginModel loginModel = new LoginModel();
 
     @FXML
     private Label isConnected;
@@ -36,17 +36,17 @@ public class  LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (loginModel.isDbConnected()) {
-            isConnected.setText("Connected");
-        } else {
-            isConnected.setText("Not Connected");
-        }
+//        if (loginModel.isDbConnected()) {
+//            isConnected.setText("Connected");
+//        } else {
+//            isConnected.setText("Not Connected");
+//        }
     }
 
     public void login(javafx.event.ActionEvent event) {
         try {
-            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
-                isConnected.setText("Username & password is correct");
+//            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
+//                isConnected.setText("Username & password is correct");
 
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
@@ -69,12 +69,12 @@ public class  LoginController implements Initializable {
             primaryStage.show();
 
 
-            }else{
-                isConnected.setText("Username & password is not correct");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            isConnected.setText("Username & password is not correct");
+//            }else{
+//                isConnected.setText("Username & password is not correct");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            isConnected.setText("Username & password is not correct");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

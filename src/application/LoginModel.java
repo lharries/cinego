@@ -1,5 +1,7 @@
 package application;
 
+import utils.SQLiteConnection;
+
 import java.sql.*;
 
 
@@ -8,10 +10,12 @@ public class LoginModel{
     Connection connection;
 
     public LoginModel(){
-//        connection = SQLiteConnection.connector();
-//        if(connection == null){
-//            System.exit(1);
-//        }
+
+        connection = SQLiteConnection.connection;
+
+        if(connection == null){
+            System.exit(1);
+        }
     }
 
     public boolean isDbConnected(){
@@ -19,6 +23,7 @@ public class LoginModel{
             return !connection.isClosed();
         }
         catch(SQLException e){
+            System.out.println("test");
             e.printStackTrace();
             return false;
         }

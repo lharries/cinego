@@ -13,7 +13,7 @@ public class EmployeeDAO {
 
     private static boolean login(String username, String password) {
         try {
-            // TODO: Switch to prepared statements
+            // TODO: Switch to prepared statementsgit
             ResultSet results = SQLiteConnection.executeQuery("SELECT * FROM Employee WHERE username=\"" + username+"\" AND password=\""+password+"\"");
             results.next();
             System.out.println(results.getString(1));

@@ -1,7 +1,6 @@
 package application;
 	
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +17,7 @@ public class Main extends Application {
 	private static AnchorPane customerProgram;
 	
 	private static Stage primaryStage;
-	private static customerProgramController customerProgramController;
+	private static CustomerProgramController CustomerProgramController;
 
 
 	@Override
@@ -42,7 +41,7 @@ public class Main extends Application {
 	}
 	
 	public static void startAsCustomer(){
-//		showCustomerRoot();
+		showCustomerRoot();
 		showCustomerProgram();
 	}
  
@@ -52,7 +51,7 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("/views/Movies.fxml"));
 			customerProgram = loader.load();
-			customerProgramController = loader.getController();
+			CustomerProgramController = loader.getController();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -70,8 +69,6 @@ public class Main extends Application {
 		Scene scene = new Scene(customerRoot);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		}
 	}
-
-
 }
+

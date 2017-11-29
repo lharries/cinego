@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <image>
-            <Image url="@../resources/27220577-cinema-wallpapers.jpeg" />
+            <Image url="@../resources/cinema-wallpaper.jpeg" />
          </image>
          <effect>
             <ColorAdjust saturation="-0.88" />

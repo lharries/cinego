@@ -52,18 +52,19 @@ public class LoginController implements Initializable {
 
 
             //launches the login view upon running program
-            Pane root = loader.load(getClass().getResource("/views/Movies.fxml").openStream());
-            MoviesController moviesController = (MoviesController) loader.getController();
-            moviesController.getMovies(txtUsername.getText());
+            Pane root = loader.load(getClass().getResource("/views/customerRoot.fxml").openStream());
+            CustomerRootController customerController = (CustomerRootController) loader.getController();
+
+            //            customerController.getMovies(txtUsername.getText());
 
 
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-            final ImageView backgroundImage = new ImageView();
-            Image image1 = new Image(new FileInputStream("resources/films.jpg"));
-            backgroundImage.setImage(image1);
-            //add image to background of Login.fxml
+//            final ImageView backgroundImage = new ImageView();
+//            Image image1 = new Image(new FileInputStream("resources/films.jpg"));
+//            backgroundImage.setImage(image1);
+//            //add image to background of Login.fxml
 
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -80,5 +81,5 @@ public class LoginController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+   }
 }

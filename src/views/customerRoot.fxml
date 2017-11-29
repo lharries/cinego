@@ -10,50 +10,42 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="800" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.customerRootController">
-   <children>
-
-         <AnchorPane>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
-         <Line endX="1098.0" layoutX="150.0" layoutY="50.0" startX="-200.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-         </AnchorPane>
-
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <center>
-            <ImageView fitHeight="900.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../resources/cinema-wallpaper.jpeg" />
-               </image>
-               <effect>
-                  <ColorAdjust saturation="-0.88" />
-               </effect>
-            </ImageView>
-         </center>
-         <bottom>
-            <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
-                  <ImageView fitHeight="39.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/Cinestar.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="40.0" layoutX="648.0" layoutY="11.0" stroke="#f3f3f3" strokeType="INSIDE" width="43.0" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">
-                     <font>
-                        <Font size="34.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-         </bottom>
-         <top>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
-               </children>
-            </AnchorPane>
-         </top>
-      </BorderPane>
-   </children>
+<BorderPane prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerRootController">
+   <top>
+      <AnchorPane prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
+            <Line endX="1279.0" layoutX="0.0" layoutY="50.0" startX="0.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
+         </children>
+      </AnchorPane>
+    </top>
+    <center>
+        <!--<ImageView fitHeight="900.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">-->
+            <!--<image>-->
+                <!--<Image url="@../resources/cinema-wallpaper.jpeg" />-->
+            <!--</image>-->
+            <!--<effect>-->
+                <!--<ColorAdjust saturation="-0.88" />-->
+            <!--</effect>-->
+        <!--</ImageView>-->
+   </center>
+   <bottom>
+      <AnchorPane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="45.0" layoutX="609.0" layoutY="3.0" stroke="#f3f3f3" strokeType="INSIDE" width="43.0" />
+             <!--<ImageView fitHeight="40.0" fitWidth="40.0" layoutX="611.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">-->
+                 <!--<image>-->
+                     <!--<Image url="@../resources/Cinestar.png" />-->
+                 <!--</image>-->
+             <!--</ImageView>-->
+             <Text fill="WHITE" layoutY="-17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">
+                 <font>
+                     <Font size="34.0" />
+                 </font>
+             </Text>
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>

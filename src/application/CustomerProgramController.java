@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
  */
 
 
-public class customerProgramController {
+public class CustomerProgramController {
 
 
 

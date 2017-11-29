@@ -41,11 +41,15 @@ public class LoginController implements Initializable {
 //        }
     }
 
+
+
+
    @FXML
     public void login(javafx.event.ActionEvent event) {
         try {
 //            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
 //                isConnected.setText("Username & password is correct");
+
 
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
@@ -56,7 +60,6 @@ public class LoginController implements Initializable {
             CustomerRootController customerController = (CustomerRootController) loader.getController();
 
             //            customerController.getMovies(txtUsername.getText());
-
 
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -69,17 +72,17 @@ public class LoginController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-
 //            }else{
 //                isConnected.setText("Username & password is not correct");
 //            }
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //            isConnected.setText("Username & password is not correct");
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ev) {
+            ev.printStackTrace();
         }
    }
 }

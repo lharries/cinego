@@ -1,5 +1,6 @@
 package application;
 	
+import com.sun.tools.hat.internal.model.Root;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,8 @@ public class Main extends Application {
 	private static BorderPane customerRoot;
 	private static AnchorPane customerProgram;
 	
-	private static Stage primaryStage;
+	private static Stage loginStage, primaryStage;
+	private static Parent root;
 	private static CustomerProgramController CustomerProgramController;
 
 
@@ -25,7 +27,7 @@ public class Main extends Application {
 		try {	
 
 			//launches the login view upon running program
-			Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
@@ -42,20 +44,29 @@ public class Main extends Application {
 	
 	public static void startAsCustomer(){
 		showCustomerRoot();
-		showCustomerProgram();
+		//showCustomerProgram();
 	}
- 
-	private static void showCustomerProgram() {
-		
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/views/Movies.fxml"));
-			customerProgram = loader.load();
-			CustomerProgramController = loader.getController();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
+//	/**
+//	 * shows customer
+//	 *
+//	 */
+//	private static void showCustomerProgram() {
+//
+//		try {
+//			FXMLLoader loader = new FXMLLoader();
+//			loader.setLocation(Main.class.getResource("/views/Movies.fxml"));
+//			customerProgram = loader.load();
+//			CustomerProgramController = loader.getController();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+	/**
+	 * loads the customerRoot
+	 *
+	 */
 
 	private static void showCustomerRoot() {
 		FXMLLoader loader = new FXMLLoader();

@@ -40,6 +40,15 @@ public class Navigation {
     }
 
     /**
+     * Purpose: sets the customer controller
+     *
+     * @param emplController
+     */
+    public static void setEmplController(EmployeeRootController emplController){
+        Navigation.emplController = emplController;
+    }
+
+    /**
      * Purpose: load the employee fxml views into the employee's Borderpane
      *
      * @param fxmlView
@@ -48,6 +57,18 @@ public class Navigation {
     public static void loadEmplFxml(String fxmlView) throws IOException {
         emplController.setCenter(FXMLLoader.load(Navigation.class.getResource(fxmlView)));
     }
+
+    /**
+     * Purpose: load the customer fxml views into the customer's Borderpane
+     *
+     * @param fxmlView
+     * @throws IOException
+     */
+    public static void loadCustFxml(String fxmlView) throws IOException {
+        custController.setCenter(FXMLLoader.load(Navigation.class.getResource(fxmlView)));
+    }
+
+
 
 
 

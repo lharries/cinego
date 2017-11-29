@@ -6,8 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 
 import javax.imageio.ImageIO;
+import javax.xml.soap.Node;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +21,8 @@ import java.util.ResourceBundle;
 
 public class CustomerRootController implements Initializable {
 
+    @FXML
+    private BorderPane custPane;
 
 
     @FXML
@@ -49,10 +53,27 @@ public class CustomerRootController implements Initializable {
 
     }
 
-    public void getMovies(String movies){
-        userLbl.setText(movies);
+    /**
+     *Purpose: method to be called by different customer controllers to set their respective views to the
+     *center of the parent borderPane: 'empPane' . This Pane is a child of the stage
+     *
+     * @param node
+     *
+     */
+    public void setCenter(Node node){
+        custPane.setCenter((javafx.scene.Node) node);
     }
 
+
+
+
+
+
+//
+//    public void getMovies(String movies){
+//        userLbl.setText(movies);
+//    }
+//
 
 
 

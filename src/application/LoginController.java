@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-public class  LoginController implements Initializable {
+public class LoginController implements Initializable {
 
     //public LoginModel loginModel = new LoginModel();
 

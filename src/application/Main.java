@@ -60,7 +60,7 @@ public class Main extends Application {
 
 	private static void showCustomerRoot() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/views/Movies.fxml"));
+		loader.setLocation(Main.class.getResource("/views/customerRoot.fxml"));
 		
 		try {
 			customerRoot = loader.load();

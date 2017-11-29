@@ -42,7 +42,7 @@ public class CustomerRootController implements Initializable {
         BufferedImage bufferedBackground = null;
         try {
             bufferedLogo = ImageIO.read(new File("src/resources/Cinestar.png"));
-            bufferedBackground = ImageIO.read(new File("src/resources/Cinestar.png"));
+            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,6 @@ public class CustomerRootController implements Initializable {
         Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.logo.setImage(logo);
         this.background.setImage(background);
-
     }
 
     /**

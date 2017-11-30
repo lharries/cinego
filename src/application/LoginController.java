@@ -93,6 +93,7 @@ public class LoginController implements Initializable {
     @FXML
     public void loginEmpl(javafx.event.ActionEvent event) {
 
+
 //        try {
 //            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
 //                isConnected.setText("Username & password is correct");

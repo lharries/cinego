@@ -10,11 +10,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -22,6 +24,8 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
 
     //public LoginModel loginModel = new LoginModel();
+    public static Stage primaryStage = new Stage();
+
 
     @FXML
     private Label isConnected;
@@ -42,35 +46,27 @@ public class LoginController implements Initializable {
     }
 
 
+    @FXML
+    public void loginCust(javafx.event.ActionEvent event) {
 
-
-   @FXML
-    public void login(javafx.event.ActionEvent event) {
-        try {
+//        try {
 //            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
 //                isConnected.setText("Username & password is correct");
 
+        ((Node) event.getSource()).getScene().getWindow().hide();
+        try {
+            primaryStage.setScene(createScene(loadCustBorderPane()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        primaryStage.setResizable(false);
+        primaryStage.show();
 
-            Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
 
+//            //launches the loginCust view upon running program
+//            Pane root = loader.load(getClass().getResource("/views/customerRoot.fxml").openStream());
+//            CustomerRootController customerController = (CustomerRootController) loader.getController();
 
-            //launches the login view upon running program
-            Pane root = loader.load(getClass().getResource("/views/customerRoot.fxml").openStream());
-            CustomerRootController customerController = (CustomerRootController) loader.getController();
-
-            //            customerController.getMovies(txtUsername.getText());
-
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-//            final ImageView backgroundImage = new ImageView();
-//            Image image1 = new Image(new FileInputStream("resources/films.jpg"));
-//            backgroundImage.setImage(image1);
-//            //add image to background of Login.fxml
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
 
 //            }else{
 //                isConnected.setText("Username & password is not correct");
@@ -79,10 +75,50 @@ public class LoginController implements Initializable {
 //            e.printStackTrace();
 //            isConnected.setText("Username & password is not correct");
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ev) {
-            ev.printStackTrace();
-        }
-   }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException ev) {
+//            ev.printStackTrace();
+//        }
+    }
+
+
+
+    /**
+     * Purpose: Static method that sets the scene and the stylesheet with a
+     * BorderPane as a paramter.
+     *
+     * @param root
+     * @return
+     */
+    private static Scene createScene(BorderPane root) {
+        Scene scene = new Scene(root);
+        scene.getStylesheets().setAll(LoginController.class.getResource("/application/application.css").toExternalForm());
+        return scene;
+    }
+
+    private static BorderPane loadCustBorderPane() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        // BoarderPane providing the root for other screens
+        BorderPane emplRoot = (BorderPane) loader.load(LoginController.class.getResourceAsStream(Navigation.CUST_ROOT));
+        CustomerRootController custRootContr = loader.getController();
+        //        emplRootController.setUser(username);
+
+        // sets controller for the employee root layout
+        Navigation.setCustController(custRootContr);
+        // loads first fxml file with a navigator method
+        Navigation.loadCustFxml(Navigation.ACC_VIEW);
+
+        return emplRoot;
+    }
+
+
+//    private static BorderPane loadEmpBorderPane() {
+//
+//        return
+//    }
+
+
+
 }

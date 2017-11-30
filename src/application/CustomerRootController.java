@@ -24,7 +24,6 @@ public class CustomerRootController implements Initializable {
     @FXML
     private BorderPane custPane;
 
-
     @FXML
     private Label userLbl;
 
@@ -59,8 +58,8 @@ public class CustomerRootController implements Initializable {
      * @param node
      *
      */
-    public void setCenter(Node node){
-        custPane.setCenter((javafx.scene.Node) node);
+    public void setCenter(javafx.scene.Node node){
+        custPane.setCenter(node);
     }
 
 

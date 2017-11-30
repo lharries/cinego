@@ -14,13 +14,15 @@ public class Navigation {
     /**
      * Constants locating the FXML files representing the different views
      */
-    public static final String CUST_ROOT = "/view/customerRoot.fxml";
+    public static final String CUST_ROOT = "/views/customerRoot.fxml";
 //    public static final String EMPL_ROOT = "/view/MgmtRootView.fxml";
 
-    public static final String TABLE_VIEW = "/view/EmpTableView.fxml";
+    //customer views
+    public static final String ACC_VIEW= "/views/customerAccount.fxml";
 //    public static final String EMP_ORDERS_VIEW = "/view/EmpOrdersView.fxml";
 //    public static final String ORDER_VIEW = "/view/EmpOrderView.fxml";
-//
+
+    //employee views
 //    public static final String MGMT_EMPLOYEES = "/view/MgmtEmployeesView.fxml";
 //    public static final String MGMT_MENU = "/view/MgmtMenuView.fxml";
 //    public static final String MGMT_ORDERS = "/view/MgmtOrdersView.fxml";
@@ -67,9 +69,6 @@ public class Navigation {
     public static void loadCustFxml(String fxmlView) throws IOException {
         custController.setCenter(FXMLLoader.load(Navigation.class.getResource(fxmlView)));
     }
-
-
-
 
 
 }

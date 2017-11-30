@@ -21,7 +21,7 @@ public class EmployeeDAO {
 
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("No user found with those login details");
+            System.out.println("No user found with those loginCust details");
         } catch (Exception e) {
             System.out.print(e);
         }

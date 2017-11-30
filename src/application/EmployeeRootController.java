@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 public class EmployeeRootController implements Initializable {
 
     @FXML
-    private BorderPane emplPane;
+    private BorderPane employeePane;
 
 
     /**
@@ -35,8 +35,8 @@ public class EmployeeRootController implements Initializable {
      * @param node
      *
      */
-    public void setCenter(Node node){
-        emplPane.setCenter((javafx.scene.Node) node);
+    public void setCenter(javafx.scene.Node node){
+        employeePane.setCenter(node);
     }
 
 

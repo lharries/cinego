@@ -1,7 +1,5 @@
 package application;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,10 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -62,11 +57,9 @@ public class LoginController implements Initializable {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-
 //            //launches the loginCust view upon running program
 //            Pane root = loader.load(getClass().getResource("/views/customerRoot.fxml").openStream());
 //            CustomerRootController customerController = (CustomerRootController) loader.getController();
-
 
 //            }else{
 //                isConnected.setText("Username & password is not correct");
@@ -97,21 +90,27 @@ public class LoginController implements Initializable {
         return scene;
     }
 
+    /**
+     *
+     * @return BorderPane custRoot
+     * @throws IOException
+     */
     private static BorderPane loadCustBorderPane() throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
-        // BoarderPane providing the root for other screens
-        BorderPane emplRoot = (BorderPane) loader.load(LoginController.class.getResourceAsStream(Navigation.CUST_ROOT));
+        // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
+        BorderPane custRoot = (BorderPane) loader.load(LoginController.class.getResourceAsStream(Navigation.CUST_ROOT));
         CustomerRootController custRootContr = loader.getController();
-        //        emplRootController.setUser(username);
 
-        // sets controller for the employee root layout
+        // sets controller for the customer root layout
         Navigation.setCustController(custRootContr);
         // loads first fxml file with a navigator method
-        Navigation.loadCustFxml(Navigation.ACC_VIEW);
+        Navigation.loadCustFxml(Navigation.CUST_ACC_VIEW);
 
-        return emplRoot;
+        return custRoot;
     }
+
+
 
 
 //    private static BorderPane loadEmpBorderPane() {

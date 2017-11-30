@@ -1,6 +1,5 @@
 package application;
 	
-import com.sun.tools.hat.internal.model.Root;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -70,7 +69,7 @@ public class Main extends Application {
 
 	private static void showCustomerRoot() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/views/customerRoot.fxml"));
+		loader.setLocation(Main.class.getResource("/views/CustomerRoot.fxml"));
 		
 		try {
 			customerRoot = loader.load();

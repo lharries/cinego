@@ -40,6 +40,13 @@ public class LoginController implements Initializable {
 //        }
     }
 
+    /**
+     * Purpose: opens a new stage with the customer views loaded into the center of the overarching
+     * customerRoot view when a system user logs in as a customer. Additionally this method hides the
+     * login screen.
+     *
+     * @param event
+     */
 
     @FXML
     public void loginCust(javafx.event.ActionEvent event) {
@@ -58,7 +65,49 @@ public class LoginController implements Initializable {
         primaryStage.show();
 
 //            //launches the loginCust view upon running program
-//            Pane root = loader.load(getClass().getResource("/views/customerRoot.fxml").openStream());
+//            Pane root = loader.load(getClass().getResource("/views/CustomerRoot.fxml").openStream());
+//            CustomerRootController customerController = (CustomerRootController) loader.getController();
+
+//            }else{
+//                isConnected.setText("Username & password is not correct");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            isConnected.setText("Username & password is not correct");
+
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException ev) {
+//            ev.printStackTrace();
+//        }
+    }
+
+    /**
+     * Purpose: opens a new stage with the customer views loaded into the center of the overarching
+     * customerRoot view when a system user logs in as a customer. Additionally this method hides the
+     * login screen.
+     *
+     * @param event
+     */
+
+    @FXML
+    public void loginEmpl(javafx.event.ActionEvent event) {
+
+//        try {
+//            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
+//                isConnected.setText("Username & password is correct");
+
+        ((Node) event.getSource()).getScene().getWindow().hide();
+        try {
+            primaryStage.setScene(createScene(loadEmpBorderPane()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        primaryStage.setResizable(false);
+        primaryStage.show();
+
+//            //launches the loginCust view upon running program
+//            Pane root = loader.load(getClass().getResource("/views/CustomerRoot.fxml").openStream());
 //            CustomerRootController customerController = (CustomerRootController) loader.getController();
 
 //            }else{
@@ -77,6 +126,8 @@ public class LoginController implements Initializable {
 
 
 
+
+
     /**
      * Purpose: Static method that sets the scene and the stylesheet with a
      * BorderPane as a paramter.
@@ -91,6 +142,8 @@ public class LoginController implements Initializable {
     }
 
     /**
+     * Purpose: loads the customer view's layout: BorderPane. Fetches BorderPane's controller and stores it in
+     * the Navigation class to be used later on.
      *
      * @return BorderPane custRoot
      * @throws IOException
@@ -99,24 +152,31 @@ public class LoginController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader();
         // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
-        BorderPane custRoot = (BorderPane) loader.load(LoginController.class.getResourceAsStream(Navigation.CUST_ROOT));
+        BorderPane customerRoot = (BorderPane) loader.load(LoginController.class.getResourceAsStream(Navigation.CUST_ROOT));
         CustomerRootController custRootContr = loader.getController();
 
         // sets controller for the customer root layout
         Navigation.setCustController(custRootContr);
         // loads first fxml file with a navigator method
-        Navigation.loadCustFxml(Navigation.CUST_ACC_VIEW);
+        Navigation.loadCustFxml(Navigation.CUST_PROG_VIEW);
 
-        return custRoot;
+        return customerRoot;
     }
 
 
+    private static BorderPane loadEmpBorderPane() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
+        BorderPane employeeRoot = (BorderPane) loader.load(LoginController.class.getResourceAsStream(Navigation.EMPL_ROOT));
+        EmployeeRootController emplRootContr = loader.getController();
 
+        // sets controller for the customer root layout
+        Navigation.setEmplController(emplRootContr);
+        // loads first fxml file with a navigator method
+        Navigation.loadCustFxml(Navigation.CUST_PROG_VIEW);
 
-//    private static BorderPane loadEmpBorderPane() {
-//
-//        return
-//    }
+        return employeeRoot;
+    }
 
 
 

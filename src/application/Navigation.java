@@ -14,8 +14,8 @@ public class Navigation {
     /**
      * Constants locating the FXML files representing the different views
      */
-    public static final String CUST_ROOT = "/views/customerRoot.fxml";
-//    public static final String EMPL_ROOT = "/views/.fxml";
+    public static final String CUST_ROOT = "/views/CustomerRoot.fxml";
+    public static final String EMPL_ROOT = "/views/EmployeeRoot.fxml";
 
     //customer views
     public static final String CUST_ACC_VIEW = "/views/customerAccount.fxml";
@@ -23,7 +23,7 @@ public class Navigation {
 //    public static final String ORDER_VIEW = "/views/EmpOrderView.fxml";
 
     //employee views
-//    public static final String MGMT_EMPLOYEES = "/view/MgmtEmployeesView.fxml";
+    public static final String MGMT_EMPLOYEES = "/views/MgmtEmployeesView.fxml";
 //    public static final String MGMT_MENU = "/view/MgmtMenuView.fxml";
 //    public static final String MGMT_ORDERS = "/view/MgmtOrdersView.fxml";
 

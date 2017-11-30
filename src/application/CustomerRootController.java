@@ -42,6 +42,8 @@ public class CustomerRootController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        System.err.println(System.getProperty("java.class.path"));
+
         BufferedImage bufferedLogo = null;
         BufferedImage bufferedBackground = null;
         try {

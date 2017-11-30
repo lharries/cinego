@@ -17,7 +17,6 @@ public class EmployeeRootController implements Initializable {
     @FXML
     private BorderPane employeePane;
 
-
     /**
      *Purpose:
      *

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="empPane" maxHeight="783.0" maxWidth="1150.0" minHeight="692.0" minWidth="999.0" prefHeight="783.0" prefWidth="1150.0" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeRootController">
+    <top>
+        <VBox prefHeight="113.0" prefWidth="1146.0" BorderPane.alignment="CENTER">
+            <children>
+                <Pane fx:id="pane1" prefHeight="114.0" prefWidth="1146.0" style="-fx-background-color: #5C847A;">
+                    <children>
+                        <GridPane layoutX="2.0" layoutY="6.0" prefHeight="61.0" prefWidth="1148.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.99682998657227" minWidth="10.0" prefWidth="57.724830627441406" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="436.2751693725586" minWidth="0.0" prefWidth="436.2751693725586" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="887.813720703125" minWidth="10.0" prefWidth="301.3331298828125" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.96234130859375" minWidth="10.0" prefWidth="104.702880859375" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.297119140625" minWidth="10.0" prefWidth="254.297119140625" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.444091796875" minWidth="10.0" prefWidth="124.444091796875" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="87.77728605270386" minHeight="3.5188255310058594" prefHeight="57.09468078613281" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="52.25909423828125" minHeight="0.0" prefHeight="3.9053192138671875" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="87.77728605270386" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#signOut" prefHeight="47.0" prefWidth="13.0" GridPane.columnIndex="5">
+                                    <graphic>
+                                        <ImageView fitHeight="32.0" fitWidth="32.0">
+                                            <image>
+                                                <!--<Image url="/res/door.png" />-->
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <GridPane prefHeight="48.0" prefWidth="246.0" GridPane.columnIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.138671875" minWidth="10.0" prefWidth="107.90093994140625" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.158447265625" minWidth="10.0" prefWidth="147.09906005859375" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="72.0" minHeight="0.8347620964050293" prefHeight="11.388412952423096" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="42.611587047576904" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="27.689266204833984" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Employee" textFill="WHITE" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="Courier New Bold" size="17.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="userLbl" prefHeight="24.0" prefWidth="128.0" text="Username" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="Courier New Bold" size="17.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </GridPane>
+                    </children>
+                </Pane>
+                <Pane fx:id="pane2" prefHeight="85.0" prefWidth="1179.0" style="-fx-background-color: #E3F1F1;">
+                    <children>
+                        <Label layoutX="281.0" layoutY="15.0" text="Tables">
+                            <font>
+                                <Font name="Courier New Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="goToTables" layoutX="219.0" layoutY="-1.0" mnemonicParsing="false" onAction="#goToTableView" opacity="0.0" prefHeight="51.0" prefWidth="188.0" />
+                        <Button fx:id="goToOrders" layoutX="643.0" layoutY="-1.0" mnemonicParsing="false" onAction="#goToEmpOrdersView" opacity="0.0" prefHeight="46.0" prefWidth="279.0" />
+                        <ImageView fitHeight="28.0" fitWidth="173.0" layoutX="726.0" layoutY="11.0" preserveRatio="true">
+                            <image>
+                                <!--<Image url="/res/uberEats.png" />-->
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </children>
+        </VBox>
+    </top>
+    <bottom>
+        <Pane prefHeight="50.0" prefWidth="1150.0" style="-fx-background-color: #EEEEEE;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="27.0" fitWidth="171.0" layoutX="505.0" layoutY="9.0" preserveRatio="true">
+                    <image>
+                        <!--<Image url="/res/withLove.png" />-->
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </bottom>
+</BorderPane>

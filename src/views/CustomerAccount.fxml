@@ -20,5 +20,6 @@
       <Label layoutX="385.0" layoutY="92.0" text="Klasen" />
       <Label layoutX="113.0" layoutY="90.0" text="Kai" />
       <Button fx:id="backToProgram" layoutX="104.0" layoutY="546.0" mnemonicParsing="false" text="Back to Movies" />
+      <Button fx:id="editProfileClickHandler" layoutX="975.0" layoutY="123.0" mnemonicParsing="false" text="edit profile" />
    </children>
 </AnchorPane>

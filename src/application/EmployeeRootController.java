@@ -94,7 +94,4 @@ public class EmployeeRootController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
-
 }

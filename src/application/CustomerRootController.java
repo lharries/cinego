@@ -1,6 +1,5 @@
 package application;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,8 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 import javax.imageio.ImageIO;
-import javax.xml.crypto.dom.DOMCryptoContext;
-import javax.xml.soap.Node;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +24,7 @@ public class CustomerRootController implements Initializable {
     private static final Logger logger = Logger.getLogger(CustomerRootController.class.getName());
 
     @FXML
-    private BorderPane custPane;
+    private BorderPane customerPane;
 
     @FXML
     private Label userLbl;
@@ -66,7 +63,7 @@ public class CustomerRootController implements Initializable {
      *
      */
     public void setCenter(javafx.scene.Node node){
-        custPane.setCenter(node);
+        customerPane.setCenter(node);
     }
 
     @FXML

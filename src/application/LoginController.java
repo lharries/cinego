@@ -89,7 +89,6 @@ public class LoginController implements Initializable {
      *
      * @param event
      */
-
     @FXML
     public void loginEmpl(javafx.event.ActionEvent event) {
 
@@ -124,13 +123,9 @@ public class LoginController implements Initializable {
 //        }
     }
 
-
-
-
-
     /**
-     * Purpose: Static method that sets the scene and the stylesheet with a
-     * BorderPane as a paramter.
+     * Purpose: Static method that sets the scene and adds styling via the CSS stylesheet with a
+     * BorderPane as a parameter.
      *
      * @param root
      * @return
@@ -145,7 +140,7 @@ public class LoginController implements Initializable {
      * Purpose: loads the customer view's layout: BorderPane. Fetches BorderPane's controller and stores it in
      * the Navigation class to be used later on.
      *
-     * @return BorderPane custRoot
+     * @return BorderPane 'customerRoot'
      * @throws IOException
      */
     private static BorderPane loadCustBorderPane() throws IOException {
@@ -163,7 +158,13 @@ public class LoginController implements Initializable {
         return customerRoot;
     }
 
-
+    /**
+     * Purpose: loads the employee view's layout: BorderPane. Fetches BorderPane's controller and stores it in
+     * the Navigation class to be used later on.
+     *
+     * @return BorderPane 'employeeRoot'
+     * @throws IOException
+     */
     private static BorderPane loadEmpBorderPane() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
@@ -177,7 +178,4 @@ public class LoginController implements Initializable {
 
         return employeeRoot;
     }
-
-
-
 }

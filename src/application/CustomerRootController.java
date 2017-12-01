@@ -21,13 +21,13 @@ import java.util.logging.Logger;
 
 public class CustomerRootController implements Initializable {
 
-    private static final Logger logger = Logger.getLogger(CustomerRootController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
 
     @FXML
     private BorderPane customerPane;
 
-    @FXML
-    private Label userLbl;
+//    @FXML
+//    private Label userLbl;
 
     @FXML
     private ImageView logo;
@@ -39,7 +39,11 @@ public class CustomerRootController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        System.err.println(System.getProperty("java.class.path"));
+        //System.err.println(System.getProperty("java.class.path"));
+
+
+        //must set the background image within the individual scenes because right now the images will
+        //likely be added to the view but are located behind the added scenes
 
         BufferedImage bufferedLogo = null;
         BufferedImage bufferedBackground = null;
@@ -56,45 +60,49 @@ public class CustomerRootController implements Initializable {
     }
 
     /**
-     *Purpose: method to be called by different customer controllers to set their respective views to the
-     *center of the parent borderPane: 'empPane' . This Pane is a child of the stage
+     * Purpose: method to be called by different customer controllers to set their respective views to the
+     * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
-     *
      */
-    public void setCenter(javafx.scene.Node node){
+    public void setCenter(javafx.scene.Node node) {
         customerPane.setCenter(node);
     }
+
+
+    /**
+     * Purpose: opens the customer's ProgramView (scene located within customerRoot) where they can see the list of
+     * available movies
+     *
+     * @param event
+     */
 
     @FXML
     public void openProgramView(ActionEvent event) {
         try {
             Navigation.loadCustFxml(Navigation.CUST_PROG_VIEW);
         } catch (IOException e) {
-            logger.logp(Level.WARNING, "CustomerRootController", "openProgramView", "Failed to load CustomerProgram View. See: " + e);
+            LOGGER.logp(Level.WARNING, "CustomerRootController", "openProgramView", "Failed to load CustomerProgram View. See: " + e);
             e.printStackTrace();
         }
     }
+
+    /**
+     * Purpose: opens the customer's Profile (scene located within customerRoot) where they can see their movie history,
+     * booked movies and edit their own profile details
+     * available movies
+     *
+     * @param event
+     */
 
     @FXML
     public void openProfileView(ActionEvent event) {
         try {
             Navigation.loadCustFxml(Navigation.CUST_ACC_VIEW);
         } catch (IOException e) {
-            logger.logp(Level.WARNING, "CustomerRootController", "openProfileView", "Failed to load CustomerProfile View. See: " + e);
+            LOGGER.logp(Level.WARNING, "CustomerRootController", "openProfileView", "Failed to load CustomerProfile View. See: " + e);
             e.printStackTrace();
         }
     }
-
-
-
-//
-//    public void getMovies(String movies){
-//        userLbl.setText(movies);
-//    }
-//
-
-
-
 }
 

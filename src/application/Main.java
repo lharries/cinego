@@ -2,10 +2,14 @@ package application;
 	
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -79,6 +83,8 @@ public class Main extends Application {
 		Scene scene = new Scene(customerRoot);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
+
 	}
 }
 

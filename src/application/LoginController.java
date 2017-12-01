@@ -156,7 +156,7 @@ public class LoginController implements Initializable {
         CustomerRootController custRootContr = loader.getController();
 
         // sets controller for the customer root layout
-        Navigation.setCustController(custRootContr);
+        Navigation.setCustomerController(custRootContr);
         // loads first fxml file with a navigator method
         Navigation.loadCustFxml(Navigation.CUST_PROG_VIEW);
 
@@ -171,9 +171,9 @@ public class LoginController implements Initializable {
         EmployeeRootController emplRootContr = loader.getController();
 
         // sets controller for the customer root layout
-        Navigation.setEmplController(emplRootContr);
+        Navigation.setEmployeeController(emplRootContr);
         // loads first fxml file with a navigator method
-        Navigation.loadCustFxml(Navigation.CUST_PROG_VIEW);
+        Navigation.loadEmplFxml(Navigation.EMPL_HOME_VIEW);
 
         return employeeRoot;
     }

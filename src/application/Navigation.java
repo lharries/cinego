@@ -23,31 +23,31 @@ public class Navigation {
 //    public static final String ORDER_VIEW = "/views/EmpOrderView.fxml";
 
     //employee views
-    public static final String MGMT_EMPLOYEES = "/views/MgmtEmployeesView.fxml";
-//    public static final String MGMT_MENU = "/view/MgmtMenuView.fxml";
+    public static final String EMPL_HOME_VIEW = "/views/EmployeeHome.fxml";
+    public static final String EMPL_MOVIE_FORM = "/views/EmployeeMovieForm.fxml";
 //    public static final String MGMT_ORDERS = "/view/MgmtOrdersView.fxml";
 
     //Main controller for each user's (customer & employee) specific rootViews
-    private static CustomerRootController custController;
-    private static EmployeeRootController emplController;
+    private static CustomerRootController customerController;
+    private static EmployeeRootController employeeController;
 
 
     /**
      * Purpose: sets the customer controller
      *
-     * @param custController
+     * @param customerController
      */
-    public static void setCustController(CustomerRootController custController){
-        Navigation.custController = custController;
+    public static void setCustomerController(CustomerRootController customerController){
+        Navigation.customerController = customerController;
     }
 
     /**
      * Purpose: sets the customer controller
      *
-     * @param emplController
+     * @param employeeController
      */
-    public static void setEmplController(EmployeeRootController emplController){
-        Navigation.emplController = emplController;
+    public static void setEmployeeController(EmployeeRootController employeeController){
+        Navigation.employeeController = employeeController;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Navigation {
      * @throws IOException
      */
     public static void loadCustFxml(String fxmlView) throws IOException {
-        custController.setCenter(FXMLLoader.load(Navigation.class.getResource(fxmlView)));
+        customerController.setCenter(FXMLLoader.load(Navigation.class.getResource(fxmlView)));
     }
 
     /**
@@ -67,7 +67,7 @@ public class Navigation {
      * @throws IOException
      */
     public static void loadEmplFxml(String fxmlView) throws IOException {
-        emplController.setCenter(FXMLLoader.load(Navigation.class.getResource(fxmlView)));
+        employeeController.setCenter(FXMLLoader.load(Navigation.class.getResource(fxmlView)));
     }
 
 

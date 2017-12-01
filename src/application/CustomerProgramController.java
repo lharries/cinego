@@ -21,7 +21,7 @@ public class CustomerProgramController {
 //    }
 //   @FXML
 //    public void goToCustAcc(ActionEvent event){
-//        Navigation.setCustController();
+//        Navigation.setCustomerController();
 //
 //    }
 

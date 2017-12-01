@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 public class FilmDAO {
 
+    // TODO Log the erros
+
     public static void main(String[] args) {
 
         try {

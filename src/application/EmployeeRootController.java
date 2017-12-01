@@ -74,25 +74,23 @@ public class EmployeeRootController implements Initializable {
         try {
             Navigation.loadEmplFxml(Navigation.EMPL_MOVIE_FORM);
         } catch (IOException e) {
-            LOGGER.logp(Level.WARNING, "EmployeeRootController", "openMovieFormView", "Failed to load MovieForm View. See: " + e);
+            LOGGER.logp(Level.WARNING, "EmployeeRootController", "openMovieFormView", "Failed to load Employee MovieForm View. See: " + e);
             e.printStackTrace();
         }
     }
 
     /**
-     * Purpose: opens the customer's Profile (scene located within customerRoot) where they can see their movie history,
-     * booked movies and edit their own profile details
-     * available movies
+     * Purpose: opens the employee's Home View (scene located within employeeRoot) where they can see the movies
      *
      * @param event
      */
 
     @FXML
-    public void openProfileView(ActionEvent event) {
+    public void openHomeView(ActionEvent event) {
         try {
-            Navigation.loadEmplFxml(Navigation.CUST_ACC_VIEW);
+            Navigation.loadEmplFxml(Navigation.EMPL_HOME_VIEW);
         } catch (IOException e) {
-            LOGGER.logp(Level.WARNING, "EmployeeRootController", "openProfileView", "Failed to load CustomerProfile View. See: " + e);
+            LOGGER.logp(Level.WARNING, "EmployeeRootController", "openHomeView", "Failed to load Employee HomeView View. See: " + e);
             e.printStackTrace();
         }
     }

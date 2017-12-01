@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.ImageView?>
@@ -9,10 +10,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.image.Image?>
 
-
-<BorderPane fx:id="employeePane" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeRootController">
+<BorderPane fx:id="employeePane" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeRootController">
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,6 +25,8 @@
             </Label>
             <Label layoutX="194.0" layoutY="20.0" text="First Name" textFill="WHITE" />
             <Label layoutX="298.0" layoutY="20.0" text="Last Name" textFill="WHITE" />
+            <Button fx:id="toMovieForm" layoutX="489.0" layoutY="60.0" mnemonicParsing="false" onAction="#openMovieFormView" prefHeight="27.0" prefWidth="248.0" text="Open Movie Form" />
+            <Button fx:id="toHomeView" layoutX="902.0" layoutY="60.0" mnemonicParsing="false" onAction="#openHomeView" prefHeight="27.0" prefWidth="189.0" text="Return Home" />
          </children>
       </AnchorPane>
     </top>

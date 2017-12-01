@@ -1,6 +1,6 @@
 package models;
 
-public class Employee {
+public class Employee extends User {
 
     public Employee() {
     }

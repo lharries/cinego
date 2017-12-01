@@ -130,7 +130,7 @@ public class LoginController implements Initializable {
      * @param root
      * @return
      */
-    private static Scene createScene(BorderPane root) {
+    protected static Scene createScene(BorderPane root) {
         Scene scene = new Scene(root);
         scene.getStylesheets().setAll(LoginController.class.getResource("/application/application.css").toExternalForm());
         return scene;

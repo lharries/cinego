@@ -3,11 +3,16 @@ package application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -101,6 +106,32 @@ public class CustomerRootController implements Initializable {
             Navigation.loadCustFxml(Navigation.CUST_ACC_VIEW);
         } catch (IOException e) {
             LOGGER.logp(Level.WARNING, "CustomerRootController", "openProfileView", "Failed to load CustomerProfile View. See: " + e);
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     *
+     * logout test
+     * @param event
+     */
+
+    @FXML
+    public void logout(ActionEvent event){
+        ((Node) event.getSource()).getScene().getWindow().hide();
+        try {
+
+            //launches the loginCust view upon running program
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+            Stage primaryStage = new Stage();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }

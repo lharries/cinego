@@ -46,7 +46,7 @@ public class CustomerDAO {
         }
     }
 
-    private static Customer login(String username, String password) throws SQLException, ClassNotFoundException {
+    public static Customer login(String username, String password) throws SQLException, ClassNotFoundException {
         // TODO: Switch to prepared statements?
         ResultSet results = SQLiteConnection.executeQuery("SELECT * FROM Customer WHERE username=\"" + username + "\" AND password=\"" + password + "\"");
         if (results != null) {

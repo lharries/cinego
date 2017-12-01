@@ -46,7 +46,7 @@ public class EmployeeDAO {
         }
     }
 
-    private static Employee login(String username, String password) throws SQLException, ClassNotFoundException {
+    public static Employee login(String username, String password) throws SQLException, ClassNotFoundException {
         // TODO: Switch to prepared statements?
         ResultSet results = SQLiteConnection.executeQuery("SELECT * FROM Employee WHERE username=\"" + username + "\" AND password=\"" + password + "\"");
         if (results != null) {
@@ -56,7 +56,7 @@ public class EmployeeDAO {
         }
     }
 
-    private static ObservableList<Employee> getEmployeeObservableList() throws SQLException, ClassNotFoundException {
+    public static ObservableList<Employee> getEmployeeObservableList() throws SQLException, ClassNotFoundException {
         ResultSet resultSetEmployees = SQLiteConnection.executeQuery("SELECT * FROM Employee");
 
         return getEmployeeList(resultSetEmployees);

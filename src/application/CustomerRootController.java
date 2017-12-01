@@ -110,30 +110,18 @@ public class CustomerRootController implements Initializable {
         }
     }
 
-
     /**
-     *
-     * logout test
+     * Purpose: logs user out of cinema system
+     * @version: logout 1.0
      * @param event
      */
-
     @FXML
     public void logout(ActionEvent event){
+
         ((Node) event.getSource()).getScene().getWindow().hide();
-        try {
-
-            //launches the loginCust view upon running program
-            Parent root;
-            root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-            Stage primaryStage = new Stage();
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        Main main = new Main();
+        Stage primaryStage = new Stage();
+        main.start(primaryStage);
     }
 }
 

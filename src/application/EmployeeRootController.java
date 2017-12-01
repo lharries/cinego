@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import javax.xml.soap.Node;
@@ -95,4 +96,19 @@ public class EmployeeRootController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Purpose: logs user out of cinema system
+     * @version: logout 1.0
+     * @param event
+     */
+    @FXML
+    public void logout(ActionEvent event){
+
+        ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
+        Main main = new Main();
+        Stage primaryStage = new Stage();
+        main.start(primaryStage);
+    }
+
 }

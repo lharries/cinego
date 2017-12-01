@@ -7,6 +7,11 @@ import javafx.fxml.FXML;
 public class EmployeeHomeController {
 
 
+    /**
+     *
+     * Purpose: allows user to also change to movie creation view from within his scene
+     * @param event
+     */
 
     @FXML
     private void createMovie(ActionEvent event){
@@ -15,6 +20,4 @@ public class EmployeeHomeController {
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openMovieFormView(event);
     }
-
-
 }

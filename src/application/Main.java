@@ -17,12 +17,12 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-	private static BorderPane customerRoot;
-	private static AnchorPane customerProgram;
+//	private static BorderPane customerRoot;
+//	private static AnchorPane customerProgram;
 	
-	private static Stage loginStage, primaryStage;
+//	private static Stage loginStage, primaryStage;
 	private static Parent root;
-	private static CustomerProgramController CustomerProgramController;
+//	private static CustomerProgramController CustomerProgramController;
 
 
 	@Override
@@ -43,48 +43,6 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-	}
-	
-	public static void startAsCustomer(){
-		showCustomerRoot();
-		//showCustomerProgram();
-	}
-
-//	/**
-//	 * shows customer
-//	 *
-//	 */
-//	private static void showCustomerProgram() {
-//
-//		try {
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(Main.class.getResource("/views/Movies.fxml"));
-//			customerProgram = loader.load();
-//			CustomerProgramController = loader.getController();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * loads the customerRoot
-	 *
-	 */
-
-	private static void showCustomerRoot() {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/views/CustomerRoot.fxml"));
-		
-		try {
-			customerRoot = loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Scene scene = new Scene(customerRoot);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
-
 	}
 }
 

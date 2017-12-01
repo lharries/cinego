@@ -20,7 +20,8 @@ import java.util.logging.Logger;
 
 
 /**
- *
+ * Purpose: This class controls all the employee views and allows user to switch between
+ * the respective scenes.
  *
  */
 public class EmployeeRootController implements Initializable {

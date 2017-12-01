@@ -28,5 +28,4 @@ public class EmployeeDAO {
 
         return false;
     }
-    ;
 }

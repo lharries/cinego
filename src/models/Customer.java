@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer extends User {
     private ArrayList<Booking> bookings = new ArrayList<Booking>();
 
     public Customer() {

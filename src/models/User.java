@@ -43,7 +43,7 @@ public class User {
         this.firstName.set(firstName);
     }
 
-    public StringProperty FirstNameProperty() {
+    public StringProperty firstNameProperty() {
         return this.firstName;
     }
 
@@ -55,7 +55,7 @@ public class User {
         this.lastName.set(lastName);
     }
 
-    public StringProperty LastNameProperty() {
+    public StringProperty lastNameProperty() {
         return this.lastName;
     }
 
@@ -67,7 +67,7 @@ public class User {
         this.email.set(email);
     }
 
-    public StringProperty EmailProperty() {
+    public StringProperty emailProperty() {
         return this.email;
     }
 
@@ -79,7 +79,7 @@ public class User {
         this.username.set(username);
     }
 
-    public StringProperty UsernameProperty() {
+    public StringProperty usernameProperty() {
         return this.username;
     }
 }

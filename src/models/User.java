@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class User {
+public abstract class User {
 
     private IntegerProperty id;
     private StringProperty firstName;
@@ -82,4 +82,6 @@ public class User {
     public StringProperty usernameProperty() {
         return this.username;
     }
+
+    public abstract void login();
 }

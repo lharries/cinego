@@ -1,6 +1,7 @@
 package utils;
 
 import com.sun.rowset.CachedRowSetImpl;
+import models.PreparedStatementArg;
 
 import java.sql.*;
 
@@ -129,6 +130,23 @@ public class SQLiteConnection {
 
         return changesMade;
 
+    }
+
+    private static PreparedStatement setArgsPreparedStatement(PreparedStatement preparedStatement, PreparedStatementArg[] args) throws SQLException {
+
+        int parameterIndex = 0;
+
+        for (PreparedStatementArg arg :
+                args) {
+            if (arg.getType().equals("Integer")) {
+                preparedStatement.setInt(parameterIndex, arg.getIntArg());
+            } else if (arg.getType().equals("String")) {
+                preparedStatement.setString(parameterIndex, arg.getStringArg());
+            }
+            parameterIndex++;
+        }
+
+        return preparedStatement;
     }
 
 }

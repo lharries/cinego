@@ -51,17 +51,17 @@ public class CustomerRootController implements Initializable {
         //likely be added to the view but are located behind the added scenes
 
         BufferedImage bufferedLogo = null;
-        BufferedImage bufferedBackground = null;
+//        BufferedImage bufferedBackground = null;
         try {
-            bufferedLogo = ImageIO.read(new File("src/resources/Cinestar.png"));
-            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
+            bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
+//            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.logo.setImage(logo);
-        this.background.setImage(background);
+//        this.background.setImage(background);
     }
 
     /**

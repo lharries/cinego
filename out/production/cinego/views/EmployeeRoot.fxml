@@ -48,7 +48,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="45.0" layoutX="609.0" layoutY="3.0" stroke="#f3f3f3" strokeType="INSIDE" width="43.0" />
              <ImageView fx:id="logo" fitHeight="40.0" fitWidth="40.0" layoutX="611.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                  <!--<image>-->
-                     <!--<Image url="@Cinestar.png" />-->
+                     <!--<Image url="@cinestar.png" />-->
                  <!--</image>-->
              </ImageView>
              <Text fill="WHITE" layoutY="-17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">

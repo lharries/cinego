@@ -32,7 +32,7 @@
       </Text>
       <ImageView fitHeight="39.0" fitWidth="40.0" layoutX="656.0" layoutY="753.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/Cinestar.png" />
+            <Image url="@../resources/cinestar.png" />
          </image>
       </ImageView>
       <Line endX="1098.0" layoutX="181.0" layoutY="50.0" startX="-200.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />

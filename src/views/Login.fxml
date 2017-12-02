@@ -27,7 +27,7 @@
             <Button fx:id="loginButton" layoutX="180.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginEmpl" prefHeight="27.0" prefWidth="120.0" text=" Employee Login" />
             <ImageView fitHeight="91.0" fitWidth="88.0" layoutX="128.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/Cinestar.png" />
+                  <Image url="@../resources/cinestar.png" />
                </image>
             </ImageView>
             <Text layoutX="53.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to CineGo">

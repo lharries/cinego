@@ -39,7 +39,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#596679" height="60.0" layoutY="100.0" opacity="0.9" stroke="#596679" strokeType="INSIDE" width="330.0" />
       <ImageView fitHeight="39.0" fitWidth="40.0" layoutX="656.0" layoutY="753.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/Cinestar.png" />
+            <Image url="@../resources/cinestar.png" />
          </image>
       </ImageView>
       <TextField layoutX="14.0" layoutY="114.0" promptText="   search" style="-fx-background-color: ffffff; -fx-border-radius: 6px;" />

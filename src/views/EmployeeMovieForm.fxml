@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<!--<?import org.controlsfx.glyphfont.Glyph?>-->
 
 <AnchorPane prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeMovieFormController">
    <children>
@@ -23,5 +24,6 @@
       <Label layoutX="559.0" layoutY="175.0" text="IMDB rating" />
       <Button fx:id="addMovie" layoutX="484.0" layoutY="391.0" mnemonicParsing="false" text="Add movie" />
       <Button fx:id="returnButton" layoutX="378.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMoviesView" text="Return to Home" />
+      <!--<Glyph fontFamily="sol" layoutX="442.0" layoutY="258.0" prefHeight="108.0" prefWidth="235.0" text="asdasd" />-->
    </children>
 </AnchorPane>

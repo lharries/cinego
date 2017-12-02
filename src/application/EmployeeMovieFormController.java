@@ -21,9 +21,5 @@ public class EmployeeMovieFormController {
     private void returnToMoviesView(){
 
         //ToDo: add ability to change back to movies view
-
-
     }
-
-
 }

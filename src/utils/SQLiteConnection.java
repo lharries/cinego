@@ -152,6 +152,8 @@ public class SQLiteConnection {
                 preparedStatement.setInt(parameterIndex, arg.getIntArg());
             } else if (arg.getType().equals("String")) {
                 preparedStatement.setString(parameterIndex, arg.getStringArg());
+            } else if (arg.getType().equals("Boolean")) {
+                preparedStatement.setBoolean(parameterIndex, arg.getBooleanArg());
             }
             parameterIndex++;
         }

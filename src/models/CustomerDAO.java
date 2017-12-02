@@ -51,8 +51,8 @@ public class CustomerDAO {
         String query = "SELECT * FROM Customer WHERE username=? AND password=?";
 
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(null, username),
-                new PreparedStatementArg(null, password)
+                new PreparedStatementArg(null, username, null),
+                new PreparedStatementArg(null, password, null)
         };
 
         ResultSet results = SQLiteConnection.executeQuery(query,preparedStatementArgs);

@@ -9,6 +9,14 @@ import java.sql.SQLException;
 
 public class BookingDAO {
     public static void main(String[] args) {
+        try {
+            insertBooking(1,false,3,2);
+            System.out.println(getBookingObservableList());
+
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
 
     }
 
@@ -27,9 +35,27 @@ public class BookingDAO {
             booking.setCustomerId(resultSet.getInt("customerId"));
             booking.setPaidFor(resultSet.getBoolean("paidFor"));
             booking.setSeatId(resultSet.getInt("seatId"));
+            booking.setScreeningId(resultSet.getInt("screeningId"));
             bookingList.add(booking);
         }
 
         return bookingList;
+    }
+
+    public static void insertBooking(int customerId, boolean paidFor, int seatId, int screeningId) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(customerId, null, null),
+                new PreparedStatementArg(null, null, paidFor),
+                new PreparedStatementArg(seatId, null, null),
+                new PreparedStatementArg(screeningId, null, null),
+        };
+
+        SQLiteConnection.execute(
+                "INSERT INTO Booking\n" +
+                        "(customerId, paidFor, seatId, screeningId)\n" +
+                        "VALUES\n" +
+                        "(?, ?, ?, ?);",
+                preparedStatementArgs
+        );
     }
 }

@@ -2,6 +2,8 @@ package models;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Booking {
 
@@ -9,8 +11,14 @@ public class Booking {
     private BooleanProperty paidFor;
     private IntegerProperty customerId;
     private IntegerProperty seatId;
+    private IntegerProperty screeningId;
 
     public Booking() {
+        this.id = new SimpleIntegerProperty();
+        this.paidFor = new SimpleBooleanProperty();
+        this.customerId = new SimpleIntegerProperty();
+        this.seatId = new SimpleIntegerProperty();
+        this.screeningId = new SimpleIntegerProperty();
     }
 
     public int getId() {
@@ -59,5 +67,17 @@ public class Booking {
 
     public void setSeatId(int seatId) {
         this.seatId.set(seatId);
+    }
+
+    public int getScreeningId() {
+        return screeningId.get();
+    }
+
+    public IntegerProperty screeningIdProperty() {
+        return screeningId;
+    }
+
+    public void setScreeningId(int screeningId) {
+        this.screeningId.set(screeningId);
     }
 }

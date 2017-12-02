@@ -48,8 +48,14 @@ public class CustomerDAO {
 
     public static Customer login(String username, String password) throws SQLException, ClassNotFoundException {
         // TODO: Switch to prepared statements?
-        String query = "SELECT * FROM Customer WHERE username=\"(?)\" AND password=\"" + password + "\"";
-        ResultSet results = SQLiteConnection.executeQuery(query);
+        String query = "SELECT * FROM Customer WHERE username=? AND password=?";
+
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(null, username),
+                new PreparedStatementArg(null, password)
+        };
+
+        ResultSet results = SQLiteConnection.executeQuery(query,preparedStatementArgs);
         if (results != null) {
             return getCustomerFromResultSet(results);
         } else {
@@ -58,7 +64,7 @@ public class CustomerDAO {
     }
 
     private static ObservableList<Customer> getCustomerObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetCustomers = SQLiteConnection.executeQuery("SELECT * FROM Customer");
+        ResultSet resultSetCustomers = SQLiteConnection.executeQuery("SELECT * FROM Customer", null);
 
         return getCustomerList(resultSetCustomers);
     }

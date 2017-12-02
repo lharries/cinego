@@ -26,6 +26,8 @@ public class PreparedStatementArg {
             return "Integer";
         } else if (stringArg != null){
             return "String";
+        } else {
+            throw new Error("No type found!");
         }
     }
 

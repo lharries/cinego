@@ -15,7 +15,7 @@ public class FilmDAO {
 
         try {
             // TODO: DEALT WITH DODGY SYMBOLS e.g. -1-1
-            insertFilm("Test","description","image path");
+            insertFilm("Test","description -13;24;/' ","image path");
             System.out.println( getFilmObservableList());
 
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class FilmDAO {
     }
 
     public static ObservableList<Film> getFilmObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetFilms = SQLiteConnection.executeQuery("SELECT * FROM Film");
+        ResultSet resultSetFilms = SQLiteConnection.executeQuery("SELECT * FROM Film", null);
 
         return getFilmList(resultSetFilms);
     }
@@ -59,11 +59,18 @@ public class FilmDAO {
     }
 
     public static void insertFilm(String title, String description, String imagePath) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(null, title),
+                new PreparedStatementArg(null, description),
+                new PreparedStatementArg(null, imagePath)
+        };
+
         SQLiteConnection.execute(
                 "INSERT INTO Film\n" +
                         "(title, description, imagePath)\n" +
                         "VALUES\n" +
-                        "('" + title + "','" + description + "','" +imagePath + "');"
+                        "(?, ?, ?);",
+                preparedStatementArgs
               );
     }
 

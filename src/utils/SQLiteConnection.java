@@ -11,6 +11,7 @@ import java.sql.*;
  * - http://www.sqlitetutorial.net/sqlite-java/sqlite-jdbc-driver/
  * - https://teamtreehouse.com/community/how-do-you-create-a-statement-and-execute-a-query-using-java-and-sql
  * - http://www.swtestacademy.com/database-operations-javafx/
+ * - https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html
  *
  * @author lukeharries
  */
@@ -42,17 +43,21 @@ public class SQLiteConnection {
 
     }
 
-    public static void execute(String query) throws SQLException, ClassNotFoundException {
+    public static void execute(String query, PreparedStatementArg[] args) throws SQLException, ClassNotFoundException {
 
-        Statement statement = null;
+        PreparedStatement statement = null;
 
         try {
 
             connect();
 
-            statement = connection.createStatement();
+            statement = connection.prepareStatement(query);
 
-            statement.execute(query);
+            if (args != null) {
+                statement = setArgsPreparedStatement(statement, args);
+            }
+
+            statement.execute();
 
         } catch (SQLException exception) {
             System.out.println("Unable to perform the query");
@@ -67,9 +72,9 @@ public class SQLiteConnection {
 
     }
 
-    public static ResultSet executeQuery(String query) throws SQLException, ClassNotFoundException {
+    public static ResultSet executeQuery(String query, PreparedStatementArg[] args) throws SQLException, ClassNotFoundException {
 
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet results = null;
         CachedRowSetImpl cachedRowSet;
 
@@ -77,9 +82,12 @@ public class SQLiteConnection {
 
             connect();
 
-            statement = connection.createStatement();
+            statement = connection.prepareStatement(query);
 
-            results = statement.executeQuery(query);
+            if (args != null) {
+                statement = setArgsPreparedStatement(statement, args);
+            }
+            results = statement.executeQuery();
 
             cachedRowSet = new CachedRowSetImpl();
 
@@ -103,19 +111,22 @@ public class SQLiteConnection {
 
     }
 
-    public static int executeUpdate(String query) throws SQLException, ClassNotFoundException {
+    public static int executeUpdate(String query, PreparedStatementArg[] args) throws SQLException, ClassNotFoundException {
 
 
-        Statement statement = null;
+        PreparedStatement statement = null;
         int changesMade;
 
         try {
-
             connect();
 
-            statement = connection.createStatement();
+            statement = connection.prepareStatement(query);
 
-            changesMade = statement.executeUpdate(query);
+            if (args != null) {
+                statement = setArgsPreparedStatement(statement, args);
+            }
+
+            changesMade = statement.executeUpdate();
 
         } catch (SQLException exception) {
             System.out.println("Unable to perform the query");
@@ -134,10 +145,9 @@ public class SQLiteConnection {
 
     private static PreparedStatement setArgsPreparedStatement(PreparedStatement preparedStatement, PreparedStatementArg[] args) throws SQLException {
 
-        int parameterIndex = 0;
+        int parameterIndex = 1;
 
-        for (PreparedStatementArg arg :
-                args) {
+        for (PreparedStatementArg arg : args) {
             if (arg.getType().equals("Integer")) {
                 preparedStatement.setInt(parameterIndex, arg.getIntArg());
             } else if (arg.getType().equals("String")) {

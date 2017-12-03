@@ -22,4 +22,12 @@ public class EmployeeMovieFormController {
 
         //ToDo: add ability to change back to movies view
     }
+
+    @FXML
+    private void addMovie(){
+        //TODO: add ability to add a new movie to database based on the input data from each field
+        //TODO: question: how do we add an image? Via internet URL or do we actually have to create an upload so the image is stored in the project's directory / the database? 
+    }
+
+
 }

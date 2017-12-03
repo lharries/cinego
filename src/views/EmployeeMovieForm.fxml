@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <!--<?import org.controlsfx.glyphfont.Glyph?>-->
 
 <AnchorPane prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeMovieFormController">
@@ -15,14 +16,14 @@
       <Label layoutX="125.0" layoutY="83.0" text="Title" />
       <TextArea layoutX="120.0" layoutY="194.0" prefHeight="126.0" prefWidth="200.0" promptText="As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain." />
       <Label layoutX="124.0" layoutY="161.0" prefHeight="17.0" prefWidth="81.0" text="Description" />
-      <ListView layoutX="130.0" layoutY="470.0" prefHeight="200.0" prefWidth="751.0" />
-      <Label layoutX="156.0" layoutY="438.0" prefHeight="17.0" prefWidth="131.0" text="Screenings Table" />
+      <ListView layoutX="125.0" layoutY="428.0" prefHeight="200.0" prefWidth="751.0" />
+      <Label layoutX="151.0" layoutY="396.0" prefHeight="17.0" prefWidth="131.0" text="Screenings Table" />
       <Button layoutX="1106.0" layoutY="86.0" mnemonicParsing="false" text="Edit" />
       <TextField layoutX="566.0" layoutY="124.0" promptText="preview link" />
       <Label layoutX="560.0" layoutY="101.0" text="Link to IMDB preview" />
       <TextField layoutX="565.0" layoutY="198.0" promptText="4.5" />
       <Label layoutX="559.0" layoutY="175.0" text="IMDB rating" />
-      <Button fx:id="addMovie" layoutX="484.0" layoutY="391.0" mnemonicParsing="false" text="Add movie" />
+      <Button fx:id="addMovie" layoutX="484.0" layoutY="359.0" mnemonicParsing="false" text="Add movie" />
       <Button fx:id="returnButton" layoutX="378.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMoviesView" text="Return to Home" />
       <!--<Glyph fontFamily="sol" layoutX="442.0" layoutY="258.0" prefHeight="108.0" prefWidth="235.0" text="asdasd" />-->
    </children>

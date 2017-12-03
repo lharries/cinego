@@ -27,6 +27,9 @@ import java.util.logging.Logger;
  */
 public class EmployeeRootController implements Initializable {
 
+    //TODO: set employeeID (Label on Root) to reflect employee's login username so that at all times we know who's logged in
+
+
     @FXML
     private BorderPane employeePane;
 

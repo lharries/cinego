@@ -42,5 +42,15 @@ public class EmployeeHomeController implements Initializable {
         emplRootController.openMovieFormView(event);
     }
 
+    @FXML
+    private void exportToCSV(){
+        //TODO: add exporting to CSV functionality (Button triggers downloading all current movies including titles, seats booked etc.)
+
+    }
+
+    @FXML
+    private void openSeatsBooked(){
+        //TODO: open a movie's specific "seats booked overview" +
+    }
 
 }

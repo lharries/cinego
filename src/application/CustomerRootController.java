@@ -106,6 +106,22 @@ public class CustomerRootController implements Initializable {
         }
     }
 
+
+
+
+
+
+    @FXML
+    public void openBookingView(){
+        try {
+            Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
+        } catch (IOException e) {
+            LOGGER.logp(Level.WARNING, "CustomerRootController", "openBookingView", "Failed to load CustomerBooking View. See: " + e);
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * Purpose: logs user out of cinema system
      * @version: logout 1.0

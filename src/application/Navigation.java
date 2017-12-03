@@ -1,6 +1,8 @@
 package application;
 
 import javafx.fxml.FXMLLoader;
+
+import javax.print.DocFlavor;
 import java.io.IOException;
 
 
@@ -14,15 +16,16 @@ public class Navigation {
     /**
      * Constants locating the FXML files representing the different views
      */
+    //root views into which the below scenes are loaded
     public static final String CUST_ROOT = "/views/CustomerRoot.fxml";
     public static final String EMPL_ROOT = "/views/EmployeeRoot.fxml";
 
-    //customer views
+    //customer scenes
     public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
     public static final String CUST_PROGRAM_VIEW = "/views/CustomerMovieProgram.fxml";
-//    public static final String ORDER_VIEW = "/views/EmpOrderView.fxml";
+    public static final String CUST_BOOKING_VIEW = "/views/CustomerBookingView.fxml";
 
-    //employee views
+    //employee scenes
     public static final String EMPL_HOME_VIEW = "/views/EmployeeHome.fxml";
     public static final String EMPL_MOVIE_FORM = "/views/EmployeeMovieForm.fxml";
 //    public static final String MGMT_ORDERS = "/view/MgmtOrdersView.fxml";

@@ -5,6 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
+
+import static application.Navigation.CUST_BOOKING_VIEW;
+
 /**
  *
  *
@@ -45,6 +49,12 @@ public class CustomerMovieProgramController {
    private void filterMoviesBySearch(){
       //TODO: add movie filter based on the input search string
       //TODO: ensure that search queries all attributes of table (title, description, etc.) and returns selection live while typing
+   }
+
+   @FXML
+   private void openBookingView() throws IOException {
+      CustomerRootController controller = new CustomerRootController();
+      controller.openBookingView();
    }
 
 

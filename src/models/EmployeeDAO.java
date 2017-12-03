@@ -50,8 +50,8 @@ public class EmployeeDAO {
         // TODO: Switch to prepared statements?
 
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(null, username, null),
-                new PreparedStatementArg(null, password, null)
+                new PreparedStatementArg(username),
+                new PreparedStatementArg(password)
         };
 
         ResultSet results = SQLiteConnection.executeQuery("SELECT * FROM Employee WHERE username=? AND password=?", preparedStatementArgs);

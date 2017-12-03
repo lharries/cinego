@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class BookingDAO {
     public static void main(String[] args) {
         try {
-            insertBooking(1,false,3,2);
+            insertBooking(1, false, 3, 2);
             deleteBooking(1);
             System.out.println(getBookingObservableList());
 
@@ -45,10 +45,10 @@ public class BookingDAO {
 
     public static void insertBooking(int customerId, boolean paidFor, int seatId, int screeningId) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(customerId, null, null),
-                new PreparedStatementArg(null, null, paidFor),
-                new PreparedStatementArg(seatId, null, null),
-                new PreparedStatementArg(screeningId, null, null),
+                new PreparedStatementArg(customerId),
+                new PreparedStatementArg(paidFor),
+                new PreparedStatementArg(seatId),
+                new PreparedStatementArg(screeningId),
         };
 
         SQLiteConnection.execute(
@@ -62,7 +62,7 @@ public class BookingDAO {
 
     public static void deleteBooking(int id) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id, null, null)
+                new PreparedStatementArg(id)
         };
 
         SQLiteConnection.execute(

@@ -1,9 +1,6 @@
 package models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,12 +9,12 @@ public class Screening {
 
     private IntegerProperty id;
     private IntegerProperty filmId;
-    private ObjectProperty<Date> date;
+    private StringProperty date;
 
     public Screening() {
         this.id = new SimpleIntegerProperty();
         this.filmId = new SimpleIntegerProperty();
-        this.date = new SimpleObjectProperty<Date>();
+        this.date = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -44,15 +41,15 @@ public class Screening {
         this.filmId.set(filmId);
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date.get();
     }
 
-    public ObjectProperty<Date> dateProperty() {
+    public StringProperty dateProperty() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date.set(date);
     }
 

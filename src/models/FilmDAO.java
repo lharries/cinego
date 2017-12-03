@@ -59,9 +59,9 @@ public class FilmDAO {
 
     public static void insertFilm(String title, String description, String imagePath) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(null, title, null),
-                new PreparedStatementArg(null, description, null),
-                new PreparedStatementArg(null, imagePath, null)
+                new PreparedStatementArg( title),
+                new PreparedStatementArg( description),
+                new PreparedStatementArg( imagePath)
         };
 
         SQLiteConnection.execute(
@@ -75,7 +75,7 @@ public class FilmDAO {
 
     public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id, null, null)
+                new PreparedStatementArg(id)
         };
 
         SQLiteConnection.execute(

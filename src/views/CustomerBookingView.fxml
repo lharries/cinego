@@ -82,6 +82,7 @@
                   <Image url="@../resources/seat.png" />
                </image>
             </ImageView>
+            <Button fx:id="buttonTest" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="56.0" prefWidth="49.0" stylesheets="@../application/application.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../resources/seat.png" />
@@ -102,7 +103,7 @@
                   <Image url="@../resources/seat.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="ImageViewTest" fitHeight="60.0" fitWidth="80.0" onMouseClicked="#selectSeat" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../resources/seat.png" />
                </image>
@@ -342,6 +343,7 @@
                   <Font size="30.0" />
                </font>
             </Text>
+            <Rectangle fx:id="testRectangle" arcHeight="5.0" arcWidth="5.0" fill="#274a6b" height="48.0" onMouseClicked="#selectSeat" stroke="BLACK" strokeType="INSIDE" width="58.0" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Label fx:id="movieTitle" alignment="CENTER" layoutX="968.0" layoutY="121.0" prefHeight="58.0" prefWidth="261.0" text="MovieTitle" textAlignment="CENTER">

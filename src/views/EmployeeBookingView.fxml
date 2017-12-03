@@ -342,7 +342,6 @@
                   <Font size="30.0" />
                </font>
             </Text>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" opacity="0.25" prefHeight="60.0" prefWidth="58.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
       <Label fx:id="movieTitle" alignment="CENTER" layoutX="968.0" layoutY="121.0" prefHeight="58.0" prefWidth="261.0" text="MovieTitle" textAlignment="CENTER">

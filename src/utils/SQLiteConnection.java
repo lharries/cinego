@@ -30,7 +30,7 @@ public class SQLiteConnection {
         String sqLiteClass = "org.sqlite.JDBC";
         Class.forName(sqLiteClass);
 
-        String jdbcURL = "jdbc:sqlite:test.db";
+        String jdbcURL = "jdbc:sqlite:data.db";
         connection = DriverManager.getConnection(jdbcURL);
 
     }

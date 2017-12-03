@@ -11,6 +11,7 @@ public class BookingDAO {
     public static void main(String[] args) {
         try {
             insertBooking(1,false,3,2);
+            deleteBooking(1);
             System.out.println(getBookingObservableList());
 
         } catch (Exception e) {
@@ -55,6 +56,18 @@ public class BookingDAO {
                         "(customerId, paidFor, seatId, screeningId)\n" +
                         "VALUES\n" +
                         "(?, ?, ?, ?);",
+                preparedStatementArgs
+        );
+    }
+
+    public static void deleteBooking(int id) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(id, null, null)
+        };
+
+        SQLiteConnection.execute(
+                "DELETE FROM Booking\n" +
+                        "WHERE id = ?",
                 preparedStatementArgs
         );
     }

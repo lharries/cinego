@@ -15,7 +15,7 @@
 
       <Label layoutX="96.0" layoutY="81.0" text="Select your date" />
       <Label layoutX="344.0" layoutY="81.0" text="Filter by time" />
-      <ListView layoutX="43.0" layoutY="194.0" prefHeight="498.0" prefWidth="1166.0" />
+      <ListView layoutX="43.0" layoutY="194.0" prefHeight="450.0" prefWidth="1166.0" />
       <TextField fx:id="typeSearchHandler" layoutX="510.0" layoutY="113.0" onAction="#filterMoviesBySearch" promptText="Type in search" />
       <Label layoutX="514.0" layoutY="81.0" text="Search" />
       <ChoiceBox fx:id="timePickerClickHandler" layoutX="309.0" layoutY="108.0" onDragDetected="#sortMoviesByTime" prefWidth="150.0" />

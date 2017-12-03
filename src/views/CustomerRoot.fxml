@@ -23,8 +23,8 @@
                      <Font size="25.0" />
                  </font>
             </Label>
-            <Label layoutX="194.0" layoutY="20.0" text="First Name" textFill="WHITE" />
-            <Label layoutX="298.0" layoutY="20.0" text="Last Name" textFill="WHITE" />
+            <Label fx:id="custFirstName" layoutX="194.0" layoutY="20.0" text="First Name" textFill="WHITE" />
+            <Label fx:id="custLastName" layoutX="298.0" layoutY="20.0" text="Last Name" textFill="WHITE" />
             <Button fx:id="toProgramView" layoutX="525.0" layoutY="56.0" mnemonicParsing="false" onAction="#openProgramView" text="Program View" />
             <Button fx:id="toCustomerProfile" layoutX="744.0" layoutY="58.0" mnemonicParsing="false" onAction="#openProfileView" text="Customer Profile" />
             <Button fx:id="logout" layoutX="1163.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" />

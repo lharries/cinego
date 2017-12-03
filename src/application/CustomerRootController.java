@@ -22,6 +22,10 @@ import java.util.logging.Logger;
 
 public class CustomerRootController implements Initializable {
 
+    //TODO: custFirstName, custLastName (Labels) need to be set according to customer's name (data from their profile)
+    //TODO: how can you set the values of the labels without triggering a specific method? So basically, to set the respective values upon login?
+
+
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
 
     @FXML
@@ -41,8 +45,6 @@ public class CustomerRootController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //System.err.println(System.getProperty("java.class.path"));
-
-
         //must set the background image within the individual scenes because right now the images will
         //likely be added to the view but are located behind the added scenes
 
@@ -107,10 +109,13 @@ public class CustomerRootController implements Initializable {
     }
 
 
-
-
-
-
+    /**
+     * Purpose: opens the cinema room's seat selection view based on the movie selected in the customerProgramView.
+     * Customers can book a movie in this view
+     *
+     * available movies
+     *
+     */
     @FXML
     public void openBookingView(){
         try {

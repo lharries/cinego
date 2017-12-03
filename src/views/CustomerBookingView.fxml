@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -15,69 +14,49 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1272.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerBookingViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerBookingViewController">
    <children>
-      <!--<ImageView fitHeight="750.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">-->
-         <!--<image>-->
-            <!--<Image url="@../resources/cinemaWallpaper.jpeg" />-->
-         <!--</image>-->
-         <!--<effect>-->
-            <!--<ColorAdjust saturation="-0.88" />-->
-         <!--</effect>-->
-      <!--</ImageView>-->
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" layoutY="750.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="220.0" layoutY="630.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
-      <Group layoutX="546.0" layoutY="742.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="40.0" layoutX="656.0" layoutY="752.0" stroke="#f3f3f3" strokeType="INSIDE" width="43.0" />
-      <Text fill="WHITE" layoutX="528.0" layoutY="787.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758">
-         <font>
-            <Font size="34.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="267.0" layoutY="640.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
+      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="264.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@../resources/seat.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="39.0" fitWidth="40.0" layoutX="656.0" layoutY="753.0" pickOnBounds="true" preserveRatio="true" />
-      <Line endX="1279.0" layoutY="50.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-      <Line endX="200.0" fill="#00000099" layoutX="464.0" layoutY="131.0" startX="-200.0" strokeWidth="15.0" />
-      <Text layoutX="245.0" layoutY="713.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your seat">
+      <Line endX="200.0" fill="#00000099" layoutX="461.0" layoutY="34.0" startX="-200.0" strokeWidth="15.0" />
+      <Text layoutX="242.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your seat">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="564.0" layoutY="644.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="561.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@../resources/seat.png" />
          </image>
       </ImageView>
-      <Text layoutX="553.0" layoutY="714.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked">
+      <Text layoutX="550.0" layoutY="617.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="423.0" layoutY="642.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="420.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@../resources/seat.png" />
          </image>
       </ImageView>
-      <Text layoutX="380.0" layoutY="715.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available seat">
+      <Text layoutX="377.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available seat">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Line endY="649.0" layoutX="900.0" layoutY="101.0" stroke="#c8ccd0" strokeMiterLimit="100.0" strokeWidth="2.0" />
-      <Text layoutX="939.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are going to see:" textAlignment="CENTER" wrappingWidth="316.9052734375">
+      <Line endY="649.0" layoutX="897.0" layoutY="4.0" stroke="#c8ccd0" strokeMiterLimit="100.0" strokeWidth="2.0" />
+      <Text layoutX="936.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are going to see:" textAlignment="CENTER" wrappingWidth="316.9052734375">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Line endX="300.0" layoutX="950.0" layoutY="200.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-      <Line endX="300.0" layoutX="950.0" layoutY="600.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-      <GridPane layoutX="30.0" layoutY="165.0" prefHeight="442.0" prefWidth="846.0" style="-fx-alignment: center;" translateZ="300.0">
+      <Line endX="300.0" layoutX="947.0" layoutY="103.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+      <Line endX="300.0" layoutX="947.0" layoutY="503.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+      <GridPane layoutX="27.0" layoutY="68.0" prefHeight="442.0" prefWidth="846.0" style="-fx-alignment: center;" translateZ="300.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
@@ -365,32 +344,32 @@
             </Text>
          </children>
       </GridPane>
-      <Label fx:id="movieTitle" alignment="CENTER" layoutX="971.0" layoutY="218.0" prefHeight="58.0" prefWidth="261.0" text="MovieTitle" textAlignment="CENTER">
+      <Label fx:id="movieTitle" alignment="CENTER" layoutX="968.0" layoutY="121.0" prefHeight="58.0" prefWidth="261.0" text="MovieTitle" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="Date" alignment="CENTER" layoutX="970.0" layoutY="288.0" prefHeight="58.0" prefWidth="133.0" text="Date" textAlignment="CENTER">
+      <Label fx:id="Date" alignment="CENTER" layoutX="967.0" layoutY="191.0" prefHeight="58.0" prefWidth="133.0" text="Date" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="972.0" layoutY="351.0" prefHeight="58.0" prefWidth="261.0" text="Seats" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="969.0" layoutY="254.0" prefHeight="58.0" prefWidth="261.0" text="Seats" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="Time" alignment="CENTER" layoutX="1118.0" layoutY="287.0" prefHeight="58.0" prefWidth="113.0" text="Time" textAlignment="CENTER">
+      <Label fx:id="Time" alignment="CENTER" layoutX="1115.0" layoutY="190.0" prefHeight="58.0" prefWidth="113.0" text="Time" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ListView fx:id="seatListView" layoutX="997.0" layoutY="418.0" prefHeight="115.0" prefWidth="200.0" />
-      <Text layoutX="947.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" textAlignment="CENTER" wrappingWidth="316.9052734375">
+      <ListView fx:id="seatListView" layoutX="994.0" layoutY="321.0" prefHeight="115.0" prefWidth="200.0" />
+      <Text layoutX="944.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" textAlignment="CENTER" wrappingWidth="316.9052734375">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="bookingConfirmationClickHandler" layoutX="1009.0" layoutY="704.0" mnemonicParsing="false" onAction="#confirmMovieBooking" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking" />
+      <Button fx:id="bookingConfirmationClickHandler" layoutX="1006.0" layoutY="607.0" mnemonicParsing="false" onAction="#confirmMovieBooking" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking" />
    </children>
 </AnchorPane>

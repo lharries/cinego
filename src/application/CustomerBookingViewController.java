@@ -2,11 +2,16 @@ package application;
 
 import com.sun.xml.internal.bind.v2.TODO;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
@@ -65,7 +70,19 @@ public class CustomerBookingViewController implements Initializable {
 
     @FXML
     private void selectSeat(){
-        
+
+//        buttonTest.setOnAction(new EventHandler<ActionEvent>() {
+//            Color colour = (Color)buttonTest.getBackground().getFills().get(0).getFill();
+//
+//            if(color == Color.RED){
+//
+//            }
+//            String colour = buttonTest.getStyle("-fx-fill");
+//            @Override public void handle(ActionEvent e) {
+//                buttonTest.setText("Accepted");
+//            }
+//        });
+
         //selected means modulo 1
         count++;
         if(count%2 == 1)
@@ -85,7 +102,12 @@ public class CustomerBookingViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        buttonTest.setStyle("-fx-background-image: url('/resources/cinestar.png')");
+        //works!
+        Image imageDecline = new Image(Main.class.getResource("/resources/seat.png").toExternalForm(), 80, 60, true, true);
+//                getClass().getResourceAsStream("/resources/cinestar.png"));
+        this.buttonTest.setGraphic(new ImageView(imageDecline));
+
+//        buttonTest.setStyle("-fx-background-image: url('/resources/cinestar.png')");
 
     }
 }

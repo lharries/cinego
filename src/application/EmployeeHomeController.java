@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 
 public class EmployeeHomeController {
 
+    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality
+    //TODO: source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
 
 
     /**

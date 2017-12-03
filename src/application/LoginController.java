@@ -153,7 +153,7 @@ public class LoginController implements Initializable {
         // sets controller for the customer root layout
         Navigation.setCustomerController(custRootContr);
         // loads first fxml file with a navigator method
-        Navigation.loadCustFxml(Navigation.CUST_PROGRAM_VIEW);
+        Navigation.loadCustFxml(Navigation.CUST_PROFILE_VIEW);
 
         return customerRoot;
     }

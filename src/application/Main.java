@@ -20,7 +20,7 @@ public class Main extends Application {
 //	private static BorderPane customerRoot;
 
 	private static Stage loginStage, primaryStage;
-//	private static CustomerProgramController CustomerProgramController;
+//	private static CustomerMovieProgramController CustomerMovieProgramController;
 
 	/**
 	 * Purpose: runs the Java application and opens the GUI

@@ -19,7 +19,7 @@ public class Navigation {
 
     //customer views
     public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
-    public static final String CUST_PROGRAM_VIEW = "/views/CustomerProgram.fxml";
+    public static final String CUST_PROGRAM_VIEW = "/views/CustomerMovieProgram.fxml";
 //    public static final String ORDER_VIEW = "/views/EmpOrderView.fxml";
 
     //employee views

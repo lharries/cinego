@@ -23,7 +23,7 @@
       <Label layoutX="128.0" layoutY="249.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
       <ListView layoutX="106.0" layoutY="282.0" prefHeight="376.0" prefWidth="1019.0" />
       <Button fx:id="backToProgram" layoutX="609.0" layoutY="40.0" mnemonicParsing="false" text="Back to Movies" />
-      <Button fx:id="deleteBookingClickHandler" layoutX="1039.0" layoutY="331.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="deleteBookingClickHandler" layoutX="1039.0" layoutY="331.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
 
       <!--<Glyph layoutX="483.0" layoutY="551.0" prefHeight="69.0" prefWidth="108.0" />-->
 

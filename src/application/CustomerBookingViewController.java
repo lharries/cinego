@@ -85,10 +85,16 @@ public class CustomerBookingViewController implements Initializable {
 
         //selected means modulo 1
         count++;
-        if(count%2 == 1)
-        this.testRectangle.setStyle("-fx-fill: #aaaaaa");
-        else
-        this.testRectangle.setStyle("-fx-fill: #d34a19");
+        if(count%2 == 1){
+            this.testRectangle.setStyle("-fx-fill: #ffffff");
+            this.buttonTest.setStyle("-fx-background-color: #ffffff");
+        }
+
+        else{
+            this.testRectangle.setStyle("-fx-fill: #d34a19");
+            this.buttonTest.setStyle("-fx-background-color: #d34a19");
+        }
+
     }
 
     @FXML

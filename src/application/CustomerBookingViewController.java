@@ -65,9 +65,7 @@ public class CustomerBookingViewController implements Initializable {
 
     @FXML
     private void selectSeat(){
-
-        testRectangle.addEventHandler(ActionEvent.ACTION);
-
+        
         //selected means modulo 1
         count++;
         if(count%2 == 1)

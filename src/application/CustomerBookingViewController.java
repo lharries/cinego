@@ -3,8 +3,22 @@ package application;
 import com.sun.xml.internal.bind.v2.TODO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 public class CustomerBookingViewController {
+
+    @FXML
+    private Label Time;
+
+    @FXML
+    private Label Date;
+
+    @FXML
+    private Label movieTitle;
+
+    @FXML
+    private ListView seatListView;
 
 
     //TODO: make cinema seats selectable (change colour, store seat identifier, disable booked seats to be chosen

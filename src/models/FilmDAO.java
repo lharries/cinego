@@ -14,7 +14,6 @@ public class FilmDAO {
     public static void main(String[] args) {
 
         try {
-            // TODO: DEALT WITH DODGY SYMBOLS e.g. -1-1
             insertFilm("Test","description -13;24;/' ","image path");
             System.out.println( getFilmObservableList());
 
@@ -72,6 +71,18 @@ public class FilmDAO {
                         "(?, ?, ?);",
                 preparedStatementArgs
               );
+    }
+
+    public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(id, null, null)
+        };
+
+        SQLiteConnection.execute(
+                "DELETE FROM Film\n" +
+                        "WHERE id = ?",
+                preparedStatementArgs
+        );
     }
 
 

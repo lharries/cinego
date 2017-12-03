@@ -7,7 +7,7 @@ public class PreparedStatementArg {
 
     private Boolean booleanArg;
 
-    public PreparedStatementArg(Integer intArg, String stringArg, Boolean booleanArg) {
+    public PreparedStatementArg(String intArg, String stringArg, Boolean booleanArg) {
         if ((intArg != null && stringArg != null && booleanArg != null) || (intArg == null && stringArg == null && booleanArg == null)) {
             throw new Error("Need to initialise EITHER int or string");
         }

@@ -24,6 +24,7 @@ public class CustomerRootController implements Initializable {
 
     //TODO: custFirstName, custLastName (Labels) need to be set according to customer's name (data from their profile)
     //TODO: how can you set the values of the labels without triggering a specific method? So basically, to set the respective values upon login?
+    //TODO: add logout icon to root and make it 'clickable' (possibly by making button see through and laying it on top of image)
 
 
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());

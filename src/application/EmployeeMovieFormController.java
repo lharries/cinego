@@ -26,7 +26,10 @@ public class EmployeeMovieFormController {
     @FXML
     private void addMovie(){
         //TODO: add ability to add a new movie to database based on the input data from each field
-        //TODO: question: how do we add an image? Via internet URL or do we actually have to create an upload so the image is stored in the project's directory / the database? 
+        //TODO: question: how do we add an image? Via internet URL or do we actually have to create an upload so the image is stored in the project's directory / the database?
+
+        //TODO: FEATURE add ability to select multiple dates and screening times to create multiple movies at once!
+        //TODO: FEATURE add ability to delete movies accidentally created / created with errors (would have to ensure that no seats booked yet if allow employee to delete the movies)
     }
 
 

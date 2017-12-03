@@ -11,6 +11,10 @@ public class CustomerBookingViewController {
     //TODO: add booking summary at the side: display (push) movie title, date + time, populate seatListView with chosen seats (Row + Column)
     //TODO: fxids= movieTitle, Date, Time, seatListView, bookingConfirmationClickHandler
 
+    //TODO: FEATURE send booking confirmation to customer's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
+
+
+    //TODO: @Kai test button behind chair image if it makes it clickable and colours whether that's enough to make the chair turn green / red
 
 
 

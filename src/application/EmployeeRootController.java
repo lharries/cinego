@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 public class EmployeeRootController implements Initializable {
 
     //TODO: set employeeID (Label on Root) to reflect employee's login username so that at all times we know who's logged in
+    //TODO: add logout icon to root and make it 'clickable' (possibly by making button see through and laying it on top of image)
 
 
     @FXML

@@ -23,7 +23,7 @@
       <Label layoutX="755.0" layoutY="238.0" text="Link to IMDB preview" />
       <TextField layoutX="760.0" layoutY="335.0" promptText="4.5" />
       <Label layoutX="754.0" layoutY="312.0" text="IMDB rating" />
-      <Button fx:id="addMovieClickHandler" layoutX="1128.0" layoutY="661.0" mnemonicParsing="false" onAction="#addMovie" text="Add movie" />
+      <Button fx:id="addMovieClickHandler" layoutX="1120.0" layoutY="553.0" mnemonicParsing="false" onAction="#addMovie" text="Add movie" />
       <Button fx:id="returnButton" layoutX="378.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMoviesView" text="Return to Home" />
       <ChoiceBox layoutX="421.0" layoutY="252.0" prefWidth="150.0" />
       <Label layoutX="427.0" layoutY="116.0" prefHeight="17.0" prefWidth="172.0" text="Choose screening date" />

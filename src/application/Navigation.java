@@ -18,8 +18,8 @@ public class Navigation {
     public static final String EMPL_ROOT = "/views/EmployeeRoot.fxml";
 
     //customer views
-    public static final String CUST_ACC_VIEW = "/views/CustomerAccount.fxml";
-    public static final String CUST_PROG_VIEW = "/views/CustomerProgram.fxml";
+    public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
+    public static final String CUST_PROGRAM_VIEW = "/views/CustomerProgram.fxml";
 //    public static final String ORDER_VIEW = "/views/EmpOrderView.fxml";
 
     //employee views

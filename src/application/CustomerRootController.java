@@ -3,12 +3,8 @@ package application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -85,7 +81,7 @@ public class CustomerRootController implements Initializable {
     @FXML
     public void openProgramView(ActionEvent event) {
         try {
-            Navigation.loadCustFxml(Navigation.CUST_PROG_VIEW);
+            Navigation.loadCustFxml(Navigation.CUST_PROGRAM_VIEW);
         } catch (IOException e) {
             LOGGER.logp(Level.WARNING, "CustomerRootController", "openProgramView", "Failed to load CustomerProgram View. See: " + e);
             e.printStackTrace();
@@ -103,7 +99,7 @@ public class CustomerRootController implements Initializable {
     @FXML
     public void openProfileView(ActionEvent event) {
         try {
-            Navigation.loadCustFxml(Navigation.CUST_ACC_VIEW);
+            Navigation.loadCustFxml(Navigation.CUST_PROFILE_VIEW);
         } catch (IOException e) {
             LOGGER.logp(Level.WARNING, "CustomerRootController", "openProfileView", "Failed to load CustomerProfile View. See: " + e);
             e.printStackTrace();

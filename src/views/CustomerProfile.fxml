@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<!--<?import org.controlsfx.glyphfont.Glyph?>-->
+
+<AnchorPane prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerProfileController">
+   <children>
+      <TextField layoutX="164.0" layoutY="156.0" promptText="First name" />
+      <TextField layoutX="379.0" layoutY="151.0" promptText="Last name" />
+      <TextField layoutX="800.0" layoutY="150.0" promptText="+44 78345 123646" />
+      <Label layoutX="806.0" layoutY="123.0" text="Your phone Number" />
+      <Label layoutX="442.0" layoutY="103.0" />
+      <Label layoutX="397.0" layoutY="120.0" text="Last name" />
+      <Label layoutX="164.0" layoutY="125.0" text="First name" />
+      <Button fx:id="editProfileClickHandler" layoutX="1025.0" layoutY="147.0" mnemonicParsing="false" onAction="#editCustomerProfile" text="edit profile" />
+      <TextField layoutX="579.0" layoutY="151.0" promptText="you@gmail.com" />
+      <Label layoutX="597.0" layoutY="120.0" text="E-Mail Address" />
+      <Label layoutX="128.0" layoutY="249.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
+      <ListView layoutX="106.0" layoutY="282.0" prefHeight="376.0" prefWidth="1019.0" />
+      <Button fx:id="backToProgram" layoutX="609.0" layoutY="40.0" mnemonicParsing="false" text="Back to Movies" />
+      <Button fx:id="deleteBookingClickHandler" layoutX="1039.0" layoutY="331.0" mnemonicParsing="false" text="Delete" />
+
+      <!--<Glyph layoutX="483.0" layoutY="551.0" prefHeight="69.0" prefWidth="108.0" />-->
+
+   </children>
+</AnchorPane>

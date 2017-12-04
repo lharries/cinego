@@ -1,5 +1,6 @@
 package application;
 
+import com.sun.javafx.font.directwrite.RECT;
 import com.sun.xml.internal.bind.v2.TODO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -41,9 +42,12 @@ public class CustomerBookingViewController implements Initializable {
 
 
 
+
     //testing colour changing rectangles for selectable cinema chairs;
     @FXML
     private Button buttonTest;
+    @FXML
+    private Rectangle backgRect;
 
     boolean isSeatSelected = false;
 
@@ -92,11 +96,13 @@ public class CustomerBookingViewController implements Initializable {
 
         if(!isSeatSelected){
             this.buttonTest.setStyle("-fx-background-color: #ffffff");
+            this.backgRect.setStyle("-fx-fill: #ffffff");
             isSeatSelected = true;
         }
 
         else{
-            this.buttonTest.setStyle("-fx-background-color: #d34a19");
+            this.buttonTest.setStyle("-fx-background-color: #4bd841");
+            this.backgRect.setStyle("-fx-fill: #4bd841");
             isSeatSelected = false;
         }
 

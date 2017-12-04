@@ -39,7 +39,10 @@ public class CustomerRootController implements Initializable {
     private ImageView logo;
 
     @FXML
-    private ImageView background;
+    private ImageView logoutImg;
+
+    @FXML
+    private ImageView backgroundImg;
 
 
     @Override
@@ -50,17 +53,21 @@ public class CustomerRootController implements Initializable {
         //likely be added to the view but are located behind the added scenes
 
         BufferedImage bufferedLogo = null;
+        BufferedImage bufferedLogout = null;
 //        BufferedImage bufferedBackground = null;
         try {
             bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
+            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
 //            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
+        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
 //        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.logo.setImage(logo);
-//        this.background.setImage(background);
+        this.logoutImg.setImage(logout);
+//        this.backgroundImg.setImage(background);
     }
 
     /**

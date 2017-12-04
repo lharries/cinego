@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -14,11 +15,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import models.Customer;
+import models.CustomerDAO;
 
 
 public class LoginController implements Initializable {
 
     //TODO: FEATURE add password reset functionality via e-Mail sent to customer  e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
+    //TODO: ensure buttons react to key tabs as well, not only clickable!
 
     //public LoginModel loginModel = new LoginModel();
     public static Stage primaryStage = new Stage();
@@ -53,35 +57,41 @@ public class LoginController implements Initializable {
     @FXML
     public void loginCust(javafx.event.ActionEvent event) {
 
-//        try {
-//            if(loginModel.isLoggedIn(txtUsername.getText(),txtPassword.getText())){
-//                isConnected.setText("Username & password is correct");
+        // TODO: GET THE USERNAME from textfield
+        String username = txtUsername.getText();
+        // TODO: GET THE PASSWORD
+        String password = txtPassword.getText();
 
-        ((Node) event.getSource()).getScene().getWindow().hide();
         try {
-            primaryStage.setScene(createScene(loadCustBorderPane()));
-        } catch (IOException e) {
+            Customer cust = CustomerDAO.login(username, password);
+
+            if (cust != null) {
+                Main.customer = cust;
+                // TODO : Switch to the correct view
+                ((Node) event.getSource()).getScene().getWindow().hide();
+                try {
+                    primaryStage.setScene(createScene(loadCustBorderPane()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                primaryStage.setResizable(false);
+                primaryStage.show();
+
+
+            } else{
+
+                //TODO: error message
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        primaryStage.setResizable(false);
-        primaryStage.show();
 
-//            //launches the loginCust view upon running program
-//            Pane root = loader.load(getClass().getResource("/views/CustomerRoot.fxml").openStream());
-//            CustomerRootController customerController = (CustomerRootController) loader.getController();
 
-//            }else{
-//                isConnected.setText("Username & password is not correct");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            isConnected.setText("Username & password is not correct");
 
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException ev) {
-//            ev.printStackTrace();
-//        }
+
     }
 
     /**

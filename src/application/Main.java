@@ -6,6 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import models.Customer;
+import models.CustomerDAO;
+import models.Employee;
+
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -16,11 +21,13 @@ public class Main extends Application {
 
 	private static Parent root;
 
-//	private static AnchorPane customerProgram;
-//	private static BorderPane customerRoot;
+	public static Customer customer;
 
+	public static Employee employee;
+
+	//Dead code?
 	private static Stage loginStage, primaryStage;
-//	private static CustomerMovieProgramController CustomerMovieProgramController;
+
 
 	/**
 	 * Purpose: runs the Java application and opens the GUI

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -33,6 +34,12 @@ public class CustomerRootController implements Initializable {
     private BorderPane customerPane;
 
 
+    @FXML
+    private Label custLastName;
+
+    @FXML
+    private Label custFirstName;
+
 
     @FXML
     private ImageView logo;
@@ -47,6 +54,13 @@ public class CustomerRootController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        //set customer's first + lastname onto root
+        custFirstName.setText(Main.customer.getFirstName());
+        custLastName.setText(Main.customer.getLastName());
+
+
+        //sets the logos for the roots
         BufferedImage bufferedLogo = null;
         BufferedImage bufferedLogout = null;
 //        BufferedImage bufferedBackground = null;

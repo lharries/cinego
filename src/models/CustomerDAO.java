@@ -38,8 +38,8 @@ public class CustomerDAO {
             customer.setId(resultSet.getInt("id"));
             customer.setFirstName(resultSet.getString("firstName"));
             customer.setLastName(resultSet.getString("lastName"));
-            customer.setEmail(resultSet.getString("email"));
             customer.setUsername(resultSet.getString("username"));
+            customer.setEmail(resultSet.getString("email"));
             return customer;
         } else {
             return null;

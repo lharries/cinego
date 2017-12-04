@@ -13,9 +13,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EmployeeMovieFormController {
+public class EmployeeMovieFormController implements Initializable {
 
 
+    @FXML
+    private ImageView backgroundImg;
 
     @FXML
     private void returnToMoviesView(){
@@ -33,4 +35,18 @@ public class EmployeeMovieFormController {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        BufferedImage bufferedBackground = null;
+        try {
+            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
+            //background alternative
+//         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+        this.backgroundImg.setImage(background);
+    }
 }

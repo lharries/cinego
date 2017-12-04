@@ -14,8 +14,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.effect.ColorAdjust?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeBookingViewController">
    <children>
+      <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+         <!--<image>-->
+         <!--<Image url="@../resources/cinemaWallpaperTest.png" backgroundLoading="true" />-->
+         <!--</image>-->
+         <effect>
+            <ColorAdjust saturation="-0.88" />
+         </effect>
+      </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
       <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="264.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>

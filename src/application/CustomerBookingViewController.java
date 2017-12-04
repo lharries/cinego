@@ -4,9 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerBookingViewController implements Initializable {
@@ -55,7 +54,6 @@ public class CustomerBookingViewController implements Initializable {
     private boolean isSeat40Selected, isSeat41Selected, isSeat42Selected, isSeat43Selected, isSeat44Selected;
 
 
-
     //TODO: make cinema seats selectable (change colour, store seat identifier, disable booked seats to be chosen
     //TODO: add booking summary at the side: display (push) movie title, date + time, populate seatListView with chosen seats (Row + Column)
     //TODO: fxids= movieTitle, Date, Time, seatListView, bookingConfirmationClickHandler
@@ -69,7 +67,8 @@ public class CustomerBookingViewController implements Initializable {
     //renders the background image for the scene + commented out code to load chair image into button's background
 
     /**
-     *Purpose: renders the background image upon opening of the scene
+     * Purpose: renders the background image upon opening of the scene
+     *
      * @param location
      * @param resources
      */
@@ -94,9 +93,9 @@ public class CustomerBookingViewController implements Initializable {
     }
 
     @FXML
-    private void confirmMovieBooking(ActionEvent event){
-    //TODO: trigger a booking summary to be displayed (should we do an additional summary or is the one above the button enough?)
-    //TODO: add order to customer profile's history view!
+    private void confirmMovieBooking(ActionEvent event) {
+        //TODO: trigger a booking summary to be displayed (should we do an additional summary or is the one above the button enough?)
+        //TODO: add order to customer profile's history view!
 
 
         //JDialog querying for correct input value
@@ -111,12 +110,22 @@ public class CustomerBookingViewController implements Initializable {
         alert.setHeaderText("Look, an Information Dialog");
         alert.setContentText("I have a great message for you!");
 
-        alert.showAndWait();
+        ButtonType buttonTypeOne = new ButtonType("Pay now");
+        ButtonType buttonTypeTwo = new ButtonType("Two");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
 
-        //jumps back to customer's profile view after having clicked the Confirm booking button (think about triggering the order with a JDialogPane)
-        CustomerRootController controller = new CustomerRootController();
-        controller.openProfileView(event);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne) {
+            //jumps back to customer's profile view after having clicked the Confirm booking button (think about triggering the order with a JDialogPane)
+            CustomerRootController controller = new CustomerRootController();
+            controller.openProfileView(event);
+        } else if (result.get() == buttonTypeTwo) {
+            //test
+            System.err.println("haha it works");
+        }
+        
     }
 
     /**
@@ -127,226 +136,222 @@ public class CustomerBookingViewController implements Initializable {
      */
 
     @FXML
-    private void selectSeat(MouseEvent event){
+    private void selectSeat(MouseEvent event) {
 
         //fetches triggering seat's fx:id which is used to check against the cases
         ImageView seat = (ImageView) event.getSource();
         String seatID = seat.getId();
 
-        switch(seatID){
+        switch (seatID) {
             //column 1 (first column filled with chairs)
             case "seat10ClickHandler":
-                if(isSeat10Selected){
+                if (isSeat10Selected) {
                     this.seat10ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat10Selected = false;
-                }
-                else if(!isSeat10Selected){
+                } else if (!isSeat10Selected) {
                     this.seat10ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat10Selected = true;
-                }break;
+                }
+                break;
 
             case "seat11ClickHandler":
-                if(isSeat11Selected){
+                if (isSeat11Selected) {
                     this.seat11ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat11Selected = false;
-                }
-                else if(!isSeat11Selected){
+                } else if (!isSeat11Selected) {
                     this.seat11ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat11Selected = true;
-                }break;
+                }
+                break;
 
             case "seat12ClickHandler":
-                if(isSeat12Selected){
+                if (isSeat12Selected) {
                     this.seat12ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat12Selected = false;
-                }
-                else if(!isSeat12Selected){
+                } else if (!isSeat12Selected) {
                     this.seat12ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat12Selected = true;
-                }break;
+                }
+                break;
 
             case "seat13ClickHandler":
-                if(isSeat13Selected){
+                if (isSeat13Selected) {
                     this.seat13ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat13Selected = false;
-                }
-                else if(!isSeat13Selected){
+                } else if (!isSeat13Selected) {
                     this.seat13ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat13Selected = true;
-                }break;
+                }
+                break;
 
             case "seat14ClickHandler":
-                if(isSeat14Selected){
+                if (isSeat14Selected) {
                     this.seat14ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat14Selected = false;
-                }
-                else if(!isSeat14Selected){
+                } else if (!isSeat14Selected) {
                     this.seat14ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat14Selected = true;
-                }break;
+                }
+                break;
 
             //column 2
             case "seat20ClickHandler":
-                if(isSeat20Selected){
+                if (isSeat20Selected) {
                     this.seat20ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat20Selected = false;
-                }
-                else if(!isSeat20Selected){
+                } else if (!isSeat20Selected) {
                     this.seat20ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat20Selected = true;
-                }break;
+                }
+                break;
 
             case "seat21ClickHandler":
-                if(isSeat21Selected){
+                if (isSeat21Selected) {
                     this.seat21ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat21Selected = false;
-                }
-                else if(!isSeat21Selected){
+                } else if (!isSeat21Selected) {
                     this.seat21ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat21Selected = true;
-                }break;
+                }
+                break;
 
             case "seat22ClickHandler":
-                if(isSeat22Selected){
+                if (isSeat22Selected) {
                     this.seat22ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat22Selected = false;
-                }
-                else if(!isSeat22Selected){
+                } else if (!isSeat22Selected) {
                     this.seat22ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat22Selected = true;
-                }break;
+                }
+                break;
 
             case "seat23ClickHandler":
-                if(isSeat23Selected){
+                if (isSeat23Selected) {
                     this.seat23ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat23Selected = false;
-                }
-                else if(!isSeat23Selected){
+                } else if (!isSeat23Selected) {
                     this.seat23ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat23Selected = true;
-                }break;
+                }
+                break;
 
             case "seat24ClickHandler":
-                if(isSeat24Selected){
+                if (isSeat24Selected) {
                     this.seat24ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat24Selected = false;
-                }
-                else if(!isSeat24Selected){
+                } else if (!isSeat24Selected) {
                     this.seat24ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat24Selected = true;
-                }break;
+                }
+                break;
 
             //column 3
             case "seat30ClickHandler":
-                if(isSeat30Selected){
+                if (isSeat30Selected) {
                     this.seat30ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat30Selected = false;
-                }
-                else if(!isSeat30Selected){
+                } else if (!isSeat30Selected) {
                     this.seat30ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat30Selected = true;
-                }break;
+                }
+                break;
 
             case "seat31ClickHandler":
-                if(isSeat31Selected){
+                if (isSeat31Selected) {
                     this.seat31ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat31Selected = false;
-                }
-                else if(!isSeat31Selected){
+                } else if (!isSeat31Selected) {
                     this.seat31ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat31Selected = true;
-                }break;
+                }
+                break;
 
             case "seat32ClickHandler":
-                if(isSeat32Selected){
+                if (isSeat32Selected) {
                     this.seat32ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat32Selected = false;
-                }
-                else if(!isSeat32Selected){
+                } else if (!isSeat32Selected) {
                     this.seat32ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat32Selected = true;
-                }break;
+                }
+                break;
 
             case "seat33ClickHandler":
-                if(isSeat33Selected){
+                if (isSeat33Selected) {
                     this.seat33ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat33Selected = false;
-                }
-                else if(!isSeat33Selected){
+                } else if (!isSeat33Selected) {
                     this.seat33ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat33Selected = true;
-                }break;
+                }
+                break;
 
             case "seat34ClickHandler":
-                if(isSeat34Selected){
+                if (isSeat34Selected) {
                     this.seat34ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat34Selected = false;
-                }
-                else if(!isSeat34Selected){
+                } else if (!isSeat34Selected) {
                     this.seat34ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat34Selected = true;
-                }break;
+                }
+                break;
 
             //column 4
             case "seat40ClickHandler":
-                if(isSeat40Selected){
+                if (isSeat40Selected) {
                     this.seat40ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat40Selected = false;
-                }
-                else if(!isSeat40Selected){
+                } else if (!isSeat40Selected) {
                     this.seat40ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat40Selected = true;
-                }break;
+                }
+                break;
 
             case "seat41ClickHandler":
-                if(isSeat41Selected){
+                if (isSeat41Selected) {
                     this.seat41ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat41Selected = false;
-                }
-                else if(!isSeat41Selected){
+                } else if (!isSeat41Selected) {
                     this.seat41ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat41Selected = true;
-                }break;
+                }
+                break;
 
             case "seat42ClickHandler":
-                if(isSeat42Selected){
+                if (isSeat42Selected) {
                     this.seat42ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat42Selected = false;
-                }
-                else if(!isSeat42Selected){
+                } else if (!isSeat42Selected) {
                     this.seat42ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat42Selected = true;
-                }break;
+                }
+                break;
 
             case "seat43ClickHandler":
-                if(isSeat43Selected){
+                if (isSeat43Selected) {
                     this.seat43ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat43Selected = false;
-                }
-                else if(!isSeat43Selected){
+                } else if (!isSeat43Selected) {
                     this.seat43ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat43Selected = true;
-                }break;
+                }
+                break;
 
             case "seat44ClickHandler":
-                if(isSeat44Selected){
+                if (isSeat44Selected) {
                     this.seat44ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat44Selected = false;
-                }
-                else if(!isSeat44Selected){
+                } else if (!isSeat44Selected) {
                     this.seat44ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat44Selected = true;
-                }break;
+                }
+                break;
 
 
-
-            default: System.err.println("Switch statement is faulty");
+            default:
+                System.err.println("Switch statement is faulty");
         }
-
-
-
-
-
-
     }
 }
+
+

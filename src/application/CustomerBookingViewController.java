@@ -1,6 +1,7 @@
 package application;
 
 import com.sun.xml.internal.bind.v2.TODO;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +35,9 @@ public class CustomerBookingViewController implements Initializable {
 
     @FXML
     private ListView seatListView;
+
+    @FXML
+    private ImageView backgroundImg;
 
 
 
@@ -108,7 +116,21 @@ public class CustomerBookingViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //works!
+        //renders background image of the view
+        BufferedImage bufferedBackground = null;
+        try {
+            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
+//         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+        this.backgroundImg.setImage(background);
+
+
+
+
+    //works!
         Image imageDecline = new Image(Main.class.getResource("/resources/seat.png").toExternalForm(), 80, 60, true, true);
 //                getClass().getResourceAsStream("/resources/cinestar.png"));
         this.buttonTest.setGraphic(new ImageView(imageDecline));

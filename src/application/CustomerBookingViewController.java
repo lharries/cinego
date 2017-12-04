@@ -44,9 +44,8 @@ public class CustomerBookingViewController implements Initializable {
     //testing colour changing rectangles for selectable cinema chairs;
     @FXML
     private Button buttonTest;
-    @FXML
-    private Rectangle testRectangle;
-    int count = 0;
+
+    boolean isSeatSelected = false;
 
 
     //TODO: make cinema seats selectable (change colour, store seat identifier, disable booked seats to be chosen
@@ -74,8 +73,6 @@ public class CustomerBookingViewController implements Initializable {
 
 
 
-
-
     @FXML
     private void selectSeat(){
 
@@ -92,25 +89,18 @@ public class CustomerBookingViewController implements Initializable {
 //        });
 
         //selected means modulo 1
-        count++;
-        if(count%2 == 1){
-            this.testRectangle.setStyle("-fx-fill: #ffffff");
+
+        if(!isSeatSelected){
             this.buttonTest.setStyle("-fx-background-color: #ffffff");
+            isSeatSelected = true;
         }
 
         else{
-            this.testRectangle.setStyle("-fx-fill: #d34a19");
             this.buttonTest.setStyle("-fx-background-color: #d34a19");
+            isSeatSelected = false;
         }
 
     }
-
-    @FXML
-    private void unselectSeat(){
-        this.testRectangle.setStyle("-fx-fill: #cccccc");
-    }
-
-
 
     //testing the idea of having clickable seats / with a colour changes depending on whether they were selected
     @Override
@@ -126,8 +116,6 @@ public class CustomerBookingViewController implements Initializable {
         }
         Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.backgroundImg.setImage(background);
-
-
 
 
     //works!

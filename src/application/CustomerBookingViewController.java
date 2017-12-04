@@ -39,9 +39,9 @@ public class CustomerBookingViewController implements Initializable {
 
     //testing colour changing rectangles for selectable cinema chairs;
     @FXML
-    private Rectangle seat10ColorRect, seat11ColorRect;
+    private Rectangle seat10ColorRect, seat11ColorRect, seat12ColorRect, seat13ColorRect, seat14ColorRect;
 
-    private boolean isSeat10Selected = false, isSeat11Selected = false;
+    private boolean isSeat10Selected, isSeat11Selected, isSeat12Selected, isSeat13Selected, isSeat14Selected;
 
 
 
@@ -93,18 +93,12 @@ public class CustomerBookingViewController implements Initializable {
     @FXML
     private void selectSeat(MouseEvent event){
 
-        //fetches triggering seat's ID
+        //fetches triggering seat's fx:id which is used to check against the cases
         ImageView seat = (ImageView) event.getSource();
-        String seatID = seat.getUserData().toString();
-
-//        switch(seatID){
-//            case seat10ColorRect:
-//
-//
-//        }
+        String seatID = seat.getId();
 
         switch(seatID){
-            case "seat10ColorRect":
+            case "seat10ClickHandler":
                 if(isSeat10Selected){
                     this.seat10ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat10Selected = false;
@@ -114,7 +108,7 @@ public class CustomerBookingViewController implements Initializable {
                     this.isSeat10Selected = true;
                 }break;
 
-            case "seat11ColorRect":
+            case "seat11ClickHandler":
                 if(isSeat11Selected){
                     this.seat11ColorRect.setStyle("-fx-fill: #ffffff");
                     this.isSeat11Selected = false;
@@ -123,6 +117,37 @@ public class CustomerBookingViewController implements Initializable {
                     this.seat11ColorRect.setStyle("-fx-fill: #4bd841");
                     this.isSeat11Selected = true;
                 }break;
+
+            case "seat12ClickHandler":
+                if(isSeat12Selected){
+                    this.seat12ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat12Selected = false;
+                }
+                else if(!isSeat12Selected){
+                    this.seat12ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat12Selected = true;
+                }break;
+
+            case "seat13ClickHandler":
+                if(isSeat13Selected){
+                    this.seat13ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat13Selected = false;
+                }
+                else if(!isSeat13Selected){
+                    this.seat13ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat13Selected = true;
+                }break;
+
+            case "seat14ClickHandler":
+                if(isSeat14Selected){
+                    this.seat14ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat14Selected = false;
+                }
+                else if(!isSeat14Selected){
+                    this.seat14ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat14Selected = true;
+                }break;
+
             default: System.err.println("Switch statement is faulty");
         }
 

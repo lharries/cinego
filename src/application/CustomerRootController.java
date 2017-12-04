@@ -32,8 +32,7 @@ public class CustomerRootController implements Initializable {
     @FXML
     private BorderPane customerPane;
 
-//    @FXML
-//    private Label userLbl;
+
 
     @FXML
     private ImageView logo;
@@ -47,10 +46,6 @@ public class CustomerRootController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //System.err.println(System.getProperty("java.class.path"));
-        //must set the background image within the individual scenes because right now the images will
-        //likely be added to the view but are located behind the added scenes
 
         BufferedImage bufferedLogo = null;
         BufferedImage bufferedLogout = null;

@@ -24,9 +24,23 @@
                </font>
             </Label>
             <Label fx:id="employeeID" layoutX="194.0" layoutY="20.0" text="First Name" textFill="WHITE" />
-            <Button fx:id="toMovieForm" layoutX="489.0" layoutY="60.0" mnemonicParsing="false" onAction="#openMovieFormView" prefHeight="27.0" prefWidth="248.0" text="Open Movie Form" />
-            <Button fx:id="toHomeView" layoutX="902.0" layoutY="60.0" mnemonicParsing="false" onAction="#openHomeView" prefHeight="27.0" prefWidth="189.0" text="Return Home" />
-            <Button fx:id="logout" layoutX="1163.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+            <Button fx:id="toMovieForm" layoutX="987.0" layoutY="61.0" mnemonicParsing="false" onAction="#openMovieFormView" prefHeight="27.0" prefWidth="248.0" text="Open Movie Form" />
+            <Button fx:id="toHomeView" layoutX="759.0" layoutY="61.0" mnemonicParsing="false" onAction="#openHomeView" prefHeight="27.0" prefWidth="189.0" text="Return Home" />
+
+             <!--<Button fx:id="logout" layoutX="1163.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" />-->
+
+             <ImageView fx:id="logoutImg" fitHeight="41.0" fitWidth="41.0" layoutX="1214.0" layoutY="5.0">
+                 <!--<image>-->
+                 <!--<Image url="@../resources/logout.png" />-->
+                 <!--</image>-->
+             </ImageView>
+             <Label layoutX="1153.0" layoutY="14.0" text="Logout" textFill="WHITE">
+                 <font>
+                     <Font size="17.0" />
+                 </font>
+             </Label>
+             <Button fx:id="logout" layoutX="1150.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" opacity="0.0" prefHeight="43.0" prefWidth="106.0" text="Logout" />
+
          </children>
       </AnchorPane>
     </top>

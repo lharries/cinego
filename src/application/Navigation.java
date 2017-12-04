@@ -27,8 +27,8 @@ public class Navigation {
 
     //employee scenes
     public static final String EMPL_HOME_VIEW = "/views/EmployeeHome.fxml";
-    public static final String EMPL_MOVIE_FORM = "/views/EmployeeMovieForm.fxml";
-//    public static final String MGMT_ORDERS = "/view/MgmtOrdersView.fxml";
+    public static final String EMPL_MOVIE_VIEW = "/views/EmployeeMovieForm.fxml";
+    public static final String EMPL_BOOKING_VIEW = "/views/EmployeeBookingView.fxml";
 
     //Main controller for each user's (customer & employee) specific rootViews
     private static CustomerRootController customerController;

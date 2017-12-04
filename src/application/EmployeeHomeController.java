@@ -45,12 +45,14 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void exportToCSV(){
         //TODO: add exporting to CSV functionality (Button triggers downloading all current movies including titles, seats booked etc.)
-
     }
+
 
     @FXML
-    private void openSeatsBooked(){
+    private void openSeatsBooked(ActionEvent event) {
         //TODO: open a movie's specific "seats booked overview" +
-    }
 
+        EmployeeRootController emplRootController = new EmployeeRootController();
+        emplRootController.openBookingView(event);
+    }
 }

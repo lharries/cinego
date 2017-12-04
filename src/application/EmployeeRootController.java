@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
-import javax.xml.soap.Node;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +36,9 @@ public class EmployeeRootController implements Initializable {
     @FXML
     private ImageView logo;
 
+    @FXML
+    private ImageView logoutImg;
+
 //    @FXML
 //    private ImageView background;
 
@@ -51,16 +53,20 @@ public class EmployeeRootController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         BufferedImage bufferedLogo = null;
+        BufferedImage bufferedLogout = null;
 //        BufferedImage bufferedBackground = null;
         try {
             bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
+            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
 //            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
+        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
 //        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.logo.setImage(logo);
+        this.logoutImg.setImage(logout);
 //        this.background.setImage(background);
     }
 
@@ -78,7 +84,7 @@ public class EmployeeRootController implements Initializable {
     @FXML
     public void openMovieFormView(ActionEvent event) {
         try {
-            Navigation.loadEmplFxml(Navigation.EMPL_MOVIE_FORM);
+            Navigation.loadEmplFxml(Navigation.EMPL_MOVIE_VIEW);
         } catch (IOException e) {
             LOGGER.logp(Level.WARNING, "EmployeeRootController", "openMovieFormView", "Failed to load Employee MovieForm View. See: " + e);
             e.printStackTrace();
@@ -100,6 +106,24 @@ public class EmployeeRootController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     *
+     *
+     * @param event
+     */
+    @FXML
+    public void openBookingView(ActionEvent event) {
+        try {
+            Navigation.loadEmplFxml(Navigation.EMPL_BOOKING_VIEW);
+        } catch (IOException e) {
+            LOGGER.logp(Level.WARNING, "EmployeeRootController", "openBookingView", "Failed to load Employee Booking View. See: " + e);
+            e.printStackTrace();
+        }
+    }
+
+
 
     /**
      * Purpose: logs user out of cinema system

@@ -4,6 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -65,6 +67,12 @@ public class CustomerBookingViewController implements Initializable {
 
 
     //renders the background image for the scene + commented out code to load chair image into button's background
+
+    /**
+     *Purpose: renders the background image upon opening of the scene
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -85,12 +93,25 @@ public class CustomerBookingViewController implements Initializable {
 //        this.buttonTest.setGraphic(new ImageView(imageDecline));
     }
 
-
-
     @FXML
     private void confirmMovieBooking(ActionEvent event){
     //TODO: trigger a booking summary to be displayed (should we do an additional summary or is the one above the button enough?)
     //TODO: add order to customer profile's history view!
+
+
+        //JDialog querying for correct input value
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        // Get the Stage
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+
+        // Add a custom icon.
+        stage.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+
+        alert.setTitle("Booking Confirmation");
+        alert.setHeaderText("Look, an Information Dialog");
+        alert.setContentText("I have a great message for you!");
+
+        alert.showAndWait();
 
 
         //jumps back to customer's profile view after having clicked the Confirm booking button (think about triggering the order with a JDialogPane)
@@ -98,6 +119,12 @@ public class CustomerBookingViewController implements Initializable {
         controller.openProfileView(event);
     }
 
+    /**
+     * Purpose: changes colour of selected seats and thus allows customers to select their preferred seats
+     * for a respective movie screening.
+     *
+     * @param event
+     */
 
     @FXML
     private void selectSeat(MouseEvent event){

@@ -98,7 +98,7 @@ public class CustomerBookingViewController implements Initializable {
         //TODO: add order to customer profile's history view!
 
 
-        //JDialog querying for correct input value
+        //JDialog querying for correct input value: source: http://code.makery.ch/blog/javafx-dialogs-official/
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         // Get the Stage
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -107,8 +107,8 @@ public class CustomerBookingViewController implements Initializable {
         stage.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         alert.setTitle("Booking Confirmation");
-        alert.setHeaderText("Look, an Information Dialog");
-        alert.setContentText("I have a great message for you!");
+        alert.setHeaderText("THIS IS WHERE YOUR BOOKING DETAILS WOULD GO VIA VARIABLES, Luke!");
+        alert.setContentText("Luke, I'm awesome");
 
         ButtonType buttonTypeOne = new ButtonType("Pay now");
         ButtonType buttonTypeTwo = new ButtonType("Two");
@@ -125,7 +125,7 @@ public class CustomerBookingViewController implements Initializable {
             //test
             System.err.println("haha it works");
         }
-        
+
     }
 
     /**

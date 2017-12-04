@@ -103,29 +103,55 @@ public class CustomerBookingViewController implements Initializable {
 //
 //        }
 
-        if(seatID.equalsIgnoreCase(seat10ColorRect.getId())){
-           if(isSeat10Selected){
-               this.seat10ColorRect.setStyle("-fx-fill: #ffffff");
-               this.isSeat10Selected = false;
-           }
-           else if(!isSeat10Selected){
-               this.seat10ColorRect.setStyle("-fx-fill: #4bd841");
-               this.isSeat10Selected = true;
-           }
+        switch(seatID){
+            case "seat10ColorRect":
+                if(isSeat10Selected){
+                    this.seat10ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat10Selected = false;
+                }
+                else if(!isSeat10Selected){
+                    this.seat10ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat10Selected = true;
+                }break;
+
+            case "seat11ColorRect":
+                if(isSeat11Selected){
+                    this.seat11ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat11Selected = false;
+                }
+                else if(!isSeat11Selected){
+                    this.seat11ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat11Selected = true;
+                }break;
+            default: System.err.println("Switch statement is faulty");
         }
 
-        else if(seatID.equalsIgnoreCase(seat11ColorRect.getId())){
-            if(isSeat11Selected){
-                this.seat11ColorRect.setStyle("-fx-fill: #ffffff");
-                isSeat11Selected = false;
-//                this.isSeat11Selected = false;
-            }
-            else if(!isSeat11Selected){
-                this.seat11ColorRect.setStyle("-fx-fill: #4bd841");
-                isSeat11Selected = true;
-//                this.isSeat11Selected = true;
-            }
-        }
+
+
+//        if(seatID.equalsIgnoreCase(seat10ColorRect.getId())){
+//           if(isSeat10Selected){
+//               this.seat10ColorRect.setStyle("-fx-fill: #ffffff");
+//               this.isSeat10Selected = false;
+//           }
+//           else if(!isSeat10Selected){
+//               this.seat10ColorRect.setStyle("-fx-fill: #4bd841");
+//               this.isSeat10Selected = true;
+//           }
+//        }
+//
+//        else if(seatID.equalsIgnoreCase(seat11ColorRect.getId())){
+//            if(isSeat11Selected){
+//                this.seat11ColorRect.setStyle("-fx-fill: #ffffff");
+//                isSeat11Selected = false;
+////                this.isSeat11Selected = false;
+//            }
+//            else if(!isSeat11Selected){
+//                this.seat11ColorRect.setStyle("-fx-fill: #4bd841");
+//                isSeat11Selected = true;
+////                this.isSeat11Selected = true;
+//            }
+//        }
+
 
     }
 }

@@ -40,8 +40,17 @@ public class CustomerBookingViewController implements Initializable {
     //testing colour changing rectangles for selectable cinema chairs;
     @FXML
     private Rectangle seat10ColorRect, seat11ColorRect, seat12ColorRect, seat13ColorRect, seat14ColorRect;
+    @FXML
+    private Rectangle seat20ColorRect, seat21ColorRect, seat22ColorRect, seat23ColorRect, seat24ColorRect;
+    @FXML
+    private Rectangle seat30ColorRect, seat31ColorRect, seat32ColorRect, seat33ColorRect, seat34ColorRect;
+    @FXML
+    private Rectangle seat40ColorRect, seat41ColorRect, seat42ColorRect, seat43ColorRect, seat44ColorRect;
 
     private boolean isSeat10Selected, isSeat11Selected, isSeat12Selected, isSeat13Selected, isSeat14Selected;
+    private boolean isSeat20Selected, isSeat21Selected, isSeat22Selected, isSeat23Selected, isSeat24Selected;
+    private boolean isSeat30Selected, isSeat31Selected, isSeat32Selected, isSeat33Selected, isSeat34Selected;
+    private boolean isSeat40Selected, isSeat41Selected, isSeat42Selected, isSeat43Selected, isSeat44Selected;
 
 
 
@@ -98,6 +107,7 @@ public class CustomerBookingViewController implements Initializable {
         String seatID = seat.getId();
 
         switch(seatID){
+            //column 1 (first column filled with chairs)
             case "seat10ClickHandler":
                 if(isSeat10Selected){
                     this.seat10ColorRect.setStyle("-fx-fill: #ffffff");
@@ -148,34 +158,116 @@ public class CustomerBookingViewController implements Initializable {
                     this.isSeat14Selected = true;
                 }break;
 
+            //column 2
+            case "seat20ClickHandler":
+                if(isSeat20Selected){
+                    this.seat20ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat20Selected = false;
+                }
+                else if(!isSeat20Selected){
+                    this.seat20ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat20Selected = true;
+                }break;
+
+            case "seat21ClickHandler":
+                if(isSeat21Selected){
+                    this.seat21ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat21Selected = false;
+                }
+                else if(!isSeat21Selected){
+                    this.seat21ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat21Selected = true;
+                }break;
+
+            case "seat22ClickHandler":
+                if(isSeat22Selected){
+                    this.seat22ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat22Selected = false;
+                }
+                else if(!isSeat22Selected){
+                    this.seat22ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat22Selected = true;
+                }break;
+
+            case "seat23ClickHandler":
+                if(isSeat23Selected){
+                    this.seat23ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat23Selected = false;
+                }
+                else if(!isSeat23Selected){
+                    this.seat23ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat23Selected = true;
+                }break;
+
+            case "seat24ClickHandler":
+                if(isSeat24Selected){
+                    this.seat24ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat24Selected = false;
+                }
+                else if(!isSeat24Selected){
+                    this.seat24ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat24Selected = true;
+                }break;
+
+            //column 3
+            case "seat30ClickHandler":
+                if(isSeat30Selected){
+                    this.seat30ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat30Selected = false;
+                }
+                else if(!isSeat30Selected){
+                    this.seat30ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat30Selected = true;
+                }break;
+
+            case "seat31ClickHandler":
+                if(isSeat31Selected){
+                    this.seat31ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat31Selected = false;
+                }
+                else if(!isSeat31Selected){
+                    this.seat31ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat31Selected = true;
+                }break;
+
+            case "seat32ClickHandler":
+                if(isSeat32Selected){
+                    this.seat32ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat32Selected = false;
+                }
+                else if(!isSeat32Selected){
+                    this.seat32ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat32Selected = true;
+                }break;
+
+            case "seat33ClickHandler":
+                if(isSeat33Selected){
+                    this.seat33ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat33Selected = false;
+                }
+                else if(!isSeat33Selected){
+                    this.seat33ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat33Selected = true;
+                }break;
+
+            case "seat34ClickHandler":
+                if(isSeat34Selected){
+                    this.seat34ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat34Selected = false;
+                }
+                else if(!isSeat34Selected){
+                    this.seat34ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat34Selected = true;
+                }break;
+
+
+                
             default: System.err.println("Switch statement is faulty");
         }
 
 
 
-//        if(seatID.equalsIgnoreCase(seat10ColorRect.getId())){
-//           if(isSeat10Selected){
-//               this.seat10ColorRect.setStyle("-fx-fill: #ffffff");
-//               this.isSeat10Selected = false;
-//           }
-//           else if(!isSeat10Selected){
-//               this.seat10ColorRect.setStyle("-fx-fill: #4bd841");
-//               this.isSeat10Selected = true;
-//           }
-//        }
-//
-//        else if(seatID.equalsIgnoreCase(seat11ColorRect.getId())){
-//            if(isSeat11Selected){
-//                this.seat11ColorRect.setStyle("-fx-fill: #ffffff");
-//                isSeat11Selected = false;
-////                this.isSeat11Selected = false;
-//            }
-//            else if(!isSeat11Selected){
-//                this.seat11ColorRect.setStyle("-fx-fill: #4bd841");
-//                isSeat11Selected = true;
-////                this.isSeat11Selected = true;
-//            }
-//        }
+
 
 
     }

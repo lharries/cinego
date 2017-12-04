@@ -193,8 +193,6 @@
 
 
 
-
-
             <!---->
             <!--<ImageView fx:id="ImView30ClickHandler" fitHeight="60.0" fitWidth="80.0" onMouseClicked="#selectSeat" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">-->
                <!--<image>-->
@@ -225,31 +223,69 @@
 
 
             <!--column4-->
-            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+
+            <Rectangle fx:id="seat40ColorRect" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="58.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="57.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0"  GridPane.valignment="CENTER" />
+            <ImageView fx:id="seat40ClickHandler" fitHeight="60.0" fitWidth="80.0" onMouseClicked="#selectSeat" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../resources/seat.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+
+            <Rectangle fx:id="seat41ColorRect" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="58.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="57.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <ImageView fx:id="seat41ClickHandler" fitHeight="60.0" fitWidth="80.0" onMouseClicked="#selectSeat" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../resources/seat.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Rectangle fx:id="seat42ColorRect" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="58.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="57.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <ImageView fx:id="seat42ClickHandler" fitHeight="60.0" fitWidth="80.0" onMouseClicked="#selectSeat" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../resources/seat.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Rectangle fx:id="seat43ColorRect" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="58.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="57.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <ImageView fx:id="seat43ClickHandler" fitHeight="60.0" fitWidth="80.0" onMouseClicked="#selectSeat" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../resources/seat.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Rectangle fx:id="seat44ColorRect" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="58.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="57.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <ImageView fx:id="seat44ClickHandler" fitHeight="60.0" fitWidth="80.0" onMouseClicked="#selectSeat" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../resources/seat.png" />
                </image>
             </ImageView>
+
+
+
+
+
+            <!---->
+            <!--<ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">-->
+               <!--<image>-->
+                  <!--<Image url="@../resources/seat.png" />-->
+               <!--</image>-->
+            <!--</ImageView>-->
+            <!--<ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">-->
+               <!--<image>-->
+                  <!--<Image url="@../resources/seat.png" />-->
+               <!--</image>-->
+            <!--</ImageView>-->
+            <!--<ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">-->
+               <!--<image>-->
+                  <!--<Image url="@../resources/seat.png" />-->
+               <!--</image>-->
+            <!--</ImageView>-->
+            <!--<ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">-->
+               <!--<image>-->
+                  <!--<Image url="@../resources/seat.png" />-->
+               <!--</image>-->
+            <!--</ImageView>-->
+            <!--<ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">-->
+               <!--<image>-->
+                  <!--<Image url="@../resources/seat.png" />-->
+               <!--</image>-->
+            <!--</ImageView>-->
 
 
             <!--column5-->

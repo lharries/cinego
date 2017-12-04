@@ -260,8 +260,59 @@ public class CustomerBookingViewController implements Initializable {
                     this.isSeat34Selected = true;
                 }break;
 
+            //column 4
+            case "seat40ClickHandler":
+                if(isSeat40Selected){
+                    this.seat40ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat40Selected = false;
+                }
+                else if(!isSeat40Selected){
+                    this.seat40ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat40Selected = true;
+                }break;
 
-                
+            case "seat41ClickHandler":
+                if(isSeat41Selected){
+                    this.seat41ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat41Selected = false;
+                }
+                else if(!isSeat41Selected){
+                    this.seat41ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat41Selected = true;
+                }break;
+
+            case "seat42ClickHandler":
+                if(isSeat42Selected){
+                    this.seat42ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat42Selected = false;
+                }
+                else if(!isSeat42Selected){
+                    this.seat42ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat42Selected = true;
+                }break;
+
+            case "seat43ClickHandler":
+                if(isSeat43Selected){
+                    this.seat43ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat43Selected = false;
+                }
+                else if(!isSeat43Selected){
+                    this.seat43ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat43Selected = true;
+                }break;
+
+            case "seat44ClickHandler":
+                if(isSeat44Selected){
+                    this.seat44ColorRect.setStyle("-fx-fill: #ffffff");
+                    this.isSeat44Selected = false;
+                }
+                else if(!isSeat44Selected){
+                    this.seat44ColorRect.setStyle("-fx-fill: #4bd841");
+                    this.isSeat44Selected = true;
+                }break;
+
+
+
             default: System.err.println("Switch statement is faulty");
         }
 

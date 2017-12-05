@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -53,6 +54,12 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private ObservableList<Film> data;
 
+    @FXML
+    private HBox hBox;
+
+    @FXML
+    private TextField addID,addTitle, addImagePath, addDescription;
+
 
 
     @Override
@@ -74,7 +81,7 @@ public class EmployeeHomeController implements Initializable {
                         new Film(2, "Smith", "aksjdaskjdhaskdaksjdh", "das"),
                         new Film(3, "Smith", "hello world #3", "test")
                 );
-        final HBox hb = new HBox();
+
 
         table.setEditable(true);
 
@@ -83,6 +90,10 @@ public class EmployeeHomeController implements Initializable {
 //        TableColumn URLCol = new TableColumn("Image URL");
 //        TableColumn descriptCol = new TableColumn("Description");
 
+        TableColumn idCol = new TableColumn("ID");
+        idCol.setMinWidth(100);
+        idCol.setCellValueFactory(
+                new PropertyValueFactory<Film, Integer>("id"));
 
         TableColumn titleCol = new TableColumn("Title");
         titleCol.setMinWidth(100);
@@ -100,9 +111,12 @@ public class EmployeeHomeController implements Initializable {
                 new PropertyValueFactory<Film, String>("description"));
 
         this.table.setItems(data);
-        this.table.getColumns().addAll(titleCol,URLCol,descriptCol);
+        this.table.getColumns().addAll(idCol,titleCol,URLCol,descriptCol);
+
+//        hBox.getChildren().addAll(addID,addTitle,addImagePath,addDescription);
 
         this.AnchorPane.getChildren().addAll(table);
+//
 
 //
 //        final VBox vbox = new VBox();
@@ -110,11 +124,13 @@ public class EmployeeHomeController implements Initializable {
 //        vbox.setPadding(new Insets(10, 0, 0, 10));
 //        vbox.getChildren().addAll(label, table);
 
-//        ( (Group) Main.scene.getRoot()).getChildren().addAll(AnchorPane);
+        //trouble maker: but I need this (below)?
+//        ((Group) Main.scene.getRoot()).getChildren().addAll(AnchorPane);
 //        ((Group) scene.getRoot()).getChildren().addAll(vbox);
 //
 //        stage.setScene(scene);
 //        stage.show();
+
 
 
         //render background image
@@ -141,7 +157,16 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createMovie(){
 
-
+        //adds user's input to table
+        data.add(new Film(
+                Integer.valueOf(addID.getText()),
+                addTitle.getText(),
+                addImagePath.getText(),
+                addDescription.getText()));
+        addID.clear();
+        addTitle.clear();
+        addImagePath.clear();
+        addDescription.clear();
 
 
         //takes user to new view but possibly do without it

@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import models.EmployeeDAO;
 import models.Film;
 import models.FilmDAO;
 
@@ -60,6 +61,9 @@ public class EmployeeHomeController implements Initializable {
     private HBox hBox;
 
     @FXML
+    private TableColumn idCol,titleCol,urlCol,descriptCol;
+
+    @FXML
     private TextField addID,addTitle, addImagePath, addDescription;
 
 
@@ -68,67 +72,50 @@ public class EmployeeHomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-//        Stage stage = new Stage();
-//        Scene scene = new Scene(new Group());
-//        stage.setTitle("Table View Sample");
-//        stage.setWidth(450);
-//        stage.setHeight(500);
-//
-//        final Label label = new Label("Address Book");
-//        label.setFont(new Font("Arial", 20));
-
         //TODO populate list with movies from the database -> SELECT query to insert DB movies into table
 
         table = new TableView<Film>();
-        data = FXCollections.observableArrayList(
-                        new Film(1, "Smith", "jacob.smith@example.com", "das"),
-                        new Film(2, "Smith", "aksjdaskjdhaskdaksjdh", "das"),
-                        new Film(3, "Smith", "hello world #3", "test")
-                );
+        try {
+            data = FilmDAO.getFilmObservableList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+//                FXCollections.observableArrayList(
+//                        new Film(1, "Smith", "jacob.smith@example.com", "das"),
+//                        new Film(2, "Smith", "aksjdaskjdhaskdaksjdh", "das"),
+//                        new Film(3, "Smith", "hello world #3", "test")
+//                );
 
 
-        table.setEditable(true);
+//        table.setEditable(true);
+
+//        idCol.setCellValueFactory(data);
+        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
+
 
         TableColumn idCol = new TableColumn("ID");
         idCol.setMinWidth(100);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<Film, Integer>("id"));
-
         TableColumn titleCol = new TableColumn("Title");
         titleCol.setMinWidth(100);
         titleCol.setCellValueFactory(
                 new PropertyValueFactory<Film, String>("title"));
-
-        TableColumn URLCol = new TableColumn("Image URL");
-        URLCol.setMinWidth(100);
-        URLCol.setCellValueFactory(
+        TableColumn urlCol = new TableColumn("Image URL");
+        urlCol.setMinWidth(100);
+        urlCol.setCellValueFactory(
                 new PropertyValueFactory<Film, String>("imagePath"));
-
         TableColumn descriptCol = new TableColumn("Description");
         descriptCol.setMinWidth(200);
         descriptCol.setCellValueFactory(
                 new PropertyValueFactory<Film, String>("description"));
 
         this.table.setItems(data);
-        this.table.getColumns().addAll(idCol,titleCol,URLCol,descriptCol);
-
+        this.table.getColumns().addAll(idCol,titleCol,urlCol,descriptCol);
 //        hBox.getChildren().addAll(addID,addTitle,addImagePath,addDescription);
-
         this.AnchorPane.getChildren().addAll(table);
-//
-
-//
-//        final VBox vbox = new VBox();
-//        vbox.setSpacing(5);
-//        vbox.setPadding(new Insets(10, 0, 0, 10));
-//        vbox.getChildren().addAll(label, table);
-
-        //trouble maker: but I need this (below)?
-//        ((Group) Main.scene.getRoot()).getChildren().addAll(AnchorPane);
-//        ((Group) scene.getRoot()).getChildren().addAll(vbox);
-//
-//        stage.setScene(scene);
-//        stage.show();
 
 
 
@@ -142,10 +129,14 @@ public class EmployeeHomeController implements Initializable {
         Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.backgroundImg.setImage(background);
 
+
+
         //Tooltip feature
         this.CreateMovieButton.setTooltip(
                 new Tooltip("Button of doom")
         );
+
+
     }
 
 
@@ -155,7 +146,9 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void createMovie() throws SQLException, ClassNotFoundException {
-        
+
+        //TODO: add input validation (e.g. ID must be an int otherwise it can't be converter to Integer
+
         //store input in local variables to used for TableView and database input
         Integer id = Integer.valueOf(addID.getText());
         String title = addTitle.getText();
@@ -171,7 +164,6 @@ public class EmployeeHomeController implements Initializable {
 
         //adds the newly created movie to the database
         FilmDAO.insertFilm(title,imagePath,description);
-
 
         //TODO: should we delete the other "moviecreation view"? If yes -> below code to switch to view unnecessary
         //takes user to new view but possibly do without it

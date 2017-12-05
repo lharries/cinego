@@ -35,6 +35,9 @@ public class CustomerRootController implements Initializable {
     @FXML
     protected Label custLastNameLabel;
 
+//    @FXML
+//    protected static Label custLastNameLabel;
+
     @FXML
     protected Label custFirstNameLabel;
 
@@ -45,10 +48,11 @@ public class CustomerRootController implements Initializable {
     private ImageView logoutImg;
 
 
-
-    public void setCustFirstNameLabel(String txt){
-        custFirstNameLabel.setText(txt);
-    }
+//
+//    public void setCustNameLabels(){
+//        this.custFirstNameLabel.setText(Main.user.getFirstName());
+//        custLastNameLabel.setText(Main.user.getLastName());
+//    }
 
 
     @Override

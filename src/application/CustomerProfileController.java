@@ -47,33 +47,59 @@ public class CustomerProfileController implements Initializable{
     boolean textFieldEditable = false;
 
 
-
+    /**
+     * Purpose: is called by clicking the edit Profile button and then calls the setCustProFieldsEnabled
+     * method in order to set the fields to be editable and change the prompttext to normal text
+     *
+     */
     @FXML
     private void setCustProfEditable() {
 
-        // TODO: Add ability to edit customer data. First click enable editing and change button lable to say "update".
         textFieldEditable = true;
-
-        updateProfileBttn.setDisable(!textFieldEditable);
-        editProfileBttn.setDisable(textFieldEditable);
-
-        custFirNameField.setText(Main.user.getFirstName());
-        custFirNameField.setEditable(textFieldEditable);
-
-        custLaNameField.setText(Main.user.getLastName());
-        custLaNameField.setEditable(textFieldEditable);
-
-        custEmailField.setText(Main.user.getEmail());
-        custEmailField.setEditable(textFieldEditable);
-        //TODO: store customer's phone number in database
-//        custPhone.setText(Main.user.getPhone());
-        custPhone.setEditable(textFieldEditable);
-
-
-
+        setCustProFieldsEnabled(textFieldEditable);
     }
 
+    private void setCustProFieldsEnabled(boolean textFieldEditable){
 
+
+        if(textFieldEditable){
+            updateProfileBttn.setDisable(!textFieldEditable);
+            editProfileBttn.setDisable(textFieldEditable);
+
+            custFirNameField.setText(Main.user.getFirstName());
+            custFirNameField.setEditable(textFieldEditable);
+
+            custLaNameField.setText(Main.user.getLastName());
+            custLaNameField.setEditable(textFieldEditable);
+
+            custEmailField.setText(Main.user.getEmail());
+            custEmailField.setEditable(textFieldEditable);
+            //TODO: store customer's phone number in database
+//        custPhone.setText(Main.user.getPhone());
+            custPhone.setEditable(textFieldEditable);
+        } if(!textFieldEditable){
+            updateProfileBttn.setDisable(!textFieldEditable);
+            editProfileBttn.setDisable(textFieldEditable);
+
+            custFirNameField.setPromptText(Main.user.getFirstName());
+            custFirNameField.setEditable(textFieldEditable);
+
+            custLaNameField.setPromptText(Main.user.getLastName());
+            custLaNameField.setEditable(textFieldEditable);
+
+            custEmailField.setPromptText(Main.user.getEmail());
+            custEmailField.setEditable(textFieldEditable);
+            //TODO: store customer's phone number in database
+//        custPhone.setText(Main.user.getPhone());
+            custPhone.setEditable(textFieldEditable);
+        }
+    }
+
+    /**
+     * Purpose: called upon clicking the update profile button. Updates the database with the user's
+     * input data upon click event.
+     *
+     */
     @FXML
     private void updateCustomerProfile(){
 
@@ -90,14 +116,12 @@ public class CustomerProfileController implements Initializable{
         }
 
         //TODO: display the adjusted customer name in the root
-//        CustomerRootController.
+//        //alternative 1: static custNameLabels
+//        CustomerRootController.custLastNameLabel.setText(Main.user.getLastName());
 
-        //testing
+//        alternative 2: non-static custNameLabels need to be called via instance of and changed via setter method in CustomerRootController
 //        CustomerRootController controller = new CustomerRootController();
-//        controller.custFirstName.setText(custFirNameField.getText());
-//        CustomerRootController.custLastNameLabel.setText(custLaNameField.getText());
-//
-//        CustomerRootController.
+//        controller.setCustNameLabels();
 
 
         //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
@@ -109,23 +133,13 @@ public class CustomerProfileController implements Initializable{
         alert.setContentText("Your profile was successfully updated, "+ Main.user.getFirstName());
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(e -> popup.hide());
-
         popup.show();
         delay.play();
 
-        
-
+        //sets editability of profile back to disabled
+        setCustProFieldsEnabled(false);
     }
 
-
-
-
-    @FXML
-    private void setProfileEditable(){
-
-
-
-    }
 
 
     @FXML
@@ -142,23 +156,8 @@ public class CustomerProfileController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //initializes customer profile input fields
-
-//        updateProfileBttn.setVisible(false);
-        updateProfileBttn.setDisable(true);
-
-        custFirNameField.setPromptText(Main.user.getFirstName());
-        custFirNameField.setEditable(textFieldEditable);
-
-        custLaNameField.setPromptText(Main.user.getLastName());
-        custLaNameField.setEditable(textFieldEditable);
-
-        custEmailField.setPromptText(Main.user.getEmail());
-        custEmailField.setEditable(textFieldEditable);
-        //TODO: store customer's phone number in database
-//        custPhone.setPromptText(Main.user.getPhone());
-        custPhone.setEditable(textFieldEditable);
-
+        //initializes customer profile input fields and sets them to not editable
+        setCustProFieldsEnabled(textFieldEditable);
 
         //render background image
         BufferedImage bufferedBackground = null;

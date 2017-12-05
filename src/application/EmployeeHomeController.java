@@ -2,14 +2,25 @@ package application;
 
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import models.Film;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -31,7 +42,16 @@ public class EmployeeHomeController implements Initializable {
     private ImageView backgroundImg;
 
     @FXML
+    private AnchorPane AnchorPane;
+
+    @FXML
     private TableView ScreeningsTable;
+
+    @FXML
+    private TableView<Film> table;
+
+    @FXML
+    private ObservableList<Film> data;
 
 
 
@@ -39,35 +59,68 @@ public class EmployeeHomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        //set TableView: source: https://docs.oracle.com/javafx/2/ui_controls/table-view.htm
-        private TableView<Person> ScreeningsTable = new TableView<Person>();
-        private final ObservableList<Person> data =
-                FXCollections.observableArrayList(
-                        new Person("Jacob", "Smith", "jacob.smith@example.com"),
-                        new Person("Isabella", "Johnson", "isabella.johnson@example.com"),
-                        new Person("Ethan", "Williams", "ethan.williams@example.com"),
-                        new Person("Emma", "Jones", "emma.jones@example.com"),
-                        new Person("Michael", "Brown", "michael.brown@example.com")
+//        Stage stage = new Stage();
+//        Scene scene = new Scene(new Group());
+//        stage.setTitle("Table View Sample");
+//        stage.setWidth(450);
+//        stage.setHeight(500);
+//
+//        final Label label = new Label("Address Book");
+//        label.setFont(new Font("Arial", 20));
+
+        table = new TableView<Film>();
+        data = FXCollections.observableArrayList(
+                        new Film(1, "Smith", "jacob.smith@example.com", "das"),
+                        new Film(2, "Smith", "aksjdaskjdhaskdaksjdh", "das"),
+                        new Film(3, "Smith", "hello world #3", "test")
                 );
+        final HBox hb = new HBox();
+
+        table.setEditable(true);
+
+//        TableColumn idCol = new TableColumn("ID");
+//        TableColumn titleCol = new TableColumn("Title");
+//        TableColumn URLCol = new TableColumn("Image URL");
+//        TableColumn descriptCol = new TableColumn("Description");
 
 
-
-
-        ScreeningsTable.setEditable(true);
         TableColumn titleCol = new TableColumn("Title");
-        TableColumn lastNameCol = new TableColumn("Last Name");
-        TableColumn emailCol = new TableColumn("Email");
+        titleCol.setMinWidth(100);
+        titleCol.setCellValueFactory(
+                new PropertyValueFactory<Film, String>("title"));
 
-        ScreeningsTable.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        TableColumn URLCol = new TableColumn("Image URL");
+        URLCol.setMinWidth(100);
+        URLCol.setCellValueFactory(
+                new PropertyValueFactory<Film, String>("imagePath"));
 
+        TableColumn descriptCol = new TableColumn("Description");
+        descriptCol.setMinWidth(200);
+        descriptCol.setCellValueFactory(
+                new PropertyValueFactory<Film, String>("description"));
+
+        this.table.setItems(data);
+        this.table.getColumns().addAll(titleCol,URLCol,descriptCol);
+
+        this.AnchorPane.getChildren().addAll(table);
+
+//
+//        final VBox vbox = new VBox();
+//        vbox.setSpacing(5);
+//        vbox.setPadding(new Insets(10, 0, 0, 10));
+//        vbox.getChildren().addAll(label, table);
+
+//        ( (Group) Main.scene.getRoot()).getChildren().addAll(AnchorPane);
+//        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+//
+//        stage.setScene(scene);
+//        stage.show();
 
 
         //render background image
         BufferedImage bufferedBackground = null;
         try {
             bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-            //background alternative
-//         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,12 +137,16 @@ public class EmployeeHomeController implements Initializable {
     /**
      *
      * Purpose: allows user to also change to movie creation view from within his scene
-     * @param event
      */
     @FXML
-    private void createMovie(ActionEvent event){
-        EmployeeRootController emplRootController = new EmployeeRootController();
-        emplRootController.openMovieFormView(event);
+    private void createMovie(){
+
+
+
+
+        //takes user to new view but possibly do without it
+//        EmployeeRootController emplRootController = new EmployeeRootController();
+//        emplRootController.openMovieFormView(event);
     }
 
     @FXML

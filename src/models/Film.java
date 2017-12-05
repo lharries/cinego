@@ -18,6 +18,14 @@ public class Film {
         this.description = new SimpleStringProperty();
     }
 
+    //added constructor to test populating employee movies list
+    public Film (int id, String title, String imagePath, String description){
+        this.id = new SimpleIntegerProperty(id);
+        this.title = new SimpleStringProperty(title);
+        this.imagePath = new SimpleStringProperty(imagePath);
+        this.description = new SimpleStringProperty(description);
+    }
+
     //TODO: missing Trailer link?
 
 

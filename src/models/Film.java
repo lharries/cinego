@@ -18,6 +18,9 @@ public class Film {
         this.description = new SimpleStringProperty();
     }
 
+    //TODO: missing Trailer link?
+
+
     public Integer getId() {
         return this.id.get();
     }

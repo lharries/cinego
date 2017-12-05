@@ -1,14 +1,15 @@
 package application;
 
 
+import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -29,13 +30,39 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private ImageView backgroundImg;
 
+    @FXML
+    private TableView ScreeningsTable;
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //render background image
 
+        //set TableView: source: https://docs.oracle.com/javafx/2/ui_controls/table-view.htm
+        private TableView<Person> ScreeningsTable = new TableView<Person>();
+        private final ObservableList<Person> data =
+                FXCollections.observableArrayList(
+                        new Person("Jacob", "Smith", "jacob.smith@example.com"),
+                        new Person("Isabella", "Johnson", "isabella.johnson@example.com"),
+                        new Person("Ethan", "Williams", "ethan.williams@example.com"),
+                        new Person("Emma", "Jones", "emma.jones@example.com"),
+                        new Person("Michael", "Brown", "michael.brown@example.com")
+                );
+
+
+
+
+        ScreeningsTable.setEditable(true);
+        TableColumn titleCol = new TableColumn("Title");
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn emailCol = new TableColumn("Email");
+
+        ScreeningsTable.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+
+
+
+        //render background image
         BufferedImage bufferedBackground = null;
         try {
             bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
@@ -61,9 +88,6 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void createMovie(ActionEvent event){
-
-        //ToDo: re-direct to "create-new-movie" view
-
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openMovieFormView(event);
     }
@@ -72,7 +96,6 @@ public class EmployeeHomeController implements Initializable {
     private void exportToCSV(){
         //TODO: add exporting to CSV functionality (Button triggers downloading all current movies including titles, seats booked etc.)
     }
-
 
     @FXML
     private void openSeatsBooked(ActionEvent event) {

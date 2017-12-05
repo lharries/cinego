@@ -62,7 +62,7 @@ public class EmployeeRootController implements Initializable {
 
         //sets user's name onto root
         emplFirstName.setText(Main.user.getFirstName());
-        emplFirstName.setText(Main.user.getLastName());
+        emplLastName.setText(Main.user.getLastName());
 
         BufferedImage bufferedLogo = null;
         BufferedImage bufferedLogout = null;
@@ -119,7 +119,6 @@ public class EmployeeRootController implements Initializable {
         }
     }
 
-
     /**
      *
      *
@@ -134,8 +133,6 @@ public class EmployeeRootController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     /**
      * Purpose: logs user out of cinema system

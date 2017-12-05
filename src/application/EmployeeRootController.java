@@ -4,12 +4,14 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,12 @@ public class EmployeeRootController implements Initializable {
     @FXML
     private ImageView logoutImg;
 
+    @FXML
+    private Label emplFirstName;
+
+    @FXML
+    private Label emplLastName;
+
 //    @FXML
 //    private ImageView background;
 
@@ -51,6 +59,10 @@ public class EmployeeRootController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //sets user's name onto root
+        emplFirstName.setText(Main.user.getFirstName());
+        emplFirstName.setText(Main.user.getLastName());
 
         BufferedImage bufferedLogo = null;
         BufferedImage bufferedLogout = null;

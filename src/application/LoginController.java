@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +32,6 @@ public class LoginController implements Initializable {
     //public LoginModel loginModel = new LoginModel();
     public static Stage primaryStage = new Stage();
 
-
     @FXML
     private Label isConnected;
 
@@ -43,6 +43,8 @@ public class LoginController implements Initializable {
 
     @FXML
     private TextField txtPassword;
+    @FXML
+    private Label loginUnsuccessful;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,11 +69,8 @@ public class LoginController implements Initializable {
 //        custLoginBttn.addEventHandler(KeyEvent.KEY_PRESSED,  new EventHandler<KeyEvent>() {
 //            public void handle(KeyEvent event) {
 
-                // TODO: GET THE USERNAME from textfield
                 String username = txtUsername.getText();
-                // TODO: GET THE PASSWORD
                 String password = txtPassword.getText();
-
                 try {
                     Customer cust = CustomerDAO.login(username, password);
 
@@ -88,7 +87,15 @@ public class LoginController implements Initializable {
                         primaryStage.show();
                     } else{
 
-                        //TODO: error message
+                        loginUnsuccessful.setText("Invalid login - please try again");
+                        txtUsername.requestFocus();
+                        //TODO - add timer to set Label back to blank after 3 seconds
+//                        Timer t = new Timer();
+//                        t.schedule(new TimerTask() {
+//                            @Override public void run() {
+//                                loginUnsuccessful.setText(" ");
+//                            }
+//                        }, 0L, 5000L);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -129,8 +136,9 @@ public class LoginController implements Initializable {
                 primaryStage.setResizable(false);
                 primaryStage.show();
             } else{
-
-                //TODO: error message
+                loginUnsuccessful.setText("Invalid login - please try again");
+                txtUsername.requestFocus();
+                //TODO - add timer to set Label back to blank after 3 seconds
             }
         } catch (SQLException e) {
             e.printStackTrace();

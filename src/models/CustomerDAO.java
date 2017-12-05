@@ -63,6 +63,22 @@ public class CustomerDAO {
         }
     }
 
+
+    //TODO: Kai's database update call
+    public static void updateCustomerDetails(String firstName, String lastName, String email, int id) throws SQLException, ClassNotFoundException {
+
+        String query = "UPDATE Customer SET firstName = ?, lastName = ? , email = ? WHERE id = ?";
+
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg( firstName),
+                new PreparedStatementArg( lastName),
+                new PreparedStatementArg( email),
+                new PreparedStatementArg( id)
+        };
+        SQLiteConnection.executeUpdate(query,preparedStatementArgs);
+    }
+
+
     private static ObservableList<Customer> getCustomerObservableList() throws SQLException, ClassNotFoundException {
         ResultSet resultSetCustomers = SQLiteConnection.executeQuery("SELECT * FROM Customer", null);
 

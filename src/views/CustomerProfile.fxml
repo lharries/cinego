@@ -20,10 +20,10 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
-      <TextField layoutX="164.0" layoutY="156.0" promptText="First name" />
-      <TextField layoutX="379.0" layoutY="151.0" promptText="Last name" />
-      <TextField layoutX="579.0" layoutY="151.0" promptText="you@gmail.com" />
-      <TextField layoutX="800.0" layoutY="150.0" promptText="+44 78345 123646" />
+      <TextField fx:id="custFirNameField" layoutX="164.0" layoutY="156.0" promptText="First name" />
+      <TextField fx:id="custLaNameField" layoutX="379.0" layoutY="151.0" promptText="Last name" />
+      <TextField fx:id="custEmailField" layoutX="579.0" layoutY="151.0" promptText="you@gmail.com" />
+      <TextField fx:id="custPhone" layoutX="800.0" layoutY="150.0" promptText="+44 78345 123646" />
       <Button fx:id="editProfileClickHandler" layoutX="1025.0" layoutY="147.0" mnemonicParsing="false" onAction="#editCustomerProfile" text="edit profile" />
       <Label layoutX="806.0" layoutY="123.0" text="Your phone Number" />
       <Label layoutX="442.0" layoutY="103.0" />

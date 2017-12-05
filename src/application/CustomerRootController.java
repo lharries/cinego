@@ -23,23 +23,20 @@ import java.util.logging.Logger;
 
 public class CustomerRootController implements Initializable {
 
-    //TODO: custFirstName, custLastName (Labels) need to be set according to user's name (data from their profile)
-    //TODO: how can you set the values of the labels without triggering a specific method? So basically, to set the respective values upon login?
-    //TODO: add logout icon to root and make it 'clickable' (possibly by making button see through and laying it on top of image)
 
+    //TODO: make the logout button hoverable so the mouse changes / the colour changes so the user knows there is something clickable
 
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
+
 
     @FXML
     private BorderPane customerPane;
 
+    @FXML
+    protected Label custLastNameLabel;
 
     @FXML
-    private Label custLastName;
-
-    @FXML
-    private Label custFirstName;
-
+    protected Label custFirstNameLabel;
 
     @FXML
     private ImageView logo;
@@ -47,8 +44,11 @@ public class CustomerRootController implements Initializable {
     @FXML
     private ImageView logoutImg;
 
-    @FXML
-    private ImageView backgroundImg;
+
+
+    public void setCustFirstNameLabel(String txt){
+        custFirstNameLabel.setText(txt);
+    }
 
 
     @Override
@@ -56,9 +56,8 @@ public class CustomerRootController implements Initializable {
 
 
         //set user's first + lastname onto root
-        custFirstName.setText(Main.user.getFirstName());
-        custLastName.setText(Main.user.getLastName());
-
+        custFirstNameLabel.setText(Main.user.getFirstName());
+        custLastNameLabel.setText(Main.user.getLastName());
 
         //sets the logos for the roots
         BufferedImage bufferedLogo = null;

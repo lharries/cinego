@@ -22,12 +22,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import models.Film;
+import models.FilmDAO;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -75,6 +77,8 @@ public class EmployeeHomeController implements Initializable {
 //        final Label label = new Label("Address Book");
 //        label.setFont(new Font("Arial", 20));
 
+        //TODO populate list with movies from the database -> SELECT query to insert DB movies into table
+
         table = new TableView<Film>();
         data = FXCollections.observableArrayList(
                         new Film(1, "Smith", "jacob.smith@example.com", "das"),
@@ -84,11 +88,6 @@ public class EmployeeHomeController implements Initializable {
 
 
         table.setEditable(true);
-
-//        TableColumn idCol = new TableColumn("ID");
-//        TableColumn titleCol = new TableColumn("Title");
-//        TableColumn URLCol = new TableColumn("Image URL");
-//        TableColumn descriptCol = new TableColumn("Description");
 
         TableColumn idCol = new TableColumn("ID");
         idCol.setMinWidth(100);
@@ -155,20 +154,26 @@ public class EmployeeHomeController implements Initializable {
      * Purpose: allows user to also change to movie creation view from within his scene
      */
     @FXML
-    private void createMovie(){
+    private void createMovie() throws SQLException, ClassNotFoundException {
+        
+        //store input in local variables to used for TableView and database input
+        Integer id = Integer.valueOf(addID.getText());
+        String title = addTitle.getText();
+        String imagePath = addImagePath.getText();
+        String description = addDescription.getText();
 
-        //adds user's input to table
-        data.add(new Film(
-                Integer.valueOf(addID.getText()),
-                addTitle.getText(),
-                addImagePath.getText(),
-                addDescription.getText()));
+        //adds the newly created movie to the TableView
+        data.add(new Film(id, title, imagePath, description));
         addID.clear();
         addTitle.clear();
         addImagePath.clear();
         addDescription.clear();
 
+        //adds the newly created movie to the database
+        FilmDAO.insertFilm(title,imagePath,description);
 
+
+        //TODO: should we delete the other "moviecreation view"? If yes -> below code to switch to view unnecessary
         //takes user to new view but possibly do without it
 //        EmployeeRootController emplRootController = new EmployeeRootController();
 //        emplRootController.openMovieFormView(event);

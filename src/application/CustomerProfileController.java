@@ -24,7 +24,10 @@ import java.util.ResourceBundle;
 public class CustomerProfileController implements Initializable{
 
     @FXML
-    private Button editProfile;
+    private Button updateProfileBttn;
+
+    @FXML
+    private Button editProfileBttn;
 
     @FXML
     private ImageView backgroundImg;
@@ -44,6 +47,9 @@ public class CustomerProfileController implements Initializable{
     boolean textFieldEditable = false;
 
 
+
+
+
     @FXML
     private void editCustomerProfile() {
 
@@ -51,8 +57,7 @@ public class CustomerProfileController implements Initializable{
 
 
 
-
-        //Updates the users information in the database
+        //Updates the user's information in the database
         Main.user.setFirstName(custFirNameField.getText());
         Main.user.setLastName(custLaNameField.getText());
         Main.user.setEmail(custEmailField.getText());
@@ -92,6 +97,13 @@ public class CustomerProfileController implements Initializable{
         delay.play();
     }
 
+    @FXML
+    private void setProfileEditable(){
+
+
+
+    }
+
 
     @FXML
     private void deleteMovieBooking(){
@@ -107,21 +119,23 @@ public class CustomerProfileController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //initializes customer profile input fields
+        editProfileBttn.isDisable();
 
         custFirNameField.setText(Main.user.getFirstName());
-        //custFirNameField.setEditable(textFieldEditable);
+        custFirNameField.setEditable(textFieldEditable);
 
         custLaNameField.setText(Main.user.getLastName());
-        //custLaNameField.setEditable(textFieldEditable);
+        custLaNameField.setEditable(textFieldEditable);
 
         custEmailField.setText(Main.user.getEmail());
-        //custEmailField.setEditable(textFieldEditable);
+        custEmailField.setEditable(textFieldEditable);
         //TODO: store customer's phone number in database
-        //custPhone.setText(Main.user.getPhone());
-        //custPhone.setEditable(textFieldEditable);
+//        custPhone.setText(Main.user.getPhone());
+        custPhone.setEditable(textFieldEditable);
 
 
-
+        //render background image
         BufferedImage bufferedBackground = null;
         try {
             bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));

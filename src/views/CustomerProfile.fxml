@@ -20,20 +20,19 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
-      <TextField fx:id="custFirNameField" layoutX="164.0" layoutY="156.0" promptText="First name" />
-      <TextField fx:id="custLaNameField" layoutX="379.0" layoutY="151.0" promptText="Last name" />
-      <TextField fx:id="custEmailField" layoutX="579.0" layoutY="151.0" promptText="you@gmail.com" />
-      <TextField fx:id="custPhone" layoutX="800.0" layoutY="150.0" promptText="+44 78345 123646" />
-      <Button fx:id="editProfileClickHandler" layoutX="1025.0" layoutY="147.0" mnemonicParsing="false" onAction="#editCustomerProfile" text="edit profile" />
-      <Label layoutX="806.0" layoutY="123.0" text="Your phone Number" />
-      <Label layoutX="442.0" layoutY="103.0" />
-      <Label layoutX="397.0" layoutY="120.0" text="Last name" />
-      <Label layoutX="164.0" layoutY="125.0" text="First name" />
-      <Label layoutX="597.0" layoutY="120.0" text="E-Mail Address" />
-      <Label layoutX="128.0" layoutY="249.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
-      <ListView layoutX="106.0" layoutY="282.0" prefHeight="376.0" prefWidth="1019.0" />
-      <Button fx:id="backToProgram" layoutX="609.0" layoutY="40.0" mnemonicParsing="false" text="Back to Movies" />
-      <Button fx:id="deleteBookingClickHandler" layoutX="1039.0" layoutY="331.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
+      <TextField fx:id="custFirNameField" layoutX="119.0" layoutY="247.0" promptText="First name" />
+      <TextField fx:id="custLaNameField" layoutX="112.0" layoutY="341.0" promptText="Last name" />
+      <TextField fx:id="custEmailField" layoutX="121.0" layoutY="436.0" promptText="you@gmail.com" />
+      <TextField fx:id="custPhone" layoutX="129.0" layoutY="524.0" promptText="+44 78345 123646" />
+      <Button fx:id="updateProfileBttn" layoutX="154.0" layoutY="577.0" mnemonicParsing="false" onAction="#editCustomerProfile" text="update" />
+      <Label layoutX="135.0" layoutY="497.0" text="Your phone Number" />
+      <Label layoutX="130.0" layoutY="310.0" text="Last name" />
+      <Label layoutX="119.0" layoutY="216.0" text="First name" />
+      <Label layoutX="139.0" layoutY="405.0" text="E-Mail Address" />
+      <Label layoutX="484.0" layoutY="101.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
+      <ListView layoutX="455.0" layoutY="139.0" prefHeight="488.0" prefWidth="711.0" />
+      <Button fx:id="deleteBookingClickHandler" layoutX="1074.0" layoutY="186.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
+      <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setProfileEditable" text="Edit profile" />
 
       <!--<Glyph layoutX="483.0" layoutY="551.0" prefHeight="69.0" prefWidth="108.0" />-->
 

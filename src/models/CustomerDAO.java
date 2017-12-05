@@ -15,7 +15,7 @@ public class CustomerDAO {
 
         // Example of how to use the login
         try {
-            Customer customer = login("customer", "customerpassword");
+            Customer customer = login("user", "customerpassword");
             if (customer != null) {
                 System.out.println(customer.getFirstName());
                 System.out.println(customer.getLastName());

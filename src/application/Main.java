@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import models.Customer;
 import models.CustomerDAO;
 import models.Employee;
+import models.User;
 
 import java.sql.SQLException;
 
@@ -21,7 +22,7 @@ public class Main extends Application {
 
 	private static Parent root;
 
-	public static Customer customer;
+	public static User user;
 
 	public static Employee employee;
 
@@ -44,6 +45,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

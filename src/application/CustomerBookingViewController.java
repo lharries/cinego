@@ -58,7 +58,7 @@ public class CustomerBookingViewController implements Initializable {
     //TODO: add booking summary at the side: display (push) movie title, date + time, populate seatListView with chosen seats (Row + Column)
     //TODO: fxids= movieTitle, Date, Time, seatListView, bookingConfirmationClickHandler
 
-    //TODO: FEATURE send booking confirmation to customer's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
+    //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
 
 
     //TODO: @Kai test button behind chair image if it makes it clickable and colours whether that's enough to make the chair turn green / red
@@ -95,7 +95,7 @@ public class CustomerBookingViewController implements Initializable {
     @FXML
     private void confirmMovieBooking(ActionEvent event) {
         //TODO: trigger a booking summary to be displayed (should we do an additional summary or is the one above the button enough?)
-        //TODO: add order to customer profile's history view!
+        //TODO: add order to user profile's history view!
 
 
         //JDialog querying for correct input value: source: http://code.makery.ch/blog/javafx-dialogs-official/
@@ -118,7 +118,7 @@ public class CustomerBookingViewController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne) {
-            //jumps back to customer's profile view after having clicked the Confirm booking button (think about triggering the order with a JDialogPane)
+            //jumps back to user's profile view after having clicked the Confirm booking button (think about triggering the order with a JDialogPane)
             CustomerRootController controller = new CustomerRootController();
             controller.openProfileView(event);
         } else if (result.get() == buttonTypeTwo) {

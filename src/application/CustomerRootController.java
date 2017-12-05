@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 public class CustomerRootController implements Initializable {
 
-    //TODO: custFirstName, custLastName (Labels) need to be set according to customer's name (data from their profile)
+    //TODO: custFirstName, custLastName (Labels) need to be set according to user's name (data from their profile)
     //TODO: how can you set the values of the labels without triggering a specific method? So basically, to set the respective values upon login?
     //TODO: add logout icon to root and make it 'clickable' (possibly by making button see through and laying it on top of image)
 
@@ -55,9 +55,9 @@ public class CustomerRootController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        //set customer's first + lastname onto root
-        custFirstName.setText(Main.customer.getFirstName());
-        custLastName.setText(Main.customer.getLastName());
+        //set user's first + lastname onto root
+        custFirstName.setText(Main.user.getFirstName());
+        custLastName.setText(Main.user.getLastName());
 
 
         //sets the logos for the roots
@@ -80,7 +80,7 @@ public class CustomerRootController implements Initializable {
     }
 
     /**
-     * Purpose: method to be called by different customer controllers to set their respective views to the
+     * Purpose: method to be called by different user controllers to set their respective views to the
      * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
@@ -91,7 +91,7 @@ public class CustomerRootController implements Initializable {
 
 
     /**
-     * Purpose: opens the customer's ProgramView (scene located within customerRoot) where they can see the list of
+     * Purpose: opens the user's ProgramView (scene located within customerRoot) where they can see the list of
      * available movies
      *
      * @param event
@@ -108,7 +108,7 @@ public class CustomerRootController implements Initializable {
     }
 
     /**
-     * Purpose: opens the customer's Profile (scene located within customerRoot) where they can see their movie history,
+     * Purpose: opens the user's Profile (scene located within customerRoot) where they can see their movie history,
      * booked movies and edit their own profile details
      * available movies
      *

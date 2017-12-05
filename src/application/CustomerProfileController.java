@@ -48,14 +48,34 @@ public class CustomerProfileController implements Initializable{
 
 
 
+    @FXML
+    private void setCustProfEditable() {
+
+        // TODO: Add ability to edit customer data. First click enable editing and change button lable to say "update".
+        textFieldEditable = true;
+
+        updateProfileBttn.setDisable(!textFieldEditable);
+        editProfileBttn.setDisable(textFieldEditable);
+
+        custFirNameField.setText(Main.user.getFirstName());
+        custFirNameField.setEditable(textFieldEditable);
+
+        custLaNameField.setText(Main.user.getLastName());
+        custLaNameField.setEditable(textFieldEditable);
+
+        custEmailField.setText(Main.user.getEmail());
+        custEmailField.setEditable(textFieldEditable);
+        //TODO: store customer's phone number in database
+//        custPhone.setText(Main.user.getPhone());
+        custPhone.setEditable(textFieldEditable);
+
+
+
+    }
 
 
     @FXML
-    private void editCustomerProfile() {
-
-        // TODO: Add ability to edit customer data. First click enable editing and change button lable to say "update".
-
-
+    private void updateCustomerProfile(){
 
         //Updates the user's information in the database
         Main.user.setFirstName(custFirNameField.getText());
@@ -69,7 +89,6 @@ public class CustomerProfileController implements Initializable{
             e.printStackTrace();
         }
 
-
         //TODO: display the adjusted customer name in the root
 //        CustomerRootController.
 
@@ -79,8 +98,6 @@ public class CustomerProfileController implements Initializable{
 //        CustomerRootController.custLastNameLabel.setText(custLaNameField.getText());
 //
 //        CustomerRootController.
-
-
 
 
         //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
@@ -95,7 +112,13 @@ public class CustomerProfileController implements Initializable{
 
         popup.show();
         delay.play();
+
+        
+
     }
+
+
+
 
     @FXML
     private void setProfileEditable(){
@@ -120,18 +143,20 @@ public class CustomerProfileController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
         //initializes customer profile input fields
-        editProfileBttn.isDisable();
 
-        custFirNameField.setText(Main.user.getFirstName());
+//        updateProfileBttn.setVisible(false);
+        updateProfileBttn.setDisable(true);
+
+        custFirNameField.setPromptText(Main.user.getFirstName());
         custFirNameField.setEditable(textFieldEditable);
 
-        custLaNameField.setText(Main.user.getLastName());
+        custLaNameField.setPromptText(Main.user.getLastName());
         custLaNameField.setEditable(textFieldEditable);
 
-        custEmailField.setText(Main.user.getEmail());
+        custEmailField.setPromptText(Main.user.getEmail());
         custEmailField.setEditable(textFieldEditable);
         //TODO: store customer's phone number in database
-//        custPhone.setText(Main.user.getPhone());
+//        custPhone.setPromptText(Main.user.getPhone());
         custPhone.setEditable(textFieldEditable);
 
 

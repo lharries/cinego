@@ -24,7 +24,7 @@
       <TextField fx:id="custLaNameField" layoutX="112.0" layoutY="341.0" promptText="Last name" />
       <TextField fx:id="custEmailField" layoutX="121.0" layoutY="436.0" promptText="you@gmail.com" />
       <TextField fx:id="custPhone" layoutX="129.0" layoutY="524.0" promptText="+44 78345 123646" />
-      <Button fx:id="updateProfileBttn" layoutX="154.0" layoutY="577.0" mnemonicParsing="false" onAction="#editCustomerProfile" text="update" />
+      <Button fx:id="updateProfileBttn" layoutX="154.0" layoutY="577.0" mnemonicParsing="false" onAction="#updateCustomerProfile" text="update" />
       <Label layoutX="135.0" layoutY="497.0" text="Your phone Number" />
       <Label layoutX="130.0" layoutY="310.0" text="Last name" />
       <Label layoutX="119.0" layoutY="216.0" text="First name" />
@@ -32,7 +32,7 @@
       <Label layoutX="484.0" layoutY="101.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
       <ListView layoutX="455.0" layoutY="139.0" prefHeight="488.0" prefWidth="711.0" />
       <Button fx:id="deleteBookingClickHandler" layoutX="1074.0" layoutY="186.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
-      <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setProfileEditable" text="Edit profile" />
+      <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setCustProfEditable" text="Edit profile" />
 
       <!--<Glyph layoutX="483.0" layoutY="551.0" prefHeight="69.0" prefWidth="108.0" />-->
 

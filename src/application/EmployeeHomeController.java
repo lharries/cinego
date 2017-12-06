@@ -77,10 +77,10 @@ public class EmployeeHomeController implements Initializable {
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
-
-
+        
         try {
             data = FilmDAO.getFilmObservableList();
+            table.setItems(data);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -46,32 +46,40 @@
             <Image url="@../resources/cinestar.png" />
          </image>
       </ImageView>
-      <TextField layoutX="14.0" layoutY="149.0" prefHeight="38.0" prefWidth="362.0" promptText="Search..." style="-fx-background-color: #ffffff; -fx-border-radius: 6px;">
-         <font>
-            <Font size="19.0" />
-         </font></TextField>
-      <ChoiceBox layoutX="221.0" layoutY="110.0" prefHeight="28.0" prefWidth="155.0" />
+      <Group layoutX="12.0" layoutY="110.0">
+         <children>
+            <TextField layoutX="2.0" layoutY="39.0" prefHeight="38.0" prefWidth="362.0" promptText="Search..." style="-fx-background-color: #ffffff; -fx-border-radius: 6px;">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <ChoiceBox layoutX="209.0" prefHeight="28.0" prefWidth="155.0" />
+            <DatePicker />
+         </children>
+      </Group>
       <ScrollPane fx:id="moviesScrollPane" layoutY="196.0" opacity="0.9" prefHeight="554.0" prefWidth="408.0" style="-fx-background-color: #596679;">
         <content>
-          <!--<AnchorPane fx:id="moviesAnchorPane" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="552.0" prefWidth="406.0">-->
                   <VBox fx:id="moviesVBox" layoutX="-3.0" layoutY="-7.0" prefHeight="684.0" prefWidth="350.0" style="-fx-background-color: #596679;" />
         </content>
       </ScrollPane>
-      <ImageView fitHeight="306.0" fitWidth="305.0" layoutX="937.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/TheBrokenPoster.jpg" />
-         </image>
-      </ImageView>
-      <Text layoutX="498.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Text>
-      <Label layoutX="502.0" layoutY="490.0" prefHeight="97.0" prefWidth="362.0" text="Description" />
-      <DatePicker layoutX="12.0" layoutY="110.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="251.0" layoutX="502.0" layoutY="230.0" stroke="BLACK" strokeType="INSIDE" width="389.0" />
-      <Button layoutX="521.0" layoutY="618.0" mnemonicParsing="false" text="Book" />
-      <Button layoutX="606.0" layoutY="618.0" mnemonicParsing="false" text="Book" />
-      <Button layoutX="699.0" layoutY="618.0" mnemonicParsing="false" text="Book" />
+      <Group layoutX="498.0" layoutY="155.328125" fx:id="selectedFilmGroup">
+         <children>
+            <ImageView fx:id="selectedFilmImage" fitHeight="306.0" fitWidth="305.0" layoutX="439.0" layoutY="46.671875" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/TheBrokenPoster.jpg" />
+               </image>
+            </ImageView>
+            <Text fx:id="selectedFilmTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
+            <Label fx:id="selectedFilmDescription" layoutX="4.0" layoutY="334.671875" prefHeight="97.0" prefWidth="362.0" text="Description" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="251.0" layoutX="4.0" layoutY="74.671875" stroke="BLACK" strokeType="INSIDE" width="389.0" />
+            <Button fx:id="selectedFilmScreening" layoutX="23.0" layoutY="462.671875" mnemonicParsing="false" text="Book" />
+            <Button layoutX="108.0" layoutY="462.671875" mnemonicParsing="false" text="Book" />
+            <Button layoutX="201.0" layoutY="462.671875" mnemonicParsing="false" text="Book" />
+         </children>
+      </Group>
    </children>
 </AnchorPane>

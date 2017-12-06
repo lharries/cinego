@@ -64,7 +64,10 @@ public class EmployeeHomeController implements Initializable {
     private TableColumn idCol,titleCol,urlCol,descriptCol;
 
     @FXML
-    private TextField addID,addTitle, addImagePath, addDescription;
+    private TextField addTitle, addImagePath, addDescription;
+
+//    @FXML
+//    private TextArea addDescription;
 
 
 
@@ -77,7 +80,7 @@ public class EmployeeHomeController implements Initializable {
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
-        
+
         try {
             data = FilmDAO.getFilmObservableList();
             table.setItems(data);
@@ -86,7 +89,6 @@ public class EmployeeHomeController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
 
         idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
 
@@ -107,10 +109,6 @@ public class EmployeeHomeController implements Initializable {
         this.backgroundImg.setImage(background);
 
 
-        //Tooltip feature
-//        this.CreateMovieButton.setTooltip(
-//                new Tooltip("Button of doom")
-//        );
     }
 
 

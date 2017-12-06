@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="AnchorPane" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeHomeController">
    <children>
@@ -20,25 +23,47 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
-      <TableView fx:id="ScreeningsTable" layoutX="385.0" layoutY="297.0" prefHeight="360.0" prefWidth="788.0" />
-      <TableView fx:id="table" layoutX="634.0" layoutY="75.0" prefHeight="160.0" prefWidth="535.0">
+      <TableView fx:id="ScreeningsTable" layoutX="700.0" layoutY="100.0" prefHeight="467.0" prefWidth="526.0">
          <columns>
-            <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="titleCol" prefWidth="75.0" text="Title" />
-            <TableColumn fx:id="urlCol" prefWidth="75.0" text="Image URL" />
-            <TableColumn fx:id="descriptCol" prefWidth="75.0" text="Description" />
+            <TableColumn prefWidth="44.8363037109375" text="ID" />
+            <TableColumn prefWidth="105.16375732421875" text="Title" />
+            <TableColumn prefWidth="82.18511962890625" text="Date" />
+            <TableColumn prefWidth="93.14788818359375" text="Time" />
+            <TableColumn prefWidth="198.5" text="Seat Booking" />
          </columns></TableView>
-      <Label layoutX="154.0" layoutY="67.0" text="Movies" />
+      <TableView fx:id="table" layoutX="50.0" layoutY="100.0" prefHeight="486.0" prefWidth="535.0">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="40.767337799072266" text="ID" />
+            <TableColumn fx:id="titleCol" prefWidth="98.39752197265625" text="Title" />
+            <TableColumn fx:id="urlCol" prefWidth="168.60247802734375" text="Image URL" />
+            <TableColumn fx:id="descriptCol" prefWidth="227.15658569335938" text="Description" />
+         </columns></TableView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="55.0" prefHeight="18.0" prefWidth="160.0" text="Movies" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
 
-      <Button fx:id="exportCSVHandler" layoutX="886.0" layoutY="503.0" mnemonicParsing="false" onAction="#exportToCSV" prefHeight="32.0" prefWidth="115.0" text="export" />
+      <Button fx:id="exportCSVHandler" layoutX="1103.0" layoutY="662.0" mnemonicParsing="false" onAction="#exportToCSV" prefHeight="32.0" prefWidth="115.0" text="export" />
       <Button fx:id="toSeatBooking" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#openSeatsBooked" text="view seat booking" />
 
-      <HBox fx:id="hBox" layoutX="400.0" layoutY="503.0">
-         <TextField fx:id="addID" layoutX="1054.0" layoutY="503.0" prefWidth="118.0" promptText="id" />
-         <TextField fx:id="addTitle" layoutX="1054.0" layoutY="503.0" prefWidth="118.0" promptText="title" />
-         <TextField fx:id="addImagePath" layoutX="1054.0" layoutY="503.0" onAction="#createMovie" prefWidth="118.0" promptText="image URL" />
-         <TextField fx:id="addDescription" layoutX="1054.0" layoutY="503.0" onAction="#createMovie" prefWidth="118.0" promptText="description" />
-         <Button fx:id="CreateMovieButton" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#createMovie" prefWidth="118.0" text="Add movie" />
+      <HBox fx:id="hBox" layoutX="50.0" layoutY="600.0" prefHeight="32.0" prefWidth="510.0" spacing="15.0">
+         <TextField fx:id="addTitle" layoutX="1054.0" layoutY="503.0" prefHeight="26.0" prefWidth="130.0" promptText="title" />
+         <TextField fx:id="addImagePath" layoutX="1054.0" layoutY="503.0" onAction="#createMovie" prefWidth="130.0" promptText="image URL" />
+         <TextField fx:id="addDescription" layoutX="50.0" layoutY="500.0" onAction="#createMovie" prefHeight="26.0" prefWidth="130.0" promptText="description" />
+         <Button fx:id="CreateMovieButton" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#createMovie" prefHeight="32.0" prefWidth="132.0" text="Add movie" />
+      </HBox>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="954.0" layoutY="55.0" prefHeight="18.0" prefWidth="160.0" text="Screenings" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <HBox fx:id="hBox1" layoutX="700.0" layoutY="600.0" prefHeight="32.0" prefWidth="510.0" spacing="15.0">
+         <children>
+            <ComboBox fx:id="MovieSelectionBox" prefWidth="150.0" />
+            <DatePicker fx:id="DatePicker" />
+            <ComboBox fx:id="TimePicker" prefWidth="150.0" />
+            <Button fx:id="AddScreening" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="143.0" text="Add Screening" />
+         </children>
       </HBox>
 
    </children>

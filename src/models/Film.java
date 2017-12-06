@@ -18,6 +18,16 @@ public class Film {
         this.description = new SimpleStringProperty();
     }
 
+    public void print() {
+        System.out.println(this.id);
+        System.out.println(this.title);
+//        System.out.println(this.imagePath);
+//        System.out.println(this.description);
+    }
+
+    //TODO: missing Trailer link?
+
+
     public Integer getId() {
         return this.id.get();
     }
@@ -47,7 +57,7 @@ public class Film {
     }
 
     public void setImagePath(String imagePath) {
-        this.title.set(imagePath);
+        this.imagePath.set(imagePath);
     }
 
     public StringProperty imagePathProperty() {
@@ -59,7 +69,7 @@ public class Film {
     }
 
     public void setDescription(String description) {
-        this.title.set(description);
+        this.description.set(description);
     }
 
     public StringProperty descriptionProperty() {

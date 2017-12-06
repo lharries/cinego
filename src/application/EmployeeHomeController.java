@@ -1,29 +1,20 @@
 package application;
 
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import models.EmployeeDAO;
 import models.Film;
 import models.FilmDAO;
+import models.Screening;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -52,43 +43,71 @@ public class EmployeeHomeController implements Initializable {
     private TableView ScreeningsTable;
 
     @FXML
-    private TableView<Film> table;
+    private TableView<Film> moviesTable, screeningsTable;
 
     @FXML
-    private ObservableList<Film> data;
+    private ObservableList<Film> moviesData, screeningsData;
 
     @FXML
     private HBox hBox;
 
     @FXML
-    private TableColumn idCol,titleCol,urlCol,descriptCol;
+    private TableColumn titleCol,urlCol,descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab, bookingColScreenTab;
 
     @FXML
     private TextField addTitle, addImagePath, addDescription;
 
+
+
+
 //    @FXML
 //    private TextArea addDescription;
-
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        //TODO populate list with movies from the database -> SELECT query to insert DB movies into table
-//        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
+        //TODO populate list with movies from the database -> SELECT query to insert DB movies into moviesTable
+        //set moviesTable headers - 'moviesTable'
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
 
+        //populate moviesTable from database - 'screeningsTable'
         try {
-            data = FilmDAO.getFilmObservableList();
-            table.setItems(data);
+            moviesData = FilmDAO.getFilmObservableList();
+            moviesTable.setItems(moviesData);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+
+
+
+        //set moviesTable headers - 'screeningsTable'
+        titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+        dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
+//        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
+        bookingColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
+
+        //populate moviesTable from database - 'screeningsTable'
+
+//        try {
+//            moviesData = FilmDAO.getFilmObservableList();
+//            moviesTable.setItems(moviesData);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+
+
+
+
 
         //render background image
         BufferedImage bufferedBackground = null;
@@ -99,7 +118,6 @@ public class EmployeeHomeController implements Initializable {
         }
         Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.backgroundImg.setImage(background);
-
     }
 
 

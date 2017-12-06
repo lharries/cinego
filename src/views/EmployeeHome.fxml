@@ -23,14 +23,14 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
-      <TableView fx:id="ScreeningsTable" layoutX="700.0" layoutY="100.0" prefHeight="467.0" prefWidth="526.0">
+      <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="100.0" prefHeight="467.0" prefWidth="526.0">
          <columns>
-            <TableColumn prefWidth="105.16375732421875" text="Title" />
-            <TableColumn prefWidth="82.18511962890625" text="Date" />
-            <TableColumn prefWidth="93.14788818359375" text="Time" />
-            <TableColumn prefWidth="198.5" text="Seat Booking" />
+            <TableColumn fx:id="titleColScreenTab" prefWidth="105.16375732421875" text="Title" />
+            <TableColumn fx:id="dateColScreenTab" prefWidth="82.18511962890625" text="Date" />
+            <TableColumn fx:id="timeColScreenTab" prefWidth="93.14788818359375" text="Time" />
+            <TableColumn fx:id="bookingColScreenTab" prefWidth="198.5" text="Seat Booking" />
          </columns></TableView>
-      <TableView fx:id="table" layoutX="50.0" layoutY="100.0" prefHeight="486.0" prefWidth="535.0">
+      <TableView fx:id="moviesTable" layoutX="50.0" layoutY="100.0" prefHeight="486.0" prefWidth="535.0">
          <columns>
             <TableColumn fx:id="titleCol" prefWidth="98.39752197265625" text="Title" />
             <TableColumn fx:id="urlCol" prefWidth="168.60247802734375" text="Image URL" />

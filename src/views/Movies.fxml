@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -44,39 +46,17 @@
             <Image url="@../resources/cinestar.png" />
          </image>
       </ImageView>
-      <TextField layoutX="14.0" layoutY="149.0" prefHeight="38.0" prefWidth="362.0" promptText="Search..." style="-fx-background-color: ffffff; -fx-border-radius: 6px;">
+      <TextField layoutX="14.0" layoutY="149.0" prefHeight="38.0" prefWidth="362.0" promptText="Search..." style="-fx-background-color: #ffffff; -fx-border-radius: 6px;">
          <font>
             <Font size="19.0" />
          </font></TextField>
       <ChoiceBox layoutX="221.0" layoutY="110.0" prefHeight="28.0" prefWidth="155.0" />
-      <ScrollPane layoutY="196.0" opacity="0.9" prefHeight="554.0" prefWidth="408.0">
+      <ScrollPane fx:id="moviesScrollPane" layoutY="196.0" opacity="0.9" prefHeight="554.0" prefWidth="408.0" style="-fx-background-color: #596679;">
         <content>
-          <AnchorPane fx:id="moviesAnchorPane" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="989.0" prefWidth="407.0" style="-fx-background-color: #596679#596679;">
-               <!--<children>-->
-                  <!--<Group layoutX="10.0" layoutY="15.0">-->
-                     <!--<children>-->
-                        <!--<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" stroke="#2f3c4d" strokeType="INSIDE" width="367.0" />-->
-                        <!--<ImageView fitHeight="216.0" fitWidth="88.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">-->
-                           <!--<image>-->
-                              <!--<Image url="@../resources/TheBrokenPoster.jpg" />-->
-                           <!--</image>-->
-                        <!--</ImageView>-->
-                        <!--<Text layoutX="29.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">-->
-                           <!--<font>-->
-                              <!--<Font size="25.0" />-->
-                           <!--</font>-->
-                        <!--</Text>-->
-                        <!--<Label layoutX="34.0" layoutY="65.0" text="Label" />-->
-                        <!--<Label layoutX="108.0" layoutY="66.0" text="Label" />-->
-                        <!--<Label layoutX="33.0" layoutY="102.0" text="Date" />-->
-                     <!--</children>-->
-                  <!--</Group>-->
-                  <!--<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="10.0" layoutY="191.0" stroke="#2f3c4d" strokeType="INSIDE" width="367.0" />-->
-               <!--</children>-->
-          </AnchorPane>
+                  <VBox fx:id="moviesVBox" layoutX="-3.0" layoutY="-7.0" prefHeight="684.0" prefWidth="350.0" style="-fx-background-color: #596679;" />
         </content>
       </ScrollPane>
-      <ImageView fitHeight="306.0" fitWidth="305.0" layoutX="918.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="306.0" fitWidth="305.0" layoutX="937.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/TheBrokenPoster.jpg" />
          </image>
@@ -86,9 +66,11 @@
             <Font size="40.0" />
          </font>
       </Text>
-      <Label layoutX="498.0" layoutY="254.0" text="Description" />
+      <Label layoutX="502.0" layoutY="490.0" prefHeight="97.0" prefWidth="362.0" text="Description" />
       <DatePicker layoutX="12.0" layoutY="110.0" />
-      <Label layoutX="519.0" layoutY="577.0" text="Date" />
-      <Label layoutX="599.0" layoutY="587.0" text="Date" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="251.0" layoutX="502.0" layoutY="230.0" stroke="BLACK" strokeType="INSIDE" width="389.0" />
+      <Button layoutX="521.0" layoutY="618.0" mnemonicParsing="false" text="Book" />
+      <Button layoutX="606.0" layoutY="618.0" mnemonicParsing="false" text="Book" />
+      <Button layoutX="699.0" layoutY="618.0" mnemonicParsing="false" text="Book" />
    </children>
 </AnchorPane>

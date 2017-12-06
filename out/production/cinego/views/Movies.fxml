@@ -2,9 +2,9 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -15,9 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MoviesController">
+<!--TODO: Remove the header and footer-->
+
+<AnchorPane prefHeight="800" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MoviesController">
    <children>
-      <ImageView fitHeight="800.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ImageView fitHeight="800.0" fitWidth="1281.0" layoutX="408.0" layoutY="-13.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="408.0" AnchorPane.rightAnchor="-327.8408203125">
          <image>
             <Image url="@../resources/cinemaWallpaper.jpeg" />
          </image>
@@ -30,52 +32,63 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
       <Group layoutX="546.0" layoutY="742.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f3c4d" height="40.0" layoutX="656.0" layoutY="752.0" stroke="#2f3c4d" strokeType="INSIDE" width="43.0" />
-      <Text fill="WHITE" layoutX="528.0" layoutY="787.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758">
+      <Text fill="WHITE" layoutX="528.0" layoutY="787.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.02083206176758">
          <font>
             <Font size="34.0" />
          </font>
       </Text>
       <Line endX="1098.0" layoutX="181.0" layoutY="50.0" startX="-200.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#596679" height="60.0" layoutY="100.0" opacity="0.9" stroke="#596679" strokeType="INSIDE" width="330.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#596679" height="97.0" layoutY="100.0" opacity="0.9" stroke="#596679" strokeType="INSIDE" width="408.0" />
       <ImageView fitHeight="39.0" fitWidth="40.0" layoutX="656.0" layoutY="753.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/cinestar.png" />
          </image>
       </ImageView>
-      <TextField layoutX="14.0" layoutY="114.0" promptText="   search" style="-fx-background-color: ffffff; -fx-border-radius: 6px;" />
-      <ChoiceBox layoutX="179.0" layoutY="115.0" prefHeight="28.0" prefWidth="129.0" />
-      <ScrollPane layoutY="150.0" opacity="0.9" prefHeight="600.0" prefWidth="330.0">
+      <TextField layoutX="14.0" layoutY="149.0" prefHeight="38.0" prefWidth="362.0" promptText="Search..." style="-fx-background-color: ffffff; -fx-border-radius: 6px;">
+         <font>
+            <Font size="19.0" />
+         </font></TextField>
+      <ChoiceBox layoutX="221.0" layoutY="110.0" prefHeight="28.0" prefWidth="155.0" />
+      <ScrollPane layoutY="196.0" opacity="0.9" prefHeight="554.0" prefWidth="408.0">
         <content>
-          <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="989.0" prefWidth="330.0" style="-fx-background-color: #596679#596679;">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="10.0" layoutY="15.0" stroke="#2f3c4d" strokeType="INSIDE" width="295.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="10.0" layoutY="191.0" stroke="#2f3c4d" strokeType="INSIDE" width="295.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="12.0" layoutY="370.0" stroke="#2f3c4d" strokeType="INSIDE" width="295.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="7.0" layoutY="539.0" stroke="#2f3c4d" strokeType="INSIDE" width="295.0" />
-                  <ImageView fitHeight="216.0" fitWidth="88.0" layoutX="201.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/TheBrokenPoster.jpg" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="36.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
-               </children></AnchorPane>
+          <AnchorPane fx:id="moviesAnchorPane" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="989.0" prefWidth="407.0" style="-fx-background-color: #596679#596679;">
+               <!--<children>-->
+                  <!--<Group layoutX="10.0" layoutY="15.0">-->
+                     <!--<children>-->
+                        <!--<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" stroke="#2f3c4d" strokeType="INSIDE" width="367.0" />-->
+                        <!--<ImageView fitHeight="216.0" fitWidth="88.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">-->
+                           <!--<image>-->
+                              <!--<Image url="@../resources/TheBrokenPoster.jpg" />-->
+                           <!--</image>-->
+                        <!--</ImageView>-->
+                        <!--<Text layoutX="29.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">-->
+                           <!--<font>-->
+                              <!--<Font size="25.0" />-->
+                           <!--</font>-->
+                        <!--</Text>-->
+                        <!--<Label layoutX="34.0" layoutY="65.0" text="Label" />-->
+                        <!--<Label layoutX="108.0" layoutY="66.0" text="Label" />-->
+                        <!--<Label layoutX="33.0" layoutY="102.0" text="Date" />-->
+                     <!--</children>-->
+                  <!--</Group>-->
+                  <!--<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="10.0" layoutY="191.0" stroke="#2f3c4d" strokeType="INSIDE" width="367.0" />-->
+               <!--</children>-->
+          </AnchorPane>
         </content>
       </ScrollPane>
-      <TextArea layoutX="389.0" layoutY="217.0" prefHeight="317.0" prefWidth="452.0" text="Lore Ipsum blablbaalsjkdhalsdh   asdjhalsjdh* jasdkajsd" />
       <ImageView fitHeight="306.0" fitWidth="305.0" layoutX="918.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/TheBrokenPoster.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="400.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">
+      <Text layoutX="498.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <Label fx:id="userLbl" layoutX="650.0" layoutY="138.0" text="User &quot;Welcome&quot;" />
+      <Label layoutX="498.0" layoutY="254.0" text="Description" />
+      <DatePicker layoutX="12.0" layoutY="110.0" />
+      <Label layoutX="519.0" layoutY="577.0" text="Date" />
+      <Label layoutX="599.0" layoutY="587.0" text="Date" />
    </children>
 </AnchorPane>

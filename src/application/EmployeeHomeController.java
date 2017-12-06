@@ -33,6 +33,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Source:
+ * - https://docs.oracle.com/javafx/2/ui_controls/table-view.htm
+ */
+
 
 public class EmployeeHomeController implements Initializable {
 
@@ -53,6 +58,8 @@ public class EmployeeHomeController implements Initializable {
 
     @FXML
     private TableView<Film> table;
+    @FXML
+    private TableColumn<Film, String> idCol, titleCol, urlCol, descriptCol;
 
     @FXML
     private ObservableList<Film> data;
@@ -60,12 +67,9 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private HBox hBox;
 
-    @FXML
-    private TableColumn idCol,titleCol,urlCol,descriptCol;
 
     @FXML
-    private TextField addID,addTitle, addImagePath, addDescription;
-
+    private TextField addID, addTitle, addImagePath, addDescription;
 
 
     @Override
@@ -73,75 +77,59 @@ public class EmployeeHomeController implements Initializable {
 
 
         //TODO populate list with movies from the database -> SELECT query to insert DB movies into table
+        idCol.setCellValueFactory(new PropertyValueFactory<Film, String>("id"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+        urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
+        descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
 
-        table = new TableView<Film>();
+        table.setEditable(true);
+
         try {
             data = FilmDAO.getFilmObservableList();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+            table.setItems(data);
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-//                FXCollections.observableArrayList(
-//                        new Film(1, "Smith", "jacob.smith@example.com", "das"),
-//                        new Film(2, "Smith", "aksjdaskjdhaskdaksjdh", "das"),
-//                        new Film(3, "Smith", "hello world #3", "test")
-//                );
 
 
-//        table.setEditable(true);
-
-//        idCol.setCellValueFactory(data);
-        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
 
 
-        TableColumn idCol = new TableColumn("ID");
+//        table = new TableView<Film>();
+
+//
+//
+////
+//
+////        idCol.setCellValueFactory(data);
+//        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
+//
+//
         idCol.setMinWidth(100);
-        idCol.setCellValueFactory(
-                new PropertyValueFactory<Film, Integer>("id"));
-        TableColumn titleCol = new TableColumn("Title");
         titleCol.setMinWidth(100);
-        titleCol.setCellValueFactory(
-                new PropertyValueFactory<Film, String>("title"));
-        TableColumn urlCol = new TableColumn("Image URL");
         urlCol.setMinWidth(100);
-        urlCol.setCellValueFactory(
-                new PropertyValueFactory<Film, String>("imagePath"));
-        TableColumn descriptCol = new TableColumn("Description");
         descriptCol.setMinWidth(200);
-        descriptCol.setCellValueFactory(
-                new PropertyValueFactory<Film, String>("description"));
-
-        this.table.setItems(data);
-        this.table.getColumns().addAll(idCol,titleCol,urlCol,descriptCol);
-//        hBox.getChildren().addAll(addID,addTitle,addImagePath,addDescription);
-        this.AnchorPane.getChildren().addAll(table);
-
-
-
-        //render background image
-        BufferedImage bufferedBackground = null;
-        try {
-            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.backgroundImg.setImage(background);
-
-
-
-        //Tooltip feature
-        this.CreateMovieButton.setTooltip(
-                new Tooltip("Button of doom")
-        );
+//        //render background image
+//        BufferedImage bufferedBackground = null;
+//        try {
+//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        this.backgroundImg.setImage(background);
+//
+//
+//
+//        //Tooltip feature
+//        this.CreateMovieButton.setTooltip(
+//                new Tooltip("Button of doom")
+//        );
 
 
     }
 
 
     /**
-     *
      * Purpose: allows user to also change to movie creation view from within his scene
      */
     @FXML
@@ -156,14 +144,15 @@ public class EmployeeHomeController implements Initializable {
         String description = addDescription.getText();
 
         //adds the newly created movie to the TableView
-        data.add(new Film(id, title, imagePath, description));
-        addID.clear();
-        addTitle.clear();
-        addImagePath.clear();
-        addDescription.clear();
+        // TODO: Fix this! Luke
+//        data.add(new Film(id, title, imagePath, description));
+//        addID.clear();
+//        addTitle.clear();
+//        addImagePath.clear();
+//        addDescription.clear();
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title,imagePath,description);
+        FilmDAO.insertFilm(title, imagePath, description);
 
         //TODO: should we delete the other "moviecreation view"? If yes -> below code to switch to view unnecessary
         //takes user to new view but possibly do without it
@@ -172,7 +161,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     @FXML
-    private void exportToCSV(){
+    private void exportToCSV() {
         //TODO: add exporting to CSV functionality (Button triggers downloading all current movies including titles, seats booked etc.)
     }
 

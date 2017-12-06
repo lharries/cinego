@@ -18,12 +18,11 @@ public class Film {
         this.description = new SimpleStringProperty();
     }
 
-    //added constructor to test populating employee movies list
-    public Film (Integer id, String title, String imagePath, String description){
-        this.id = new SimpleIntegerProperty(id);
-        this.title = new SimpleStringProperty(title);
-        this.imagePath = new SimpleStringProperty(imagePath);
-        this.description = new SimpleStringProperty(description);
+    public void print() {
+        System.out.println(this.id);
+        System.out.println(this.title);
+//        System.out.println(this.imagePath);
+//        System.out.println(this.description);
     }
 
     //TODO: missing Trailer link?
@@ -58,7 +57,7 @@ public class Film {
     }
 
     public void setImagePath(String imagePath) {
-        this.title.set(imagePath);
+        this.imagePath.set(imagePath);
     }
 
     public StringProperty imagePathProperty() {
@@ -70,7 +69,7 @@ public class Film {
     }
 
     public void setDescription(String description) {
-        this.title.set(description);
+        this.description.set(description);
     }
 
     public StringProperty descriptionProperty() {

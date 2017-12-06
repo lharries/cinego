@@ -14,8 +14,8 @@ public class FilmDAO {
     public static void main(String[] args) {
 
         try {
-            insertFilm("Test","description -13;24;/' ","image path");
-            System.out.println( getFilmObservableList());
+            insertFilm("Test", "description -13;24;/' ", "image path");
+            System.out.println(getFilmObservableList());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -38,7 +38,6 @@ public class FilmDAO {
 
     public static ObservableList<Film> getFilmObservableList() throws SQLException, ClassNotFoundException {
         ResultSet resultSetFilms = SQLiteConnection.executeQuery("SELECT * FROM Film", null);
-
         return getFilmList(resultSetFilms);
     }
 
@@ -47,10 +46,12 @@ public class FilmDAO {
 
         while (resultSet.next()) {
             Film film = new Film();
+//            System.out.println(resultSet.getString("imagePath"));
             film.setId(resultSet.getInt("id"));
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
             film.setImagePath(resultSet.getString("imagePath"));
+            film.print();
             filmList.add(film);
         }
 
@@ -59,9 +60,9 @@ public class FilmDAO {
 
     public static void insertFilm(String title, String description, String imagePath) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg( title),
-                new PreparedStatementArg( description),
-                new PreparedStatementArg( imagePath)
+                new PreparedStatementArg(title),
+                new PreparedStatementArg(description),
+                new PreparedStatementArg(imagePath)
         };
 
         SQLiteConnection.execute(
@@ -70,7 +71,7 @@ public class FilmDAO {
                         "VALUES\n" +
                         "(?, ?, ?);",
                 preparedStatementArgs
-              );
+        );
     }
 
     public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {

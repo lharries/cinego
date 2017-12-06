@@ -76,7 +76,7 @@ public class EmployeeHomeController implements Initializable {
 
 
         //TODO populate list with movies from the database -> SELECT query to insert DB movies into table
-        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
+//        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
@@ -90,14 +90,6 @@ public class EmployeeHomeController implements Initializable {
             e.printStackTrace();
         }
 
-        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
-
-        idCol.setMinWidth(100);
-        titleCol.setMinWidth(100);
-        urlCol.setMinWidth(100);
-        descriptCol.setMinWidth(200);
-
-
         //render background image
         BufferedImage bufferedBackground = null;
         try {
@@ -107,7 +99,6 @@ public class EmployeeHomeController implements Initializable {
         }
         Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
         this.backgroundImg.setImage(background);
-
 
     }
 

@@ -25,7 +25,6 @@
       </ImageView>
       <TableView fx:id="ScreeningsTable" layoutX="700.0" layoutY="100.0" prefHeight="467.0" prefWidth="526.0">
          <columns>
-            <TableColumn prefWidth="44.8363037109375" text="ID" />
             <TableColumn prefWidth="105.16375732421875" text="Title" />
             <TableColumn prefWidth="82.18511962890625" text="Date" />
             <TableColumn prefWidth="93.14788818359375" text="Time" />
@@ -33,7 +32,6 @@
          </columns></TableView>
       <TableView fx:id="table" layoutX="50.0" layoutY="100.0" prefHeight="486.0" prefWidth="535.0">
          <columns>
-            <TableColumn fx:id="idCol" prefWidth="40.767337799072266" text="ID" />
             <TableColumn fx:id="titleCol" prefWidth="98.39752197265625" text="Title" />
             <TableColumn fx:id="urlCol" prefWidth="168.60247802734375" text="Image URL" />
             <TableColumn fx:id="descriptCol" prefWidth="227.15658569335938" text="Description" />

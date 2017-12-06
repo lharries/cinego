@@ -73,8 +73,12 @@ public class EmployeeHomeController implements Initializable {
 
 
         //TODO populate list with movies from the database -> SELECT query to insert DB movies into table
+        idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+        urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
+        descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
 
-        table = new TableView<Film>();
+
         try {
             data = FilmDAO.getFilmObservableList();
         } catch (SQLException e) {
@@ -82,41 +86,14 @@ public class EmployeeHomeController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-//                FXCollections.observableArrayList(
-//                        new Film(1, "Smith", "jacob.smith@example.com", "das"),
-//                        new Film(2, "Smith", "aksjdaskjdhaskdaksjdh", "das"),
-//                        new Film(3, "Smith", "hello world #3", "test")
-//                );
 
 
-//        table.setEditable(true);
-
-//        idCol.setCellValueFactory(data);
         idCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
 
-
-        TableColumn idCol = new TableColumn("ID");
         idCol.setMinWidth(100);
-        idCol.setCellValueFactory(
-                new PropertyValueFactory<Film, Integer>("id"));
-        TableColumn titleCol = new TableColumn("Title");
         titleCol.setMinWidth(100);
-        titleCol.setCellValueFactory(
-                new PropertyValueFactory<Film, String>("title"));
-        TableColumn urlCol = new TableColumn("Image URL");
         urlCol.setMinWidth(100);
-        urlCol.setCellValueFactory(
-                new PropertyValueFactory<Film, String>("imagePath"));
-        TableColumn descriptCol = new TableColumn("Description");
         descriptCol.setMinWidth(200);
-        descriptCol.setCellValueFactory(
-                new PropertyValueFactory<Film, String>("description"));
-
-        this.table.setItems(data);
-        this.table.getColumns().addAll(idCol,titleCol,urlCol,descriptCol);
-//        hBox.getChildren().addAll(addID,addTitle,addImagePath,addDescription);
-        this.AnchorPane.getChildren().addAll(table);
-
 
 
         //render background image
@@ -130,13 +107,10 @@ public class EmployeeHomeController implements Initializable {
         this.backgroundImg.setImage(background);
 
 
-
         //Tooltip feature
-        this.CreateMovieButton.setTooltip(
-                new Tooltip("Button of doom")
-        );
-
-
+//        this.CreateMovieButton.setTooltip(
+//                new Tooltip("Button of doom")
+//        );
     }
 
 
@@ -150,14 +124,11 @@ public class EmployeeHomeController implements Initializable {
         //TODO: add input validation (e.g. ID must be an int otherwise it can't be converter to Integer
 
         //store input in local variables to used for TableView and database input
-        Integer id = Integer.valueOf(addID.getText());
         String title = addTitle.getText();
         String imagePath = addImagePath.getText();
         String description = addDescription.getText();
 
         //adds the newly created movie to the TableView
-        data.add(new Film(id, title, imagePath, description));
-        addID.clear();
         addTitle.clear();
         addImagePath.clear();
         addDescription.clear();

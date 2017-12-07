@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
+import models.ScreeningDAO;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -150,16 +151,27 @@ public class EmployeeHomeController implements Initializable {
 
         //adds the newly created movie to the database
         FilmDAO.insertFilm(title,imagePath,description);
+
+        //update the movies table with newly-created movie
+        try {
+            moviesData = FilmDAO.getFilmObservableList();
+            moviesTable.setItems(moviesData);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @FXML
-    private void createScreening(){
+    private void createScreening() throws SQLException, ClassNotFoundException {
 
         //TODO: screenings are pushed to database
 
-        //TODO: upon picking date show only available -> non-taken timeslots!
-
         //TODO: screenings are added to table on screen -> updating live!
+
         //TODO: new screening in screeningTable should include a button linking to screenings specific employeeBookingView ask @LUKE
 
         //TODO: input validation - only when all three fields used + correct input then activate button
@@ -167,19 +179,32 @@ public class EmployeeHomeController implements Initializable {
         //access input values
 
         String title = movieSelectionBox.getValue().toString();
-        String screeningDate = timePicker.getValue().toString();
-        String screeningTime = datePicker.getValue().toString();
-
-        String Date = screeningDate+screeningTime;
+        String screeningTime = timePicker.getValue().toString();
+        String screeningDate = datePicker.getValue().toString();
 
 
-        //adds the newly created movie to the TableView
-        movieSelectionBox.getSelectionModel().selectFirst();
-        timePicker.getSelectionModel().selectFirst();
+        String Date = screeningDate+" "+screeningTime;
+
+
+        //adds the newly created screening to the database
+
+        //TODO: get selected movie's ID to insert into insertScreening method
+        System.err.println(FilmDAO.getFilmObservableList().toString());
+        ScreeningDAO.insertScreening();
+//        FilmDAO.insertFilm(title,imagePath,description);
+
+
+
+        //adds the newly created screening to the TableView
+        //TODO: add screening to TableView
+
+
+        //resets input values to default
+        movieSelectionBox.setValue(null);
+        timePicker.setValue(null);
         datePicker.setValue(null);
 
-        //adds the newly created movie to the database
-//        FilmDAO.insertFilm(title,imagePath,description);
+
     }
 
 

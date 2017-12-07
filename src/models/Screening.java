@@ -2,10 +2,15 @@ package models;
 
 import javafx.beans.property.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class Screening {
+
+    private static DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
 
     private IntegerProperty id;
     private IntegerProperty filmId;
@@ -51,6 +56,9 @@ public class Screening {
 
     public void setDate(String date) {
         this.date.set(date);
+    }
+
+    public void getShortDate() {
     }
 
 

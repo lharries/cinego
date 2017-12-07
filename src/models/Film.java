@@ -1,21 +1,22 @@
 package models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 
 public class Film {
     private IntegerProperty id;
     private StringProperty title;
     private StringProperty imagePath;
     private StringProperty description;
+    private ListProperty<Screening> screenings;
+
 
     public Film() {
         this.id = new SimpleIntegerProperty();
         this.title = new SimpleStringProperty();
         this.imagePath = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
+        this.screenings = new SimpleListProperty<Screening>();
     }
 
     public void print() {
@@ -76,4 +77,15 @@ public class Film {
         return this.description;
     }
 
+    public ObservableList<Screening> getScreenings() {
+        return screenings.get();
+    }
+
+    public ListProperty<Screening> screeningsProperty() {
+        return screenings;
+    }
+
+    public void setScreenings(ObservableList<Screening> screenings) {
+        this.screenings.set(screenings);
+    }
 }

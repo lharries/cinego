@@ -48,7 +48,7 @@
       </ImageView>
       <Group layoutX="12.0" layoutY="110.0">
          <children>
-            <TextField layoutX="2.0" layoutY="39.0" prefHeight="38.0" prefWidth="362.0" promptText="Search..." style="-fx-background-color: #ffffff; -fx-border-radius: 6px;">
+            <TextField fx:id="searchField" layoutX="2.0" layoutY="39.0" prefHeight="38.0" prefWidth="362.0" promptText="Search by title or description..." style="-fx-background-color: #ffffff; -fx-border-radius: 6px;">
                <font>
                   <Font size="19.0" />
                </font>
@@ -59,10 +59,10 @@
       </Group>
       <ScrollPane fx:id="moviesScrollPane" layoutY="196.0" opacity="0.9" prefHeight="554.0" prefWidth="408.0" style="-fx-background-color: #596679;">
         <content>
-                  <VBox fx:id="moviesVBox" layoutX="-3.0" layoutY="-7.0" prefHeight="684.0" prefWidth="350.0" style="-fx-background-color: #596679;" />
+                  <VBox fx:id="moviesVBox" layoutX="-3.0" layoutY="-7.0" prefHeight="684.0" prefWidth="405.0" style="-fx-background-color: #596679;" />
         </content>
       </ScrollPane>
-      <Group layoutX="498.0" layoutY="155.328125" fx:id="selectedFilmGroup">
+      <Group fx:id="selectedFilmGroup" layoutX="498.0" layoutY="155.328125">
          <children>
             <ImageView fx:id="selectedFilmImage" fitHeight="306.0" fitWidth="305.0" layoutX="439.0" layoutY="46.671875" pickOnBounds="true" preserveRatio="true">
                <image>

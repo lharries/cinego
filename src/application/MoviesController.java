@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,8 +16,10 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -27,6 +30,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import models.Film;
 import models.FilmDAO;
+import models.Screening;
 
 /**
  * Sources:
@@ -53,7 +57,12 @@ public class MoviesController implements Initializable {
     public Label selectedFilmDescription;
     public Button selectedFilmScreening;
 
-    public ArrayList<Rectangle> rectangleArrayList = new ArrayList<Rectangle>();
+    @FXML
+    public TextField searchField;
+
+    private String searchText = "";
+
+    private ArrayList<Rectangle> rectangleArrayList = new ArrayList<Rectangle>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,26 +76,44 @@ public class MoviesController implements Initializable {
         moviesVBox.setPadding(new Insets(10.0));
         moviesVBox.setSpacing(10.0);
 
+        updateFilmList();
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchText = searchField.getText();
+            System.out.println("Key up:");
+            System.out.println(searchField.getText());
+            updateFilmList();
+        });
+
+    }
+
+    private void updateFilmList() {
+
+        moviesVBox.getChildren().clear();
         // Get the films from the db and add them to the list of films
         try {
             ObservableList<Film> films = FilmDAO.getFilmObservableList();
             for (int i = 0; i < films.size(); i++) {
                 // set the first film to be selected
+                Film film = films.get(i);
                 boolean isSelected = (i == 0);
+                if (film.getTitle().toLowerCase().contains(searchText.toLowerCase()) || film.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
 
-                addFilmToList(films.get(i), isSelected);
+                    addFilmToList(films.get(i), isSelected);
+                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     private void selectFilm(Film film, Rectangle rectangle) {
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
+        selectedFilmImage.setImage(new Image(film.getImagePath()));
         // TODO: Set image and set screening times
 
         for (Rectangle otherRectangles :
@@ -112,6 +139,16 @@ public class MoviesController implements Initializable {
         rectangle.setStrokeType(StrokeType.CENTERED);
         rectangle.setStrokeWidth(0.0);
 
+        // To enable turning off the selection color
+        rectangleArrayList.add(rectangle);
+        group.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("Clicked");
+                selectFilm(film, rectangle);
+            }
+        });
+
         // TODO: split the text over multiple lines
         Label title = new Label(film.getTitle());
         title.setLayoutX(15.0);
@@ -128,13 +165,6 @@ public class MoviesController implements Initializable {
         Font descriptionFont = new Font(15.0);
         description.setFont(descriptionFont);
 
-        // TODO: Switch to real data
-        Label screening = new Label("PLACEHOLDER");
-        screening.setLayoutX(15.0);
-        screening.setLayoutY(120.0);
-        Font screeningFont = new Font(15.0);
-        screening.setFont(screeningFont);
-
         Image image = new Image("/resources/TheBrokenPoster.jpg");
         ImageView imageView = new ImageView(image);
         imageView.setX(230.0);
@@ -142,22 +172,25 @@ public class MoviesController implements Initializable {
         imageView.setFitHeight(145.0);
         imageView.setFitWidth(134.0);
 
-        // To enable turning off the selection color
-        rectangleArrayList.add(rectangle);
-        group.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("Clicked");
-                selectFilm(film, rectangle);
-            }
-        });
+        group.getChildren().addAll(rectangle, title, description, imageView);
 
-        group.getChildren().addAll(rectangle, title, description, screening, imageView);
+        double xPost = 15.0;
+
+        for (Screening filmScreening : film.getScreenings()) {
+            Label screening = new Label(filmScreening.getDate());
+            screening.setLayoutX(xPost);
+            screening.setLayoutY(120.0);
+            Font screeningFont = new Font(15.0);
+            screening.setFont(screeningFont);
+            xPost += 15.0;
+            group.getChildren().add(screening);
+
+        }
 
         moviesVBox.getChildren().add(group);
 
         if (isSelected) {
-            selectFilm(film,rectangle);
+            selectFilm(film, rectangle);
         }
     }
 

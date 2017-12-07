@@ -135,34 +135,22 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
-        //TODO: screenings are pushed to database
         //TODO: screenings are added to table on screen -> updating live!
         //TODO: new screening in screeningTable should include a button linking to screenings specific employeeBookingView ask @LUKE
         //TODO: input validation - only when all three fields used + correct input then activate button
 
-        //access input values
-        String title = movieSelectionBox.getValue().toString();
+        //access input values & create date-time
         String screeningTime = timePicker.getValue().toString();
         String screeningDate = datePicker.getValue().toString();
         String date = screeningDate+" "+screeningTime;
-
-
-        Film testFilm = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
-        int movieID = testFilm.getId();
+        Film film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
+        int movieID = film.getId();
 
         //adds the newly created screening to the database
-        //TODO: get selected movie's ID to insert into insertScreening method
-
         ScreeningDAO.insertScreening(movieID, date);
 
         //adds the newly created screening to the TableView
-        //TODO: add screening to TableView
-
-
-
-
-
-
+        
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
         timePicker.setValue(null);

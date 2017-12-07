@@ -145,8 +145,6 @@ public class CustomerBookingViewController implements Initializable {
 
 
         gridPaneSeats.add(seat, 1, 0);
-//        GridPane.setHalignment(gridPaneSeats, HPos.CENTER);
-//        gridPaneSeats.setValignment(gridPaneSeats, VPos.CENTER);
         gridPaneSeats.add(seat2, 2, 0);
         gridPaneSeats.add(seat3, 2, 1);
         gridPaneSeats.add(seat4, 1, 1);

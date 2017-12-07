@@ -42,7 +42,7 @@ public class Main extends Application {
 		try {	
 
 			//launches the loginCust view upon running program
-			root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/views/EmployeeHome.fxml"));
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 

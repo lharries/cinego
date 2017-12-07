@@ -77,4 +77,9 @@ public class Film {
         return this.description;
     }
 
+    @Override
+    public String toString() {
+        return getTitle();
+    }
+
 }

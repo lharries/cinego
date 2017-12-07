@@ -57,6 +57,12 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private TextField addTitle, addImagePath, addDescription;
 
+    @FXML
+    private ComboBox movieSelectionBox, timePicker;
+
+    @FXML
+    private DatePicker datePicker;
+
 
 
 
@@ -85,28 +91,30 @@ public class EmployeeHomeController implements Initializable {
         }
 
 
-
-
         //set moviesTable headers - 'screeningsTable'
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
 //        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
         bookingColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
 
+        //initialize the movieSelectionBox
+        try {
+            movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         //populate moviesTable from database - 'screeningsTable'
-
-//        try {
-//            moviesData = FilmDAO.getFilmObservableList();
-//            moviesTable.setItems(moviesData);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
+        try {
+            moviesData = FilmDAO.getFilmObservableList();
+            moviesTable.setItems(moviesData);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
         //render background image
@@ -142,12 +150,41 @@ public class EmployeeHomeController implements Initializable {
 
         //adds the newly created movie to the database
         FilmDAO.insertFilm(title,imagePath,description);
-
-        //TODO: should we delete the other "moviecreation view"? If yes -> below code to switch to view unnecessary
-        //takes user to new view but possibly do without it
-//        EmployeeRootController emplRootController = new EmployeeRootController();
-//        emplRootController.openMovieFormView(event);
     }
+
+    @FXML
+    private void createScreening(){
+
+        //TODO: screenings are pushed to database
+
+        //TODO: upon picking date show only available -> non-taken timeslots!
+
+        //TODO: screenings are added to table on screen -> updating live!
+        //TODO: new screening in screeningTable should include a button linking to screenings specific employeeBookingView ask @LUKE
+
+        //TODO: input validation - only when all three fields used + correct input then activate button
+
+        //access input values
+
+        String title = movieSelectionBox.getValue().toString();
+        String screeningDate = timePicker.getValue().toString();
+        String screeningTime = datePicker.getValue().toString();
+
+        String Date = screeningDate+screeningTime;
+
+
+        //adds the newly created movie to the TableView
+        movieSelectionBox.getSelectionModel().selectFirst();
+        timePicker.getSelectionModel().selectFirst();
+        datePicker.setValue(null);
+
+        //adds the newly created movie to the database
+//        FilmDAO.insertFilm(title,imagePath,description);
+    }
+
+
+
+
 
     @FXML
     private void exportToCSV(){

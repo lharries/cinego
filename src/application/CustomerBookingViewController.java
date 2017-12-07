@@ -2,28 +2,36 @@ package application;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import models.Seat;
+import models.SeatDAO;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerBookingViewController implements Initializable {
+
+    private Seat selectedSeat;
 
     @FXML
     private Label Time;
@@ -64,21 +72,21 @@ public class CustomerBookingViewController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setupBackgroundImage();
+//        setupBackgroundImage();
         createSeatingPlan();
 
     }
 
     private void setupBackgroundImage() {
         //renders background image of the view
-        BufferedImage bufferedBackground = null;
-        try {
-            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.backgroundImg.setImage(background);
+//        BufferedImage bufferedBackground = null;
+//        try {
+//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        this.backgroundImg.setImage(background);
     }
 
     @FXML
@@ -118,36 +126,37 @@ public class CustomerBookingViewController implements Initializable {
     }
 
     private void createSeatingPlan() {
-        ImageView seat = new ImageView("/resources/seat.png");
-        seat.setFitWidth(60.0);
-        seat.setFitHeight(60.0);
-        seat.setX(100.0);
-        seat.setY(5.0);
+        String[] rows = new String[]{"A", "B", "C", "D", "E"};
+        for (int i = 0; i < 5; i++) {
+            for (int j = 1; j < 9; j++) {
+                try {
+                    Seat seat = SeatDAO.getSeatByLocation(rows[i], j);
 
+                    ImageView seatView = new ImageView("/resources/seat.png");
+                    seatView.setFitWidth(60.0);
+                    seatView.setFitHeight(60.0);
 
-        ImageView seat2 = new ImageView("/resources/seat.png");
-        seat2.setFitWidth(60.0);
-        seat2.setFitHeight(60.0);
-        seat2.setX(100.0);
-        seat2.setY(5.0);
+                    Button btn = new Button();
+                    btn.setGraphic(seatView);
+                    btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            selectedSeat = seat;
+                        }
+                    });
+                    //TODO: Set the button color to white
+                    gridPaneSeats.add(btn, j, i);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-        ImageView seat3 = new ImageView("/resources/seat.png");
-        seat3.setFitWidth(60.0);
-        seat3.setFitHeight(60.0);
-        seat3.setX(100.0);
-        seat3.setY(5.0);
+    private void displaySelectedSeat() {
 
-        ImageView seat4 = new ImageView("/resources/seat.png");
-        seat4.setFitWidth(60.0);
-        seat4.setFitHeight(60.0);
-        seat4.setX(100.0);
-        seat4.setY(5.0);
-
-
-        gridPaneSeats.add(seat, 1, 0);
-        gridPaneSeats.add(seat2, 2, 0);
-        gridPaneSeats.add(seat3, 2, 1);
-        gridPaneSeats.add(seat4, 1, 1);
     }
 
 

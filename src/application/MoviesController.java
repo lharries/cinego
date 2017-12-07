@@ -1,12 +1,14 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,7 +21,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -41,6 +42,7 @@ import models.Screening;
 
 public class MoviesController implements Initializable {
 
+
     @FXML
     public ScrollPane moviesScrollPane;
 
@@ -49,6 +51,8 @@ public class MoviesController implements Initializable {
 
     @FXML
     public VBox moviesVBox;
+
+    private Film selectedFilm;
 
     @FXML
     public Group selectedFilmGroup;
@@ -111,6 +115,8 @@ public class MoviesController implements Initializable {
     }
 
     private void selectFilm(Film film, Rectangle rectangle) {
+        selectedFilm = film;
+
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
         selectedFilmImage.setImage(new Image(film.getImagePath()));
@@ -123,6 +129,8 @@ public class MoviesController implements Initializable {
 
         rectangle.setStrokeWidth(5.0);
         selectedFilmGroup.setVisible(true);
+
+        addScreeningsToView();
     }
 
     private void addFilmToList(Film film, boolean isSelected) {
@@ -153,7 +161,7 @@ public class MoviesController implements Initializable {
         Label title = new Label(film.getTitle());
         title.setLayoutX(15.0);
         title.setLayoutY(10.0);
-        Font titleFont = new Font(30.0);
+        Font titleFont = new Font(25.0);
         title.setFont(titleFont);
 
         // TODO: Limit the size of the description
@@ -161,7 +169,7 @@ public class MoviesController implements Initializable {
         description.setWrapText(true);
         description.setMaxWidth(200.0);
         description.setLayoutX(15.0);
-        description.setLayoutY(70.0);
+        description.setLayoutY(50.0);
         Font descriptionFont = new Font(15.0);
         description.setFont(descriptionFont);
 
@@ -172,20 +180,14 @@ public class MoviesController implements Initializable {
         imageView.setFitHeight(145.0);
         imageView.setFitWidth(134.0);
 
-        group.getChildren().addAll(rectangle, title, description, imageView);
 
-        double xPost = 15.0;
+        Label screenings = new Label(film.getScreeningsDescription());
+        screenings.setLayoutX(15.0);
+        screenings.setLayoutY(120.0);
+        Font screeningFont = new Font(15.0);
+        screenings.setFont(screeningFont);
 
-        for (Screening filmScreening : film.getScreenings()) {
-            Label screening = new Label(filmScreening.getDate());
-            screening.setLayoutX(xPost);
-            screening.setLayoutY(120.0);
-            Font screeningFont = new Font(15.0);
-            screening.setFont(screeningFont);
-            xPost += 15.0;
-            group.getChildren().add(screening);
-
-        }
+        group.getChildren().addAll(rectangle, title, description, imageView, screenings);
 
         moviesVBox.getChildren().add(group);
 
@@ -233,6 +235,37 @@ public class MoviesController implements Initializable {
 //                        <Label layoutX="33.0" layoutY="102.0" text="Date" />
 //                     </children>
 //                  </Group>
+    }
+
+    private void addScreeningsToView() {
+        // TODO: Switch to flowpane or tabs
+        double xPosition = 0.0;
+        for (Screening screening :
+                selectedFilm.getScreenings()) {
+            try {
+                Button screeningButton = new Button();
+                screeningButton.setText(screening.getShortDate());
+                screeningButton.setLayoutX(xPosition);
+                screeningButton.setLayoutY(400.0);
+                screeningButton.setOnAction((event) -> {
+                    try {
+                        // TODO Set this up properly! KAI We need to move the movies controller into the proper place
+                        Navigation.loadCustFxml(Navigation.EMPL_HOME_VIEW);
+                    } catch (IOException e) {
+                        // TODO: Add loggin LOGGER.logp(Level.WARNING, "CustomerRootController", "openBookingView", "Failed to load CustomerBooking View. See: " + e);
+                        System.err.println(e);
+                        e.printStackTrace();
+                    }
+                });
+
+                selectedFilmGroup.getChildren().add(screeningButton);
+
+                xPosition += 100.0;
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

@@ -3,6 +3,14 @@ package models;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+
+
+/**
+ * Source:
+ * - https://stackoverflow.com/questions/3395286/remove-last-character-of-a-stringbuilder
+ */
 public class Film {
     private IntegerProperty id;
     private StringProperty title;
@@ -87,5 +95,38 @@ public class Film {
 
     public void setScreenings(ObservableList<Screening> screenings) {
         this.screenings.set(screenings);
+    }
+
+    public String getScreeningsDescription() {
+
+        int maxNumberOfScreenings = 4;
+
+        ObservableList<Screening> screenings = getScreenings();
+
+        int numberOfScreeningsToShow = (screenings.size() < maxNumberOfScreenings ? screenings.size() : maxNumberOfScreenings);
+
+        StringBuilder screeningsDescription = new StringBuilder();
+
+        if (screenings.size() == 0) {
+            screeningsDescription.append("No upcoming screenings");
+        } else {
+
+            for (int screeningIndex = 0; screeningIndex < numberOfScreeningsToShow; screeningIndex++) {
+                try {
+                    screeningsDescription.append(screenings.get(screeningIndex).getShortDate());
+                    screeningsDescription.append(", ");
+                } catch (ParseException e) {
+                    System.err.println("Unable to get screening description");
+                    e.printStackTrace();
+                }
+            }
+
+            // remove the trailing ", "
+            screeningsDescription.setLength(screeningsDescription.length() - 2);
+        }
+
+        return screeningsDescription.toString();
+
+
     }
 }

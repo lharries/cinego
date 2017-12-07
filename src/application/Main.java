@@ -39,7 +39,7 @@ public class Main extends Application {
 
 			//launches the loginCust view upon running program
 
-			root = FXMLLoader.load(getClass().getResource("/views/Movies.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/views/CustomerBookingView.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 

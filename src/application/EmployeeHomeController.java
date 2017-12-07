@@ -1,6 +1,5 @@
 package application;
 
-
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -44,10 +43,16 @@ public class EmployeeHomeController implements Initializable {
     private TableView ScreeningsTable;
 
     @FXML
-    private TableView<Film> moviesTable, screeningsTable;
+    private TableView<Film> moviesTable;
 
     @FXML
-    private ObservableList<Film> moviesData, screeningsData;
+    private TableView<Screening> screeningsTable;
+
+    @FXML
+    private ObservableList<Film> moviesData;
+
+    @FXML
+    private ObservableList<Screening> screeningsData;
 
     @FXML
     private HBox hBox;
@@ -65,58 +70,30 @@ public class EmployeeHomeController implements Initializable {
     private DatePicker datePicker;
 
 
-
-
-//    @FXML
-//    private TextArea addDescription;
-
+    /**
+     * Purpose: sets the column titles of both tables and populates them with data from the database,
+     * intialises the movieSelectionBox with the latest movies and renderes the background Image of the view
+     *
+     * @param location
+     * @param resources
+     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        //TODO populate list with movies from the database -> SELECT query to insert DB movies into moviesTable
-        //set moviesTable headers - 'moviesTable'
+        //set moviesTable headers - 'moviesTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
+        populateMoviesTable();
 
-        //populate moviesTable from database - 'screeningsTable'
-        try {
-            moviesData = FilmDAO.getFilmObservableList();
-            moviesTable.setItems(moviesData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-        //set moviesTable headers - 'screeningsTable'
+        //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
 //        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
         bookingColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
-
-        //initialize the movieSelectionBox
-        try {
-            movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        //populate moviesTable from database - 'screeningsTable'
-        try {
-            moviesData = FilmDAO.getFilmObservableList();
-            moviesTable.setItems(moviesData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        populateScreeningsTable();
+        populateMovieSelectBox();
 
         //render background image
         BufferedImage bufferedBackground = null;
@@ -144,72 +121,48 @@ public class EmployeeHomeController implements Initializable {
         String imagePath = addImagePath.getText();
         String description = addDescription.getText();
 
-        //adds the newly created movie to the TableView
+        //adds the newly created movie to the database
+        FilmDAO.insertFilm(title, imagePath, description);
+
+        //resets input fields to default + updates moviesTable & movieSelectionBox
         addTitle.clear();
         addImagePath.clear();
         addDescription.clear();
-
-        //adds the newly created movie to the database
-        FilmDAO.insertFilm(title,imagePath,description);
-
-        //update the movies table with newly-created movie
-        try {
-            moviesData = FilmDAO.getFilmObservableList();
-            moviesTable.setItems(moviesData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
+        populateMoviesTable();
+        populateMovieSelectBox();
     }
 
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
         //TODO: screenings are pushed to database
-
         //TODO: screenings are added to table on screen -> updating live!
-
         //TODO: new screening in screeningTable should include a button linking to screenings specific employeeBookingView ask @LUKE
-
         //TODO: input validation - only when all three fields used + correct input then activate button
 
         //access input values
-
         String title = movieSelectionBox.getValue().toString();
         String screeningTime = timePicker.getValue().toString();
         String screeningDate = datePicker.getValue().toString();
+        String date = screeningDate+" "+screeningTime;
 
-
-        String Date = screeningDate+" "+screeningTime;
-
+        //TODO: INCORRECT MOVIE ID!!!!!! -> get movie's actual ID from Combobox selected Object
+        int screeningID = 1;
 
         //adds the newly created screening to the database
-
         //TODO: get selected movie's ID to insert into insertScreening method
-        System.err.println(FilmDAO.getFilmObservableList().toString());
-        ScreeningDAO.insertScreening();
-//        FilmDAO.insertFilm(title,imagePath,description);
-
-
+//        System.err.println(FilmDAO.getFilmObservableList().toString());
+        ScreeningDAO.insertScreening(screeningID, date);
 
         //adds the newly created screening to the TableView
         //TODO: add screening to TableView
 
-
-        //resets input values to default
+        //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
         timePicker.setValue(null);
         datePicker.setValue(null);
-
-
+        populateScreeningsTable();
     }
-
-
-
-
 
     @FXML
     private void exportToCSV(){
@@ -223,4 +176,45 @@ public class EmployeeHomeController implements Initializable {
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openBookingView(event);
     }
+
+    /**
+     * Purpose: updates the moviesTable with movie specific data from the database
+     */
+    private void populateMoviesTable(){
+        try {
+            moviesData = FilmDAO.getFilmObservableList();
+            moviesTable.setItems(moviesData);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Purpose: updates the screeningsTable with screening specific data from the database
+     */
+    private void populateScreeningsTable(){
+        try {
+            screeningsData = ScreeningDAO.getScreeningObservableList();
+            screeningsTable.setItems(screeningsData);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Purpose: updates the movieSelectionBox with the latest Movie Titles from the database
+     */
+    private void populateMovieSelectBox(){
+        try {
+            movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

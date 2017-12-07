@@ -146,16 +146,22 @@ public class EmployeeHomeController implements Initializable {
         String screeningDate = datePicker.getValue().toString();
         String date = screeningDate+" "+screeningTime;
 
-        //TODO: INCORRECT MOVIE ID!!!!!! -> get movie's actual ID from Combobox selected Object
-        int screeningID = 1;
+
+        Film testFilm = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
+        int movieID = testFilm.getId();
 
         //adds the newly created screening to the database
         //TODO: get selected movie's ID to insert into insertScreening method
-//        System.err.println(FilmDAO.getFilmObservableList().toString());
-        ScreeningDAO.insertScreening(screeningID, date);
+
+        ScreeningDAO.insertScreening(movieID, date);
 
         //adds the newly created screening to the TableView
         //TODO: add screening to TableView
+
+
+
+
+
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);

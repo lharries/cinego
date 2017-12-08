@@ -146,25 +146,62 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void uploadMovieImage(Event event){
 
-                FileChooser fileChooser = new FileChooser();
+//        source: http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
+        FileChooser fileChooser = new FileChooser();
 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-                FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-                fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
-                //Show open file dialog
-                File file = fileChooser.showOpenDialog(null);
+        //Show open file dialog
+//        File file = fileChooser.showOpenDialog(null);
 
-                try {
-                    BufferedImage bufferedImage = ImageIO.read(file);
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                    moviePoster.setImage(image);
-                } catch (IOException ex) {
-                    Logger.getLogger(EmployeeHomeController.class.getName()).log(Level.SEVERE, null, ex);
-                }
 
-            }
+//        try {
+//            BufferedImage bufferedImage = ImageIO.read(file);
+//            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+//            moviePoster.setImage(image);
+//        } catch (IOException ex) {
+//            Logger.getLogger(EmployeeHomeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+
+        BufferedImage image = null;
+        File file = null;
+        String filename = "kaiTest.jpg";
+
+        //read image file
+        try{
+            file = new File("/Users/kai/Desktop/IMG_0002.JPG");
+//            file = fileChooser.showOpenDialog(null);
+            image = ImageIO.read(file);
+        }catch(IOException e){
+            System.out.println("Error: "+e);
+        }
+
+        //write image
+        try{
+            file = new File("/Users/kai/code/cinego/src/resources" + filename);
+            ImageIO.write(image, "jpg", file);
+        }catch(IOException e){
+            System.out.println("Error: "+e);
+        }
+
+
+            //source: https://bytes.com/topic/java/answers/828841-how-copy-image-file
+//        FileInputStream fis=new FileInputStream(new File("D:/image.bmp"));
+//        FileOutputStream fos=new FilePutputStream(new FIle("D:/copyImage.bmp"));
+//        int c;
+//        while((c=fis.read())!=-1)
+//        {
+//            fos.write(c);
+//        }
+//
+
+
+
+    }
 
 
     @FXML

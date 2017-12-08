@@ -150,7 +150,7 @@ public class EmployeeHomeController implements Initializable {
         ScreeningDAO.insertScreening(movieID, date);
 
         //adds the newly created screening to the TableView
-        
+
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
         timePicker.setValue(null);

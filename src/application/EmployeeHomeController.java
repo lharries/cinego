@@ -26,8 +26,11 @@ import java.util.ResourceBundle;
 
 public class EmployeeHomeController implements Initializable {
 
-    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality
-    //TODO: source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
+    //TODO: add file uploader to load movie images into project directory
+
+
+    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
+
 
     @FXML
     private Button CreateMovieButton;
@@ -87,15 +90,15 @@ public class EmployeeHomeController implements Initializable {
         populateMoviesTable();
 
         //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
-        titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+        titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
 //        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
-        bookingColScreenTab.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
+        bookingColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
         populateScreeningsTable();
         populateMovieSelectBox();
 
-        //render background image
 
+        //render background image
 //        BufferedImage bufferedBackground = null;
 //        try {
 //            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
@@ -145,9 +148,10 @@ public class EmployeeHomeController implements Initializable {
         String date = screeningDate+" "+screeningTime;
         Film film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
+        String movieTitle = film.getTitle();
 
         //adds the newly created screening to the database
-        ScreeningDAO.insertScreening(movieID, date);
+        ScreeningDAO.insertScreening(movieID, date, movieTitle);
 
         //adds the newly created screening to the TableView
 

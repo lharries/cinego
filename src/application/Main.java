@@ -44,7 +44,7 @@ public class Main extends Application {
 
 			//launches the loginCust view upon running program
 
-			root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/views/EmployeeHome.fxml"));
 			root.setCache(true);
 			root.setCacheHint(CacheHint.SPEED);
 			Scene scene = new Scene(root);

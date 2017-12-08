@@ -17,18 +17,19 @@ public class Screening {
             System.out.println(screening.getShortDate());
     }
 
-
     private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
     private static DateFormat shortFormat = new SimpleDateFormat("EEE HH:mm", Locale.ENGLISH);
 
     private IntegerProperty id;
     private IntegerProperty filmId;
     private StringProperty date;
+    private StringProperty filmTitle;
 
     public Screening() {
         this.id = new SimpleIntegerProperty();
         this.filmId = new SimpleIntegerProperty();
         this.date = new SimpleStringProperty();
+        this.filmTitle = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -67,10 +68,24 @@ public class Screening {
         this.date.set(date);
     }
 
+    public String getFilmTitle() {
+        return filmTitle.get();
+    }
+
+    public StringProperty filmTitleProperty() {
+        return filmTitle;
+    }
+
+    public void setFilmTitle(String filmTitle) {
+        this.filmTitle.set(filmTitle);
+    }
+
     public String getShortDate() throws ParseException {
         Date date = longFormat.parse(getDate());
         return shortFormat.format(date);
     }
+
+
 
 
 }

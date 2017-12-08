@@ -15,7 +15,7 @@ public class ScreeningDAO {
 
             String dateString = new Date().toString();
 
-            insertScreening(1, dateString);
+            insertScreening(1, dateString, "hardCodedTitle");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -27,6 +27,10 @@ public class ScreeningDAO {
             screening.setId(resultSet.getInt("id"));
             screening.setFilmId(resultSet.getInt("filmId"));
             screening.setDate(resultSet.getString("date"));
+
+            //added
+//            screening.setFilmTitle(resultSet.getString("filmTitle"));
+
             return screening;
         } else {
             return null;
@@ -47,6 +51,8 @@ public class ScreeningDAO {
             screening.setId(resultSet.getInt("id"));
             screening.setFilmId(resultSet.getInt("filmId"));
             screening.setDate(resultSet.getString("date"));
+            //added
+            screening.setFilmTitle(resultSet.getString("filmTitle"));
             screeningList.add(screening);
         }
 
@@ -58,22 +64,34 @@ public class ScreeningDAO {
                 "SELECT * FROM Screening\n" +
                         "WHERE filmId = ?", new PreparedStatementArg[]{
                         new PreparedStatementArg(filmId)
+
+
+//                "SELECT * FROM Screening\n" +
+//                        "WHERE filmId = ?", new PreparedStatementArg[]{
+//                        new PreparedStatementArg(filmId)
+
+
+//                        SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+//                        FROM Orders
+//                        INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
+
                 });
 
         return getScreeningList(resultSetScreenings);
     }
 
-    public static void insertScreening(int filmId, String date) throws SQLException, ClassNotFoundException {
+    public static void insertScreening(int filmId, String date, String filmTitle) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
                 new PreparedStatementArg(filmId),
-                new PreparedStatementArg(date)
+                new PreparedStatementArg(date),
+                new PreparedStatementArg(filmTitle)
         };
 
         SQLiteConnection.execute(
                 "INSERT INTO Screening\n" +
-                        "(filmId, date)\n" +
+                        "(filmId, date, filmTitle)\n" +
                         "VALUES\n" +
-                        "(?, ?);",
+                        "(?, ?, ?);",
                 preparedStatementArgs
         );
     }

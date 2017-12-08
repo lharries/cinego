@@ -151,33 +151,10 @@ public class EmployeeHomeController implements Initializable {
 //        source: http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
         FileChooser fileChooser = new FileChooser();
 
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-
-//        DirectoryChooser extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-//        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-//        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-
-
-
-        //Show open file dialog
-//        File file = fileChooser.showOpenDialog(null);
-
-
-//        try {
-//            BufferedImage bufferedImage = ImageIO.read(file);
-//            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-//            moviePoster.setImage(image);
-//        } catch (IOException ex) {
-//            Logger.getLogger(EmployeeHomeController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
-//        Window window = new Window();
-
 
         BufferedImage image = null;
         File chosenFile = null;
@@ -185,29 +162,30 @@ public class EmployeeHomeController implements Initializable {
         String filename = "kaiTest.jpg";
         String path = null;
 
-
         //TODO: myFileChooser.getSelectedFile().getAbsolutePath()
+
+        //TODO: add exception Handler if employee presses cancel and doesn't select an image -> THROWS error
 
         //read image file
         try{
             chosenFile = fileChooser.showOpenDialog(null);
             path = chosenFile.getAbsolutePath();
+
+
             file = new File(path);
 //            path = directoryChooser.showDialog(Main.primaryStage).toString();
-
             image = ImageIO.read(file);
+
         }catch(IOException e){
             System.out.println("Error: "+e);
         }
-
         //write image
         try{
-            file = new File("/Users/kai/code/cinego/src/resources" + filename);
+            file = new File("src/resources/" + filename);
             ImageIO.write(image, "jpg", file);
         }catch(IOException e){
             System.out.println("Error: "+e);
         }
-
 
             //source: https://bytes.com/topic/java/answers/828841-how-copy-image-file
 //        FileInputStream fis=new FileInputStream(new File("D:/image.bmp"));

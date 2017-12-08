@@ -12,6 +12,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,14 +29,10 @@ import models.EmployeeDAO;
 public class LoginController {
 
     //TODO: FEATURE add password reset functionality via e-Mail sent to user e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
-    //TODO: ensure buttons react to key tabs as well, not only clickable!
 
     //public LoginModel loginModel = new LoginModel();
     public static Stage primaryStage = new Stage();
 
-
-    @FXML
-    private Button custLoginBttn;
 
     @FXML
     private TextField txtUsername;
@@ -54,12 +51,6 @@ public class LoginController {
      */
     @FXML
     public void loginCust(Event event) {
-
-//        custLoginBttn.defaultButtonProperty().bind(custLoginBttn.focusedProperty());
-
-
-//        custLoginBttn.addEventHandler(KeyEvent.KEY_PRESSED,  new EventHandler<KeyEvent>() {
-//            public void handle(KeyEvent event) {
 
         String username = txtUsername.getText();
         String password = txtPassword.getText();
@@ -107,7 +98,7 @@ public class LoginController {
      * @param event
      */
     @FXML
-    public void loginEmpl(javafx.event.ActionEvent event) {
+    public void loginEmpl(Event event) {
 
         //get user login input
         String username = txtUsername.getText();
@@ -162,8 +153,14 @@ public class LoginController {
     private static BorderPane loadCustBorderPane() throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
+
         // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
         BorderPane customerRoot = (BorderPane) loader.load(LoginController.class.getResourceAsStream(Navigation.CUST_ROOT));
+
+        //testing rendering speed
+//        customerRoot.setCache(true);
+//        customerRoot.setCacheHint(CacheHint.SPEED);
+
         CustomerRootController custRootContr = loader.getController();
 
         // sets controller for the user root layout

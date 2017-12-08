@@ -95,14 +95,15 @@ public class EmployeeHomeController implements Initializable {
         populateMovieSelectBox();
 
         //render background image
-        BufferedImage bufferedBackground = null;
-        try {
-            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.backgroundImg.setImage(background);
+
+//        BufferedImage bufferedBackground = null;
+//        try {
+//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        this.backgroundImg.setImage(background);
     }
 
 

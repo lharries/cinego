@@ -45,7 +45,6 @@ public class Film {
 
     //TODO: missing Trailer link?
 
-
     public Integer getId() {
         return this.id.get();
     }

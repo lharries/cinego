@@ -18,8 +18,7 @@ import models.ScreeningDAO;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -158,11 +157,37 @@ public class EmployeeHomeController implements Initializable {
         populateScreeningsTable();
     }
 
+    /**
+     * Purpose: exports list of screening data to directory: "../cinego/ScreeningsExport.csv"
+     *
+     * @throws IOException
+     */
     @FXML
-    private void exportToCSV(){
-        //TODO: add exporting to CSV functionality (Button triggers downloading all current movies including titles, seats booked etc.)
-    }
+    private void exportToCSV() throws IOException {
 
+        //source: https://community.oracle.com/thread/2397100
+        //TODO: add following data to csv export: movie title, dates, times and number of booked and available seats.
+
+            Writer writer = null;
+            try {
+                File file = new File("../cinego/ScreeningsExport.csv");
+                writer = new BufferedWriter(new FileWriter(file));
+                for (Screening Screening: screeningsData) {
+
+                    String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
+
+                    writer.write(text);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            finally {
+                writer.flush();
+                writer.close();
+            }
+        }
+
+    
     @FXML
     private void openSeatsBooked(ActionEvent event) {
         //TODO: open a movie's specific "seats booked overview" +

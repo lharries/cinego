@@ -53,6 +53,16 @@ public class ScreeningDAO {
         return screeningList;
     }
 
+    public static ObservableList<Screening> getScreeningObservableListByFilmId(int filmId) throws SQLException, ClassNotFoundException {
+        ResultSet resultSetScreenings = SQLiteConnection.executeQuery(
+                "SELECT * FROM Screening\n" +
+                        "WHERE filmId = ?", new PreparedStatementArg[]{
+                        new PreparedStatementArg(filmId)
+                });
+
+        return getScreeningList(resultSetScreenings);
+    }
+
     public static void insertScreening(int filmId, String date) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
                 new PreparedStatementArg(filmId),

@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import models.Customer;
 import models.CustomerDAO;
 import models.Employee;
 import models.User;
@@ -20,9 +19,10 @@ public class Main extends Application {
 //		Font.loadFont(Main.class.getResource("/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf").toExternalForm(), 10);
 //	}
 
-	public static Parent root;
 
 	public static User user;
+
+	private static Parent root;
 
 	public static Employee employee;
 
@@ -42,8 +42,10 @@ public class Main extends Application {
 		try {	
 
 			//launches the loginCust view upon running program
-			root = FXMLLoader.load(getClass().getResource("/views/EmployeeHome.fxml"));
-			scene = new Scene(root);
+
+			root = FXMLLoader.load(getClass().getResource("/views/CustomerBookingView.fxml"));
+			Scene scene = new Scene(root);
+
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			primaryStage.setScene(scene);
@@ -55,6 +57,13 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+
+		try {
+			user = CustomerDAO.login("customer", "customerpassword");
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
 		launch(args);
 	}
 }

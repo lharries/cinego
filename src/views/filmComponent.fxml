@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<Group xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="491.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="220.0" stroke="BLACK" strokeType="INSIDE" width="491.0" />
+            <Label layoutX="26.0" layoutY="28.0" text="Film Name">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="93.0" text="Description" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="152.0" layoutX="308.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
+            <Label layoutX="26.0" layoutY="155.0" text="Times" />
+            <Label layoutX="102.0" layoutY="155.0" text="Wed 5:30pm" />
+         </children>
+      </Pane>
+   </children>
+</Group>

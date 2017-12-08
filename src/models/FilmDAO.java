@@ -14,8 +14,8 @@ public class FilmDAO {
     public static void main(String[] args) {
 
         try {
-            insertFilm("Test","description -13;24;/' ","image path");
-            System.out.println( getFilmObservableList());
+            insertFilm("Test", "description -13;24;/' ", "image path");
+            System.out.println(getFilmObservableList());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -51,6 +51,7 @@ public class FilmDAO {
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
             film.setImagePath(resultSet.getString("imagePath"));
+            film.setScreenings(ScreeningDAO.getScreeningObservableListByFilmId(film.getId()));
             filmList.add(film);
         }
 
@@ -59,9 +60,9 @@ public class FilmDAO {
 
     public static void insertFilm(String title, String description, String imagePath) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg( title),
-                new PreparedStatementArg( description),
-                new PreparedStatementArg( imagePath)
+                new PreparedStatementArg(title),
+                new PreparedStatementArg(description),
+                new PreparedStatementArg(imagePath)
         };
 
         SQLiteConnection.execute(
@@ -70,7 +71,7 @@ public class FilmDAO {
                         "VALUES\n" +
                         "(?, ?, ?);",
                 preparedStatementArgs
-              );
+        );
     }
 
     public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {

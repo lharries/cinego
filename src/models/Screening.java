@@ -14,7 +14,7 @@ public class Screening {
     public static void main(String[] args) throws ParseException {
         Screening screening = new Screening();
         screening.setDate(new Date().toString());
-            System.out.println(screening.getShortDate());
+        System.out.println(screening.getShortDate());
     }
 
     private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
@@ -84,8 +84,6 @@ public class Screening {
         Date date = longFormat.parse(getDate());
         return shortFormat.format(date);
     }
-
-
 
 
 }

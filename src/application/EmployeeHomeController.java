@@ -3,6 +3,7 @@ package application;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
@@ -22,7 +24,8 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EmployeeHomeController implements Initializable {
 
@@ -36,7 +39,7 @@ public class EmployeeHomeController implements Initializable {
     private Button CreateMovieButton;
 
     @FXML
-    private ImageView backgroundImg;
+    private ImageView backgroundImg, moviePoster;
 
     @FXML
     private AnchorPane AnchorPane;
@@ -79,7 +82,6 @@ public class EmployeeHomeController implements Initializable {
      * @param location
      * @param resources
      */
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -92,7 +94,7 @@ public class EmployeeHomeController implements Initializable {
         //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
-//        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
+        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
         bookingColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
         populateScreeningsTable();
         populateMovieSelectBox();
@@ -117,12 +119,16 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createMovie() throws SQLException, ClassNotFoundException {
 
+        //TODO: add image uploader to Movie Creation process and pass on it's url to rest of program
+
         //TODO: add input validation (e.g. ID must be an int otherwise it can't be converter to Integer
 
         //store input in local variables to used for TableView and database input
         String title = addTitle.getText();
         String imagePath = addImagePath.getText();
         String description = addDescription.getText();
+
+
 
         //adds the newly created movie to the database
         FilmDAO.insertFilm(title, imagePath, description);
@@ -135,10 +141,35 @@ public class EmployeeHomeController implements Initializable {
         populateMovieSelectBox();
     }
 
+
+
+    @FXML
+    private void uploadMovieImage(Event event){
+
+                FileChooser fileChooser = new FileChooser();
+
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+                FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+                fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+
+                //Show open file dialog
+                File file = fileChooser.showOpenDialog(null);
+
+                try {
+                    BufferedImage bufferedImage = ImageIO.read(file);
+                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    moviePoster.setImage(image);
+                } catch (IOException ex) {
+                    Logger.getLogger(EmployeeHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
-        //TODO: screenings are added to table on screen -> updating live!
         //TODO: new screening in screeningTable should include a button linking to screenings specific employeeBookingView ask @LUKE
         //TODO: input validation - only when all three fields used + correct input then activate button
 
@@ -153,7 +184,6 @@ public class EmployeeHomeController implements Initializable {
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
 
-        //adds the newly created screening to the TableView
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -191,7 +221,6 @@ public class EmployeeHomeController implements Initializable {
             writer.flush();
             writer.close();
         }
-
     }
 
 
@@ -202,6 +231,15 @@ public class EmployeeHomeController implements Initializable {
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openBookingView(event);
     }
+
+
+
+    @FXML
+    private void deleteScreening(){
+        //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
+    }
+
+
 
     /**
      * Purpose: updates the moviesTable with movie specific data from the database

@@ -26,6 +26,13 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
+
+      <!--TESTING IMAGE UPLOAD-->
+      <ImageView fx:id="moviePoster" fitHeight="100.0" fitWidth="100.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+            <!--<Image url="@../resources/cinWallpaper.png" backgroundLoading="false" />-->
+      </ImageView>
+
+
       <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="100.0" prefHeight="467.0" prefWidth="526.0">
          <columns>
             <TableColumn fx:id="titleColScreenTab" prefWidth="136.5" text="Title" />
@@ -49,6 +56,7 @@
 
       <HBox fx:id="hBox" layoutX="50.0" layoutY="600.0" prefHeight="32.0" prefWidth="510.0" spacing="15.0">
          <TextField fx:id="addTitle" layoutX="1054.0" layoutY="503.0" prefHeight="26.0" prefWidth="130.0" promptText="title" />
+         <Button fx:id="moviePosterBttn" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#uploadMovieImage" text="view seat booking" />
          <TextField fx:id="addImagePath" layoutX="1054.0" layoutY="503.0" onAction="#createMovie" prefWidth="130.0" promptText="image URL" />
          <TextField fx:id="addDescription" layoutX="50.0" layoutY="500.0" onAction="#createMovie" prefHeight="26.0" prefWidth="130.0" promptText="description" />
          <Button fx:id="CreateMovieButton" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#createMovie" prefHeight="32.0" prefWidth="132.0" text="Add movie" />

@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,12 +27,13 @@ import models.EmployeeDAO;
 
 public class LoginController {
 
-    //TODO: FEATURE add password reset functionality via e-Mail sent to user  e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
+    //TODO: FEATURE add password reset functionality via e-Mail sent to user e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
     //TODO: ensure buttons react to key tabs as well, not only clickable!
 
     //public LoginModel loginModel = new LoginModel();
     public static Stage primaryStage = new Stage();
-    
+
+
     @FXML
     private Button custLoginBttn;
 
@@ -40,6 +42,7 @@ public class LoginController {
 
     @FXML
     private TextField txtPassword;
+
     @FXML
     private Label loginUnsuccessful;
 
@@ -50,44 +53,47 @@ public class LoginController {
      * login screen.
      */
     @FXML
-    public void loginCust(ActionEvent event) {
+    public void loginCust(Event event) {
+
+//        custLoginBttn.defaultButtonProperty().bind(custLoginBttn.focusedProperty());
+
 
 //        custLoginBttn.addEventHandler(KeyEvent.KEY_PRESSED,  new EventHandler<KeyEvent>() {
 //            public void handle(KeyEvent event) {
 
-                String username = txtUsername.getText();
-                String password = txtPassword.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        try {
+            Customer cust = CustomerDAO.login(username, password);
+
+            if (cust != null) {
+                Main.user = cust;
+                // TODO : Switch to the correct view
+                ((Node) event.getSource()).getScene().getWindow().hide();
                 try {
-                    Customer cust = CustomerDAO.login(username, password);
+                    primaryStage.setScene(createScene(loadCustBorderPane()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                primaryStage.setResizable(false);
+                primaryStage.show();
+            } else{
 
-                    if (cust != null) {
-                        Main.user = cust;
-                        // TODO : Switch to the correct view
-                        ((Node) event.getSource()).getScene().getWindow().hide();
-                        try {
-                            primaryStage.setScene(createScene(loadCustBorderPane()));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        primaryStage.setResizable(false);
-                        primaryStage.show();
-                    } else{
-
-                        loginUnsuccessful.setText("Invalid login - please try again");
-                        txtUsername.requestFocus();
-                        //TODO - add timer to set Label back to blank after 3 seconds
+                loginUnsuccessful.setText("Invalid login - please try again");
+                txtUsername.requestFocus();
+                //TODO - add timer to set Label back to blank after 3 seconds
 //                        Timer t = new Timer();
 //                        t.schedule(new TimerTask() {
 //                            @Override public void run() {
 //                                loginUnsuccessful.setText(" ");
 //                            }
 //                        }, 0L, 5000L);
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
 //            };
 //        });

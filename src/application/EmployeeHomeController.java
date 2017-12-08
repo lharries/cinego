@@ -12,7 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
@@ -149,10 +151,18 @@ public class EmployeeHomeController implements Initializable {
 //        source: http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
         FileChooser fileChooser = new FileChooser();
 
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+
+//        DirectoryChooser extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+//        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+//        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+
+
 
         //Show open file dialog
 //        File file = fileChooser.showOpenDialog(null);
@@ -166,15 +176,25 @@ public class EmployeeHomeController implements Initializable {
 //            Logger.getLogger(EmployeeHomeController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
+//        Window window = new Window();
+
 
         BufferedImage image = null;
+        File chosenFile = null;
         File file = null;
         String filename = "kaiTest.jpg";
+        String path = null;
+
+
+        //TODO: myFileChooser.getSelectedFile().getAbsolutePath()
 
         //read image file
         try{
-            file = new File("/Users/kai/Desktop/IMG_0002.JPG");
-//            file = fileChooser.showOpenDialog(null);
+            chosenFile = fileChooser.showOpenDialog(null);
+            path = chosenFile.getAbsolutePath();
+            file = new File(path);
+//            path = directoryChooser.showDialog(Main.primaryStage).toString();
+
             image = ImageIO.read(file);
         }catch(IOException e){
             System.out.println("Error: "+e);

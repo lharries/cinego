@@ -30,7 +30,7 @@ public class Main extends Application {
 	public static Scene scene;
 
 	//Dead code?
-	private static Stage loginStage, primaryStage;
+	protected static Stage loginStage, primaryStage;
 
 
 	/**
@@ -42,6 +42,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {	
 
+			Main.primaryStage = primaryStage;
 			//launches the loginCust view upon running program
 
 			root = FXMLLoader.load(getClass().getResource("/views/EmployeeHome.fxml"));

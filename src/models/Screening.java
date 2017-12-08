@@ -17,6 +17,7 @@ public class Screening {
             System.out.println(screening.getShortDate());
     }
 
+
     private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
     private static DateFormat shortFormat = new SimpleDateFormat("EEE HH:mm", Locale.ENGLISH);
 

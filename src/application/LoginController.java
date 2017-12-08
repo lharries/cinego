@@ -24,17 +24,14 @@ import models.Employee;
 import models.EmployeeDAO;
 
 
-public class LoginController implements Initializable {
+public class LoginController {
 
     //TODO: FEATURE add password reset functionality via e-Mail sent to user  e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
     //TODO: ensure buttons react to key tabs as well, not only clickable!
 
     //public LoginModel loginModel = new LoginModel();
     public static Stage primaryStage = new Stage();
-
-    @FXML
-    private Label isConnected;
-
+    
     @FXML
     private Button custLoginBttn;
 
@@ -46,23 +43,12 @@ public class LoginController implements Initializable {
     @FXML
     private Label loginUnsuccessful;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-//        if (loginModel.isDbConnected()) {
-//            isConnected.setText("Connected");
-//        } else {
-//            isConnected.setText("Not Connected");
-//        }
-    }
 
     /**
      * Purpose: opens a new stage with the user views loaded into the center of the overarching
      * customerRoot view when a system user logs in as a user. Additionally this method hides the
      * login screen.
-     *
-
      */
-
     @FXML
     public void loginCust(ActionEvent event) {
 

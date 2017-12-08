@@ -168,26 +168,28 @@ public class EmployeeHomeController implements Initializable {
         //source: https://community.oracle.com/thread/2397100
         //TODO: add following data to csv export: movie title, dates, times and number of booked and available seats.
 
-            Writer writer = null;
-            try {
-                File file = new File("../cinego/ScreeningsExport.csv");
-                writer = new BufferedWriter(new FileWriter(file));
-                for (Screening Screening: screeningsData) {
 
-                    String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
 
-                    writer.write(text);
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+        //writes data into .csv file
+        Writer writer = null;
+        try {
+            File file = new File("../cinego/ScreeningsExport.csv");
+            writer = new BufferedWriter(new FileWriter(file));
+            for (Screening Screening: screeningsData) {
+                String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
+                writer.write(text);
             }
-            finally {
-                writer.flush();
-                writer.close();
-            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            writer.flush();
+            writer.close();
         }
 
-    
+    }
+
+
     @FXML
     private void openSeatsBooked(ActionEvent event) {
         //TODO: open a movie's specific "seats booked overview" +

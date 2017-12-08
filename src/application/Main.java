@@ -2,6 +2,7 @@ package application;
 	
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
@@ -43,7 +44,9 @@ public class Main extends Application {
 
 			//launches the loginCust view upon running program
 
-			root = FXMLLoader.load(getClass().getResource("/views/EmployeeHome.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
+			root.setCache(true);
+			root.setCacheHint(CacheHint.SPEED);
 			Scene scene = new Scene(root);
 
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -57,6 +60,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+
+//		AquaFX.style();
 
 		try {
 			user = CustomerDAO.login("customer", "customerpassword");

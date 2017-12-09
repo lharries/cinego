@@ -2,7 +2,6 @@ package application;
 
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,10 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 import models.Film;
 import models.FilmDAO;
@@ -72,7 +69,8 @@ public class EmployeeHomeController implements Initializable {
     private TableColumn titleCol,urlCol,descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab, bookingColScreenTab;
 
     @FXML
-    private TextField addTitle, addImagePath, addDescription;
+    private TextField addTitle, addDescription;
+    private String path;
 
     @FXML
     private ComboBox movieSelectionBox, timePicker;
@@ -130,17 +128,15 @@ public class EmployeeHomeController implements Initializable {
 
         //store input in local variables to used for TableView and database input
         String title = addTitle.getText();
-        String imagePath = addImagePath.getText();
         String description = addDescription.getText();
 
 
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title, imagePath, description);
+        FilmDAO.insertFilm(title, path, description);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         addTitle.clear();
-        addImagePath.clear();
         addDescription.clear();
         populateMoviesTable();
         populateMovieSelectBox();
@@ -191,8 +187,8 @@ public class EmployeeHomeController implements Initializable {
 
                 JOptionPane.showMessageDialog(null, "PLEASE SELECT 1 FILE!", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
-                path = chosenFile.getAbsolutePath();
-                file = new File(path);
+                this.path = chosenFile.getAbsolutePath();
+                file = new File(this.path);
                 image = ImageIO.read(file);
 
                 //write image to relative project path

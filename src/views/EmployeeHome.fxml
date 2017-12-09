@@ -10,17 +10,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.image.Image?>
 <AnchorPane fx:id="AnchorPane" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeHomeController">
    <children>
       <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
          <image>
-         <Image url="@../resources/cinBackground.png" backgroundLoading="true" />
+         <Image backgroundLoading="true" url="@../resources/cinBackground.png" />
          </image>
          <effect>
             <ColorAdjust saturation="-0.88" />
@@ -43,8 +43,8 @@
       <TableView fx:id="moviesTable" layoutX="50.0" layoutY="100.0" prefHeight="486.0" prefWidth="535.0">
          <columns>
             <TableColumn fx:id="titleCol" prefWidth="98.39752197265625" text="Title" />
-            <TableColumn fx:id="urlCol" prefWidth="168.60247802734375" text="Image URL" />
-            <TableColumn fx:id="descriptCol" prefWidth="266.5" text="Description" />
+            <TableColumn fx:id="urlCol" prefWidth="215.0" text="Image URL" />
+            <TableColumn fx:id="descriptCol" prefWidth="220.5" text="Description" />
          </columns></TableView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="55.0" prefHeight="18.0" prefWidth="160.0" text="Movies" textAlignment="CENTER">
          <font>
@@ -54,12 +54,11 @@
       <Button fx:id="exportCSVHandler" layoutX="1103.0" layoutY="662.0" mnemonicParsing="false" onAction="#exportToCSV" prefHeight="32.0" prefWidth="115.0" text="export" />
       <Button fx:id="toSeatBooking" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#openSeatsBooked" text="view seat booking" />
 
-      <HBox fx:id="hBox" layoutX="50.0" layoutY="600.0" prefHeight="32.0" prefWidth="510.0" spacing="15.0">
+      <HBox fx:id="hBox" layoutX="50.0" layoutY="600.0" prefHeight="32.0" prefWidth="535.0" spacing="15.0">
          <TextField fx:id="addTitle" layoutX="1054.0" layoutY="503.0" prefHeight="26.0" prefWidth="130.0" promptText="title" />
-         <Button fx:id="moviePosterBttn" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#uploadMovieImage" onKeyPressed="#uploadMovieImage" text="Poster upload" />
-         <TextField fx:id="addImagePath" layoutX="1054.0" layoutY="503.0" onAction="#createMovie" prefWidth="130.0" promptText="image URL" />
-         <TextField fx:id="addDescription" layoutX="50.0" layoutY="500.0" onAction="#createMovie" prefHeight="26.0" prefWidth="130.0" promptText="description" />
-         <Button fx:id="CreateMovieButton" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#createMovie" prefHeight="32.0" prefWidth="132.0" text="Add movie" />
+         <Button fx:id="moviePosterBttn" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#uploadMovieImage" onKeyPressed="#uploadMovieImage" prefHeight="32.0" prefWidth="114.0" text="Poster upload" />
+         <TextField fx:id="addDescription" layoutX="50.0" layoutY="500.0" onAction="#createMovie" prefHeight="63.0" prefWidth="161.0" promptText="description" />
+         <Button fx:id="CreateMovieButton" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#createMovie" prefHeight="32.0" prefWidth="87.0" text="Add movie" />
       </HBox>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="954.0" layoutY="55.0" prefHeight="18.0" prefWidth="160.0" text="Screenings" textAlignment="CENTER">
          <font>

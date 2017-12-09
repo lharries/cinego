@@ -62,7 +62,11 @@ public class Screening {
     }
 
     public Date getDateObject() throws ParseException {
-        return longFormat.parse(getDate());
+        if (getDate() != null) {
+            return longFormat.parse(getDate());
+        } else {
+            return null;
+        }
     }
 
     public StringProperty dateProperty() {

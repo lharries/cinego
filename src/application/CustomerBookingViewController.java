@@ -73,7 +73,7 @@ public class CustomerBookingViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-            movieTitle.setText(selectedScreening.getFilmTitle());
+        movieTitle.setText(selectedScreening.getFilmTitle());
         try {
             screeningDate.setText(selectedScreening.getMediumDate());
         } catch (ParseException e) {
@@ -126,6 +126,7 @@ public class CustomerBookingViewController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne) {
             System.out.println("Clicked confirm");
+            createBooking();
             alert.close();
         }
 
@@ -181,6 +182,22 @@ public class CustomerBookingViewController implements Initializable {
     private void displaySelectedSeats() {
         ObservableList<Seat> seatObservableList = FXCollections.observableList(selectedSeats);
         seatListView.setItems(seatObservableList);
+    }
+
+    public void createBooking() {
+        for (Seat selectedSeat :
+                selectedSeats) {
+
+            try {
+                BookingDAO.insertBooking(Main.user.getId(), true, selectedSeat.getId(), selectedScreening.getId());
+                System.out.println("Booked!");
+            } catch (SQLException | ClassNotFoundException e) {
+
+                // TODO: Handle this better;
+                System.out.println("Booking failed");
+                e.printStackTrace();
+            }
+        }
     }
 
 

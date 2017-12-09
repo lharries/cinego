@@ -3,8 +3,13 @@ package models;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Source:
@@ -136,6 +141,23 @@ public class Film {
         return screeningsDescription.toString();
 
 
+    }
+
+    public boolean hasScreeningOnDate(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+        for (Screening screening :
+                getScreenings()) {
+            try {
+                if (Objects.equals(dateFormat.format(screening.getDateObject()), dateFormat.format(date))) {
+                    return true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
     }
 
     @Override

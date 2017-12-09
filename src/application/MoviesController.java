@@ -272,7 +272,7 @@ public class MoviesController implements Initializable {
                 screeningButton.setOnAction((event) -> {
                     try {
                         // TODO Set this up properly! KAI We need to move the movies controller into the proper place
-                        Navigation.loadCustFxml(Navigation.EMPL_HOME_VIEW);
+                        Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
                     } catch (IOException e) {
                         // TODO: Add loggin LOGGER.logp(Level.WARNING, "CustomerRootController", "openBookingView", "Failed to load CustomerBooking View. See: " + e);
                         System.err.println(e);

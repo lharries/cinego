@@ -39,7 +39,7 @@ public class EmployeeHomeController implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
 
     @FXML
-    private Button CreateMovieButton;
+    private Button toSeatBooking;
 
     @FXML
     private ImageView backgroundImg, moviePoster;
@@ -179,8 +179,6 @@ public class EmployeeHomeController implements Initializable {
             delay.setOnFinished(e -> popup.hide());
             popup.show();
             delay.play();
-//            alert.showAndWait();
-
         } else {
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, "+ Main.user.getFirstName());
@@ -188,7 +186,6 @@ public class EmployeeHomeController implements Initializable {
             delay.setOnFinished(e -> popup.hide());
             popup.show();
             delay.play();
-//            alert.showAndWait();
 
             createMovie();
         }
@@ -242,8 +239,6 @@ public class EmployeeHomeController implements Initializable {
             delay.setOnFinished(e -> popup.hide());
             popup.show();
             delay.play();
-//            alert.showAndWait();
-
         } else {
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, "+ Main.user.getFirstName());
@@ -251,16 +246,9 @@ public class EmployeeHomeController implements Initializable {
             delay.setOnFinished(e -> popup.hide());
             popup.show();
             delay.play();
-//            alert.showAndWait();
 
             createScreening();
         }
-    }
-
-    @FXML
-    private void getScreeningID(){
-        int id = screeningsTable.getSelectionModel().getSelectedItem().getId();
-        System.err.println(id);
     }
 
 
@@ -319,9 +307,22 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
+    /**
+     * Extracts the screeningsID upon selecting a screening from the screeningsTable
+     *
+     */
+    @FXML
+    private void getScreeningID(){
+        int id = screeningsTable.getSelectionModel().getSelectedItem().getId();
+        toSeatBooking.setDisable(false);
+
+    }
+
     @FXML
     private void openSeatsBooked(ActionEvent event) {
         //TODO: open a movie's specific "seats booked overview" +
+
+
 
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openBookingView(event);

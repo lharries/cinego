@@ -273,7 +273,6 @@ public class MoviesController implements Initializable {
                 screeningButton.setLayoutY(0);
                 screeningButton.setOnAction((event) -> {
                     try {
-                        // TODO Set this up properly! KAI We need to move the movies controller into the proper place
                         CustomerBookingViewController.selectedScreening = screening;
                         Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
                     } catch (IOException e) {

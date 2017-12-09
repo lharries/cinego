@@ -72,26 +72,19 @@ public class CustomerBookingViewController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        setupBackgroundImage();
-        System.out.println("Init");
-        System.out.println(selectedScreening);
-
-        // TODO: Remove, this is just temp for development
-        try {
-            selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
 
             movieTitle.setText(selectedScreening.getFilmTitle());
+        try {
             screeningDate.setText(selectedScreening.getMediumDate());
-            createSeatingPlan();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-//
+        System.out.println(selectedScreening);
+        System.out.println(selectedScreening.getDate());
+
+        createSeatingPlan();
+
 
     }
 

@@ -33,10 +33,10 @@ public class CustomerProfileController implements Initializable{
     private ImageView backgroundImg;
 
     @FXML
-    private TextField custFirNameField;
+    private TextField custFirstNameField;
 
     @FXML
-    private TextField custLaNameField;
+    private TextField custLastNameField;
 
     @FXML
     private TextField custEmailField;
@@ -66,11 +66,11 @@ public class CustomerProfileController implements Initializable{
             updateProfileBttn.setDisable(!textFieldEditable);
             editProfileBttn.setDisable(textFieldEditable);
 
-            custFirNameField.setText(Main.user.getFirstName());
-            custFirNameField.setEditable(textFieldEditable);
+            custFirstNameField.setText(Main.user.getFirstName());
+            custFirstNameField.setEditable(textFieldEditable);
 
-            custLaNameField.setText(Main.user.getLastName());
-            custLaNameField.setEditable(textFieldEditable);
+            custLastNameField.setText(Main.user.getLastName());
+            custLastNameField.setEditable(textFieldEditable);
 
             custEmailField.setText(Main.user.getEmail());
             custEmailField.setEditable(textFieldEditable);
@@ -81,11 +81,11 @@ public class CustomerProfileController implements Initializable{
             updateProfileBttn.setDisable(!textFieldEditable);
             editProfileBttn.setDisable(textFieldEditable);
 
-            custFirNameField.setPromptText(Main.user.getFirstName());
-            custFirNameField.setEditable(textFieldEditable);
+            custFirstNameField.setPromptText(Main.user.getFirstName());
+            custFirstNameField.setEditable(textFieldEditable);
 
-            custLaNameField.setPromptText(Main.user.getLastName());
-            custLaNameField.setEditable(textFieldEditable);
+            custLastNameField.setPromptText(Main.user.getLastName());
+            custLastNameField.setEditable(textFieldEditable);
 
             custEmailField.setPromptText(Main.user.getEmail());
             custEmailField.setEditable(textFieldEditable);
@@ -104,8 +104,8 @@ public class CustomerProfileController implements Initializable{
     private void updateCustomerProfile(){
 
         //Updates the user's information in the database
-        Main.user.setFirstName(custFirNameField.getText());
-        Main.user.setLastName(custLaNameField.getText());
+        Main.user.setFirstName(custFirstNameField.getText());
+        Main.user.setLastName(custLastNameField.getText());
         Main.user.setEmail(custEmailField.getText());
         try {
             CustomerDAO.updateCustomerDetails(Main.user.getFirstName(),Main.user.getLastName(),Main.user.getEmail(), Main.user.getId());

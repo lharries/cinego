@@ -20,8 +20,8 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
-      <TextField fx:id="custFirNameField" layoutX="119.0" layoutY="247.0" promptText="First name" />
-      <TextField fx:id="custLaNameField" layoutX="112.0" layoutY="341.0" promptText="Last name" />
+      <TextField fx:id="custFirstNameField" layoutX="119.0" layoutY="247.0" promptText="First name" />
+      <TextField fx:id="custLastNameField" layoutX="112.0" layoutY="341.0" promptText="Last name" />
       <TextField fx:id="custEmailField" layoutX="121.0" layoutY="436.0" promptText="you@gmail.com" />
       <TextField fx:id="custPhone" layoutX="129.0" layoutY="524.0" promptText="+44 78345 123646" />
       <Button fx:id="updateProfileBttn" layoutX="154.0" layoutY="577.0" mnemonicParsing="false" onAction="#updateCustomerProfile" text="update" />

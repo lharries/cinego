@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import models.Seat;
 import models.SeatDAO;
 
 import java.io.IOException;
@@ -32,16 +33,17 @@ public class EmployeeBookingViewController implements Initializable{
 
 
 
-
     //TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        //TODO: @Luke display selected seats in this view
         //initialize data
         try {
-            SeatDAO.getSeatsByScreening(EmployeeHomeController.screenID);
+            Seat seat = SeatDAO.getSeatsByScreening(EmployeeHomeController.screenID);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -55,7 +57,5 @@ public class EmployeeBookingViewController implements Initializable{
         EmployeeRootController controller = new EmployeeRootController();
         controller.openHomeView(event);
     }
-
-
 
 }

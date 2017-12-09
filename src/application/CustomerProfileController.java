@@ -6,12 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import models.Booking;
 import models.CustomerDAO;
+import models.Screening;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -44,7 +47,34 @@ public class CustomerProfileController implements Initializable{
     @FXML
     private TextField custPhone;
 
+    @FXML
+    private Button deleteBooking;
+
     boolean textFieldEditable = false;
+
+    @FXML
+    private TableView<Booking> bookingsTable;
+
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //initializes customer profile input fields and sets them to not editable
+        setCustProfileFieldsEnabled(textFieldEditable);
+
+        //render background image
+//        BufferedImage bufferedBackground = null;
+//        try {
+//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
+//            //background alternative
+////         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        this.backgroundImg.setImage(background);
+    }
 
 
     /**
@@ -115,15 +145,6 @@ public class CustomerProfileController implements Initializable{
             e.printStackTrace();
         }
 
-        //TODO: display the adjusted customer name in the root
-//        //alternative 1: static custNameLabels
-//        CustomerRootController.custLastNameLabel.setText(Main.user.getLastName());
-
-//        alternative 2: non-static custNameLabels need to be called via instance of and changed via setter method in CustomerRootController
-//        CustomerRootController controller = new CustomerRootController();
-//        controller.setCustNameLabels();
-
-
         //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -140,35 +161,36 @@ public class CustomerProfileController implements Initializable{
         setCustProfileFieldsEnabled(false);
     }
 
+    @FXML
+    private void getSelectedBooking(){
+
+
+        deleteBooking.setDisable(false);
+
+    }
+
+    @FXML
+    private void populateBookingsTable(){
+
+    }
+
 
 
     @FXML
     private void deleteMovieBooking(){
 
-        //TODO General: Delete button located in each movie booking that is still in the future
-        //TODO 1: Add delete button only for movies that are in the future
+
+
         //TODO 2: Add error popup for movies that are in the past (can't delete them!)
         //TODO 3: delete the actual booking with a JDialogBOx pop-up asking if you're sure to delete (https://www.youtube.com/watch?v=oZUGMpGQxgQ)
 
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-        //initializes customer profile input fields and sets them to not editable
-        setCustProfileFieldsEnabled(textFieldEditable);
 
-        //render background image
-        BufferedImage bufferedBackground = null;
-        try {
-            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-            //background alternative
-//         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.backgroundImg.setImage(background);
-    }
+
+    //TODO: //TODO: add ability to select movies from the list and delete them (see employeeHomeController: getScreeningID() )
+
+
 }

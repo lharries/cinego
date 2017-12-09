@@ -2,9 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -13,9 +15,9 @@
 <AnchorPane prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerProfileController">
    <children>
       <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
-         <!--<image>-->
-            <!--<Image url="@../resources/cinemaWallpaperTest.png" backgroundLoading="true" />-->
-         <!--</image>-->
+         <image>
+            <Image backgroundLoading="true" url="@../resources/cinWallpaper2.png" />
+         </image>
          <effect>
             <ColorAdjust saturation="-0.88" />
          </effect>
@@ -30,8 +32,13 @@
       <Label layoutX="119.0" layoutY="216.0" text="First name" />
       <Label layoutX="139.0" layoutY="405.0" text="E-Mail Address" />
       <Label layoutX="484.0" layoutY="101.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
-      <ListView layoutX="455.0" layoutY="139.0" prefHeight="488.0" prefWidth="711.0" />
-      <Button fx:id="deleteBookingClickHandler" layoutX="1074.0" layoutY="186.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
+      <TableView layoutX="455.0" layoutY="139.0" onMouseClicked="#getSelectedBooking" prefHeight="488.0" prefWidth="711.0">
+         <columns>
+            <TableColumn fx:id="titleColBookingTable" prefWidth="136.5" text="Title" />
+            <TableColumn fx:id="dateColBookingTable" prefWidth="105.5" text="Date" />
+            <TableColumn fx:id="timeColBookingTable" prefWidth="97.5" text="Time" />
+         </columns></TableView>
+      <Button fx:id="deleteBooking" disable="true" layoutX="1083.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
       <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setCustProfileEditable" text="Edit profile" />
 
       <!--<Glyph layoutX="483.0" layoutY="551.0" prefHeight="69.0" prefWidth="108.0" />-->

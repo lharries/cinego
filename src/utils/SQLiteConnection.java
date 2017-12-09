@@ -106,7 +106,6 @@ public class SQLiteConnection {
         }
 
         return cachedRowSet;
-
     }
 
     public static int executeUpdate(String query, PreparedStatementArg[] args) throws SQLException, ClassNotFoundException {

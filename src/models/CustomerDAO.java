@@ -15,7 +15,7 @@ public class CustomerDAO {
 
         // Example of how to use the login
         try {
-            Customer customer = login("customer", "customerpassword");
+            Customer customer = login("customer", "password");
             if (customer != null) {
                 System.out.println(customer.getFirstName());
                 System.out.println(customer.getLastName());
@@ -38,8 +38,8 @@ public class CustomerDAO {
             customer.setId(resultSet.getInt("id"));
             customer.setFirstName(resultSet.getString("firstName"));
             customer.setLastName(resultSet.getString("lastName"));
-            customer.setEmail(resultSet.getString("email"));
             customer.setUsername(resultSet.getString("username"));
+            customer.setEmail(resultSet.getString("email"));
             return customer;
         } else {
             return null;
@@ -62,6 +62,22 @@ public class CustomerDAO {
             return null;
         }
     }
+
+
+    //TODO: Kai's database update call
+    public static void updateCustomerDetails(String firstName, String lastName, String email, int id) throws SQLException, ClassNotFoundException {
+
+        String query = "UPDATE Customer SET firstName = ?, lastName = ? , email = ? WHERE id = ?";
+
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg( firstName),
+                new PreparedStatementArg( lastName),
+                new PreparedStatementArg( email),
+                new PreparedStatementArg( id)
+        };
+        SQLiteConnection.executeUpdate(query,preparedStatementArgs);
+    }
+
 
     private static ObservableList<Customer> getCustomerObservableList() throws SQLException, ClassNotFoundException {
         ResultSet resultSetCustomers = SQLiteConnection.executeQuery("SELECT * FROM Customer", null);

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -22,17 +23,28 @@ import java.util.logging.Logger;
 
 public class CustomerRootController implements Initializable {
 
-    //TODO: custFirstName, custLastName (Labels) need to be set according to customer's name (data from their profile)
-    //TODO: how can you set the values of the labels without triggering a specific method? So basically, to set the respective values upon login?
-    //TODO: add logout icon to root and make it 'clickable' (possibly by making button see through and laying it on top of image)
+
+    //TODO: make the logout button hoverable so the mouse changes / the colour changes so the user knows there is something clickable
+
+    //TODO: add a 'Goodbye, xx' message to login screen that disappears after some seconds
+
+
 
 
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
 
+
     @FXML
     private BorderPane customerPane;
 
+    @FXML
+    protected Label custLastNameLabel;
 
+//    @FXML
+//    protected static Label custLastNameLabel;
+
+    @FXML
+    protected Label custFirstNameLabel;
 
     @FXML
     private ImageView logo;
@@ -40,13 +52,23 @@ public class CustomerRootController implements Initializable {
     @FXML
     private ImageView logoutImg;
 
-    @FXML
-    private ImageView backgroundImg;
+
+//
+//    public void setCustNameLabels(){
+//        this.custFirstNameLabel.setText(Main.user.getFirstName());
+//        custLastNameLabel.setText(Main.user.getLastName());
+//    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        //set user's first + lastname onto root
+        custFirstNameLabel.setText(Main.user.getFirstName());
+        custLastNameLabel.setText(Main.user.getLastName());
+
+        //sets the logos for the roots
         BufferedImage bufferedLogo = null;
         BufferedImage bufferedLogout = null;
 //        BufferedImage bufferedBackground = null;
@@ -66,7 +88,7 @@ public class CustomerRootController implements Initializable {
     }
 
     /**
-     * Purpose: method to be called by different customer controllers to set their respective views to the
+     * Purpose: method to be called by different user controllers to set their respective views to the
      * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
@@ -77,7 +99,7 @@ public class CustomerRootController implements Initializable {
 
 
     /**
-     * Purpose: opens the customer's ProgramView (scene located within customerRoot) where they can see the list of
+     * Purpose: opens the user's ProgramView (scene located within customerRoot) where they can see the list of
      * available movies
      *
      * @param event
@@ -94,7 +116,7 @@ public class CustomerRootController implements Initializable {
     }
 
     /**
-     * Purpose: opens the customer's Profile (scene located within customerRoot) where they can see their movie history,
+     * Purpose: opens the user's Profile (scene located within customerRoot) where they can see their movie history,
      * booked movies and edit their own profile details
      * available movies
      *

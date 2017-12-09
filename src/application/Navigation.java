@@ -20,7 +20,7 @@ public class Navigation {
     public static final String CUST_ROOT = "/views/CustomerRoot.fxml";
     public static final String EMPL_ROOT = "/views/EmployeeRoot.fxml";
 
-    //customer scenes
+    //user scenes
     public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
     public static final String CUST_PROGRAM_VIEW = "/views/CustomerMovieProgram.fxml";
     public static final String CUST_BOOKING_VIEW = "/views/CustomerBookingView.fxml";
@@ -30,13 +30,13 @@ public class Navigation {
     public static final String EMPL_MOVIE_VIEW = "/views/EmployeeMovieForm.fxml";
     public static final String EMPL_BOOKING_VIEW = "/views/EmployeeBookingView.fxml";
 
-    //Main controller for each user's (customer & employee) specific rootViews
+    //Main controller for each user's (user & employee) specific rootViews
     private static CustomerRootController customerController;
     private static EmployeeRootController employeeController;
 
 
     /**
-     * Purpose: sets the customer controller
+     * Purpose: sets the user controller
      *
      * @param customerController
      */
@@ -45,7 +45,7 @@ public class Navigation {
     }
 
     /**
-     * Purpose: sets the customer controller
+     * Purpose: sets the user controller
      *
      * @param employeeController
      */
@@ -54,7 +54,7 @@ public class Navigation {
     }
 
     /**
-     * Purpose: load the customer fxml views into the customer's Borderpane
+     * Purpose: load the user fxml views into the user's Borderpane
      *
      * @param fxmlView
      * @throws IOException

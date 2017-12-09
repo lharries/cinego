@@ -23,7 +23,6 @@ public class EmployeeDAO {
                 System.out.println(employee.getUsername());
             } else {
                 System.out.println("Unable to login");
-
             }
         } catch (Exception e) {
             System.out.println("Printing the error");

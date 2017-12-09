@@ -7,6 +7,9 @@ import javafx.beans.property.StringProperty;
 
 public class User {
 
+    //TODO: missing phone number to be declared here and in all other classes where necessary. Will we use phone number?
+
+
     private IntegerProperty id;
     private StringProperty firstName;
     private StringProperty lastName;

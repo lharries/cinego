@@ -1,37 +1,150 @@
 package application;
 
+import javafx.animation.PauseTransition;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import models.CustomerDAO;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CustomerProfileController implements Initializable{
 
     @FXML
-    private Button editProfile;
+    private Button updateProfileBttn;
+
+    @FXML
+    private Button editProfileBttn;
 
     @FXML
     private ImageView backgroundImg;
 
+    @FXML
+    private TextField custFirstNameField;
 
     @FXML
-    private void editCustomerProfile() {
-        // TODO: Add ability to edit customer data. First click enable editing and change button lable to say "update".
-        // TODO: Next click: push customer data into data base via "update" sql command
+    private TextField custLastNameField;
+
+    @FXML
+    private TextField custEmailField;
+
+    @FXML
+    private TextField custPhone;
+
+    boolean textFieldEditable = false;
+
+
+    /**
+     * Purpose: is called by clicking the edit Profile button and then calls the setCustProfileFieldsEnabled
+     * method in order to set the fields to be editable and change the prompttext to normal text
+     *
+     */
+    @FXML
+    private void setCustProfileEditable() {
+
+        textFieldEditable = true;
+        setCustProfileFieldsEnabled(textFieldEditable);
     }
+
+    private void setCustProfileFieldsEnabled(boolean textFieldEditable){
+
+
+        if(textFieldEditable){
+            updateProfileBttn.setDisable(!textFieldEditable);
+            editProfileBttn.setDisable(textFieldEditable);
+
+            custFirstNameField.setText(Main.user.getFirstName());
+            custFirstNameField.setEditable(textFieldEditable);
+
+            custLastNameField.setText(Main.user.getLastName());
+            custLastNameField.setEditable(textFieldEditable);
+
+            custEmailField.setText(Main.user.getEmail());
+            custEmailField.setEditable(textFieldEditable);
+            //TODO: store customer's phone number in database
+//        custPhone.setText(Main.user.getPhone());
+            custPhone.setEditable(textFieldEditable);
+        } if(!textFieldEditable){
+            updateProfileBttn.setDisable(!textFieldEditable);
+            editProfileBttn.setDisable(textFieldEditable);
+
+            custFirstNameField.setPromptText(Main.user.getFirstName());
+            custFirstNameField.setEditable(textFieldEditable);
+
+            custLastNameField.setPromptText(Main.user.getLastName());
+            custLastNameField.setEditable(textFieldEditable);
+
+            custEmailField.setPromptText(Main.user.getEmail());
+            custEmailField.setEditable(textFieldEditable);
+            //TODO: store customer's phone number in database
+//        custPhone.setText(Main.user.getPhone());
+            custPhone.setEditable(textFieldEditable);
+        }
+    }
+
+    /**
+     * Purpose: called upon clicking the update profile button. Updates the database with the user's
+     * input data upon click event.
+     *
+     */
+    @FXML
+    private void updateCustomerProfile(){
+
+        //Updates the user's information in the database
+        Main.user.setFirstName(custFirstNameField.getText());
+        Main.user.setLastName(custLastNameField.getText());
+        Main.user.setEmail(custEmailField.getText());
+        try {
+            CustomerDAO.updateCustomerDetails(Main.user.getFirstName(),Main.user.getLastName(),Main.user.getEmail(), Main.user.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //TODO: display the adjusted customer name in the root
+//        //alternative 1: static custNameLabels
+//        CustomerRootController.custLastNameLabel.setText(Main.user.getLastName());
+
+//        alternative 2: non-static custNameLabels need to be called via instance of and changed via setter method in CustomerRootController
+//        CustomerRootController controller = new CustomerRootController();
+//        controller.setCustNameLabels();
+
+
+        //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+        alert.setTitle("Cinego");
+        alert.setHeaderText("Profile Update");
+        alert.setContentText("Your profile was successfully updated, "+ Main.user.getFirstName());
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
+
+        //sets editability of profile back to disabled
+        setCustProfileFieldsEnabled(false);
+    }
+
 
 
     @FXML
     private void deleteMovieBooking(){
+
         //TODO General: Delete button located in each movie booking that is still in the future
         //TODO 1: Add delete button only for movies that are in the future
         //TODO 2: Add error popup for movies that are in the past (can't delete them!)
@@ -42,6 +155,11 @@ public class CustomerProfileController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //initializes customer profile input fields and sets them to not editable
+        setCustProfileFieldsEnabled(textFieldEditable);
+
+        //render background image
         BufferedImage bufferedBackground = null;
         try {
             bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));

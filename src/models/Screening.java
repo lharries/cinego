@@ -2,19 +2,34 @@ package models;
 
 import javafx.beans.property.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class Screening {
+
+    public static void main(String[] args) throws ParseException {
+        Screening screening = new Screening();
+        screening.setDate(new Date().toString());
+        System.out.println(screening.getShortDate());
+    }
+
+    private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+    private static DateFormat shortFormat = new SimpleDateFormat("EEE HH:mm", Locale.ENGLISH);
 
     private IntegerProperty id;
     private IntegerProperty filmId;
     private StringProperty date;
+    private StringProperty filmTitle;
 
     public Screening() {
         this.id = new SimpleIntegerProperty();
         this.filmId = new SimpleIntegerProperty();
         this.date = new SimpleStringProperty();
+        this.filmTitle = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -52,5 +67,23 @@ public class Screening {
     public void setDate(String date) {
         this.date.set(date);
     }
+
+    public String getFilmTitle() {
+        return filmTitle.get();
+    }
+
+    public StringProperty filmTitleProperty() {
+        return filmTitle;
+    }
+
+    public void setFilmTitle(String filmTitle) {
+        this.filmTitle.set(filmTitle);
+    }
+
+    public String getShortDate() throws ParseException {
+        Date date = longFormat.parse(getDate());
+        return shortFormat.format(date);
+    }
+
 
 }

@@ -18,8 +18,17 @@
 
 <!--TODO: Remove the header and footer-->
 
+<?import javafx.scene.effect.ColorAdjust?>
 <AnchorPane prefHeight="750" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MoviesController">
    <children>
+       <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+           <image>
+               <Image backgroundLoading="true" url="@../resources/cinWallpaper2.png" />
+           </image>
+           <effect>
+               <ColorAdjust saturation="-0.88" />
+           </effect>
+       </ImageView>
       <Group layoutX="546.0" layoutY="742.0" />
       <Text fill="WHITE" layoutX="528.0" layoutY="787.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.02083206176758">
          <font>

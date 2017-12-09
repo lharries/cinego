@@ -32,8 +32,14 @@ import java.util.logging.Logger;
 
 public class EmployeeHomeController implements Initializable {
 
+    //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
+
+    
     //TODO: add loggers to the validation for us
+
+    //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT
     //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
+
 
 
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
@@ -80,6 +86,7 @@ public class EmployeeHomeController implements Initializable {
     //reused variables in validation and creation of movies and screenings
     private String title, path,relativePath, description, screeningTime, screeningDate, movieTitle;
     Film film;
+    public static int screenID;
 
 
 
@@ -313,7 +320,7 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void getScreeningID(){
-        int id = screeningsTable.getSelectionModel().getSelectedItem().getId();
+        screenID = screeningsTable.getSelectionModel().getSelectedItem().getId();
         toSeatBooking.setDisable(false);
 
     }
@@ -322,10 +329,10 @@ public class EmployeeHomeController implements Initializable {
     private void openSeatsBooked(ActionEvent event) {
         //TODO: open a movie's specific "seats booked overview" +
 
-
-
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openBookingView(event);
+
+        toSeatBooking.setDisable(true);
     }
 
 

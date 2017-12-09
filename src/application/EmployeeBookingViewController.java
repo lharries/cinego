@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EmployeeBookingViewController implements Initializable {
+public class EmployeeBookingViewController implements Initializable{
 
     @FXML
     private Label Time;
@@ -40,24 +40,25 @@ public class EmployeeBookingViewController implements Initializable {
 
 //TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //initialize data
+
+
+
+
+
+
+    }
+
     @FXML
     private void openHomeView(ActionEvent event) throws IOException {
         EmployeeRootController controller = new EmployeeRootController();
         controller.openHomeView(event);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        BufferedImage bufferedBackground = null;
-        try {
-            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-        //background alternative
-//         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.backgroundImg.setImage(background);
-    }
+
 
 }

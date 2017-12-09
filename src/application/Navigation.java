@@ -22,7 +22,7 @@ public class Navigation {
 
     //user scenes
     public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
-    public static final String CUST_PROGRAM_VIEW = "/views/CustomerMovieProgram.fxml";
+    public static final String CUST_PROGRAM_VIEW = "/views/Movies.fxml";
     public static final String CUST_BOOKING_VIEW = "/views/CustomerBookingView.fxml";
 
     //employee scenes

@@ -10,7 +10,6 @@ import java.sql.SQLException;
 public class SeatDAO {
 
     public static void main(String[] args) {
-//        try {
 
 //        create seats
 //        String[] rows = new String[]{"A", "B", "C", "D", "E"};
@@ -28,11 +27,6 @@ public class SeatDAO {
 //        }
 
 
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
     }
 
 

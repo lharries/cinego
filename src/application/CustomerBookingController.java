@@ -73,6 +73,15 @@ public class CustomerBookingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // TODO REmove this
+        try {
+            selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         movieTitle.setText(selectedScreening.getFilmTitle());
         try {
             screeningDate.setText(selectedScreening.getMediumDate());
@@ -133,6 +142,7 @@ public class CustomerBookingController implements Initializable {
     }
 
     private void createSeatingPlan() {
+        gridPaneSeats.getChildren().clear();
         String[] rows = new String[]{"A", "B", "C", "D", "E"};
         for (int i = 0; i < 5; i++) {
             for (int j = 1; j < 9; j++) {
@@ -156,6 +166,7 @@ public class CustomerBookingController implements Initializable {
 
                     Button btn = new Button();
                     btn.setGraphic(seatViewImage);
+
                     btn.setOnAction((ActionEvent e) -> {
                         if (selectedSeats.contains(seat)) {
                             selectedSeats.remove(seat);
@@ -164,9 +175,15 @@ public class CustomerBookingController implements Initializable {
                             selectedSeats.add(seat);
                             btn.setGraphic(selectedSeatImage);
                         }
-                        System.out.println(seat.getId());
                         displaySelectedSeats();
                     });
+
+                    if (BookingDAO.getBooking(seat.getId(), selectedScreening.getId()) != null) {
+                        btn.setGraphic(takenSeatImage);
+                        btn.setDisable(true);
+                    }
+
+                    System.out.println(BookingDAO.getBooking(seat.getId(), selectedScreening.getId()));
 
                     //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
@@ -198,6 +215,7 @@ public class CustomerBookingController implements Initializable {
                 e.printStackTrace();
             }
         }
+        createSeatingPlan();
     }
 
 

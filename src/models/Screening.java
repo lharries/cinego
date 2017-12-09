@@ -18,6 +18,7 @@ public class Screening {
     }
 
     private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+    private static DateFormat mediumFormat = new SimpleDateFormat("hh:mm aa EEEE dd/MM", Locale.ENGLISH);
     private static DateFormat shortFormat = new SimpleDateFormat("EEE HH:mm", Locale.ENGLISH);
 
     private IntegerProperty id;
@@ -83,6 +84,11 @@ public class Screening {
     public String getShortDate() throws ParseException {
         Date date = longFormat.parse(getDate());
         return shortFormat.format(date);
+    }
+
+    public String getMediumDate() throws ParseException {
+        Date date = longFormat.parse(getDate());
+        return mediumFormat.format(date); // 08:54 AM Saturday 09/12
     }
 
 

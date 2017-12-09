@@ -92,8 +92,14 @@ public class SeatDAO {
         );
     }
 
-    public static Seat getSeatByLocation(String column, int row) throws SQLException, ClassNotFoundException {
-        ResultSet resultSetSeats = SQLiteConnection.executeQuery("SELECT * FROM Seat", null);
+    public static Seat getSeatByLocation(int column, String row) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(column),
+                new PreparedStatementArg(row),
+        };
+
+        ResultSet resultSetSeats = SQLiteConnection.executeQuery(
+                "SELECT * FROM Seat WHERE column = ? AND row = ?",preparedStatementArgs);
 
         if (resultSetSeats != null) {
             return getSeatList(resultSetSeats).get(0);

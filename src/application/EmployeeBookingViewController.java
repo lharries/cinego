@@ -36,8 +36,6 @@ public class EmployeeBookingViewController implements Initializable {
     private ImageView backgroundImg;
 
 
-
-
 //TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
 
     @FXML
@@ -51,7 +49,7 @@ public class EmployeeBookingViewController implements Initializable {
         BufferedImage bufferedBackground = null;
         try {
             bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-        //background alternative
+            //background alternative
 //         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
         } catch (IOException e) {
             e.printStackTrace();

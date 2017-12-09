@@ -15,205 +15,168 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0"
-            xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="application.CustomerBookingViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerBookingViewController">
     <children>
-        <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
             <!--<image>-->
             <!--<Image url="@../resources/cinemaWallpaperTest.png" backgroundLoading="true" />-->
             <!--</image>-->
             <effect>
-                <ColorAdjust saturation="-0.88"/>
+                <ColorAdjust saturation="-0.88" />
             </effect>
         </ImageView>
 
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0"
-                   stroke="BLACK" strokeType="INSIDE" width="447.0"/>
-        <Line endX="200.0" fill="#00000099" layoutX="461.0" layoutY="34.0" startX="-200.0" strokeWidth="15.0"/>
-        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#4bd841" height="46.0" layoutX="265.0" layoutY="543.0"
-                   stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="45.0"/>
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="264.0" layoutY="543.0" pickOnBounds="true"
-                   preserveRatio="true" rotate="90.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
+        <Line endX="200.0" fill="#00000099" layoutX="461.0" layoutY="34.0" startX="-200.0" strokeWidth="15.0" />
+        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#4bd841" height="46.0" layoutX="265.0" layoutY="543.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="45.0" />
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="264.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
             <image>
-                <Image url="@../resources/seat.png"/>
+                <Image url="@../resources/seat.png" />
             </image>
         </ImageView>
         <Text layoutX="242.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your seat">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Text>
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="561.0" layoutY="547.0" pickOnBounds="true"
-                   preserveRatio="true" rotate="90.0">
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="561.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
             <image>
-                <Image url="@../resources/seat.png"/>
+                <Image url="@../resources/seat.png" />
             </image>
         </ImageView>
         <Text layoutX="550.0" layoutY="617.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Text>
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="420.0" layoutY="545.0" pickOnBounds="true"
-                   preserveRatio="true" rotate="90.0">
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="420.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
             <image>
-                <Image url="@../resources/seat.png"/>
+                <Image url="@../resources/seat.png" />
             </image>
         </ImageView>
         <Text layoutX="377.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available seat">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Text>
-        <Line endY="649.0" layoutX="897.0" layoutY="4.0" stroke="#c8ccd0" strokeMiterLimit="100.0" strokeWidth="2.0"/>
-        <Text layoutX="936.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are going to see:"
-              textAlignment="CENTER" wrappingWidth="316.9052734375">
+        <Line endY="649.0" layoutX="897.0" layoutY="4.0" stroke="#c8ccd0" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Text layoutX="936.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are going to see:" textAlignment="CENTER" wrappingWidth="316.9052734375">
             <font>
-                <Font size="25.0"/>
+                <Font size="25.0" />
             </font>
         </Text>
-        <Line endX="300.0" layoutX="947.0" layoutY="103.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0"/>
-        <Line endX="300.0" layoutX="947.0" layoutY="503.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0"/>
-        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="385.0" layoutX="95.0" layoutY="60.0"
-                   stroke="BLACK" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" width="754.0"/>
-        <GridPane fx:id="gridPaneSeats" layoutY="68.0" prefHeight="442.0" prefWidth="846.0"
-                  style="-fx-alignment: center;" translateZ="300.0">
+        <Line endX="300.0" layoutX="947.0" layoutY="103.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Line endX="300.0" layoutX="947.0" layoutY="503.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="385.0" layoutX="95.0" layoutY="60.0" stroke="BLACK" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" width="754.0" />
+        <GridPane fx:id="gridPaneSeats" layoutY="68.0" prefHeight="442.0" prefWidth="846.0" style="-fx-alignment: center;" translateZ="300.0">
             <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints valignment="CENTER" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES"/>
-                <RowConstraints valignment="CENTER" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES"/>
-                <RowConstraints valignment="CENTER" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES"/>
-                <RowConstraints valignment="CENTER" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES"/>
-                <RowConstraints valignment="CENTER" maxHeight="86.0" minHeight="10.0" prefHeight="83.0"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints valignment="CENTER" maxHeight="69.0" minHeight="10.0" prefHeight="63.0"
-                                vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="83.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="63.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="C" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.rowIndex="2">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="C" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.rowIndex="2">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="B" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.rowIndex="1">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="B" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.rowIndex="1">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="8" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="8" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="8" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="8" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.rowIndex="3">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.rowIndex="3">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.rowIndex="4">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.rowIndex="4">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="1" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="2" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="3" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="6" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="7" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="7" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="5" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="96.95425796508789" GridPane.columnIndex="4" GridPane.rowIndex="5">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" textAlignment="CENTER"
-                      wrappingWidth="96.95425796508789">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" textAlignment="CENTER" wrappingWidth="96.95425796508789">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Text>
             </children>
         </GridPane>
-        <Label fx:id="movieTitle" alignment="CENTER" layoutX="968.0" layoutY="121.0" prefHeight="58.0" prefWidth="261.0"
-               text="MovieTitle" textAlignment="CENTER">
+        <Label fx:id="movieTitle" layoutX="964.0" layoutY="122.0" prefHeight="58.0" prefWidth="261.0" text="MovieTitle" textAlignment="CENTER">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="Date" alignment="CENTER" layoutX="967.0" layoutY="191.0" prefHeight="58.0" prefWidth="133.0"
-               text="Date" textAlignment="CENTER">
+        <Label fx:id="screeningDate" layoutX="967.0" layoutY="190.0" prefHeight="58.0" prefWidth="261.0" text="Time" textAlignment="CENTER">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="969.0" layoutY="254.0" prefHeight="58.0" prefWidth="261.0" text="Seats"
-               textAlignment="CENTER">
+        <ListView fx:id="seatListView" layoutX="958.0" layoutY="269.0" prefHeight="167.0" prefWidth="282.0" />
+        <Text fx:id="totalCost" layoutX="1080.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" wrappingWidth="172.9052734375">
             <font>
-                <Font size="20.0"/>
-            </font>
-        </Label>
-        <Label fx:id="Time" alignment="CENTER" layoutX="1115.0" layoutY="190.0" prefHeight="58.0" prefWidth="113.0"
-               text="Time" textAlignment="CENTER">
-            <font>
-                <Font size="20.0"/>
-            </font>
-        </Label>
-        <ListView fx:id="seatListView" layoutX="994.0" layoutY="321.0" prefHeight="115.0" prefWidth="200.0"/>
-        <Text layoutX="944.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" textAlignment="CENTER"
-              wrappingWidth="316.9052734375">
-            <font>
-                <Font size="25.0"/>
+                <Font size="25.0" />
             </font>
         </Text>
-        <Button fx:id="bookingConfirmationClickHandler" layoutX="1006.0" layoutY="607.0" mnemonicParsing="false"
-                onAction="#confirmMovieBooking" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking"/>
+        <Button fx:id="bookingConfirmationClickHandler" layoutX="1002.0" layoutY="595.0" mnemonicParsing="false" onAction="#confirmMovieBooking" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking" />
+      <Text layoutX="946.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" wrappingWidth="90.07814260572195">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

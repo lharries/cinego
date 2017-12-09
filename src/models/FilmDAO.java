@@ -23,6 +23,8 @@ public class FilmDAO {
 
     }
 
+    // TODO: Add in get the film by id
+
     private static Film getFilmFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         if (resultSet.next()) {
             Film film = new Film();

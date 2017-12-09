@@ -60,6 +60,7 @@ public class MoviesController implements Initializable {
     public Text selectedFilmTitle;
     public Label selectedFilmDescription;
     public Button selectedFilmScreening;
+    public Group screeningTimes;
 
     @FXML
     public TextField searchField;
@@ -262,16 +263,18 @@ public class MoviesController implements Initializable {
     private void addScreeningsToView() {
         // TODO: Switch to flowpane or tabs
         double xPosition = 0.0;
+        screeningTimes.getChildren().clear();
         for (Screening screening :
                 selectedFilm.getScreenings()) {
             try {
                 Button screeningButton = new Button();
                 screeningButton.setText(screening.getShortDate());
                 screeningButton.setLayoutX(xPosition);
-                screeningButton.setLayoutY(400.0);
+                screeningButton.setLayoutY(0);
                 screeningButton.setOnAction((event) -> {
                     try {
                         // TODO Set this up properly! KAI We need to move the movies controller into the proper place
+                        CustomerBookingViewController.selectedScreening = screening;
                         Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
                     } catch (IOException e) {
                         // TODO: Add loggin LOGGER.logp(Level.WARNING, "CustomerRootController", "openBookingView", "Failed to load CustomerBooking View. See: " + e);
@@ -280,7 +283,7 @@ public class MoviesController implements Initializable {
                     }
                 });
 
-                selectedFilmGroup.getChildren().add(screeningButton);
+                screeningTimes.getChildren().add(screeningButton);
 
                 xPosition += 100.0;
 

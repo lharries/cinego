@@ -66,4 +66,9 @@ public class Seat {
     public void setRow(String row) {
         this.row.set(row);
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

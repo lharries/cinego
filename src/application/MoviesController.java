@@ -202,6 +202,8 @@ public class MoviesController implements Initializable {
         Font screeningFont = new Font(15.0);
         screenings.setFont(screeningFont);
 
+        // TODO: Remove the other screenings
+
         if (imageView != null) {
             group.getChildren().addAll(rectangle, title, description, imageView, screenings);
         } else {

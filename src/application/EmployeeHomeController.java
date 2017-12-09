@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 
 public class EmployeeHomeController implements Initializable {
 
-
+    //TODO: add loggers to the validation for us
     //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
 
     @FXML
@@ -78,8 +78,6 @@ public class EmployeeHomeController implements Initializable {
     //reused variables in validation and creation of movies and screenings
     private String title, path, description, screeningTime, screeningDate, movieTitle;
     Film film;
-
-
 
 
 

@@ -32,7 +32,7 @@
       <Label layoutX="484.0" layoutY="101.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
       <ListView layoutX="455.0" layoutY="139.0" prefHeight="488.0" prefWidth="711.0" />
       <Button fx:id="deleteBookingClickHandler" layoutX="1074.0" layoutY="186.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
-      <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setCustProfEditable" text="Edit profile" />
+      <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setCustProfileEditable" text="Edit profile" />
 
       <!--<Glyph layoutX="483.0" layoutY="551.0" prefHeight="69.0" prefWidth="108.0" />-->
 

@@ -48,18 +48,18 @@ public class CustomerProfileController implements Initializable{
 
 
     /**
-     * Purpose: is called by clicking the edit Profile button and then calls the setCustProFieldsEnabled
+     * Purpose: is called by clicking the edit Profile button and then calls the setCustProfileFieldsEnabled
      * method in order to set the fields to be editable and change the prompttext to normal text
      *
      */
     @FXML
-    private void setCustProfEditable() {
+    private void setCustProfileEditable() {
 
         textFieldEditable = true;
-        setCustProFieldsEnabled(textFieldEditable);
+        setCustProfileFieldsEnabled(textFieldEditable);
     }
 
-    private void setCustProFieldsEnabled(boolean textFieldEditable){
+    private void setCustProfileFieldsEnabled(boolean textFieldEditable){
 
 
         if(textFieldEditable){
@@ -137,7 +137,7 @@ public class CustomerProfileController implements Initializable{
         delay.play();
 
         //sets editability of profile back to disabled
-        setCustProFieldsEnabled(false);
+        setCustProfileFieldsEnabled(false);
     }
 
 
@@ -157,7 +157,7 @@ public class CustomerProfileController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
         //initializes customer profile input fields and sets them to not editable
-        setCustProFieldsEnabled(textFieldEditable);
+        setCustProfileFieldsEnabled(textFieldEditable);
 
         //render background image
         BufferedImage bufferedBackground = null;

@@ -99,5 +99,17 @@ public class Screening {
         return mediumFormat.format(date); // 08:54 Saturday 09/12
     }
 
+//    public boolean isInPast() {
+//        Date today = new Date();
+//
+//        try {
+//            return today.compareTo(getDateObject()) <= 0;
+//        } catch (ParseException e) {
+//            System.out.println("Unable to parse the date isInPast");
+//            e.printStackTrace();
+//            return true;
+//        }
+//    }
+
 
 }

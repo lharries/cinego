@@ -1,20 +1,5 @@
 package application;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,6 +24,18 @@ import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
 
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * Sources:
  * - https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
@@ -50,12 +47,19 @@ import models.ScreeningDAO;
 
 public class MoviesController implements Initializable {
 
+    private Film selectedFilm;
+
+    private Date selectedDate;
+
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+    private String searchText = "";
+
+    private ArrayList<Rectangle> rectangleArrayList = new ArrayList<>();
+
 
     @FXML
     public ScrollPane moviesScrollPane;
-
-    @FXML
-    public AnchorPane moviesAnchorPane;
 
     @FXML
     private DatePicker datePicker;
@@ -63,26 +67,23 @@ public class MoviesController implements Initializable {
     @FXML
     public VBox moviesVBox;
 
-    private Film selectedFilm;
-
-    private Date selectedDate;
-
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    @FXML
+    private Group selectedFilmGroup;
 
     @FXML
-    public Group selectedFilmGroup;
-    public ImageView selectedFilmImage;
-    public Text selectedFilmTitle;
-    public Label selectedFilmDescription;
-    public Button selectedFilmScreening;
-    public Group screeningTimes;
+    private ImageView selectedFilmImage;
+
+    @FXML
+    private Text selectedFilmTitle;
+
+    @FXML
+    private Label selectedFilmDescription;
+
+    @FXML
+    private Group screeningTimes;
 
     @FXML
     public TextField searchField;
-
-    private String searchText = "";
-
-    private ArrayList<Rectangle> rectangleArrayList = new ArrayList<Rectangle>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -107,9 +108,7 @@ public class MoviesController implements Initializable {
 
         try {
             setColorsOfDatePicker();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -132,10 +131,10 @@ public class MoviesController implements Initializable {
 
                 }
 
+                System.out.println(films.get(i).getUpcomingScreenings());
+
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -290,7 +289,7 @@ public class MoviesController implements Initializable {
         double xPosition = 0.0;
         screeningTimes.getChildren().clear();
         for (Screening screening :
-                selectedFilm.getScreenings()) {
+                selectedFilm.getUpcomingScreenings()) {
             try {
                 Button screeningButton = new Button();
                 screeningButton.setText(screening.getShortDate());
@@ -345,8 +344,7 @@ public class MoviesController implements Initializable {
         for (Screening screening :
                 screenings) {
             try {
-                LocalDate date = null;
-                date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(screening.getDateObject()));
+                LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(screening.getDateObject()));
                 allScreenDates.add(date);
             } catch (ParseException | NullPointerException e) {
                 System.err.println("Unable to parse string");
@@ -361,9 +359,13 @@ public class MoviesController implements Initializable {
                     @Override
                     public void updateItem(LocalDate date, boolean empty) {
                         super.updateItem(date, empty);
-                        if (allScreenDates.contains(date)) {
+
+                        if (date.compareTo(LocalDate.now()) < 0) {
+                            setDisable(true);
+                        } else if (allScreenDates.contains(date)) {
                             setStyle("-fx-background-color: #00FF00;");
                         }
+
 
                     }
                 };

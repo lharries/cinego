@@ -119,7 +119,16 @@ public class MoviesController implements Initializable {
 
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
-        selectedFilmImage.setImage(new Image(film.getImagePath()));
+
+        // Try and get the film if it's found
+        try {
+            selectedFilmImage.setImage(new Image(film.getImagePath()));
+            selectedFilmImage.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Cant locate the image: ");
+            System.err.println(film.getImagePath());
+            selectedFilmImage.setVisible(false);
+        }
         // TODO: Set image and set screening times
 
         for (Rectangle otherRectangles :
@@ -173,12 +182,18 @@ public class MoviesController implements Initializable {
         Font descriptionFont = new Font(15.0);
         description.setFont(descriptionFont);
 
-        Image image = new Image("/resources/TheBrokenPoster.jpg");
-        ImageView imageView = new ImageView(image);
-        imageView.setX(230.0);
-        imageView.setY(30.0);
-        imageView.setFitHeight(145.0);
-        imageView.setFitWidth(134.0);
+        ImageView imageView = null;
+        try {
+            Image image = new Image(film.getImagePath());
+            imageView = new ImageView(image);
+            imageView.setX(230.0);
+            imageView.setY(30.0);
+            imageView.setFitHeight(145.0);
+            imageView.setFitWidth(134.0);
+        } catch (IllegalArgumentException e) {
+            System.err.print("Unable to find film");
+            System.err.println(film.getImagePath());
+        }
 
 
         Label screenings = new Label(film.getScreeningsDescription());
@@ -187,7 +202,14 @@ public class MoviesController implements Initializable {
         Font screeningFont = new Font(15.0);
         screenings.setFont(screeningFont);
 
-        group.getChildren().addAll(rectangle, title, description, imageView, screenings);
+        // TODO: Remove the other screenings
+
+        if (imageView != null) {
+            group.getChildren().addAll(rectangle, title, description, imageView, screenings);
+        } else {
+            group.getChildren().addAll(rectangle, title, description, screenings);
+
+        }
 
         moviesVBox.getChildren().add(group);
 

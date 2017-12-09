@@ -128,7 +128,7 @@ public class CustomerBookingViewController implements Initializable {
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         ButtonType buttonTypeOne = new ButtonType("Pay now");
 
-        alert.getButtonTypes().setAll(buttonTypeCancel,buttonTypeOne);
+        alert.getButtonTypes().setAll(buttonTypeCancel, buttonTypeOne);
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne) {

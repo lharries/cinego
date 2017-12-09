@@ -29,19 +29,19 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
         <Line endX="200.0" fill="#00000099" layoutX="461.0" layoutY="34.0" startX="-200.0" strokeWidth="15.0" />
         <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#4bd841" height="46.0" layoutX="265.0" layoutY="543.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="45.0" />
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="264.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="264.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/seat.png" />
+                <Image url="@../resources/selected-seat.png" />
             </image>
         </ImageView>
-        <Text layoutX="242.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your seat">
+        <Text layoutX="242.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected">
             <font>
                 <Font size="20.0" />
             </font>
         </Text>
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="561.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="561.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/seat.png" />
+                <Image url="@../resources/taken-seat.png" />
             </image>
         </ImageView>
         <Text layoutX="550.0" layoutY="617.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked">
@@ -49,12 +49,12 @@
                 <Font size="20.0" />
             </font>
         </Text>
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="420.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="420.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../resources/seat.png" />
             </image>
         </ImageView>
-        <Text layoutX="377.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available seat">
+        <Text layoutX="399.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
             <font>
                 <Font size="20.0" />
             </font>

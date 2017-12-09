@@ -102,4 +102,25 @@ public class SeatDAO {
             return null;
         }
     }
+
+    public static Seat getSeatsByScreening(int screeningID) throws SQLException, ClassNotFoundException {
+
+
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(screeningID)
+        };
+
+        ResultSet resultSetSeats = SQLiteConnection.executeQuery(
+                "SELECT * FROM Seat\n" +
+                        "WHERE screeningId = ?",
+                preparedStatementArgs
+        );
+
+        if (resultSetSeats != null) {
+            return getSeatList(resultSetSeats).get(0);
+
+        } else {
+            return null;
+        }
+    }
 }

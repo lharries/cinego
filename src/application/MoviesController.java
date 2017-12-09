@@ -1,24 +1,13 @@
 package application;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-
-
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -29,44 +18,72 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
+import models.ScreeningDAO;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Sources:
  * - https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
  * - https://stackoverflow.com/questions/24700765/how-to-hide-a-pannable-scrollbar-in-javafx
+ * - https://stackoverflow.com/questions/42542312/javafx-datepicker-color-single-cell
+ * - https://stackoverflow.com/questions/21242110/convert-java-util-date-to-java-time-localdate
  */
 
 
 public class MoviesController implements Initializable {
+
+    private Film selectedFilm;
+
+    private Date selectedDate;
+
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+    private String searchText = "";
+
+    private ArrayList<Rectangle> rectangleArrayList = new ArrayList<>();
 
 
     @FXML
     public ScrollPane moviesScrollPane;
 
     @FXML
-    public AnchorPane moviesAnchorPane;
+    private DatePicker datePicker;
 
     @FXML
     public VBox moviesVBox;
 
-    private Film selectedFilm;
+    @FXML
+    private Group selectedFilmGroup;
 
     @FXML
-    public Group selectedFilmGroup;
-    public ImageView selectedFilmImage;
-    public Text selectedFilmTitle;
-    public Label selectedFilmDescription;
-    public Button selectedFilmScreening;
+    private ImageView selectedFilmImage;
+
+    @FXML
+    private Text selectedFilmTitle;
+
+    @FXML
+    private Label selectedFilmDescription;
+
+    @FXML
+    private Group screeningTimes;
 
     @FXML
     public TextField searchField;
-
-    private String searchText = "";
-
-    private ArrayList<Rectangle> rectangleArrayList = new ArrayList<Rectangle>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,6 +106,12 @@ public class MoviesController implements Initializable {
             updateFilmList();
         });
 
+        try {
+            setColorsOfDatePicker();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void updateFilmList() {
@@ -102,14 +125,16 @@ public class MoviesController implements Initializable {
                 Film film = films.get(i);
                 boolean isSelected = (i == 0);
                 if (film.getTitle().toLowerCase().contains(searchText.toLowerCase()) || film.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
+                    if (selectedDate == null || film.hasScreeningOnDate(selectedDate)) {
+                        addFilmToList(films.get(i), isSelected);
+                    }
 
-                    addFilmToList(films.get(i), isSelected);
                 }
 
+                System.out.println(films.get(i).getUpcomingScreenings());
+
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -262,16 +287,17 @@ public class MoviesController implements Initializable {
     private void addScreeningsToView() {
         // TODO: Switch to flowpane or tabs
         double xPosition = 0.0;
+        screeningTimes.getChildren().clear();
         for (Screening screening :
-                selectedFilm.getScreenings()) {
+                selectedFilm.getUpcomingScreenings()) {
             try {
                 Button screeningButton = new Button();
                 screeningButton.setText(screening.getShortDate());
                 screeningButton.setLayoutX(xPosition);
-                screeningButton.setLayoutY(400.0);
+                screeningButton.setLayoutY(0);
                 screeningButton.setOnAction((event) -> {
                     try {
-                        // TODO Set this up properly! KAI We need to move the movies controller into the proper place
+                        CustomerBookingController.selectedScreening = screening;
                         Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
                     } catch (IOException e) {
                         // TODO: Add loggin LOGGER.logp(Level.WARNING, "CustomerRootController", "openBookingView", "Failed to load CustomerBooking View. See: " + e);
@@ -280,7 +306,7 @@ public class MoviesController implements Initializable {
                     }
                 });
 
-                selectedFilmGroup.getChildren().add(screeningButton);
+                screeningTimes.getChildren().add(screeningButton);
 
                 xPosition += 100.0;
 
@@ -291,4 +317,61 @@ public class MoviesController implements Initializable {
     }
 
 
+    public void datePickerHandler(ActionEvent actionEvent) {
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        try {
+            if (datePicker.getValue() != null)
+                selectedDate = dateFormat.parse(String.valueOf(datePicker.getValue()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        updateFilmList();
+    }
+
+    public void showAllFilms(ActionEvent actionEvent) {
+        datePicker.setValue(null);
+        selectedDate = null;
+        searchText = "";
+        searchField.setText("");
+        updateFilmList();
+    }
+
+    public void setColorsOfDatePicker() throws SQLException, ClassNotFoundException {
+        ObservableList<Screening> screenings = ScreeningDAO.getScreeningObservableList();
+
+        ArrayList<LocalDate> allScreenDates = new ArrayList<>();
+
+        for (Screening screening :
+                screenings) {
+            try {
+                LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(screening.getDateObject()));
+                allScreenDates.add(date);
+            } catch (ParseException | NullPointerException e) {
+                System.err.println("Unable to parse string");
+                e.printStackTrace();
+            }
+        }
+
+        Callback<DatePicker, DateCell> cellColorFactory = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+
+                        if (date.compareTo(LocalDate.now()) < 0) {
+                            setDisable(true);
+                        } else if (allScreenDates.contains(date)) {
+                            setStyle("-fx-background-color: #00FF00;");
+                        }
+
+
+                    }
+                };
+            }
+        };
+
+        datePicker.setDayCellFactory(cellColorFactory);
+    }
 }

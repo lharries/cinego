@@ -38,8 +38,6 @@ public class FilmDAO {
 
     }
 
-
-
     private static Film getFilmFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         if (resultSet.next()) {
             Film film = new Film();

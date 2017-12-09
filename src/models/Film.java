@@ -2,9 +2,16 @@ package models;
 
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * Source:
@@ -109,7 +116,7 @@ public class Film {
 
         int maxNumberOfScreenings = 4;
 
-        ObservableList<Screening> screenings = getScreenings();
+        FilteredList<Screening> screenings = getUpcomingScreenings();
 
         int numberOfScreeningsToShow = (screenings.size() < maxNumberOfScreenings ? screenings.size() : maxNumberOfScreenings);
 
@@ -138,8 +145,42 @@ public class Film {
 
     }
 
+    public boolean hasScreeningOnDate(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+        for (Screening screening :
+                getScreenings()) {
+            try {
+                if (Objects.equals(dateFormat.format(screening.getDateObject()), dateFormat.format(date))) {
+                    return true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         return getTitle();
+    }
+
+    public FilteredList<Screening> getUpcomingScreenings() {
+        return screenings.get().filtered(new Predicate<Screening>() {
+            @Override
+            public boolean test(Screening screening) {
+                try {
+                    Date today = new Date();
+                    Date screeningDate = screening.getDateObject();
+
+                    return today.compareTo(screeningDate) <= 0;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            };
+        });
     }
 }

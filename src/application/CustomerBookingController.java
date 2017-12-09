@@ -1,60 +1,60 @@
 package application;
 
-import javafx.embed.swing.SwingFXUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.control.*;
-
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import models.Seat;
-import models.SeatDAO;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import models.*;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerBookingController implements Initializable {
 
-    private Seat selectedSeat;
+    public static Screening selectedScreening;
+
+    private ArrayList<Seat> selectedSeats = new ArrayList<>();
+
+    @FXML
+    private Text totalCost;
 
     @FXML
     private Label Time;
 
     @FXML
-    private Label Date;
+    private Label screeningDate;
 
     @FXML
     private Label movieTitle;
 
     @FXML
-    private ListView seatListView;
+    private ListView<Seat> seatListView;
 
     @FXML
     private ImageView backgroundImg;
 
     @FXML
-    public GridPane gridPaneSeats;
+    private GridPane gridPaneSeats;
 
 
     //TODO: make cinema seats selectable (change colour, store seat identifier, disable booked seats to be chosen
     //TODO: add booking summary at the side: display (push) movie title, date + time, populate seatListView with chosen seats (Row + Column)
-    //TODO: fxids= movieTitle, Date, Time, seatListView, bookingConfirmationClickHandler
+    //TODO: fxids= movieTitle, screeningDate, Time, seatListView, bookingConfirmationClickHandler
 
     //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
 
@@ -72,8 +72,19 @@ public class CustomerBookingController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        setupBackgroundImage();
+
+        movieTitle.setText(selectedScreening.getFilmTitle());
+        try {
+            screeningDate.setText(selectedScreening.getMediumDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(selectedScreening);
+        System.out.println(selectedScreening.getDate());
+
         createSeatingPlan();
+
 
     }
 
@@ -95,33 +106,29 @@ public class CustomerBookingController implements Initializable {
         //TODO: add order to user profile's history view!
 
 
-//        //JDialog querying for correct input value: source: http://code.makery.ch/blog/javafx-dialogs-official/
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        // Get the Stage
-//        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-//
-//        // Add a custom icon.
-//        stage.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-//
-//        alert.setTitle("Booking Confirmation");
-//        alert.setHeaderText("THIS IS WHERE YOUR BOOKING DETAILS WOULD GO VIA VARIABLES, Luke!");
-//        alert.setContentText("Luke, I'm awesome");
-//
-//        ButtonType buttonTypeOne = new ButtonType("Pay now");
-//        ButtonType buttonTypeTwo = new ButtonType("Two");
-//        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//
-//        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
-//
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (result.get() == buttonTypeOne) {
-//            //jumps back to customer's profile view after having clicked the Confirm booking button (think about triggering the order with a JDialogPane)
-//            CustomerRootController controller = new CustomerRootController();
-//            controller.openProfileView(event);
-//        } else if (result.get() == buttonTypeTwo) {
-//            //test
-//            System.err.println("haha it works");
-//        }
+        //JDialog querying for correct input value: source: http://code.makery.ch/blog/javafx-dialogs-official/
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        // Get the Stage
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+
+        // Add a custom icon.
+        stage.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+
+        alert.setTitle("Booking Confirmation");
+        alert.setHeaderText("Confirm Booking");
+        alert.setContentText("Do you wish to book " + String.valueOf(selectedSeats.size()) + " seats");
+
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeOne = new ButtonType("Pay now");
+
+        alert.getButtonTypes().setAll(buttonTypeCancel, buttonTypeOne);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne) {
+            System.out.println("Clicked confirm");
+            createBooking();
+            alert.close();
+        }
 
     }
 
@@ -130,20 +137,37 @@ public class CustomerBookingController implements Initializable {
         for (int i = 0; i < 5; i++) {
             for (int j = 1; j < 9; j++) {
                 try {
-                    Seat seat = SeatDAO.getSeatByLocation(rows[i], j);
+                    Seat seat = SeatDAO.getSeatByLocation(j, rows[i]);
 
-                    ImageView seatView = new ImageView("/resources/seat.png");
-                    seatView.setFitWidth(60.0);
-                    seatView.setFitHeight(60.0);
+                    // normal seat
+                    ImageView seatViewImage = new ImageView("/resources/seat.png");
+                    seatViewImage.setFitWidth(60.0);
+                    seatViewImage.setFitHeight(60.0);
+
+                    // taken seat
+                    ImageView takenSeatImage = new ImageView("/resources/taken-seat.png");
+                    takenSeatImage.setFitWidth(60.0);
+                    takenSeatImage.setFitHeight(60.0);
+
+                    // taken seat
+                    ImageView selectedSeatImage = new ImageView("/resources/selected-seat.png");
+                    selectedSeatImage.setFitWidth(60.0);
+                    selectedSeatImage.setFitHeight(60.0);
 
                     Button btn = new Button();
-                    btn.setGraphic(seatView);
-                    btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            selectedSeat = seat;
+                    btn.setGraphic(seatViewImage);
+                    btn.setOnAction((ActionEvent e) -> {
+                        if (selectedSeats.contains(seat)) {
+                            selectedSeats.remove(seat);
+                            btn.setGraphic(seatViewImage);
+                        } else {
+                            selectedSeats.add(seat);
+                            btn.setGraphic(selectedSeatImage);
                         }
+                        System.out.println(seat.getId());
+                        displaySelectedSeats();
                     });
+
                     //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
                 } catch (SQLException e) {
@@ -155,8 +179,25 @@ public class CustomerBookingController implements Initializable {
         }
     }
 
-    private void displaySelectedSeat() {
+    private void displaySelectedSeats() {
+        ObservableList<Seat> seatObservableList = FXCollections.observableList(selectedSeats);
+        seatListView.setItems(seatObservableList);
+    }
 
+    public void createBooking() {
+        for (Seat selectedSeat :
+                selectedSeats) {
+
+            try {
+                BookingDAO.insertBooking(Main.user.getId(), true, selectedSeat.getId(), selectedScreening.getId());
+                System.out.println("Booked!");
+            } catch (SQLException | ClassNotFoundException e) {
+
+                // TODO: Handle this better;
+                System.out.println("Booking failed");
+                e.printStackTrace();
+            }
+        }
     }
 
 

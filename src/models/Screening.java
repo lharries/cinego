@@ -18,6 +18,7 @@ public class Screening {
     }
 
     private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+    private static DateFormat mediumFormat = new SimpleDateFormat("HH:mm EEEE dd/MM", Locale.ENGLISH);
     private static DateFormat shortFormat = new SimpleDateFormat("EEE HH:mm", Locale.ENGLISH);
 
     private IntegerProperty id;
@@ -60,6 +61,14 @@ public class Screening {
         return date.get();
     }
 
+    public Date getDateObject() throws ParseException {
+        if (getDate() != null) {
+            return longFormat.parse(getDate());
+        } else {
+            return null;
+        }
+    }
+
     public StringProperty dateProperty() {
         return date;
     }
@@ -81,7 +90,13 @@ public class Screening {
     }
 
     public String getShortDate() throws ParseException {
-        Date date = longFormat.parse(getDate());
+        Date date = getDateObject();
         return shortFormat.format(date);
     }
+
+    public String getMediumDate() throws ParseException {
+        Date date = getDateObject();
+        return mediumFormat.format(date); // 08:54 Saturday 09/12
+    }
+
 }

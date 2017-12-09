@@ -23,14 +23,12 @@ import models.Screening;
 import models.ScreeningDAO;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EmployeeHomeController implements Initializable {
@@ -88,7 +86,7 @@ public class EmployeeHomeController implements Initializable {
     //reused variables in validation and creation of movies and screenings
     private String title, path, relativePath, description, screeningTime, screeningDate, movieTitle;
     Film film;
-    public static int screenID;
+    public static int selectedScreeningId;
 
 
     /**
@@ -139,21 +137,20 @@ public class EmployeeHomeController implements Initializable {
         File file = null;
         String filename = addTitle.getText();
 
-        //read image file
         try {
+            //read image file
             chosenFile = fileChooser.showOpenDialog(null);
             this.path = chosenFile.getAbsolutePath();
             file = new File(this.path);
             image = ImageIO.read(file);
-        } catch (IOException e) {
-            System.out.println("Error: " + e);
-        }
 
-        //write image to relative project path
-        try {
+            // TODO: Switch this to a randomly generated string
+            //write image to relative project path
             relativePath = "src/resources/" + filename + ".jpg";
             file = new File(relativePath);
+            // TODO: Be careful with the file extensions
             ImageIO.write(image, "jpg", file);
+            relativePath = "/resources/" + filename + ".jpg";
         } catch (IOException e) {
             System.out.println("Error: " + e);
         }
@@ -301,7 +298,7 @@ public class EmployeeHomeController implements Initializable {
         file = new File("../cinego/ScreeningsExport.csv");
         try {
             writer = new BufferedWriter(new FileWriter(file));
-            String text ="id" + "," + "filmId" + "," + "date" + "\n";
+            String text = "id" + "," + "filmId" + "," + "date" + "\n";
             writer.write(text);
 
             for (Screening Screening : screeningsData) {
@@ -324,7 +321,7 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void getScreeningID() {
-        screenID = screeningsTable.getSelectionModel().getSelectedItem().getId();
+        selectedScreeningId = screeningsTable.getSelectionModel().getSelectedItem().getId();
         toSeatBooking.setDisable(false);
 
     }
@@ -333,9 +330,16 @@ public class EmployeeHomeController implements Initializable {
     private void openSeatsBooked(ActionEvent event) {
         //TODO: open a movie's specific "seats booked overview" +
 
-        EmployeeRootController emplRootController = new EmployeeRootController();
-        emplRootController.openBookingView(event);
 
+        try {
+            EmployeeBookingController.selectedScreening = ScreeningDAO.getScreeningById(selectedScreeningId);
+            EmployeeRootController emplRootController = new EmployeeRootController();
+            emplRootController.openBookingView(event);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         toSeatBooking.setDisable(true);
     }
 

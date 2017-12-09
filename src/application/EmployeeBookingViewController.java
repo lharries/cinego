@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// TODO: Can we delete this controller?
 public class EmployeeBookingViewController implements Initializable {
 
     @FXML
@@ -35,7 +36,6 @@ public class EmployeeBookingViewController implements Initializable {
 
     @FXML
     private ImageView backgroundImg;
-
 
 //TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
 

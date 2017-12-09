@@ -1,9 +1,6 @@
 package models;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 
 public class Booking {
 
@@ -12,6 +9,9 @@ public class Booking {
     private IntegerProperty customerId;
     private IntegerProperty seatId;
     private IntegerProperty screeningId;
+    private ObjectProperty<Screening> screening;
+    private ObjectProperty<Seat> seat;
+    private ObjectProperty<Customer> customer;
 
     public Booking() {
         this.id = new SimpleIntegerProperty();
@@ -19,6 +19,9 @@ public class Booking {
         this.customerId = new SimpleIntegerProperty();
         this.seatId = new SimpleIntegerProperty();
         this.screeningId = new SimpleIntegerProperty();
+        this.screening = new SimpleObjectProperty<>();
+        this.seat = new SimpleObjectProperty<>();
+        this.customer = new SimpleObjectProperty<>();
     }
 
     public int getId() {
@@ -79,5 +82,41 @@ public class Booking {
 
     public void setScreeningId(int screeningId) {
         this.screeningId.set(screeningId);
+    }
+
+    public Screening getScreening() {
+        return screening.get();
+    }
+
+    public ObjectProperty<Screening> screeningProperty() {
+        return screening;
+    }
+
+    public void setScreening(Screening screening) {
+        this.screening.set(screening);
+    }
+
+    public Seat getSeat() {
+        return seat.get();
+    }
+
+    public ObjectProperty<Seat> seatProperty() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat.set(seat);
+    }
+
+    public Customer getCustomer() {
+        return customer.get();
+    }
+
+    public ObjectProperty<Customer> customerProperty() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer.set(customer);
     }
 }

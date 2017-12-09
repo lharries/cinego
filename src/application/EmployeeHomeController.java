@@ -34,7 +34,7 @@ public class EmployeeHomeController implements Initializable {
 
     //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
 
-    
+
     //TODO: add loggers to the validation for us
 
     //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT

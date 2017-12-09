@@ -37,6 +37,7 @@
             <TableColumn fx:id="titleColBookingTable" prefWidth="136.5" text="Title" />
             <TableColumn fx:id="dateColBookingTable" prefWidth="105.5" text="Date" />
             <TableColumn fx:id="timeColBookingTable" prefWidth="97.5" text="Time" />
+            <TableColumn fx:id="seatsColBookingTable" prefWidth="97.5" text="Time" />
          </columns></TableView>
       <Button fx:id="deleteBooking" disable="true" layoutX="1083.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
       <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setCustProfileEditable" text="Edit profile" />

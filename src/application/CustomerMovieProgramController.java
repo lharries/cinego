@@ -40,39 +40,33 @@ public class CustomerMovieProgramController implements Initializable {
     @FXML
     private Button toCustProf;
 
+    @FXML
+    private TableView<String> tableView;
+
+
+    /**
+     *
+     * @param location
+     * @param resources
+     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        BufferedImage bufferedBackground = null;
-        try {
-            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-            //background alternative
-//         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.backgroundImg.setImage(background);
+
 
         initTable();
     }
 
-    @FXML
-    private TableView<String> tableView;
 
     private void initTable() {
         try {
-
             // Create the Lists for the ListViews
-
-
             TableColumn name = new TableColumn("name");
             TableColumn screenings = new TableColumn("screenings");
             TableColumn misc = new TableColumn("misc");
 
             tableView.getColumns().addAll(name, screenings, misc);
-
 
 //            tableView.setItems(FilmDAO.getFilmObservableList());
 //            System.out.print(listView);

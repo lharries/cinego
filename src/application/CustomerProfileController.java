@@ -1,25 +1,16 @@
 package application;
 
 import javafx.animation.PauseTransition;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import models.Booking;
-import models.CustomerDAO;
-import models.Screening;
+import models.*;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -27,25 +18,14 @@ import java.util.ResourceBundle;
 public class CustomerProfileController implements Initializable{
 
     @FXML
-    private Button updateProfileBttn;
-
-    @FXML
-    private Button editProfileBttn;
-
+    private Button updateProfileBttn, editProfileBttn;
+    
     @FXML
     private ImageView backgroundImg;
 
     @FXML
-    private TextField custFirstNameField;
+    private TextField custFirstNameField, custLastNameField, custEmailField, custPhone;
 
-    @FXML
-    private TextField custLastNameField;
-
-    @FXML
-    private TextField custEmailField;
-
-    @FXML
-    private TextField custPhone;
 
     @FXML
     private Button deleteBooking;
@@ -55,6 +35,9 @@ public class CustomerProfileController implements Initializable{
     @FXML
     private TableView<Booking> bookingsTable;
 
+    @FXML
+    private TableColumn titleColBookingTable, dateColBookingTable, timeColBookingTable, seatsColBookingTable;
+
 
 
     @Override
@@ -63,18 +46,32 @@ public class CustomerProfileController implements Initializable{
         //initializes customer profile input fields and sets them to not editable
         setCustProfileFieldsEnabled(textFieldEditable);
 
-        //render background image
-//        BufferedImage bufferedBackground = null;
-//        try {
-//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-//            //background alternative
-////         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
-//        } catch (IOException e) {
+        titleColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
+        dateColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
+//        timeColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
+        seatsColBookingTable.setCellValueFactory(new PropertyValueFactory<Booking, Integer>("seatId"));
+
+//        populateBookingsTable();
+
+    }
+
+    /**
+     * Purpose: updates the moviesTable with movie specific data from the database
+     */
+    private void populateBookingsTable(){
+
+
+        //        try {
+//            moviesData = FilmDAO.getFilmObservableList();
+//            moviesTable.setItems(moviesData);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
 //        }
-//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-//        this.backgroundImg.setImage(background);
+
     }
+
 
 
     /**
@@ -170,24 +167,15 @@ public class CustomerProfileController implements Initializable{
     }
 
     @FXML
-    private void populateBookingsTable(){
-
-    }
-
-
-
-    @FXML
     private void deleteMovieBooking(){
-
-
 
         //TODO 2: Add error popup for movies that are in the past (can't delete them!)
         //TODO 3: delete the actual booking with a JDialogBOx pop-up asking if you're sure to delete (https://www.youtube.com/watch?v=oZUGMpGQxgQ)
 
+
+
+
     }
-
-
-
 
 
     //TODO: //TODO: add ability to select movies from the list and delete them (see employeeHomeController: getScreeningID() )

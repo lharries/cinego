@@ -203,6 +203,7 @@ public class EmployeeHomeController implements Initializable {
         //gets the input values and checks if they're correctly filled in
         title = addTitle.getText();
         description = addDescription.getText();
+
         if(title.isEmpty() || description.isEmpty() || path.isEmpty()){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
@@ -246,7 +247,6 @@ public class EmployeeHomeController implements Initializable {
         populateMovieSelectBox();
     }
 
-
     /**
      * Purpose: tests if input variables to create a screening are correct.
      * Informs the user of outcome of test and only creates screening when input is correct
@@ -263,12 +263,11 @@ public class EmployeeHomeController implements Initializable {
         alert.setTitle("Cinego");
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
-        film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
-        movieTitle = film.getTitle();
-        screeningTime = timePicker.getValue().toString();
-        screeningDate = datePicker.getValue().toString();
-
-        if(movieTitle.isEmpty() || screeningTime.isEmpty() || screeningDate.isEmpty()){
+        //get input values and check for validity
+        movieTitle = movieSelectionBox.getValue()+"";
+        screeningTime = timePicker.getValue()+"";
+        screeningDate = datePicker.getValue()+"";
+        if(movieTitle.equals("null") || screeningTime.equals("null") || screeningDate.equals("null")){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
             PauseTransition delay = new PauseTransition(Duration.seconds(4));

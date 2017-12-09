@@ -35,6 +35,7 @@ public class EmployeeHomeController implements Initializable {
     //TODO: add loggers to the validation for us
     //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
 
+
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
 
     @FXML
@@ -65,11 +66,10 @@ public class EmployeeHomeController implements Initializable {
     private HBox hBox;
 
     @FXML
-    private TableColumn titleCol,urlCol,descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab, bookingColScreenTab;
+    private TableColumn titleCol,urlCol,descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab;
 
     @FXML
     private TextField addTitle, addDescription;
-
 
     @FXML
     private ComboBox movieSelectionBox, timePicker;
@@ -103,20 +103,9 @@ public class EmployeeHomeController implements Initializable {
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
         timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
-        bookingColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
         populateScreeningsTable();
         populateMovieSelectBox();
 
-
-        //render background image
-//        BufferedImage bufferedBackground = null;
-//        try {
-//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-//        this.backgroundImg.setImage(background);
     }
 
 
@@ -142,30 +131,9 @@ public class EmployeeHomeController implements Initializable {
         File file = null;
         String filename = addTitle.getText();
 
-        //TODO: add exception Handler if employee presses cancel and doesn't select an image -> THROWS error
-
         //read image file
         try{
             chosenFile = fileChooser.showOpenDialog(null);
-
-            //Input validation for each field vs input validation globally when button pressed
-
-            //            if(chosenFile == null){
-//                System.err.println("no image chosen!");
-
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-//                popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-//                alert.setTitle("Cinego");
-//                alert.setHeaderText("Error: failed to upload image");
-//                alert.setContentText("Please select an image, "+ Main.user.getFirstName());
-//                PauseTransition delay = new PauseTransition(Duration.seconds(2));
-//                delay.setOnFinished(e -> popup.hide());
-//                popup.show();
-//                delay.play();
-
-//                JOptionPane.showMessageDialog(null, "PLEASE SELECT 1 FILE!", "Error", JOptionPane.ERROR_MESSAGE);
-//            }else{
             this.path = chosenFile.getAbsolutePath();
             file = new File(this.path);
             image = ImageIO.read(file);

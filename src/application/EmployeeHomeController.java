@@ -85,7 +85,7 @@ public class EmployeeHomeController implements Initializable {
 
     //reused variables in validation and creation of movies and screenings
     private String title, path,relativePath, description, screeningTime, screeningDate, movieTitle;
-    Film film;
+    private Film film;
     public static int screenID;
 
 
@@ -322,7 +322,6 @@ public class EmployeeHomeController implements Initializable {
     private void getScreeningID(){
         screenID = screeningsTable.getSelectionModel().getSelectedItem().getId();
         toSeatBooking.setDisable(false);
-
     }
 
     @FXML

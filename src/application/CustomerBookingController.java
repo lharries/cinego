@@ -88,18 +88,6 @@ public class CustomerBookingController implements Initializable {
 
     }
 
-    private void setupBackgroundImage() {
-        //renders background image of the view
-//        BufferedImage bufferedBackground = null;
-//        try {
-//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-//        this.backgroundImg.setImage(background);
-    }
-
     @FXML
     private void confirmMovieBooking(ActionEvent event) {
         //TODO: trigger a booking summary to be displayed (should we do an additional summary or is the one above the button enough?)

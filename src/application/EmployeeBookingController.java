@@ -14,7 +14,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class EmployeeBookingViewController implements Initializable{
+public class EmployeeBookingController implements Initializable{
 
     @FXML
     private Label Time;

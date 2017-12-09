@@ -1,6 +1,9 @@
 package application;
 
 import javafx.animation.PauseTransition;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -8,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import models.*;
 
@@ -33,10 +37,13 @@ public class CustomerProfileController implements Initializable{
     boolean textFieldEditable = false;
 
     @FXML
-    private TableView<Booking> bookingsTable;
+    private TableView<Screening> bookingsTable;
 
     @FXML
     private TableColumn titleColBookingTable, dateColBookingTable, timeColBookingTable, seatsColBookingTable;
+
+    @FXML
+    private ObservableList<Screening> screeningData;
 
 
 
@@ -45,13 +52,31 @@ public class CustomerProfileController implements Initializable{
 
         //initializes customer profile input fields and sets them to not editable
         setCustProfileFieldsEnabled(textFieldEditable);
+        initCellFactories();
 
-        titleColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
-        dateColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
+        populateBookingsTable();
 //        timeColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
-        seatsColBookingTable.setCellValueFactory(new PropertyValueFactory<Booking, Integer>("seatId"));
+//        seatsColBookingTable.setCellValueFactory(new PropertyValueFactory<Booking, Integer>("seatId"));
 
 //        populateBookingsTable();
+
+    }
+
+    private void initCellFactories() {
+
+        titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Screening,String>, ObservableValue<String>>() {
+            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Screening,String> param) {
+                try {
+                    return new ReadOnlyObjectWrapper<String>(FilmDAO.getFilmById(param.getValue().getId()).getTitle());
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return new ReadOnlyObjectWrapper<String>("");
+            }
+        });
+
+//        titleColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
+        dateColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
 
     }
 
@@ -59,10 +84,17 @@ public class CustomerProfileController implements Initializable{
      * Purpose: updates the moviesTable with movie specific data from the database
      */
     private void populateBookingsTable(){
+//
+//        try {
+//            screeningData = ScreeningDAO.get();
+        try {
+            bookingsTable.setItems(ScreeningDAO.getScreeningObservableList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
-
-        //        try {
-//            moviesData = FilmDAO.getFilmObservableList();
 //            moviesTable.setItems(moviesData);
 //        } catch (SQLException e) {
 //            e.printStackTrace();
@@ -71,8 +103,6 @@ public class CustomerProfileController implements Initializable{
 //        }
 
     }
-
-
 
     /**
      * Purpose: is called by clicking the edit Profile button and then calls the setCustProfileFieldsEnabled

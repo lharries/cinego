@@ -32,12 +32,12 @@
       <Label layoutX="119.0" layoutY="216.0" text="First name" />
       <Label layoutX="139.0" layoutY="405.0" text="E-Mail Address" />
       <Label layoutX="484.0" layoutY="101.0" prefHeight="17.0" prefWidth="141.0" text="Your movie history" />
-      <TableView layoutX="455.0" layoutY="139.0" onMouseClicked="#getSelectedBooking" prefHeight="488.0" prefWidth="711.0">
+      <TableView fx:id="bookingsTable" layoutY="139.0" onMouseClicked="#getSelectedBooking" prefHeight="488.0" prefWidth="711.0">
          <columns>
             <TableColumn fx:id="titleColBookingTable" prefWidth="136.5" text="Title" />
             <TableColumn fx:id="dateColBookingTable" prefWidth="105.5" text="Date" />
             <TableColumn fx:id="timeColBookingTable" prefWidth="97.5" text="Time" />
-            <TableColumn fx:id="seatsColBookingTable" prefWidth="97.5" text="Time" />
+            <TableColumn fx:id="seatsColBookingTable" prefWidth="97.5" text="Seats" />
          </columns></TableView>
       <Button fx:id="deleteBooking" disable="true" layoutX="1083.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
       <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setCustProfileEditable" text="Edit profile" />

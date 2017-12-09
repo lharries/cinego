@@ -23,7 +23,7 @@ public class Screening {
     private IntegerProperty id;
     private IntegerProperty filmId;
     private StringProperty date;
-    private StringProperty filmTitle;
+    private StringProperty filmTitle; // TODO Remove this
 
     public Screening() {
         this.id = new SimpleIntegerProperty();
@@ -84,6 +84,4 @@ public class Screening {
         Date date = longFormat.parse(getDate());
         return shortFormat.format(date);
     }
-
-
 }

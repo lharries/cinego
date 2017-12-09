@@ -23,6 +23,23 @@ public class FilmDAO {
 
     }
 
+    public static Film getFilmById(int id) throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = SQLiteConnection.executeQuery("SELECT * FROM Film", null);
+
+        // TODO deal with not being able to do .next();
+        resultSet.next();
+            Film film = new Film();
+            film.setId(resultSet.getInt("id"));
+            film.setTitle(resultSet.getString("title"));
+            film.setDescription(resultSet.getString("description"));
+            film.setImagePath(resultSet.getString("imagePath"));
+            film.setScreenings(ScreeningDAO.getScreeningObservableListByFilmId(film.getId()));
+            return film;
+
+    }
+
+
+
     private static Film getFilmFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         if (resultSet.next()) {
             Film film = new Film();

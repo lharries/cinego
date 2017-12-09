@@ -29,7 +29,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class CustomerBookingViewController implements Initializable {
+public class CustomerBookingController implements Initializable {
 
     private Seat selectedSeat;
 

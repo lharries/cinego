@@ -32,11 +32,8 @@ import java.util.logging.Logger;
 
 public class EmployeeHomeController implements Initializable {
 
-    //TODO: add file uploader to load movie images into project directory
-
 
     //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
-
 
     @FXML
     private Button CreateMovieButton;
@@ -70,13 +67,20 @@ public class EmployeeHomeController implements Initializable {
 
     @FXML
     private TextField addTitle, addDescription;
-    private String path;
+
 
     @FXML
     private ComboBox movieSelectionBox, timePicker;
 
     @FXML
     private DatePicker datePicker;
+
+    //reused variables in validation and creation of movies and screenings
+    private String title, path, description, screeningTime, screeningDate, movieTitle;
+    Film film;
+
+
+
 
 
     /**
@@ -115,32 +119,6 @@ public class EmployeeHomeController implements Initializable {
 //        this.backgroundImg.setImage(background);
     }
 
-    /**
-     *
-     * Purpose: allows user to also change to movie creation view from within his scene
-     */
-    @FXML
-    private void createMovie() throws SQLException, ClassNotFoundException {
-
-        //TODO: add image uploader to Movie Creation process and pass on it's url to rest of program
-
-        //TODO: add input validation (e.g. ID must be an int otherwise it can't be converter to Integer
-
-        //store input in local variables to used for TableView and database input
-        String title = addTitle.getText();
-        String description = addDescription.getText();
-
-
-
-        //adds the newly created movie to the database
-        FilmDAO.insertFilm(title, path, description);
-
-        //resets input fields to default + updates moviesTable & movieSelectionBox
-        addTitle.clear();
-        addDescription.clear();
-        populateMoviesTable();
-        populateMovieSelectBox();
-    }
 
     /**
      *Purpose: allows employee to upload a movie poster by copying the image into a local file and naming it
@@ -149,7 +127,6 @@ public class EmployeeHomeController implements Initializable {
      *  - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
      *  - https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java
      */
-
     @FXML
     private void uploadMovieImage(Event event){
 
@@ -171,39 +148,151 @@ public class EmployeeHomeController implements Initializable {
         //read image file
         try{
             chosenFile = fileChooser.showOpenDialog(null);
-            if(chosenFile == null){
-                System.err.println("no image chosen!");
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-                popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-                alert.setTitle("Cinego");
-                alert.setHeaderText("Error: failed to upload image");
-                alert.setContentText("Please select an image, "+ Main.user.getFirstName());
-                PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                delay.setOnFinished(e -> popup.hide());
-                popup.show();
-                delay.play();
+            //Input validation for each field vs input validation globally when button pressed
 
-                JOptionPane.showMessageDialog(null, "PLEASE SELECT 1 FILE!", "Error", JOptionPane.ERROR_MESSAGE);
-            }else{
-                this.path = chosenFile.getAbsolutePath();
-                file = new File(this.path);
-                image = ImageIO.read(file);
+            //            if(chosenFile == null){
+//                System.err.println("no image chosen!");
 
-                //write image to relative project path
-                try{
-                    file = new File("src/resources/" + filename+".jpg");
-                    ImageIO.write(image, "jpg", file);
-                }catch(IOException e){
-                    System.out.println("Error: "+e);
-                }
-            }
+
+
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+//                popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+//                alert.setTitle("Cinego");
+//                alert.setHeaderText("Error: failed to upload image");
+//                alert.setContentText("Please select an image, "+ Main.user.getFirstName());
+//                PauseTransition delay = new PauseTransition(Duration.seconds(2));
+//                delay.setOnFinished(e -> popup.hide());
+//                popup.show();
+//                delay.play();
+
+//                JOptionPane.showMessageDialog(null, "PLEASE SELECT 1 FILE!", "Error", JOptionPane.ERROR_MESSAGE);
+//            }else{
+            this.path = chosenFile.getAbsolutePath();
+            file = new File(this.path);
+            image = ImageIO.read(file);
         }catch(IOException e){
             System.out.println("Error: "+e);
         }
 
+        //write image to relative project path
+        try{
+            file = new File("src/resources/" + filename+".jpg");
+            ImageIO.write(image, "jpg", file);
+        }catch(IOException e){
+            System.out.println("Error: "+e);
+        }
     }
+
+
+    /**
+     * Purpose: validates user input before creating a movie
+     * Informs the user of outcome of test and only creates the movie when input is correct
+     *
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @FXML
+    private void movieValidation() throws SQLException, ClassNotFoundException {
+
+        //creates alert to be used in both cases: correct & incorrect inputs
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert.setTitle("Cinego");
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+
+        //gets the input values and checks if they're correctly filled in
+        title = addTitle.getText();
+        description = addDescription.getText();
+        if(title.isEmpty() || description.isEmpty() || path.isEmpty()){
+            alert.setHeaderText("Error: invalid input fields");
+            alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
+            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> popup.hide());
+            popup.show();
+            delay.play();
+//            alert.showAndWait();
+
+        } else {
+            alert.setHeaderText("Success: movie created");
+            alert.setContentText("Your movie was successfully created, "+ Main.user.getFirstName());
+            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> popup.hide());
+            popup.show();
+            delay.play();
+//            alert.showAndWait();
+
+            createMovie();
+        }
+    }
+
+    /**
+     *
+     * Purpose: allows user to also change to movie creation view from within his scene
+     */
+    @FXML
+    private void createMovie() throws SQLException, ClassNotFoundException {
+
+        //store input in local variables to used for TableView and database input
+        title = addTitle.getText();
+        description = addDescription.getText();
+
+        //adds the newly created movie to the database
+        FilmDAO.insertFilm(title,description,path);
+
+        //resets input fields to default + updates moviesTable & movieSelectionBox
+        addTitle.clear();
+        addDescription.clear();
+        populateMoviesTable();
+        populateMovieSelectBox();
+    }
+
+
+    /**
+     * Purpose: tests if input variables to create a screening are correct.
+     * Informs the user of outcome of test and only creates screening when input is correct
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @FXML
+    private void validateScreening() throws SQLException, ClassNotFoundException {
+
+        //creates alert to be used in both cases: correct & incorrect inputs
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert.setTitle("Cinego");
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+
+        film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
+        movieTitle = film.getTitle();
+        screeningTime = timePicker.getValue().toString();
+        screeningDate = datePicker.getValue().toString();
+
+        if(movieTitle.isEmpty() || screeningTime.isEmpty() || screeningDate.isEmpty()){
+            alert.setHeaderText("Error: invalid input fields");
+            alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
+            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> popup.hide());
+            popup.show();
+            delay.play();
+//            alert.showAndWait();
+
+        } else {
+            alert.setHeaderText("Success: screening created");
+            alert.setContentText("Your screening was successfully added, "+ Main.user.getFirstName());
+            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> popup.hide());
+            popup.show();
+            delay.play();
+//            alert.showAndWait();
+
+            createScreening();
+        }
+    }
+
 
     /**
      * Purpose: create a new
@@ -211,8 +300,6 @@ public class EmployeeHomeController implements Initializable {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-
-
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
@@ -220,16 +307,11 @@ public class EmployeeHomeController implements Initializable {
         //TODO: input validation - only when all three fields used + correct input then activate button
 
         //access input values & create date-time
-        String screeningTime = timePicker.getValue().toString();
-        String screeningDate = datePicker.getValue().toString();
         String date = screeningDate+" "+screeningTime;
-        Film film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
-        String movieTitle = film.getTitle();
 
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
-
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -240,16 +322,14 @@ public class EmployeeHomeController implements Initializable {
 
     /**
      * Purpose: exports list of screening data to directory: "../cinego/ScreeningsExport.csv"
+     * - Source: https://community.oracle.com/thread/2397100
      *
      * @throws IOException
      */
     @FXML
     private void exportToCSV() throws IOException {
 
-        //source: https://community.oracle.com/thread/2397100
         //TODO: add following data to csv export: movie title, dates, times and number of booked and available seats.
-
-
 
         //writes data into .csv file
         Writer writer = null;
@@ -277,7 +357,6 @@ public class EmployeeHomeController implements Initializable {
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openBookingView(event);
     }
-
 
 
     @FXML
@@ -312,6 +391,7 @@ public class EmployeeHomeController implements Initializable {
             e.printStackTrace();
         }
     }
+
     /**
      * Purpose: updates the movieSelectionBox with the latest Movie Titles from the database
      */

@@ -35,6 +35,8 @@ public class EmployeeHomeController implements Initializable {
     //TODO: add loggers to the validation for us
     //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
 
+    private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
+
     @FXML
     private Button CreateMovieButton;
 
@@ -76,7 +78,7 @@ public class EmployeeHomeController implements Initializable {
     private DatePicker datePicker;
 
     //reused variables in validation and creation of movies and screenings
-    private String title, path, description, screeningTime, screeningDate, movieTitle;
+    private String title, path,relativePath, description, screeningTime, screeningDate, movieTitle;
     Film film;
 
 
@@ -139,7 +141,6 @@ public class EmployeeHomeController implements Initializable {
         File chosenFile = null;
         File file = null;
         String filename = addTitle.getText();
-        String path = null;
 
         //TODO: add exception Handler if employee presses cancel and doesn't select an image -> THROWS error
 
@@ -151,8 +152,6 @@ public class EmployeeHomeController implements Initializable {
 
             //            if(chosenFile == null){
 //                System.err.println("no image chosen!");
-
-
 
 //                Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //                Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -176,13 +175,13 @@ public class EmployeeHomeController implements Initializable {
 
         //write image to relative project path
         try{
-            file = new File("src/resources/" + filename+".jpg");
+            relativePath = "src/resources/" + filename+".jpg";
+            file = new File(relativePath);
             ImageIO.write(image, "jpg", file);
         }catch(IOException e){
             System.out.println("Error: "+e);
         }
     }
-
 
     /**
      * Purpose: validates user input before creating a movie
@@ -238,7 +237,7 @@ public class EmployeeHomeController implements Initializable {
         description = addDescription.getText();
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title,description,path);
+        FilmDAO.insertFilm(title,description,relativePath);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         addTitle.clear();
@@ -346,7 +345,6 @@ public class EmployeeHomeController implements Initializable {
             writer.close();
         }
     }
-
 
     @FXML
     private void openSeatsBooked(ActionEvent event) {

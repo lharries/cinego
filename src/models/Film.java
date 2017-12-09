@@ -137,4 +137,9 @@ public class Film {
 
 
     }
+
+    @Override
+    public String toString() {
+        return title.toString();
+    }
 }

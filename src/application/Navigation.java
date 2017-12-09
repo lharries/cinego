@@ -2,7 +2,6 @@ package application;
 
 import javafx.fxml.FXMLLoader;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 
 
@@ -23,12 +22,12 @@ public class Navigation {
     //user scenes
     public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
     public static final String CUST_PROGRAM_VIEW = "/views/Movies.fxml";
-    public static final String CUST_BOOKING_VIEW = "/views/CustomerBookingView.fxml";
+    public static final String CUST_BOOKING_VIEW = "/views/CustomerBooking.fxml";
 
     //employee scenes
     public static final String EMPL_HOME_VIEW = "/views/EmployeeHome.fxml";
     public static final String EMPL_MOVIE_VIEW = "/views/EmployeeMovieForm.fxml";
-    public static final String EMPL_BOOKING_VIEW = "/views/EmployeeBookingView.fxml";
+    public static final String EMPL_BOOKING_VIEW = "/views/EmployeeBooking.fxml";
 
     //Main controller for each user's (user & employee) specific rootViews
     private static CustomerRootController customerController;

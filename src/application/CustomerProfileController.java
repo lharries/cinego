@@ -19,7 +19,7 @@ public class CustomerProfileController implements Initializable{
 
     @FXML
     private Button updateProfileBttn, editProfileBttn;
-    
+
     @FXML
     private ImageView backgroundImg;
 
@@ -171,14 +171,8 @@ public class CustomerProfileController implements Initializable{
 
         //TODO 2: Add error popup for movies that are in the past (can't delete them!)
         //TODO 3: delete the actual booking with a JDialogBOx pop-up asking if you're sure to delete (https://www.youtube.com/watch?v=oZUGMpGQxgQ)
-
-
-
+        //TODO: add ability to select movies from the list and delete them (see employeeHomeController: getScreeningID() )
 
     }
-
-
-    //TODO: //TODO: add ability to select movies from the list and delete them (see employeeHomeController: getScreeningID() )
-
 
 }

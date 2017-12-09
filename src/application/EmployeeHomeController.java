@@ -289,6 +289,12 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
+    @FXML
+    private void getScreeningID(){
+        int id = screeningsTable.getSelectionModel().getSelectedItem().getId();
+        System.err.println(id);
+    }
+
 
     /**
      * Purpose: create a new

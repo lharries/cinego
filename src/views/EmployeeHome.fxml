@@ -33,7 +33,7 @@
       </ImageView>
 
 
-      <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="100.0" prefHeight="467.0" prefWidth="526.0">
+      <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="100.0" onMouseClicked="#getScreeningID" prefHeight="467.0" prefWidth="526.0">
          <columns>
             <TableColumn fx:id="titleColScreenTab" prefWidth="136.5" text="Title" />
             <TableColumn fx:id="dateColScreenTab" prefWidth="105.5" text="Date" />

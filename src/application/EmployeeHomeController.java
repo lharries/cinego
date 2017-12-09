@@ -1,5 +1,6 @@
 package application;
 
+import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -14,13 +15,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
@@ -113,7 +117,6 @@ public class EmployeeHomeController implements Initializable {
 //        this.backgroundImg.setImage(background);
     }
 
-
     /**
      *
      * Purpose: allows user to also change to movie creation view from within his scene
@@ -143,12 +146,17 @@ public class EmployeeHomeController implements Initializable {
         populateMovieSelectBox();
     }
 
-
+    /**
+     *Purpose: allows employee to upload a movie poster by copying the image into a local file and naming it
+     * after the chosen movie title
+     * Sources:
+     *  - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
+     *  - https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java
+     */
 
     @FXML
     private void uploadMovieImage(Event event){
 
-//        source: http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter
@@ -159,47 +167,54 @@ public class EmployeeHomeController implements Initializable {
         BufferedImage image = null;
         File chosenFile = null;
         File file = null;
-        String filename = "kaiTest.jpg";
+        String filename = addTitle.getText();
         String path = null;
-
-        //TODO: myFileChooser.getSelectedFile().getAbsolutePath()
 
         //TODO: add exception Handler if employee presses cancel and doesn't select an image -> THROWS error
 
         //read image file
         try{
             chosenFile = fileChooser.showOpenDialog(null);
-            path = chosenFile.getAbsolutePath();
+            if(chosenFile == null){
+                System.err.println("no image chosen!");
 
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+                popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+                alert.setTitle("Cinego");
+                alert.setHeaderText("Error: failed to upload image");
+                alert.setContentText("Please select an image, "+ Main.user.getFirstName());
+                PauseTransition delay = new PauseTransition(Duration.seconds(2));
+                delay.setOnFinished(e -> popup.hide());
+                popup.show();
+                delay.play();
 
-            file = new File(path);
-//            path = directoryChooser.showDialog(Main.primaryStage).toString();
-            image = ImageIO.read(file);
+                JOptionPane.showMessageDialog(null, "PLEASE SELECT 1 FILE!", "Error", JOptionPane.ERROR_MESSAGE);
+            }else{
+                path = chosenFile.getAbsolutePath();
+                file = new File(path);
+                image = ImageIO.read(file);
 
+                //write image to relative project path
+                try{
+                    file = new File("src/resources/" + filename+".jpg");
+                    ImageIO.write(image, "jpg", file);
+                }catch(IOException e){
+                    System.out.println("Error: "+e);
+                }
+            }
         }catch(IOException e){
             System.out.println("Error: "+e);
         }
-        //write image
-        try{
-            file = new File("src/resources/" + filename);
-            ImageIO.write(image, "jpg", file);
-        }catch(IOException e){
-            System.out.println("Error: "+e);
-        }
-
-            //source: https://bytes.com/topic/java/answers/828841-how-copy-image-file
-//        FileInputStream fis=new FileInputStream(new File("D:/image.bmp"));
-//        FileOutputStream fos=new FilePutputStream(new FIle("D:/copyImage.bmp"));
-//        int c;
-//        while((c=fis.read())!=-1)
-//        {
-//            fos.write(c);
-//        }
-//
-
-
 
     }
+
+    /**
+     * Purpose: create a new
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
 
     @FXML
@@ -273,8 +288,6 @@ public class EmployeeHomeController implements Initializable {
     private void deleteScreening(){
         //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
     }
-
-
 
     /**
      * Purpose: updates the moviesTable with movie specific data from the database

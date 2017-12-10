@@ -40,9 +40,8 @@ public class EmployeeHomeController implements Initializable {
     //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT
     //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
 
-
-
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
+
 
     @FXML
     private Button toSeatBooking;
@@ -146,6 +145,7 @@ public class EmployeeHomeController implements Initializable {
             image = ImageIO.read(file);
         }catch(IOException e){
             System.out.println("Error: "+e);
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to upload the movie poster. See: " + e);
         }
 
         //write image to relative project path
@@ -155,6 +155,7 @@ public class EmployeeHomeController implements Initializable {
             ImageIO.write(image, "jpg", file);
         }catch(IOException e){
             System.out.println("Error: "+e);
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to write movie poster. See: " + e);
         }
     }
 
@@ -305,8 +306,9 @@ public class EmployeeHomeController implements Initializable {
                 String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
                 writer.write(text);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "exportCSV", "Failed to write data to CSV file. See: " + e);
         }
         finally {
             writer.flush();
@@ -349,8 +351,10 @@ public class EmployeeHomeController implements Initializable {
             moviesTable.setItems(moviesData);
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMoviesTable", "Failed to load data to populate the movies table. See: " + e);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMoviesTable", "Failed to load data to populate the movies table. See: " + e);
         }
     }
 
@@ -363,8 +367,11 @@ public class EmployeeHomeController implements Initializable {
             screeningsTable.setItems(screeningsData);
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateScreeningsTable", "Failed to load data to populate the screenings table. See: " + e);
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateScreeningsTable", "Failed to load data to populate the screenings table. See: " + e);
         }
     }
 
@@ -376,8 +383,10 @@ public class EmployeeHomeController implements Initializable {
             movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
         }
     }
 

@@ -22,37 +22,31 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 public class CustomerProfileController implements Initializable{
-
-
 
 
     @FXML
     private Button updateProfileBttn, editProfileBttn;
-
     @FXML
     private ImageView backgroundImg;
-
     @FXML
     private TextField custFirstNameField, custLastNameField, custEmailField, custPhone;
-
     @FXML
     private Button deleteBooking, cancelUpdatingProfileBttn;
-
-    boolean textFieldEditable = false;
-
     @FXML
     private TableView<Booking> bookingsTable;
-
     @FXML
-    private TableColumn titleColBookingTable, dateColBookingTable, timeColBookingTable, seatsColBookingTable;
-
+    private TableColumn titleColBookingTable, dateColBookingTable, seatsColBookingTable;
     @FXML
     private ObservableList<Screening> screeningData;
 
-    private static int bookingID, screeningID;
-    private Screening selectedScreening;
+    private boolean textFieldEditable = false;
 
+    private static int bookingID;
+
+    private Screening selectedScreening;
 
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
@@ -66,7 +60,6 @@ public class CustomerProfileController implements Initializable{
         initCellFactories();
 
         populateBookingsTable();
-
     }
 
     private void initCellFactories() {
@@ -118,30 +111,7 @@ public class CustomerProfileController implements Initializable{
                 return new ReadOnlyObjectWrapper<String>("");
             }
         });
-
-
-
-//        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Screening,String>, ObservableValue<String>>() {
-//            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Screening,String> param) {
-//                try {
-//                    return new ReadOnlyObjectWrapper<String>(param.getValue().getMediumDate());
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                    return new ReadOnlyObjectWrapper<String>("");
-//                }
-//            }
-//        });
-
-//        seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Seat,Integer>, ObservableValue<Integer() {
-//            @Override public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Seat,Integer> param) {
-//                try {
-//                    return new ReadOnlyObjectWrapper<Integer>(FilmDAO.getFilmById(param.getValue().getId()).getTitle());
-//                } catch (SQLException | ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//                return new ReadOnlyObjectWrapper<String>("");
-//            }
-//        });
+        
     }
 
     /**

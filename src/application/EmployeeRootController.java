@@ -9,9 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,8 +20,11 @@ import java.util.logging.Logger;
 
 
 /**
- * Purpose: This class controls all the employee views and allows user to switch between
+ * This class controls all the employee views and allows user to switch between
  * the respective scenes.
+ *
+ * @author Luke Harries, Kai Klasen
+ * @version 1.0
  *
  */
 public class EmployeeRootController implements Initializable {
@@ -47,16 +48,8 @@ public class EmployeeRootController implements Initializable {
     @FXML
     private Label emplLastName;
 
-//    @FXML
-//    private ImageView background;
-
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
-    /**
-     *Purpose:
-     *
-     *
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -15,20 +15,38 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.converter.DateTimeStringConverter;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
+/**
+ * The EmployeeHomeController implements functionality specific to the EmployeeHome.fxml file which is part
+ * of the cinema booking system - 'Cinego'.
+ *
+ * @author Luke Harries, Kai Klasen
+ * @version 1.0
+ */
+
+    //@author (classes and interfaces only, required)
+    //@version (classes and interfaces only, required. See footnote 1)
+    //@param (methods and constructors only)
+    //@return (methods only)
+    //@exception (@throws is a synonym added in Javadoc 1.2)
+
 
 public class EmployeeHomeController implements Initializable {
 
@@ -40,12 +58,11 @@ public class EmployeeHomeController implements Initializable {
     //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT
     //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
 
-
-
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
 
+
     @FXML
-    private Button toSeatBooking;
+    private Button toSeatBooking, deleteBooking;
 
     @FXML
     private ImageView backgroundImg, moviePoster;
@@ -85,13 +102,12 @@ public class EmployeeHomeController implements Initializable {
 
     //reused variables in validation and creation of movies and screenings
     private String title, path,relativePath, description, screeningTime, screeningDate, movieTitle;
-    Film film;
+    private Film film;
     public static int screenID;
 
 
-
     /**
-     * Purpose: sets the column titles of both tables and populates them with data from the database,
+     * Sets the column titles of both tables and populates them with data from the database,
      * intialises the movieSelectionBox with the latest movies and renderes the background Image of the view
      *
      * @param location
@@ -109,15 +125,14 @@ public class EmployeeHomeController implements Initializable {
         //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
-        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
+        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
         populateScreeningsTable();
-        populateMovieSelectBox();
+        populateMovieSelectionBox();
 
     }
 
-
     /**
-     *Purpose: allows employee to upload a movie poster by copying the image into a local file and naming it
+     * Allows the employee to upload a movie poster by copying the image into a local file and naming it
      * after the chosen movie title
      * Sources:
      *  - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
@@ -133,35 +148,39 @@ public class EmployeeHomeController implements Initializable {
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
+        //read image file & check if file not null
         BufferedImage image = null;
         File chosenFile = null;
         File file = null;
         String filename = addTitle.getText();
-
-        //read image file
         try{
             chosenFile = fileChooser.showOpenDialog(null);
-            this.path = chosenFile.getAbsolutePath();
-            file = new File(this.path);
-            image = ImageIO.read(file);
+            if(chosenFile != null){
+                path = chosenFile.getAbsolutePath();
+                file = new File(path);
+                image = ImageIO.read(file);
+            }
         }catch(IOException e){
-            System.out.println("Error: "+e);
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to upload the movie poster. See: " + e);
         }
 
         //write image to relative project path
-        try{
-            relativePath = "src/resources/" + filename+".jpg";
-            file = new File(relativePath);
-            ImageIO.write(image, "jpg", file);
-        }catch(IOException e){
-            System.out.println("Error: "+e);
+        if(chosenFile != null) {
+            try {
+                relativePath = "src/resources/" + filename + ".jpg";
+                file = new File(relativePath);
+                ImageIO.write(image, "jpg", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to write movie poster. See: " + e);
+            }
         }
     }
 
     /**
-     * Purpose: validates user input before creating a movie
+     * Validates user input before creating a movie.
      * Informs the user of outcome of test and only creates the movie when input is correct
-     *
      *
      * @throws SQLException
      * @throws ClassNotFoundException
@@ -178,29 +197,29 @@ public class EmployeeHomeController implements Initializable {
         //gets the input values and checks if they're correctly filled in
         title = addTitle.getText();
         description = addDescription.getText();
-
         if(title.isEmpty() || description.isEmpty() || path.isEmpty()){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
         } else {
             alert.setHeaderText("Success: movie created");
-            alert.setContentText("Your movie was successfully created, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
-
-            createMovie();
+            alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
         }
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
+
+        createMovie();
+
     }
 
     /**
+     * Method that creates a new movie by inserting the user input into the database and re-populating
+     * the movieTable from the database
      *
-     * Purpose: allows user to also change to movie creation view from within his scene
+     * @throws SQLException
+     * @throws ClassNotFoundException
      */
     @FXML
     private void createMovie() throws SQLException, ClassNotFoundException {
@@ -216,11 +235,11 @@ public class EmployeeHomeController implements Initializable {
         addTitle.clear();
         addDescription.clear();
         populateMoviesTable();
-        populateMovieSelectBox();
+        populateMovieSelectionBox();
     }
 
     /**
-     * Purpose: tests if input variables to create a screening are correct.
+     * Tests if input variables to create a screening are correct.
      * Informs the user of outcome of test and only creates screening when input is correct
      *
      * @throws SQLException
@@ -239,28 +258,29 @@ public class EmployeeHomeController implements Initializable {
         movieTitle = movieSelectionBox.getValue()+"";
         screeningTime = timePicker.getValue()+"";
         screeningDate = datePicker.getValue()+"";
+
         if(movieTitle.equals("null") || screeningTime.equals("null") || screeningDate.equals("null")){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
+
         } else {
             alert.setHeaderText("Success: screening created");
-            alert.setContentText("Your screening was successfully added, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
+            alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
 
             createScreening();
         }
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
+
+
+
     }
 
 
     /**
-     * Purpose: create a new
+     * Creates a new screening to inserting the user data into the database and re-populating the screeningTable
      *
      * @throws SQLException
      * @throws ClassNotFoundException
@@ -268,15 +288,21 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
-        //TODO: new screening in screeningTable should include a button linking to screenings specific employeeBookingView ask @LUKE
         //TODO: input validation - only when all three fields used + correct input then activate button
 
         //access input values & create date-time
         String date = screeningDate+" "+screeningTime;
+        film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
+
+//        DateTimeStringConverter date2 = new DateTimeStringConverter();
+//        date2.fromString(date);
+
 
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
+
+
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -286,7 +312,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Purpose: exports list of screening data to directory: "../cinego/ScreeningsExport.csv"
+     * Exports a list of relevant screening data to directory: "../cinego/ScreeningsExport.csv"
      * - Source: https://community.oracle.com/thread/2397100
      *
      * @throws IOException
@@ -305,8 +331,9 @@ public class EmployeeHomeController implements Initializable {
                 String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
                 writer.write(text);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "exportCSV", "Failed to write data to CSV file. See: " + e);
         }
         finally {
             writer.flush();
@@ -320,14 +347,47 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void getScreeningID(){
+
         screenID = screeningsTable.getSelectionModel().getSelectedItem().getId();
         toSeatBooking.setDisable(false);
-
+        deleteBooking.setDisable(false);
     }
 
+
+    @FXML
+    private void deleteScreening() {
+
+        //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
+
+        //Prompts user to confirm deleting the selected screening
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert.setTitle("Cinego");
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+        alert.setHeaderText("Warning: deleting screening");
+        alert.setContentText("Are you sure you want to delete this screening, " + Main.user.getFirstName() + " ?");
+
+        //Deletes movie depending on user response
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                ScreeningDAO.deleteScreening(screenID);
+                populateScreeningsTable();
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "deleteScreening", "Failed to delete screening from screeningTable. See: " + e);
+            }
+        }
+    }
+
+    /**
+     *
+     *
+     * @param event
+     */
     @FXML
     private void openSeatsBooked(ActionEvent event) {
-        //TODO: open a movie's specific "seats booked overview" +
+        //TODO: @Luke: open a movie's specific "seats booked overview" +
 
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openBookingView(event);
@@ -335,51 +395,52 @@ public class EmployeeHomeController implements Initializable {
         toSeatBooking.setDisable(true);
     }
 
-
-    @FXML
-    private void deleteScreening(){
-        //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
-    }
-
     /**
-     * Purpose: updates the moviesTable with movie specific data from the database
+     * Updates the moviesTable with movie specific data from the database
      */
     private void populateMoviesTable(){
         try {
             moviesData = FilmDAO.getFilmObservableList();
             moviesTable.setItems(moviesData);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMoviesTable", "Failed to load data to populate the movies table. See: " + e);
         }
     }
 
     /**
-     * Purpose: updates the screeningsTable with screening specific data from the database
+     * Updates the screeningsTable with screening specific data from the database
      */
     private void populateScreeningsTable(){
         try {
             screeningsData = ScreeningDAO.getScreeningObservableList();
             screeningsTable.setItems(screeningsData);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateScreeningsTable", "Failed to load data to populate the screenings table. See: " + e);
         }
     }
 
     /**
-     * Purpose: updates the movieSelectionBox with the latest Movie Titles from the database
+     * Updates the movieSelectionBox with the latest Movie Titles from the database
      */
-    private void populateMovieSelectBox(){
+    private void populateMovieSelectionBox(){
         try {
             movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectionBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
         }
+    }
+
+    private void populateTimePicker(){
+
+//        timePicker.getSelectionModel().
+//
+//        Screening screening = new Screening();
+//        timePicker.setValue(screening.getDate());
+
+
     }
 
 }

@@ -25,10 +25,12 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,11 +43,11 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 
-    //@author (classes and interfaces only, required)
-    //@version (classes and interfaces only, required. See footnote 1)
-    //@param (methods and constructors only)
-    //@return (methods only)
-    //@exception (@throws is a synonym added in Javadoc 1.2)
+//@author (classes and interfaces only, required)
+//@version (classes and interfaces only, required. See footnote 1)
+//@param (methods and constructors only)
+//@return (methods only)
+//@exception (@throws is a synonym added in Javadoc 1.2)
 
 
 public class EmployeeHomeController implements Initializable {
@@ -89,7 +91,7 @@ public class EmployeeHomeController implements Initializable {
     private HBox hBox;
 
     @FXML
-    private TableColumn titleCol,urlCol,descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab;
+    private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab;
 
     @FXML
     private TextField addTitle, addDescription;
@@ -101,7 +103,7 @@ public class EmployeeHomeController implements Initializable {
     private DatePicker datePicker;
 
     //reused variables in validation and creation of movies and screenings
-    private String title, path,relativePath, description, screeningTime, screeningDate, movieTitle;
+    private String title, path, relativePath, description, screeningTime, screeningDate, movieTitle;
     private Film film;
     public static int screenID;
 
@@ -135,11 +137,11 @@ public class EmployeeHomeController implements Initializable {
      * Allows the employee to upload a movie poster by copying the image into a local file and naming it
      * after the chosen movie title
      * Sources:
-     *  - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
-     *  - https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java
+     * - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
+     * - https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java
      */
     @FXML
-    private void uploadMovieImage(Event event){
+    private void uploadMovieImage(Event event) {
 
         FileChooser fileChooser = new FileChooser();
 
@@ -153,28 +155,75 @@ public class EmployeeHomeController implements Initializable {
         File chosenFile = null;
         File file = null;
         String filename = addTitle.getText();
-        try{
-            chosenFile = fileChooser.showOpenDialog(null);
-            if(chosenFile != null){
-                path = chosenFile.getAbsolutePath();
-                file = new File(path);
-                image = ImageIO.read(file);
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to upload the movie poster. See: " + e);
-        }
+        chosenFile = fileChooser.showOpenDialog(null);
+        if (chosenFile != null) {
+            path = chosenFile.getAbsolutePath();
+            chosenFile = new File(path);
+            System.out.println(path);
 
-        //write image to relative project path
-        if(chosenFile != null) {
+//            try {
+            File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+            Path parent = f.toPath();
+            Path resources = Paths.get(parent.toString(), "../","movies-images");
+            System.out.println("resources");
+            System.out.println(resources);
+            File movieImages = new File(resources.toString());
+            System.out.println(movieImages);
+            System.out.println(Arrays.toString(movieImages.list()));
+            URL string = getClass().getResource("../resources");
+
+//            URL movieImages = getClass().getResource("../../movie-images");
+//            System.out.println(movieImages);
+
+            String resourcesPath = string.getPath();
+
+            File newFile = new File(resourcesPath + "/hello.png");
+
             try {
-                relativePath = "src/resources/" + filename + ".jpg";
-                file = new File(relativePath);
-                ImageIO.write(image, "jpg", file);
+                newFile.createNewFile();
+                System.out.println(newFile);
+                Files.copy(chosenFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
-                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to write movie poster. See: " + e);
             }
+
+
+
+
+            //got the source file, need to get the resources directory adjcaent to it, then create the new file in that
+
+//            String newFilePath = f.getParent() + "/hello.jpg";
+//            File newFile = new File(newFilePath);
+//            try {
+//
+//                String[] list  = f.list((dir, name) -> {
+//                    return Objects.equals(name, "resources");
+//                });
+//                System.out.println(Arrays.toString(list));
+//                newFile.createNewFile();
+//                System.out.println(newFile);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+////
+//                System.out.println(f.getAbsolutePath());
+//                image = ImageIO.read(chosenFile);
+//                file = new File("/resources/hello.jpg");
+//                System.out.println(file.getAbsolutePath());
+//                file.createNewFile();
+//                Files.copy(chosenFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//
+//                ImageIO.write(image, "jpg", file);
+//                System.out.println(file.getAbsolutePath());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+//
+//                relativePath = "helloooooo" + ".jpg";
+//                file = new File(relativePath);
+//                ImageIO.write(image, "jpg", file);
+//                ImageIO.write(image, "jpg", file);
         }
     }
 
@@ -197,9 +246,9 @@ public class EmployeeHomeController implements Initializable {
         //gets the input values and checks if they're correctly filled in
         title = addTitle.getText();
         description = addDescription.getText();
-        if(title.isEmpty() || description.isEmpty() || path.isEmpty()){
+        if (title.isEmpty() || description.isEmpty() || path.isEmpty()) {
             alert.setHeaderText("Error: invalid input fields");
-            alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
+            alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
         } else {
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
@@ -229,7 +278,7 @@ public class EmployeeHomeController implements Initializable {
         description = addDescription.getText();
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title,description,relativePath);
+        FilmDAO.insertFilm(title, description, relativePath);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         addTitle.clear();
@@ -255,13 +304,13 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         //get input values and check for validity
-        movieTitle = movieSelectionBox.getValue()+"";
-        screeningTime = timePicker.getValue()+"";
-        screeningDate = datePicker.getValue()+"";
+        movieTitle = movieSelectionBox.getValue() + "";
+        screeningTime = timePicker.getValue() + "";
+        screeningDate = datePicker.getValue() + "";
 
-        if(movieTitle.equals("null") || screeningTime.equals("null") || screeningDate.equals("null")){
+        if (movieTitle.equals("null") || screeningTime.equals("null") || screeningDate.equals("null")) {
             alert.setHeaderText("Error: invalid input fields");
-            alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
+            alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
 
         } else {
             alert.setHeaderText("Success: screening created");
@@ -273,7 +322,6 @@ public class EmployeeHomeController implements Initializable {
         delay.setOnFinished(e -> popup.hide());
         popup.show();
         delay.play();
-
 
 
     }
@@ -291,7 +339,7 @@ public class EmployeeHomeController implements Initializable {
         //TODO: input validation - only when all three fields used + correct input then activate button
 
         //access input values & create date-time
-        String date = screeningDate+" "+screeningTime;
+        String date = screeningDate + " " + screeningTime;
         film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
 
@@ -301,7 +349,6 @@ public class EmployeeHomeController implements Initializable {
 
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
-
 
 
         //resets input values to default + update screeningTable
@@ -327,15 +374,14 @@ public class EmployeeHomeController implements Initializable {
         try {
             File file = new File("../cinego/ScreeningsExport.csv");
             writer = new BufferedWriter(new FileWriter(file));
-            for (Screening Screening: screeningsData) {
+            for (Screening Screening : screeningsData) {
                 String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
                 writer.write(text);
             }
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "exportCSV", "Failed to write data to CSV file. See: " + e);
-        }
-        finally {
+        } finally {
             writer.flush();
             writer.close();
         }
@@ -343,10 +389,9 @@ public class EmployeeHomeController implements Initializable {
 
     /**
      * Extracts the screeningsID upon selecting a screening from the screeningsTable
-     *
      */
     @FXML
-    private void getScreeningID(){
+    private void getScreeningID() {
 
         screenID = screeningsTable.getSelectionModel().getSelectedItem().getId();
         toSeatBooking.setDisable(false);
@@ -381,8 +426,6 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     *
-     *
      * @param event
      */
     @FXML
@@ -398,7 +441,7 @@ public class EmployeeHomeController implements Initializable {
     /**
      * Updates the moviesTable with movie specific data from the database
      */
-    private void populateMoviesTable(){
+    private void populateMoviesTable() {
         try {
             moviesData = FilmDAO.getFilmObservableList();
             moviesTable.setItems(moviesData);
@@ -411,7 +454,7 @@ public class EmployeeHomeController implements Initializable {
     /**
      * Updates the screeningsTable with screening specific data from the database
      */
-    private void populateScreeningsTable(){
+    private void populateScreeningsTable() {
         try {
             screeningsData = ScreeningDAO.getScreeningObservableList();
             screeningsTable.setItems(screeningsData);
@@ -424,7 +467,7 @@ public class EmployeeHomeController implements Initializable {
     /**
      * Updates the movieSelectionBox with the latest Movie Titles from the database
      */
-    private void populateMovieSelectionBox(){
+    private void populateMovieSelectionBox() {
         try {
             movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
         } catch (SQLException | ClassNotFoundException e) {
@@ -433,7 +476,7 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
-    private void populateTimePicker(){
+    private void populateTimePicker() {
 
 //        timePicker.getSelectionModel().
 //

@@ -152,7 +152,6 @@ public class CustomerProfileController implements Initializable{
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "CustomerProfileController", "populateBookingsTable", "Failed to populate the bookingsTable. See: " + e);
         }
-
     }
 
     /**
@@ -279,9 +278,9 @@ public class CustomerProfileController implements Initializable{
     @FXML
     private void deleteMovieBooking(){
 
-        //TODO: Allow deleting bookings only for future bookings -> Add error popup for movies that are in the past (can't delete them!)
+        //TODO: Allow deleting bookings only for future bookings (1 day in advance to give fair notice!!! SPECIAL FEATURE) -> Add error popup for movies that are in the past (can't delete them!)
 
-        //Alert prompting user to confirm deleting booking
+        //Declares & instantiates alert prompting user to confirm deleting booking
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
@@ -291,6 +290,8 @@ public class CustomerProfileController implements Initializable{
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         ButtonType buttonTypeConfirm = new ButtonType("Delete booking");
         alert.getButtonTypes().setAll(buttonTypeCancel,buttonTypeConfirm);
+
+        //waiting for user decision: deletes booking from db upon confirmation & cancel deletion if wanted
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeConfirm) {
             try {
@@ -301,7 +302,6 @@ public class CustomerProfileController implements Initializable{
                 e.printStackTrace();
                 LOGGER.logp(Level.WARNING, "CustomerProfileController", "deleteMovieBooking", "Failed to run db DELETE query. See: " + e);
             }
-
         }
 
         alert.close();

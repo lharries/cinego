@@ -33,6 +33,7 @@ public class FilmDAO {
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
             film.setImagePath(resultSet.getString("imagePath"));
+            //added
             film.setScreenings(ScreeningDAO.getScreeningObservableListByFilmId(film.getId()));
             return film;
 

@@ -1,14 +1,17 @@
 package application;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import models.*;
 
 import java.io.IOException;
@@ -16,9 +19,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class EmployeeBookingController implements Initializable{
+public class EmployeeBookingController implements Initializable {
 
     public static Screening selectedScreening;
 
@@ -30,7 +34,6 @@ public class EmployeeBookingController implements Initializable{
     private ImageView backgroundImg;
 
     ArrayList<Seat> selectedSeats;
-
 
 
     //TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
@@ -98,12 +101,10 @@ public class EmployeeBookingController implements Initializable{
                     Booking bookingInSeat = BookingDAO.getBooking(seat.getId(), selectedScreening.getId());
 
                     if (bookingInSeat != null) {
-                        bookedSeatsCount ++;
-                        if (bookingInSeat.getCustomerId() == Main.user.getId()) {
-                            btn.setGraphic(selectedSeatImage);
-                        } else {
-                            btn.setGraphic(takenSeatImage);
-                        }
+                        bookedSeatsCount++;
+                        btn.setGraphic(takenSeatImage);
+                        btn.setOnMouseClicked(event -> showBookingDetails(bookingInSeat));
+                    } else {
                         btn.setDisable(true);
                     }
 
@@ -144,6 +145,33 @@ public class EmployeeBookingController implements Initializable{
             text.toFront();
             gridPaneSeats.add(text, column, 5);
         }
+    }
+
+    public void showBookingDetails(Booking booking) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        // Get the Stage
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+
+        // Add a custom icon.
+        stage.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+
+        alert.setTitle("Booking Details");
+        try {
+            Customer customer = booking.getCustomer();
+            if (customer != null) {
+                alert.setContentText("Customer: " + customer.getFirstName() + " " + customer.getLastName() + "\n");
+            } else {
+                alert.setContentText("Error: Unable to find customer");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeCancel);
+
+        alert.show();
     }
 
 }

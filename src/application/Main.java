@@ -45,7 +45,7 @@ public class Main extends Application {
 			Main.primaryStage = primaryStage;
 			//launches the loginCust view upon running program
 
-			root = FXMLLoader.load(getClass().getResource("/views/CustomerBooking.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 			root.setCache(true);
 			root.setCacheHint(CacheHint.SPEED);
 			Scene scene = new Scene(root);
@@ -63,12 +63,6 @@ public class Main extends Application {
 	public static void main(String[] args) {
 
 //		AquaFX.style();
-
-		try {
-			user = CustomerDAO.login("customer", "customerpassword");
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 
 		launch(args);
 	}

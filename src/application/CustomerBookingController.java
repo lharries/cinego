@@ -171,26 +171,34 @@ public class CustomerBookingController implements Initializable {
                     Button btn = new Button();
                     btn.setGraphic(seatViewImage);
 
-                    btn.setOnAction((ActionEvent e) -> {
-                        if (selectedSeats.contains(seat)) {
-                            selectedSeats.remove(seat);
-                            btn.setGraphic(seatViewImage);
-                        } else {
-                            selectedSeats.add(seat);
-                            btn.setGraphic(selectedSeatImage);
-                        }
-                        displaySelectedSeats();
-                    });
-
                     Booking bookingInSeat = BookingDAO.getBooking(seat.getId(), selectedScreening.getId());
 
                     if (bookingInSeat != null) {
-                        if (bookingInSeat.getCustomerId() == Main.user.getId()) {
-                            btn.setGraphic(selectedSeatImage);
-                        } else {
-                            btn.setGraphic(takenSeatImage);
-                        }
-                        btn.setDisable(true);
+                        btn.setGraphic(takenSeatImage);
+                        btn.setOnAction((ActionEvent e) -> {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                            alert.setTitle("Seat Booked");
+                            alert.setHeaderText("Error - Seat already booked");
+                            alert.setContentText("Please select a seat which has not yet been booked");
+
+                            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                            alert.getButtonTypes().setAll(buttonTypeCancel);
+
+                            alert.show();
+                        });
+                    } else {
+                        btn.setOnAction((ActionEvent e) -> {
+                            if (selectedSeats.contains(seat)) {
+                                selectedSeats.remove(seat);
+                                btn.setGraphic(seatViewImage);
+                            } else {
+                                selectedSeats.add(seat);
+                                btn.setGraphic(selectedSeatImage);
+                            }
+                            displaySelectedSeats();
+                        });
                     }
 
                     System.out.println(BookingDAO.getBooking(seat.getId(), selectedScreening.getId()));

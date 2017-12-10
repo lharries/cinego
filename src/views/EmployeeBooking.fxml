@@ -73,8 +73,6 @@
             <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="83.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="63.0" valignment="CENTER" vgrow="SOMETIMES" />
          </rowConstraints>
-         <children>
-         </children>
       </GridPane>
       <Label fx:id="bookedSeats" alignment="CENTER" layoutX="946.0" layoutY="122.0" prefHeight="58.0" prefWidth="152.0" text="Booked seats:" textAlignment="CENTER">
          <font>
@@ -107,6 +105,7 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <Label layoutX="956.0" layoutY="295.0" prefHeight="72.0" prefWidth="277.0" text="Click on a booking for customer information" wrapText="true" />
       <!--<PieChart fx:id="seatsBookedPieChart" layoutX="999.0" layoutY="239.0" prefHeight="208.0" prefWidth="203.0" />-->
    </children>
 </AnchorPane>

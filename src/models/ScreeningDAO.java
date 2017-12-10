@@ -97,5 +97,31 @@ public class ScreeningDAO {
         );
     }
 
+    //TODO: @Kai write method so it can be used in CustomerProfileController to fill the Booking's table
+
+    public static Screening getScreeningById(int id) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(id)
+        };
+
+        ResultSet resultSet = SQLiteConnection.executeQuery("SELECT * FROM Screening\n" +
+                "WHERE id = ?", preparedStatementArgs);
+
+        // TODO deal with not being able to do .next();
+        if (resultSet.wasNull() || !resultSet.next()) {
+            return null;
+        }
+        Screening screening = new Screening();
+
+        screening.setId(resultSet.getInt("id"));
+        screening.setFilmId(resultSet.getInt("filmId"));
+        screening.setDate(resultSet.getString("date"));
+        screening.setFilmTitle(resultSet.getString("filmTitle"));
+
+        return screening;
+
+    }
+
+
 
 }

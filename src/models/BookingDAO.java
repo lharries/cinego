@@ -21,7 +21,7 @@ public class BookingDAO {
 
     }
 
-    private static ObservableList<Booking> getBookingObservableList() throws SQLException, ClassNotFoundException {
+    public static ObservableList<Booking> getBookingObservableList() throws SQLException, ClassNotFoundException {
         ResultSet resultSetBookings = SQLiteConnection.executeQuery("SELECT * FROM Booking", null);
 
         return getBookingList(resultSetBookings);
@@ -37,7 +37,7 @@ public class BookingDAO {
             booking.setPaidFor(resultSet.getBoolean("paidFor"));
             booking.setSeatId(resultSet.getInt("seatId"));
             booking.setScreeningId(resultSet.getInt("screeningId"));
-            // TODO: getScreeningById getFilmById getSeatById and getCustomerById
+
 //            booking.setScreening(ScreeningDAO.getScreeningById());
             bookingList.add(booking);
         }

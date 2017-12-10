@@ -44,7 +44,8 @@
             <TableColumn fx:id="dateColBookingTable" prefWidth="105.5" text="Date" />
             <!--<TableColumn fx:id="timeColBookingTable" prefWidth="97.5" text="Time" />-->
             <TableColumn fx:id="seatsColBookingTable" prefWidth="97.5" text="Seats" />
-         </columns></TableView>
+         </columns>
+      </TableView>
       <Button fx:id="deleteBooking" disable="true" layoutX="1083.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
 
    </children>

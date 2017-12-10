@@ -16,7 +16,6 @@ import models.*;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 
 public class CustomerProfileController implements Initializable{
@@ -36,7 +35,7 @@ public class CustomerProfileController implements Initializable{
     boolean textFieldEditable = false;
 
     @FXML
-    private TableView<Screening> bookingsTable;
+    private TableView<Booking> bookingsTable;
 
     @FXML
     private TableColumn titleColBookingTable, dateColBookingTable, timeColBookingTable, seatsColBookingTable;
@@ -56,10 +55,6 @@ public class CustomerProfileController implements Initializable{
         initCellFactories();
 
         populateBookingsTable();
-//        timeColBookingTable.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
-//        seatsColBookingTable.setCellValueFactory(new PropertyValueFactory<Booking, Integer>("seatId"));
-
-//        populateBookingsTable();
 
     }
 
@@ -67,10 +62,15 @@ public class CustomerProfileController implements Initializable{
 
         //TODO: populate the entire BookingsTable with customer's bookings
 
-        titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Screening,String>, ObservableValue<String>>() {
-            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Screening,String> param) {
+        titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
+            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
                 try {
-                    return new ReadOnlyObjectWrapper<String>(FilmDAO.getFilmById(param.getValue().getId()).getTitle());
+                    Screening screening = ScreeningDAO.getScreeningById(param.getValue().getScreeningId());
+                    if (screening == null) {
+                        return new ReadOnlyObjectWrapper<String>("Screening not found");
+                    }
+                    Film film = FilmDAO.getFilmById(screening.getFilmId());
+                    return new ReadOnlyObjectWrapper<String>(film.getTitle());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -78,16 +78,32 @@ public class CustomerProfileController implements Initializable{
             }
         });
 
-        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Screening,String>, ObservableValue<String>>() {
-            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Screening,String> param) {
+        seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
+            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
                 try {
-                    return new ReadOnlyObjectWrapper<String>(param.getValue().getMediumDate());
-                } catch (ParseException e) {
+                    Seat seat = SeatDAO.getSeatsById(param.getValue().getSeatId());
+//                    Film film = FilmDAO.getFilmById(screening.getFilmId());
+//                    return new ReadOnlyObjectWrapper<String>(film.getTitle());
+                    return new ReadOnlyObjectWrapper<String>(seat.getName());
+                } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
-                    return new ReadOnlyObjectWrapper<String>("");
                 }
+                return new ReadOnlyObjectWrapper<String>("");
             }
         });
+
+
+
+//        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Screening,String>, ObservableValue<String>>() {
+//            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Screening,String> param) {
+//                try {
+//                    return new ReadOnlyObjectWrapper<String>(param.getValue().getMediumDate());
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                    return new ReadOnlyObjectWrapper<String>("");
+//                }
+//            }
+//        });
 
 //        seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Seat,Integer>, ObservableValue<Integer() {
 //            @Override public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Seat,Integer> param) {
@@ -110,15 +126,13 @@ public class CustomerProfileController implements Initializable{
 //            screeningData = ScreeningDAO.get();
 
 
-
         try {
-            bookingsTable.setItems(ScreeningDAO.getScreeningObservableList());
+            bookingsTable.setItems(BookingDAO.getBookingObservableList());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
 
     //CURRENT SOLUTION
 //        try {

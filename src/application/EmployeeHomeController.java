@@ -92,7 +92,10 @@ public class EmployeeHomeController implements Initializable {
     private TableColumn titleCol,urlCol,descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab;
 
     @FXML
-    private TextField addTitle, addDescription;
+    private TextField addTitle;
+
+    @FXML
+    private TextArea addDescription;
 
     @FXML
     private ComboBox movieSelectionBox, timePicker;
@@ -104,6 +107,7 @@ public class EmployeeHomeController implements Initializable {
     private String title, path,relativePath, description, screeningTime, screeningDate, movieTitle;
     private Film film;
     public static int screenID;
+    private File chosenFile = null;
 
 
     /**
@@ -118,7 +122,7 @@ public class EmployeeHomeController implements Initializable {
 
         //set moviesTable headers - 'moviesTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-        urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
+//        urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
         populateMoviesTable();
 
@@ -150,7 +154,7 @@ public class EmployeeHomeController implements Initializable {
 
         //read image file & check if file not null
         BufferedImage image = null;
-        File chosenFile = null;
+
         File file = null;
         String filename = addTitle.getText();
         try{
@@ -195,22 +199,25 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         //gets the input values and checks if they're correctly filled in
-        title = addTitle.getText();
-        description = addDescription.getText();
-        if(title.isEmpty() || description.isEmpty() || path.isEmpty()){
+        title = addTitle.getText()+"";
+        description = addDescription.getText()+"";
+
+        System.err.println("\n\n\n"+path+"\n\n\n");
+
+
+        if(title.equals("") || description.equals("") || path.equals(null)){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
         } else {
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
-        }
 
+            createMovie();
+        }
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(e -> popup.hide());
         popup.show();
         delay.play();
-
-        createMovie();
 
     }
 
@@ -262,7 +269,6 @@ public class EmployeeHomeController implements Initializable {
         if(movieTitle.equals("null") || screeningTime.equals("null") || screeningDate.equals("null")){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
-
         } else {
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());

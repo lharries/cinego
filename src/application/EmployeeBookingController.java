@@ -39,17 +39,6 @@ public class EmployeeBookingController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        //TODO: @Luke display selected seats in this view
-        //initialize data
-        try {
-            Seat seat = SeatDAO.getSeatsByScreening(EmployeeHomeController.screenID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @FXML

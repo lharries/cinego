@@ -20,6 +20,7 @@ public class Screening {
     private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
     private static DateFormat mediumFormat = new SimpleDateFormat("HH:mm EEEE dd/MM", Locale.ENGLISH);
     private static DateFormat shortFormat = new SimpleDateFormat("EEE HH:mm", Locale.ENGLISH);
+    private static DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
     private IntegerProperty id;
     private IntegerProperty filmId;
@@ -97,6 +98,11 @@ public class Screening {
     public String getMediumDate() throws ParseException {
         Date date = getDateObject();
         return mediumFormat.format(date); // 08:54 Saturday 09/12
+    }
+
+    public String getTime() throws ParseException {
+        Date date = getDateObject();
+        return timeFormat.format(date); // 08:54
     }
 
 }

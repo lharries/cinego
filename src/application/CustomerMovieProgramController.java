@@ -32,6 +32,7 @@ import static application.Navigation.CUST_BOOKING_VIEW;
 public class CustomerMovieProgramController implements Initializable {
 
     //TODO: render the necessary fields for the Movie Program list view table (Title, time, description, IMDB rating, image, trailer)
+    //TODO: add the trailer preview to movies
 
 
     @FXML

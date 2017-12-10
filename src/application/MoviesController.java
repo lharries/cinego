@@ -216,7 +216,7 @@ public class MoviesController implements Initializable {
             imageView.setFitHeight(145.0);
             imageView.setFitWidth(134.0);
         } catch (IllegalArgumentException e) {
-            System.err.print("Unable to find film");
+            System.err.println("Unable to find film:");
             System.err.println(film.getImagePath());
         }
 

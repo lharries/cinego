@@ -21,6 +21,24 @@ public class ScreeningDAO {
         }
     }
 
+    public static Screening getScreeningById(int id) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(id)
+        };
+
+        ResultSet resultSet = SQLiteConnection.executeQuery(
+                "SELECT * FROM Screening\n" +
+                        "WHERE id = ?", preparedStatementArgs);
+        resultSet.next();
+        Screening screening = new Screening();
+        screening.setId(resultSet.getInt("id"));
+        screening.setFilmId(resultSet.getInt("filmId"));
+        screening.setDate(resultSet.getString("date"));
+
+        return screening;
+
+    }
+
     private static Screening getScreeningFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         if (resultSet.next()) {
             Screening screening = new Screening();

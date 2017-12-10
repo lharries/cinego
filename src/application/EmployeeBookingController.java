@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import models.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,17 +23,8 @@ public class EmployeeBookingController implements Initializable{
     public static Screening selectedScreening;
 
     public GridPane gridPaneSeats;
-    @FXML
-    private Label Time;
-
-    @FXML
-    private Label Date;
-
-    @FXML
-    private Label movieTitle;
-
-    @FXML
-    private PieChart seatsBookedPieChart;
+    public Label remainingSeatsNumber;
+    public Label bookedSeatsNumber;
 
     @FXML
     private ImageView backgroundImg;
@@ -47,6 +39,19 @@ public class EmployeeBookingController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        remainingSeatsNumber.setText("5");
+        bookedSeatsNumber.setText("100");
+
+
+        //TODO: Remove this (just for dev)
+        try {
+            selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         createSeatingPlan();
 
     }
@@ -59,6 +64,8 @@ public class EmployeeBookingController implements Initializable{
 
     private void createSeatingPlan() {
 
+        int bookedSeatsCount = 0;
+
         gridPaneSeats.getChildren().clear();
 
         initGridLines();
@@ -68,18 +75,20 @@ public class EmployeeBookingController implements Initializable{
                 try {
                     Seat seat = SeatDAO.getSeatByLocation(j, rows[i]);
 
+//                    System.out.println(getClass().getResource("/resources/seat.png"));
+
                     // normal seat
-                    ImageView seatViewImage = new ImageView("/resources/seat.png");
+                    ImageView seatViewImage = new ImageView(getClass().getResource("/resources/seat.png").toString());
                     seatViewImage.setFitWidth(60.0);
                     seatViewImage.setFitHeight(60.0);
 
                     // taken seat
-                    ImageView takenSeatImage = new ImageView("/resources/taken-seat.png");
+                    ImageView takenSeatImage = new ImageView(getClass().getResource("/resources/taken-seat.png").toString());
                     takenSeatImage.setFitWidth(60.0);
                     takenSeatImage.setFitHeight(60.0);
 
                     // taken seat
-                    ImageView selectedSeatImage = new ImageView("/resources/selected-seat.png");
+                    ImageView selectedSeatImage = new ImageView(getClass().getResource("/resources/selected-seat.png").toString());
                     selectedSeatImage.setFitWidth(60.0);
                     selectedSeatImage.setFitHeight(60.0);
 
@@ -89,6 +98,7 @@ public class EmployeeBookingController implements Initializable{
                     Booking bookingInSeat = BookingDAO.getBooking(seat.getId(), selectedScreening.getId());
 
                     if (bookingInSeat != null) {
+                        bookedSeatsCount ++;
                         if (bookingInSeat.getCustomerId() == Main.user.getId()) {
                             btn.setGraphic(selectedSeatImage);
                         } else {
@@ -106,6 +116,9 @@ public class EmployeeBookingController implements Initializable{
                 }
             }
         }
+
+        bookedSeatsNumber.setText(String.valueOf(bookedSeatsCount));
+        remainingSeatsNumber.setText(String.valueOf(40 - bookedSeatsCount));
     }
 
     public void initGridLines() {

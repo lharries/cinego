@@ -3,19 +3,18 @@ package application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import models.*;
+import models.BookingDAO;
+import models.Screening;
+import models.Seat;
+import models.SeatDAO;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,6 +22,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CustomerBookingController implements Initializable {
 
@@ -51,25 +52,16 @@ public class CustomerBookingController implements Initializable {
     @FXML
     private GridPane gridPaneSeats;
 
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
+
 
     //TODO: make cinema seats selectable (change colour, store seat identifier, disable booked seats to be chosen
-    //TODO: add booking summary at the side: display (push) movie title, date + time, populate seatListView with chosen seats (Row + Column)
-    //TODO: fxids= movieTitle, screeningDate, Time, seatListView, bookingConfirmationClickHandler
+    //TODO: add booking summary / total cost to 'checkout cart' side:
 
     //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
 
 
-    //TODO: @Kai test button behind chair image if it makes it clickable and colours whether that's enough to make the chair turn green / red
 
-
-    //renders the background image for the scene + commented out code to load chair image into button's background
-
-    /**
-     * Purpose: renders the background image upon opening of the scene
-     *
-     * @param location
-     * @param resources
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -80,12 +72,10 @@ public class CustomerBookingController implements Initializable {
             e.printStackTrace();
         }
 
-        System.out.println(selectedScreening);
-        System.out.println(selectedScreening.getDate());
+//        System.out.println(selectedScreening);
+//        System.out.println(selectedScreening.getDate());
 
         createSeatingPlan();
-
-
     }
 
     @FXML
@@ -158,10 +148,9 @@ public class CustomerBookingController implements Initializable {
 
                     //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
-                } catch (SQLException e) {
+                } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "CustomerBookingController", "createSeatingPlan", "Failed to add button to 'gridPaneSeats'. See: " + e);
                 }
             }
         }
@@ -180,10 +169,8 @@ public class CustomerBookingController implements Initializable {
                 BookingDAO.insertBooking(Main.user.getId(), true, selectedSeat.getId(), selectedScreening.getId());
                 System.out.println("Booked!");
             } catch (SQLException | ClassNotFoundException e) {
-
-                // TODO: Handle this better;
-                System.out.println("Booking failed");
                 e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "CustomerBookingController", "createBooking", "Failed to create a customer booking. See: " + e);
             }
         }
     }

@@ -24,6 +24,9 @@ import java.util.logging.Logger;
 
 
 
+
+
+
 public class CustomerProfileController implements Initializable{
 
 
@@ -51,17 +54,26 @@ public class CustomerProfileController implements Initializable{
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
 
+    /**
+     * Initializes the customer profile including Textfields and bookingsTable. Disables editing the Textfields
+     * unless chosen by customer
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //initializes customer profile input fields and sets them to not editable
         enableCustProfileFields(textFieldEditable);
         editProfileBttn.requestFocus();
         initCellFactories();
-
         populateBookingsTable();
     }
 
+
+    /**
+     * Initialises the bookingsTable columns with customer-specific bookings data
+     */
     private void initCellFactories() {
 
         //TODO: populate the entire BookingsTable with customer's bookings
@@ -111,7 +123,7 @@ public class CustomerProfileController implements Initializable{
                 return new ReadOnlyObjectWrapper<String>("");
             }
         });
-        
+
     }
 
     /**

@@ -147,19 +147,18 @@ public class EmployeeHomeController implements Initializable {
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
+        //read image file
         BufferedImage image = null;
         File chosenFile = null;
         File file = null;
         String filename = addTitle.getText();
-
-        //read image file
         try{
             chosenFile = fileChooser.showOpenDialog(null);
             this.path = chosenFile.getAbsolutePath();
             file = new File(this.path);
             image = ImageIO.read(file);
         }catch(IOException e){
-            System.out.println("Error: "+e);
+            e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to upload the movie poster. See: " + e);
         }
 
@@ -169,7 +168,7 @@ public class EmployeeHomeController implements Initializable {
             file = new File(relativePath);
             ImageIO.write(image, "jpg", file);
         }catch(IOException e){
-            System.out.println("Error: "+e);
+            e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to write movie poster. See: " + e);
         }
     }
@@ -193,7 +192,6 @@ public class EmployeeHomeController implements Initializable {
         //gets the input values and checks if they're correctly filled in
         title = addTitle.getText();
         description = addDescription.getText();
-
         if(title.isEmpty() || description.isEmpty() || path.isEmpty()){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
@@ -371,10 +369,7 @@ public class EmployeeHomeController implements Initializable {
         try {
             moviesData = FilmDAO.getFilmObservableList();
             moviesTable.setItems(moviesData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMoviesTable", "Failed to load data to populate the movies table. See: " + e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMoviesTable", "Failed to load data to populate the movies table. See: " + e);
         }
@@ -387,13 +382,10 @@ public class EmployeeHomeController implements Initializable {
         try {
             screeningsData = ScreeningDAO.getScreeningObservableList();
             screeningsTable.setItems(screeningsData);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateScreeningsTable", "Failed to load data to populate the screenings table. See: " + e);
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateScreeningsTable", "Failed to load data to populate the screenings table. See: " + e);
         }
     }
 
@@ -403,10 +395,7 @@ public class EmployeeHomeController implements Initializable {
     private void populateMovieSelectBox(){
         try {
             movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
         }

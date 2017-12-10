@@ -267,7 +267,7 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
-        
+
         //TODO: input validation - only when all three fields used + correct input then activate button
 
         //access input values & create date-time

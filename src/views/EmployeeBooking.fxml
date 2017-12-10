@@ -19,7 +19,7 @@
    <children>
       <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/cinBackground.png" backgroundLoading="false" />
+            <Image url="@../resources/cinBackgroundSML.jpg" backgroundLoading="false" />
          </image>
          <effect>
             <ColorAdjust saturation="-0.88" />

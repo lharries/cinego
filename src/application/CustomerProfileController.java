@@ -17,6 +17,7 @@ import models.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CustomerProfileController implements Initializable{
@@ -68,6 +69,7 @@ public class CustomerProfileController implements Initializable{
 
         //TODO: populate the entire BookingsTable with customer's bookings
 
+        //retrieve title column data
         titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
             @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
                 try {
@@ -84,6 +86,7 @@ public class CustomerProfileController implements Initializable{
             }
         });
 
+        //retrieve date column data
         dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
             @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
                 try {
@@ -91,7 +94,6 @@ public class CustomerProfileController implements Initializable{
                     if (screening == null) {
                         return new ReadOnlyObjectWrapper<String>("Screening not found");
                     }
-//                    Screening screening = ScreeningDAO.getScreeningById(screening.getDate());
                     return new ReadOnlyObjectWrapper<String>(screening.getDate());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
@@ -100,13 +102,11 @@ public class CustomerProfileController implements Initializable{
             }
         });
 
-
+        //retrieve seat column data
         seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
             @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
                 try {
                     Seat seat = SeatDAO.getSeatsById(param.getValue().getSeatId());
-//                    Film film = FilmDAO.getFilmById(screening.getFilmId());
-//                    return new ReadOnlyObjectWrapper<String>(film.getTitle());
                     return new ReadOnlyObjectWrapper<String>(seat.getName());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
@@ -141,26 +141,16 @@ public class CustomerProfileController implements Initializable{
     }
 
     /**
-     * Purpose: updates the moviesTable with movie specific data from the database
+     * Populates bookingsTable with data related to customer's bookings
      */
     private void populateBookingsTable(){
 
         try {
             bookingsTable.setItems(BookingDAO.getBookingObservableList());
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "CustomerProfileController", "populateBookingsTable", "Failed to populate the bookingsTable. See: " + e);
         }
-
-    //CURRENT SOLUTION
-//        try {
-//            bookingsTable.setItems(ScreeningDAO.getScreeningObservableList());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
 
     }
 
@@ -240,10 +230,9 @@ public class CustomerProfileController implements Initializable{
         Main.user.setEmail(custEmailField.getText());
         try {
             CustomerDAO.updateCustomerDetails(Main.user.getFirstName(),Main.user.getLastName(),Main.user.getEmail(), Main.user.getId());
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "CustomerProfileController", "updateCustomerProfile", "Failed to run db UPDATE query. See: " + e);
         }
 
         //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
@@ -298,10 +287,9 @@ public class CustomerProfileController implements Initializable{
 
         try {
             BookingDAO.deleteBooking(bookingID);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "CustomerProfileController", "deleteMovieBooking", "Failed to run db DELETE query. See: " + e);
         }
 
         populateBookingsTable();

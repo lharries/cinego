@@ -19,9 +19,7 @@ import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
-
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
@@ -29,6 +27,24 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
+/**
+ * The EmployeeHomeController implements functionality specific to the EmployeeHome.fxml file which is part
+ * of the cinema booking system - 'Cinego'.
+ *
+ * @author Luke Harries, Kai Klasen
+ * @version 1.0
+ */
+
+    //@author (classes and interfaces only, required)
+    //@version (classes and interfaces only, required. See footnote 1)
+    //@param (methods and constructors only)
+    //@return (methods only)
+    //@exception (@throws is a synonym added in Javadoc 1.2)
+
+
+
 
 public class EmployeeHomeController implements Initializable {
 
@@ -88,9 +104,8 @@ public class EmployeeHomeController implements Initializable {
     public static int screenID;
 
 
-
     /**
-     * Purpose: sets the column titles of both tables and populates them with data from the database,
+     * Sets the column titles of both tables and populates them with data from the database,
      * intialises the movieSelectionBox with the latest movies and renderes the background Image of the view
      *
      * @param location
@@ -116,7 +131,7 @@ public class EmployeeHomeController implements Initializable {
 
 
     /**
-     *Purpose: allows employee to upload a movie poster by copying the image into a local file and naming it
+     * Allows the employee to upload a movie poster by copying the image into a local file and naming it
      * after the chosen movie title
      * Sources:
      *  - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
@@ -160,9 +175,8 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Purpose: validates user input before creating a movie
+     * Validates user input before creating a movie.
      * Informs the user of outcome of test and only creates the movie when input is correct
-     *
      *
      * @throws SQLException
      * @throws ClassNotFoundException
@@ -200,8 +214,11 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
+     * Method that creates a new movie by inserting the user input into the database and re-populating
+     * the movieTable from the database
      *
-     * Purpose: allows user to also change to movie creation view from within his scene
+     * @throws SQLException
+     * @throws ClassNotFoundException
      */
     @FXML
     private void createMovie() throws SQLException, ClassNotFoundException {
@@ -221,7 +238,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Purpose: tests if input variables to create a screening are correct.
+     * Tests if input variables to create a screening are correct.
      * Informs the user of outcome of test and only creates screening when input is correct
      *
      * @throws SQLException
@@ -261,7 +278,7 @@ public class EmployeeHomeController implements Initializable {
 
 
     /**
-     * Purpose: create a new
+     * Creates a new screening to inserting the user data into the database and re-populating the screeningTable
      *
      * @throws SQLException
      * @throws ClassNotFoundException
@@ -287,7 +304,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Purpose: exports list of screening data to directory: "../cinego/ScreeningsExport.csv"
+     * Exports a list of relevant screening data to directory: "../cinego/ScreeningsExport.csv"
      * - Source: https://community.oracle.com/thread/2397100
      *
      * @throws IOException
@@ -326,9 +343,14 @@ public class EmployeeHomeController implements Initializable {
         toSeatBooking.setDisable(false);
     }
 
+    /**
+     *
+     *
+     * @param event
+     */
     @FXML
     private void openSeatsBooked(ActionEvent event) {
-        //TODO: open a movie's specific "seats booked overview" +
+        //TODO: @Luke: open a movie's specific "seats booked overview" +
 
         EmployeeRootController emplRootController = new EmployeeRootController();
         emplRootController.openBookingView(event);
@@ -343,7 +365,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Purpose: updates the moviesTable with movie specific data from the database
+     * Updates the moviesTable with movie specific data from the database
      */
     private void populateMoviesTable(){
         try {
@@ -359,7 +381,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Purpose: updates the screeningsTable with screening specific data from the database
+     * Updates the screeningsTable with screening specific data from the database
      */
     private void populateScreeningsTable(){
         try {
@@ -376,7 +398,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Purpose: updates the movieSelectionBox with the latest Movie Titles from the database
+     * Updates the movieSelectionBox with the latest Movie Titles from the database
      */
     private void populateMovieSelectBox(){
         try {

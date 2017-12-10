@@ -17,8 +17,12 @@ import models.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class CustomerProfileController implements Initializable{
+
+
+
 
     @FXML
     private Button updateProfileBttn, editProfileBttn;
@@ -44,6 +48,8 @@ public class CustomerProfileController implements Initializable{
     private ObservableList<Screening> screeningData;
 
     public static int bookingID;
+
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
 
     @Override
@@ -77,6 +83,23 @@ public class CustomerProfileController implements Initializable{
                 return new ReadOnlyObjectWrapper<String>("");
             }
         });
+
+        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
+            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
+                try {
+                    Screening screening = ScreeningDAO.getScreeningById(param.getValue().getScreeningId());
+                    if (screening == null) {
+                        return new ReadOnlyObjectWrapper<String>("Screening not found");
+                    }
+//                    Screening screening = ScreeningDAO.getScreeningById(screening.getDate());
+                    return new ReadOnlyObjectWrapper<String>(screening.getDate());
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return new ReadOnlyObjectWrapper<String>("");
+            }
+        });
+
 
         seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
             @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
@@ -121,10 +144,6 @@ public class CustomerProfileController implements Initializable{
      * Purpose: updates the moviesTable with movie specific data from the database
      */
     private void populateBookingsTable(){
-//
-//        try {
-//            screeningData = ScreeningDAO.get();
-
 
         try {
             bookingsTable.setItems(BookingDAO.getBookingObservableList());
@@ -137,15 +156,6 @@ public class CustomerProfileController implements Initializable{
     //CURRENT SOLUTION
 //        try {
 //            bookingsTable.setItems(ScreeningDAO.getScreeningObservableList());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-//            moviesTable.setItems(moviesData);
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        } catch (ClassNotFoundException e) {

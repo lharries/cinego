@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.converter.DateTimeStringConverter;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
@@ -25,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -123,7 +125,7 @@ public class EmployeeHomeController implements Initializable {
         //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
-        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
+        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
         populateScreeningsTable();
         populateMovieSelectionBox();
 
@@ -256,23 +258,24 @@ public class EmployeeHomeController implements Initializable {
         movieTitle = movieSelectionBox.getValue()+"";
         screeningTime = timePicker.getValue()+"";
         screeningDate = datePicker.getValue()+"";
+
         if(movieTitle.equals("null") || screeningTime.equals("null") || screeningDate.equals("null")){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
+
         } else {
             alert.setHeaderText("Success: screening created");
-            alert.setContentText("Your screening was successfully added, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
+            alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
 
             createScreening();
         }
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
+
+
+
     }
 
 
@@ -292,8 +295,14 @@ public class EmployeeHomeController implements Initializable {
         film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
 
+//        DateTimeStringConverter date2 = new DateTimeStringConverter();
+//        date2.fromString(date);
+
+
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
+
+
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -370,7 +379,7 @@ public class EmployeeHomeController implements Initializable {
             }
         }
     }
-    
+
     /**
      *
      *
@@ -422,6 +431,16 @@ public class EmployeeHomeController implements Initializable {
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectionBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
         }
+    }
+
+    private void populateTimePicker(){
+
+//        timePicker.getSelectionModel().
+//
+//        Screening screening = new Screening();
+//        timePicker.setValue(screening.getDate());
+
+
     }
 
 }

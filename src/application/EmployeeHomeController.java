@@ -161,24 +161,30 @@ public class EmployeeHomeController implements Initializable {
             chosenFile = new File(path);
             System.out.println(path);
 
+//            URL f = getClass().getResource("resources");
+//            System.out.println(f);
+
 //            try {
             File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
             Path parent = f.toPath();
-            Path resources = Paths.get(parent.toString(), "../","movies-images");
-            System.out.println("resources");
+            Path resources = Paths.get(parent.toString(), "resources");
             System.out.println(resources);
-            File movieImages = new File(resources.toString());
-            System.out.println(movieImages);
-            System.out.println(Arrays.toString(movieImages.list()));
-            URL string = getClass().getResource("../resources");
+
+            relativePath = "hello.png";
+//            System.out.println("resources");
+//            System.out.println(resources);
+//            File movieImages = new File(resources.toString());
+//            System.out.println(movieImages);
+//            System.out.println(Arrays.toString(movieImages.list()));
+//            URL string = getClass().getResource("../resources");
 
 //            URL movieImages = getClass().getResource("../../movie-images");
 //            System.out.println(movieImages);
 
-            String resourcesPath = string.getPath();
-
-            File newFile = new File(resourcesPath + "/hello.png");
-
+//            String resourcesPath = string.getPath();
+//
+            File newFile = new File(resources.toString() + "/hello.png");
+//
             try {
                 newFile.createNewFile();
                 System.out.println(newFile);
@@ -186,9 +192,6 @@ public class EmployeeHomeController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-
 
             //got the source file, need to get the resources directory adjcaent to it, then create the new file in that
 

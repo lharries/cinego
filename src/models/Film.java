@@ -77,7 +77,7 @@ public class Film {
     }
 
     public String getImagePath() {
-        return this.imagePath.get();
+        return "/resources/" + this.imagePath.get();
     }
 
     public void setImagePath(String imagePath) {

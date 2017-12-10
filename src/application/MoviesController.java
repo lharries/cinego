@@ -147,7 +147,9 @@ public class MoviesController implements Initializable {
 
         // Try and get the film if it's found
         try {
-            selectedFilmImage.setImage(new Image(film.getImagePath()));
+//            System.out.println(film.getImagePath());
+//            System.out.println(getClass().getResource(film.getImagePath()).toString());
+            selectedFilmImage.setImage(new Image(getClass().getResource(film.getImagePath()).toString()));
             selectedFilmImage.setVisible(true);
         } catch (IllegalArgumentException e) {
             System.err.println("Cant locate the image: ");
@@ -209,7 +211,7 @@ public class MoviesController implements Initializable {
 
         ImageView imageView = null;
         try {
-            Image image = new Image(film.getImagePath());
+            Image image = new Image(getClass().getResource(film.getImagePath()).toString());
             imageView = new ImageView(image);
             imageView.setX(230.0);
             imageView.setY(30.0);

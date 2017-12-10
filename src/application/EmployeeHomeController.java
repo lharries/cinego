@@ -19,11 +19,13 @@ import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,8 +46,6 @@ import java.util.logging.Logger;
     //@exception (@throws is a synonym added in Javadoc 1.2)
 
 
-
-
 public class EmployeeHomeController implements Initializable {
 
     //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
@@ -60,7 +60,7 @@ public class EmployeeHomeController implements Initializable {
 
 
     @FXML
-    private Button toSeatBooking;
+    private Button toSeatBooking, deleteBooking;
 
     @FXML
     private ImageView backgroundImg, moviePoster;
@@ -125,10 +125,9 @@ public class EmployeeHomeController implements Initializable {
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
         timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("description"));
         populateScreeningsTable();
-        populateMovieSelectBox();
+        populateMovieSelectionBox();
 
     }
-
 
     /**
      * Allows the employee to upload a movie poster by copying the image into a local file and naming it
@@ -147,29 +146,33 @@ public class EmployeeHomeController implements Initializable {
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
-        //read image file
+        //read image file & check if file not null
         BufferedImage image = null;
         File chosenFile = null;
         File file = null;
         String filename = addTitle.getText();
         try{
             chosenFile = fileChooser.showOpenDialog(null);
-            this.path = chosenFile.getAbsolutePath();
-            file = new File(this.path);
-            image = ImageIO.read(file);
+            if(chosenFile != null){
+                path = chosenFile.getAbsolutePath();
+                file = new File(path);
+                image = ImageIO.read(file);
+            }
         }catch(IOException e){
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to upload the movie poster. See: " + e);
         }
 
         //write image to relative project path
-        try{
-            relativePath = "src/resources/" + filename+".jpg";
-            file = new File(relativePath);
-            ImageIO.write(image, "jpg", file);
-        }catch(IOException e){
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to write movie poster. See: " + e);
+        if(chosenFile != null) {
+            try {
+                relativePath = "src/resources/" + filename + ".jpg";
+                file = new File(relativePath);
+                ImageIO.write(image, "jpg", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to write movie poster. See: " + e);
+            }
         }
     }
 
@@ -195,20 +198,18 @@ public class EmployeeHomeController implements Initializable {
         if(title.isEmpty() || description.isEmpty() || path.isEmpty()){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
         } else {
             alert.setHeaderText("Success: movie created");
-            alert.setContentText("Your movie was successfully created, "+ Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
-
-            createMovie();
+            alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
         }
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
+
+        createMovie();
+
     }
 
     /**
@@ -232,7 +233,7 @@ public class EmployeeHomeController implements Initializable {
         addTitle.clear();
         addDescription.clear();
         populateMoviesTable();
-        populateMovieSelectBox();
+        populateMovieSelectionBox();
     }
 
     /**
@@ -337,10 +338,39 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void getScreeningID(){
+
         screenID = screeningsTable.getSelectionModel().getSelectedItem().getId();
         toSeatBooking.setDisable(false);
+        deleteBooking.setDisable(false);
     }
 
+
+    @FXML
+    private void deleteScreening() {
+
+        //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
+
+        //Prompts user to confirm deleting the selected screening
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert.setTitle("Cinego");
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+        alert.setHeaderText("Warning: deleting screening");
+        alert.setContentText("Are you sure you want to delete this screening, " + Main.user.getFirstName() + " ?");
+
+        //Deletes movie depending on user response
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                ScreeningDAO.deleteScreening(screenID);
+                populateScreeningsTable();
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "deleteScreening", "Failed to delete screening from screeningTable. See: " + e);
+            }
+        }
+    }
+    
     /**
      *
      *
@@ -354,12 +384,6 @@ public class EmployeeHomeController implements Initializable {
         emplRootController.openBookingView(event);
 
         toSeatBooking.setDisable(true);
-    }
-
-
-    @FXML
-    private void deleteScreening(){
-        //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
     }
 
     /**
@@ -385,19 +409,18 @@ public class EmployeeHomeController implements Initializable {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateScreeningsTable", "Failed to load data to populate the screenings table. See: " + e);
-
         }
     }
 
     /**
      * Updates the movieSelectionBox with the latest Movie Titles from the database
      */
-    private void populateMovieSelectBox(){
+    private void populateMovieSelectionBox(){
         try {
             movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMovieSelectionBox", "Failed to load data to populate the movieSelectionBox. See: " + e);
         }
     }
 

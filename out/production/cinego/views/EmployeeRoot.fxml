@@ -25,7 +25,6 @@
             </Label>
             <Label fx:id="emplFirstName" layoutX="194.0" layoutY="20.0" text="First Name" textFill="WHITE" />
             <Label fx:id="emplLastName" layoutX="298.0" layoutY="20.0" text="Last Name" textFill="WHITE" />
-            <Button fx:id="toMovieForm" layoutX="987.0" layoutY="61.0" mnemonicParsing="false" onAction="#openMovieFormView" prefHeight="27.0" prefWidth="248.0" text="Open Movie Form" />
             <Button fx:id="toHomeView" layoutX="759.0" layoutY="61.0" mnemonicParsing="false" onAction="#openHomeView" prefHeight="27.0" prefWidth="189.0" text="Return Home" />
 
              <!--<Button fx:id="logout" layoutX="1163.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" />-->

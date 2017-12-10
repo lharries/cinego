@@ -16,6 +16,7 @@ import models.*;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -265,35 +266,44 @@ public class CustomerProfileController implements Initializable{
     private void getSelectedBooking(){
 
         bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
-        System.err.print(bookingID);
         deleteBooking.setDisable(false);
 
     }
 
+    /**
+     *
+     * Source:
+     *  - https://www.youtube.com/watch?v=oZUGMpGQxgQ
+     */
+
     @FXML
     private void deleteMovieBooking(){
 
-        //TODO 2: Add error popup for movies that are in the past (can't delete them!)
-        //TODO 3: delete the actual booking with a JDialogBOx pop-up asking if you're sure to delete (https://www.youtube.com/watch?v=oZUGMpGQxgQ)
-        //TODO: add ability to select movies from the list and delete them (see employeeHomeController: getScreeningID() )
+        //TODO: Allow deleting bookings only for future bookings -> Add error popup for movies that are in the past (can't delete them!)
 
+        //Alert prompting user to confirm deleting booking
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
         alert.setTitle("Cinego");
         alert.setHeaderText("Delete Booking");
         alert.setContentText("Are you sure you want to delete your booking, "+ Main.user.getFirstName());
-        alert.showAndWait();
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeConfirm = new ButtonType("Delete booking");
+        alert.getButtonTypes().setAll(buttonTypeCancel,buttonTypeConfirm);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeConfirm) {
+            try {
+                BookingDAO.deleteBooking(bookingID);
+                populateBookingsTable();
+                deleteBooking.setDisable(true);
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "CustomerProfileController", "deleteMovieBooking", "Failed to run db DELETE query. See: " + e);
+            }
 
-        try {
-            BookingDAO.deleteBooking(bookingID);
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "CustomerProfileController", "deleteMovieBooking", "Failed to run db DELETE query. See: " + e);
         }
 
-        populateBookingsTable();
-        deleteBooking.setDisable(true);
+        alert.close();
     }
-
 }

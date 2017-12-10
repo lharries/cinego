@@ -16,6 +16,7 @@ import models.*;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -49,7 +50,9 @@ public class CustomerProfileController implements Initializable{
     @FXML
     private ObservableList<Screening> screeningData;
 
-    public static int bookingID;
+    private static int bookingID, screeningID;
+    private Screening selectedScreening;
+
 
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
@@ -264,9 +267,14 @@ public class CustomerProfileController implements Initializable{
     @FXML
     private void getSelectedBooking(){
 
-        bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
-        deleteBooking.setDisable(false);
-
+        try {
+            selectedScreening = ScreeningDAO.getScreeningById(bookingsTable.getSelectionModel().getSelectedItem().getScreeningId());
+            bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
+            deleteBooking.setDisable(false);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "CustomerProfileController", "getSelectedBooking", "Failed to fetch selected screening object or bookingID. See: " + e);
+        }
     }
 
     /**
@@ -274,36 +282,45 @@ public class CustomerProfileController implements Initializable{
      * Source:
      *  - https://www.youtube.com/watch?v=oZUGMpGQxgQ
      */
-
     @FXML
-    private void deleteMovieBooking(){
+    private void deleteMovieBooking() throws ParseException {
 
-        //TODO: Allow deleting bookings only for future bookings (1 day in advance to give fair notice!!! SPECIAL FEATURE) -> Add error popup for movies that are in the past (can't delete them!)
+        //checks if selected screening instance is in the past.
+        if (selectedScreening.isInPast()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+            popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+            alert.setTitle("Cinego");
+            alert.setHeaderText("Booking in the past");
+            alert.setContentText("You can't cancel a past booking, "+ Main.user.getFirstName());
+            alert.showAndWait();
 
-        //Declares & instantiates alert prompting user to confirm deleting booking
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-        alert.setTitle("Cinego");
-        alert.setHeaderText("Delete Booking");
-        alert.setContentText("Are you sure you want to delete your booking, "+ Main.user.getFirstName());
-        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        ButtonType buttonTypeConfirm = new ButtonType("Delete booking");
-        alert.getButtonTypes().setAll(buttonTypeCancel,buttonTypeConfirm);
+        }else{
 
-        //waiting for user decision: deletes booking from db upon confirmation & cancel deletion if wanted
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeConfirm) {
-            try {
-                BookingDAO.deleteBooking(bookingID);
-                populateBookingsTable();
-                deleteBooking.setDisable(true);
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-                LOGGER.logp(Level.WARNING, "CustomerProfileController", "deleteMovieBooking", "Failed to run db DELETE query. See: " + e);
+            //Declares & instantiates alert prompting user to confirm deleting booking
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+            popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+            alert.setTitle("Cinego");
+            alert.setHeaderText("Delete Booking");
+            alert.setContentText("Are you sure you want to delete your booking, "+ Main.user.getFirstName());
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType buttonTypeConfirm = new ButtonType("Delete booking");
+            alert.getButtonTypes().setAll(buttonTypeCancel,buttonTypeConfirm);
+
+            //waiting for user decision: deletes booking from db upon confirmation & cancel deletion if wanted
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeConfirm) {
+                try {
+                    BookingDAO.deleteBooking(bookingID);
+                    populateBookingsTable();
+                    deleteBooking.setDisable(true);
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "CustomerProfileController", "deleteMovieBooking", "Failed to run db DELETE query. See: " + e);
+                }
             }
+            alert.close();
         }
-
-        alert.close();
     }
 }

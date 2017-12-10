@@ -84,18 +84,6 @@ public class Booking {
         this.screeningId.set(screeningId);
     }
 
-    public Screening getScreening() {
-        return screening.get();
-    }
-
-    public ObjectProperty<Screening> screeningProperty() {
-        return screening;
-    }
-
-    public void setScreening(Screening screening) {
-        this.screening.set(screening);
-    }
-
     public Seat getSeat() {
         return seat.get();
     }

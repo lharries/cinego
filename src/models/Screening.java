@@ -105,4 +105,10 @@ public class Screening {
         return timeFormat.format(date); // 08:54
     }
 
+    public boolean isInPast() throws ParseException {
+        Date today = new Date();
+
+        return today.compareTo(getDateObject()) > 0;
+    }
+
 }

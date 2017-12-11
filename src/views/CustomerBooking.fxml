@@ -54,7 +54,7 @@
         </Text>
         <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="420.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/seat.png" />
+                <Image url="@../resources/avaliable-seat.png" />
             </image>
         </ImageView>
         <Text layoutX="399.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
@@ -94,7 +94,7 @@
             <children>
             </children>
         </GridPane>
-        <Label fx:id="movieTitle" layoutX="964.0" layoutY="122.0" prefHeight="58.0" prefWidth="261.0" text="MovieTitle" textAlignment="CENTER">
+        <Label fx:id="filmTitle" layoutX="964.0" layoutY="122.0" prefHeight="58.0" prefWidth="261.0" text="MovieTitle" textAlignment="CENTER">
             <font>
                 <Font size="20.0" />
             </font>
@@ -110,7 +110,7 @@
                 <Font size="25.0" />
             </font>
         </Text>
-        <Button fx:id="bookingConfirmationClickHandler" layoutX="1002.0" layoutY="595.0" mnemonicParsing="false" onAction="#confirmMovieBooking" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking" />
+        <Button fx:id="bookingConfirmationClickHandler" layoutX="1002.0" layoutY="595.0" mnemonicParsing="false" onAction="#confirmBookingBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking" />
         <Text layoutX="946.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" wrappingWidth="90.07814260572195">
             <font>
                 <Font size="25.0" />

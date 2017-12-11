@@ -71,10 +71,10 @@ public class EmployeeBookingController implements Initializable {
                 try {
                     Seat seat = SeatDAO.getSeatByLocation(j, rows[i]);
 
-//                    System.out.println(getClass().getResource("/resources/seat.png"));
+//                    System.out.println(getClass().getResource("/resources/avaliable-seat.png"));
 
                     // normal seat
-                    ImageView seatViewImage = new ImageView(getClass().getResource("/resources/seat.png").toString());
+                    ImageView seatViewImage = new ImageView(getClass().getResource("/resources/avaliable-seat.png").toString());
                     seatViewImage.setFitWidth(60.0);
                     seatViewImage.setFitHeight(60.0);
 

@@ -24,10 +24,22 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The graphical layout of the cinema allowing booking multiple seats for a particular screening
+ * <p>
+ * Source:
+ * - Dialog boxes http://code.makery.ch/blog/javafx-dialogs-official/
+ */
 public class CustomerBookingController implements Initializable {
 
-    public static Screening selectedScreening;
+    /**
+     * The screening which has been selected
+     */
+    static Screening selectedScreening;
 
+    /**
+     * The seats which have been selected to book
+     */
     private ArrayList<Seat> selectedSeats = new ArrayList<>();
 
     @FXML
@@ -40,7 +52,7 @@ public class CustomerBookingController implements Initializable {
     private Label screeningDate;
 
     @FXML
-    private Label movieTitle;
+    private Label filmTitle;
 
     @FXML
     private ListView<Seat> seatListView;
@@ -59,42 +71,46 @@ public class CustomerBookingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        movieTitle.setText(selectedScreening.getFilmTitle());
+        filmTitle.setText(selectedScreening.getFilmTitle());
+
         try {
             screeningDate.setText(selectedScreening.getMediumDate());
         } catch (ParseException e) {
+            LOGGER.logp(Level.WARNING, "CustomerBookingController", "initialize", "unable to parse the screening date" + e);
             e.printStackTrace();
         }
 
         initSeatingPlan();
     }
 
+    /**
+     * Dialog window showing the booking summary and asking the customer to confirm their booking
+     *
+     * @param event the
+     */
     @FXML
-    private void confirmMovieBooking(ActionEvent event) {
-        //TODO: trigger a booking summary to be displayed (should we do an additional summary or is the one above the button enough?)
-        //TODO: add order to user profile's history view!
+    private void confirmBookingBtnHandler(ActionEvent event) {
 
-
-        //JDialog querying for correct input value: source: http://code.makery.ch/blog/javafx-dialogs-official/
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         // Get the Stage
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 
-        // Add a custom icon.
+        // Add a custom icon to the dialog window box.
         stage.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
-        alert.setTitle("Booking Confirmation");
+        alert.setTitle("Confirm Booking");
         alert.setHeaderText("Confirm Booking");
         alert.setContentText("Do you wish to book " + String.valueOf(selectedSeats.size()) + " seats");
 
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        ButtonType buttonTypeOne = new ButtonType("Pay now");
+        ButtonType buttonTypeOne = new ButtonType("Book");
 
         alert.getButtonTypes().setAll(buttonTypeCancel, buttonTypeOne);
 
         Optional<ButtonType> result = alert.showAndWait();
+
         if (result.get() == buttonTypeOne) {
-            System.out.println("Clicked confirm");
+            // customer has choosen to book the seats
             createBooking();
             alert.close();
             initSeatingPlan();
@@ -102,19 +118,35 @@ public class CustomerBookingController implements Initializable {
 
     }
 
+    // TODO: Display booking summary
+
+    /**
+     * Create the graphical layout of the seating plan with different images
+     * for available seats, taken seats and selected seats
+     */
     private void initSeatingPlan() {
 
         gridPaneSeats.getChildren().clear();
 
-        initGridLines();
-        String[] rows = new String[]{"A", "B", "C", "D", "E"};
+        // add the labels to the grid i.e. Column numbers 1-8 and row letters A to E
+        initGridLabels();
+
+        String[] rowsLabels = new String[]{"A", "B", "C", "D", "E"};
+
+        // create the 5 by 8 cinema GUI
         for (int i = 0; i < 5; i++) {
             for (int j = 1; j < 9; j++) {
                 try {
-                    Seat seat = SeatDAO.getSeatByLocation(j, rows[i]);
+                    Seat seat = SeatDAO.getSeatByLocation(j, rowsLabels[i]);
+
+                    // check the seat has been found
+                    if (seat == null) {
+                        LOGGER.logp(Level.WARNING, "CustomerBookingController", "initSeatingPlan", "Unable to find seat");
+                        return;
+                    }
 
                     // normal seat
-                    ImageView seatViewImage = new ImageView("/resources/seat.png");
+                    ImageView seatViewImage = new ImageView("/resources/avaliable-seat.png");
                     seatViewImage.setFitWidth(60.0);
                     seatViewImage.setFitHeight(60.0);
 
@@ -123,7 +155,7 @@ public class CustomerBookingController implements Initializable {
                     takenSeatImage.setFitWidth(60.0);
                     takenSeatImage.setFitHeight(60.0);
 
-                    // taken seat
+                    // selected seat
                     ImageView selectedSeatImage = new ImageView("/resources/selected-seat.png");
                     selectedSeatImage.setFitWidth(60.0);
                     selectedSeatImage.setFitHeight(60.0);
@@ -131,9 +163,29 @@ public class CustomerBookingController implements Initializable {
                     Button btn = new Button();
                     btn.setGraphic(seatViewImage);
 
+                    // see if the seat has already been booked by seatId and screeningId
                     Booking bookingInSeat = BookingDAO.getBooking(seat.getId(), selectedScreening.getId());
 
-                    if (bookingInSeat != null) {
+                    if (bookingInSeat == null) {
+                        // the seat has not been booked
+
+                        // handle the seat btn being clicked
+                        btn.setOnAction((ActionEvent e) -> {
+                            if (!selectedSeats.contains(seat)) {
+                                // the seat has not yet been selected so add it to the list of selected seats
+                                selectedSeats.add(seat);
+                                btn.setGraphic(selectedSeatImage);
+                            } else {
+                                // the seat has already been selected so now remove it
+                                selectedSeats.remove(seat);
+                                btn.setGraphic(seatViewImage);
+                            }
+                            // refresh the list of selected seats
+                            updateListOfSelectedSeats();
+                        });
+                    } else {
+                        // the seat has been booked so show an error message
+
                         btn.setGraphic(takenSeatImage);
                         btn.setOnAction((ActionEvent e) -> {
                             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -148,20 +200,7 @@ public class CustomerBookingController implements Initializable {
 
                             alert.show();
                         });
-                    } else {
-                        btn.setOnAction((ActionEvent e) -> {
-                            if (selectedSeats.contains(seat)) {
-                                selectedSeats.remove(seat);
-                                btn.setGraphic(seatViewImage);
-                            } else {
-                                selectedSeats.add(seat);
-                                btn.setGraphic(selectedSeatImage);
-                            }
-                            displaySelectedSeats();
-                        });
                     }
-
-                    System.out.println(BookingDAO.getBooking(seat.getId(), selectedScreening.getId()));
 
                     //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
@@ -173,18 +212,24 @@ public class CustomerBookingController implements Initializable {
         }
     }
 
-    private void displaySelectedSeats() {
+    /**
+     * Shows which seats have been selected for booking
+     */
+    private void updateListOfSelectedSeats() {
         ObservableList<Seat> seatObservableList = FXCollections.observableList(selectedSeats);
         seatListView.setItems(seatObservableList);
     }
 
-    public void createBooking() {
+    /**
+     * Create the booking object in the database and then refresh the GUI
+     */
+    private void createBooking() {
         for (Seat selectedSeat :
                 selectedSeats) {
 
             try {
                 BookingDAO.insertBooking(Main.user.getId(), true, selectedSeat.getId(), selectedScreening.getId());
-                System.out.println("Booked!");
+                // TODO: Success message
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
                 LOGGER.logp(Level.WARNING, "CustomerBookingController", "createBooking", "Failed to create a customer booking. See: " + e);
@@ -193,12 +238,14 @@ public class CustomerBookingController implements Initializable {
         initSeatingPlan();
     }
 
-    public void initGridLines() {
+    /**
+     * Displays the labels of the grid i.e Columns 1 to 8 and Rows A to E
+     */
+    public void initGridLabels() {
 
         // Rows
         for (int row = 0; row < 5; row++) {
             Label text = new Label(Character.toString((char) (65 + row)));
-            System.out.println(text);
             text.setFont(new Font(30.0));
             text.setLayoutX(-10.0);
             text.setLayoutY(0);
@@ -209,7 +256,6 @@ public class CustomerBookingController implements Initializable {
         // columns
         for (int column = 1; column < 9; column++) {
             Label text = new Label(String.valueOf(column));
-            System.out.println(text);
             text.setFont(new Font(30.0));
             text.setLayoutX(-10.0);
             text.setLayoutY(0);

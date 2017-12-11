@@ -29,6 +29,15 @@ public class BookingDAO {
 
     }
 
+    /**
+     * Check if a seat for a certain screening has been booked
+     *
+     * @param seatId      the seat id
+     * @param screeningId the screening id
+     * @return {@link} the booking of that seat for that screening
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static Booking getBooking(int seatId, int screeningId) throws SQLException, ClassNotFoundException {
         Object[] preparedStatementArgs = {
                 seatId,

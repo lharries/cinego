@@ -4,16 +4,22 @@ import javafx.beans.property.*;
 
 import java.sql.SQLException;
 
+/**
+ * A booking of a screening of a movie.
+ * Contains the properties corresponding to the columns in the database for the booking.
+ * Has getter and setter functions to store data retrieved from the {@link BookingDAO} class.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class Booking {
 
+    // TODO: Remove paid for or add in stripe
     private IntegerProperty id;
     private BooleanProperty paidFor;
     private IntegerProperty customerId;
     private IntegerProperty seatId;
     private IntegerProperty screeningId;
-    private ObjectProperty<Screening> screening;
-    private ObjectProperty<Seat> seat;
-    private ObjectProperty<Customer> customer;
 
     public Booking() {
         this.id = new SimpleIntegerProperty();
@@ -21,9 +27,6 @@ public class Booking {
         this.customerId = new SimpleIntegerProperty();
         this.seatId = new SimpleIntegerProperty();
         this.screeningId = new SimpleIntegerProperty();
-        this.screening = new SimpleObjectProperty<>();
-        this.seat = new SimpleObjectProperty<>();
-        this.customer = new SimpleObjectProperty<>();
     }
 
     public int getId() {
@@ -86,18 +89,13 @@ public class Booking {
         this.screeningId.set(screeningId);
     }
 
-    public Seat getSeat() {
-        return seat.get();
-    }
-
-    public ObjectProperty<Seat> seatProperty() {
-        return seat;
-    }
-
-    public void setSeat(Seat seat) {
-        this.seat.set(seat);
-    }
-
+    /**
+     * Get the customer who made the booking
+     *
+     * @return the {@link Customer} the customer who made the booking
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public Customer getCustomer() throws SQLException, ClassNotFoundException {
         return CustomerDAO.getById(getCustomerId());
     }

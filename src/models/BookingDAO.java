@@ -7,6 +7,14 @@ import utils.SQLiteConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The Data access object responsible for getting and saving the {@link Booking} data.
+ * <p>
+ * Based on the DAO design pattern.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class BookingDAO {
     public static void main(String[] args) {
         try {

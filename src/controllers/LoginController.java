@@ -27,18 +27,20 @@ public class LoginController implements Initializable {
 
     //TODO: FEATURE add password reset functionality via e-Mail sent to user e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
 
-    //public LoginModel loginModel = new LoginModel();
-    public Stage primaryStage = new Stage();
+    /**
+     * The login stage
+     */
+    private Stage primaryStage = new Stage();
 
 
     @FXML
-    private TextField txtUsername;
+    private TextField usernameTextField;
 
     @FXML
-    private TextField txtPassword;
+    private TextField passwordTextField;
 
     @FXML
-    private Label loginUnsuccessful;
+    private Label loginUnsuccessfulMessage;
 
 
     @Override
@@ -46,21 +48,23 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Purpose: opens a new stage with the user views loaded into the center of the overarching
-     * customerRoot view when a system user logs in as a user. Additionally this method hides the
-     * login screen.
+     * Checks if the login details are corrected and if so opens the relevant new stage
+     *
+     * @param event The login button being clicked event - not used
      */
     @FXML
-    public void loginCust(Event event) {
+    public void customerLoginBtnHandler(Event event) {
 
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
         try {
-            Customer cust = CustomerDAO.login(username, password);
+            Customer customer = CustomerDAO.login(username, password);
 
-            if (cust != null) {
-                Main.user = cust;
-                // TODO : Switch to the correct view
+            // check that the login details are correct
+            if (customer != null) {
+                // sets the logged in user as
+                Main.user = customer;
+
                 ((Node) event.getSource()).getScene().getWindow().hide();
                 try {
                     primaryStage.setScene(createScene(loadCustBorderPane()));
@@ -69,21 +73,11 @@ public class LoginController implements Initializable {
                 }
                 primaryStage.setResizable(false);
                 primaryStage.show();
-            } else{
-
-                loginUnsuccessful.setText("Invalid login - please try again");
-                txtUsername.requestFocus();
-                //TODO - add timer to set Label back to blank after 3 seconds
-//                        Timer t = new Timer();
-//                        t.schedule(new TimerTask() {
-//                            @Override public void run() {
-//                                loginUnsuccessful.setText(" ");
-//                            }
-//                        }, 0L, 5000L);
+            } else {
+                loginUnsuccessfulMessage.setText("Invalid login - please try again");
+                usernameTextField.requestFocus();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -99,11 +93,11 @@ public class LoginController implements Initializable {
      * @param event
      */
     @FXML
-    public void loginEmpl(Event event) {
+    public void employeeLoginBtnHandler(Event event) {
 
         //get user login input
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
         //compare against database username-password pair
         try {
             Employee empl = EmployeeDAO.login(username, password);
@@ -119,9 +113,9 @@ public class LoginController implements Initializable {
                 }
                 primaryStage.setResizable(false);
                 primaryStage.show();
-            } else{
-                loginUnsuccessful.setText("Invalid login - please try again");
-                txtUsername.requestFocus();
+            } else {
+                loginUnsuccessfulMessage.setText("Invalid login - please try again");
+                usernameTextField.requestFocus();
                 //TODO - add timer to set Label back to blank after 3 seconds
             }
         } catch (SQLException e) {

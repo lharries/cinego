@@ -5,6 +5,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * A seat within the cinema room.
+ * Contains the properties corresponding to the columns in the database for the seat.
+ * Has getter and setter functions to store data retrieved using the {@link SeatDAO} class.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class Seat {
 
     private IntegerProperty id;

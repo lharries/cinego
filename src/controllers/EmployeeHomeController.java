@@ -136,7 +136,6 @@ public class EmployeeHomeController implements Initializable {
 
         //set moviesTable headers - 'moviesTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-//        urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
         populateMoviesTable();
 

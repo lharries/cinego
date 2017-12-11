@@ -6,52 +6,36 @@ import javafx.collections.transformation.FilteredList;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 /**
+ * Contains the properties corresponding to the columns in the database for the film.
+ * Has getter and setter functions to store data retrieved from the {@link FilmDAO} class.
+ * <p>
  * Source:
  * - https://stackoverflow.com/questions/3395286/remove-last-character-of-a-stringbuilder
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
  */
 public class Film {
     private IntegerProperty id;
     private StringProperty title;
-    private StringProperty imagePath;
+    private StringProperty fileName;
     private StringProperty description;
 
 
     public Film() {
         this.id = new SimpleIntegerProperty();
         this.title = new SimpleStringProperty();
-        this.imagePath = new SimpleStringProperty();
+        this.fileName = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
-    }
-
-
-//    //DELETED IN LUKE's BOOKING BRANCH
-//    //TODO: added constructor to test populating employee movies list
-//    public Film (Integer id, String title, String imagePath, String description){
-//        this.id = new SimpleIntegerProperty(id);
-//        this.title = new SimpleStringProperty(title);
-//        this.imagePath = new SimpleStringProperty(imagePath);
-//        this.description = new SimpleStringProperty(description);
-
-    public void print() {
-        System.out.println(this.id);
-        System.out.println(this.title);
-//        System.out.println(this.imagePath);
-//        System.out.println(this.description);
-
     }
 
     //TODO: missing Trailer link?
@@ -80,21 +64,16 @@ public class Film {
         return this.title;
     }
 
-    public String getImagePath() throws UnsupportedEncodingException {
-        File directory = new File(".");
-        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-        File newMovie = new File(moviesDirectory, this.imagePath.get());
-
-        System.out.println("file:" + newMovie.getAbsolutePath());
-        return "file:" + newMovie.getAbsolutePath();
+    public String getFileName() {
+        return this.fileName.get();
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath.set(imagePath);
+    public void setFileName(String fileName) {
+        this.fileName.set(fileName);
     }
 
-    public StringProperty imagePathProperty() {
-        return this.imagePath;
+    public StringProperty fileNameProperty() {
+        return this.fileName;
     }
 
     public String getDescription() {
@@ -184,5 +163,20 @@ public class Film {
                 return false;
             }
         });
+    }
+
+    /**
+     * Converts the imagepath
+     *
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    public String getImagePath() throws UnsupportedEncodingException {
+        File directory = new File(".");
+        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+        File newMovie = new File(moviesDirectory, this.getFileName());
+
+        System.out.println("file:" + newMovie.getAbsolutePath());
+        return "file:" + newMovie.getAbsolutePath();
     }
 }

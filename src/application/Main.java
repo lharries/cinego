@@ -11,6 +11,9 @@ import models.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The main application built using a MVC design pattern
+ */
 public class Main extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());

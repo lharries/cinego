@@ -7,6 +7,14 @@ import utils.SQLiteConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The Data access object responsible for getting and saving the {@link Film} data.
+ * <p>
+ * Based on the DAO design pattern.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class FilmDAO {
 
     // TODO Log the erros
@@ -32,7 +40,7 @@ public class FilmDAO {
             film.setId(resultSet.getInt("id"));
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
-            film.setImagePath(resultSet.getString("imagePath"));
+            film.setFileName(resultSet.getString("fileName"));
             //added
             return film;
 
@@ -44,7 +52,7 @@ public class FilmDAO {
             film.setId(resultSet.getInt("id"));
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
-            film.setImagePath(resultSet.getString("imagePath"));
+            film.setFileName(resultSet.getString("fileName"));
             return film;
         } else {
             return null;
@@ -65,17 +73,17 @@ public class FilmDAO {
             film.setId(resultSet.getInt("id"));
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
-            film.setImagePath(resultSet.getString("imagePath"));
+            film.setFileName(resultSet.getString("fileName"));
             filmList.add(film);
         }
 
         return filmList;
     }
 
-    public static void insertFilm(String title, String description, String imagePath) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{new PreparedStatementArg(title), new PreparedStatementArg(description), new PreparedStatementArg(imagePath)};
+    public static void insertFilm(String title, String description, String fileName) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{new PreparedStatementArg(title), new PreparedStatementArg(description), new PreparedStatementArg(fileName)};
 
-        SQLiteConnection.execute("INSERT INTO Film\n" + "(title, description, imagePath)\n" + "VALUES\n" + "(?, ?, ?);", preparedStatementArgs);
+        SQLiteConnection.execute("INSERT INTO Film\n" + "(title, description, fileName)\n" + "VALUES\n" + "(?, ?, ?);", preparedStatementArgs);
     }
 
     public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {

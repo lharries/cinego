@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * This class controls all the employee views and allows user to switch between
  * the respective scenes.
  *
- * @author Luke Harries, Kai Klasen
+ * @author lukeharries kaiklasen
  * @version 1.0
  *
  */

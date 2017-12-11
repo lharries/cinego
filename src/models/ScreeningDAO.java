@@ -8,6 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+/**
+ * The Data access object responsible for getting and saving the {@link Screening} data.
+ * <p>
+ * Based on the DAO design pattern.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class ScreeningDAO {
 
     public static void main(String[] args) {

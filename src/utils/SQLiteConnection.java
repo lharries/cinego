@@ -59,6 +59,7 @@ public class SQLiteConnection {
 
         } catch (SQLException exception) {
             System.out.println("Unable to perform the query");
+            System.out.println(query);
             throw exception;
         } finally {
             if (statement != null) {
@@ -93,6 +94,7 @@ public class SQLiteConnection {
 
         } catch (SQLException exception) {
             System.out.println("Unable to perform the query");
+            System.out.println(query);
             throw exception;
         } finally {
             if (results != null) {

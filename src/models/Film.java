@@ -180,7 +180,9 @@ public class Film {
                     e.printStackTrace();
                     return false;
                 }
-            };
+            }
+
+            ;
         });
     }
 }

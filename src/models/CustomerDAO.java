@@ -31,6 +31,28 @@ public class CustomerDAO {
         }
     }
 
+    public static Customer getById(int id) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Customer WHERE id=?";
+
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(id),
+        };
+
+        ResultSet results = SQLiteConnection.executeQuery(query, preparedStatementArgs);
+
+        if (results.next()) {
+            Customer customer = new Customer();
+            customer.setId(results.getInt("id"));
+            customer.setFirstName(results.getString("firstName"));
+            customer.setLastName(results.getString("lastName"));
+            customer.setUsername(results.getString("username"));
+            customer.setEmail(results.getString("email"));
+            return customer;
+        } else {
+            return null;
+        }
+    }
+
 
     private static Customer getCustomerFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         if (resultSet.next()) {
@@ -51,11 +73,11 @@ public class CustomerDAO {
         String query = "SELECT * FROM Customer WHERE username=? AND password=?";
 
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg( username),
-                new PreparedStatementArg( password)
+                new PreparedStatementArg(username),
+                new PreparedStatementArg(password)
         };
 
-        ResultSet results = SQLiteConnection.executeQuery(query,preparedStatementArgs);
+        ResultSet results = SQLiteConnection.executeQuery(query, preparedStatementArgs);
         if (results != null) {
             return getCustomerFromResultSet(results);
         } else {
@@ -70,12 +92,12 @@ public class CustomerDAO {
         String query = "UPDATE Customer SET firstName = ?, lastName = ? , email = ? WHERE id = ?";
 
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg( firstName),
-                new PreparedStatementArg( lastName),
-                new PreparedStatementArg( email),
-                new PreparedStatementArg( id)
+                new PreparedStatementArg(firstName),
+                new PreparedStatementArg(lastName),
+                new PreparedStatementArg(email),
+                new PreparedStatementArg(id)
         };
-        SQLiteConnection.executeUpdate(query,preparedStatementArgs);
+        SQLiteConnection.executeUpdate(query, preparedStatementArgs);
     }
 
 

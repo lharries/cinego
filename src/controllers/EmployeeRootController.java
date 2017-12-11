@@ -127,7 +127,6 @@ public class EmployeeRootController implements Initializable {
 
     /**
      * logs user out of cinema system
-     * @version: logout 1.0
      * @param event
      */
     @FXML

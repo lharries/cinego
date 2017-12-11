@@ -1,5 +1,7 @@
 package application;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import models.User;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -35,9 +38,6 @@ public class CustomerRootController implements Initializable {
     @FXML
     protected Label custLastNameLabel;
 
-//    @FXML
-//    protected static Label custLastNameLabel;
-
     @FXML
     protected Label custFirstNameLabel;
 
@@ -48,20 +48,16 @@ public class CustomerRootController implements Initializable {
     private ImageView logoutImg;
 
 
-//
-//    public void setCustNameLabels(){
-//        this.custFirstNameLabel.setText(Main.user.getFirstName());
-//        custLastNameLabel.setText(Main.user.getLastName());
-//    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        //set user's first + lastname onto root
         custFirstNameLabel.setText(Main.user.getFirstName());
         custLastNameLabel.setText(Main.user.getLastName());
+
+        //set user's first + lastname onto root
+        Main.user.firstNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
+
+        Main.user.lastNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
 
         //sets the logos for the roots
         BufferedImage bufferedLogo = null;
@@ -132,12 +128,11 @@ public class CustomerRootController implements Initializable {
     /**
      * Purpose: opens the cinema room's seat selection view based on the movie selected in the customerProgramView.
      * Customers can book a movie in this view
-     *
+     * <p>
      * available movies
-     *
      */
     @FXML
-    public void openBookingView(){
+    public void openBookingView() {
         try {
             Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
         } catch (IOException e) {
@@ -149,11 +144,12 @@ public class CustomerRootController implements Initializable {
 
     /**
      * Purpose: logs user out of cinema system
-     * @version: logout 1.0
+     *
      * @param event
+     * @version: logout 1.0
      */
     @FXML
-    public void logout(ActionEvent event){
+    public void logout(ActionEvent event) {
 
         ((Node) event.getSource()).getScene().getWindow().hide();
         Main main = new Main();

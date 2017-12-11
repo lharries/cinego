@@ -1,11 +1,16 @@
 package application;
 
+
+//import com.sun.deploy.Environment;
+import com.sun.javafx.tools.packager.Log;
+
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -20,6 +25,14 @@ import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
+import org.omg.CORBA.Environment;
+
+//import org.relique.jdbc.csv.CsvDriver;
+import org.relique.jdbc.csv.CsvDriver;
+
+
+//import sun.tools.java.Environment;
+
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -319,32 +332,52 @@ public class EmployeeHomeController implements Initializable {
 
     /**
      * Exports a list of relevant screening data to directory: "../cinego/ScreeningsExport.csv"
-     * - Source: https://community.oracle.com/thread/2397100
+     * Source:  - https://community.oracle.com/thread/2397100
+     *          - http://csvjdbc.sourceforge.net/
      *
      * @throws IOException
      */
     @FXML
-    private void exportToCSV() throws IOException {
+    private void exportToCSV() throws IOException, ClassNotFoundException, SQLException {
 
-        //TODO: add following data to csv export: movie title, dates, times and number of booked and available seats.
+        //TODO: add further statistics to CSV file
 
-        //writes data into .csv file
-        Writer writer = null;
-        try {
-            File file = new File("../cinego/ScreeningsExport.csv");
-            writer = new BufferedWriter(new FileWriter(file));
-            for (Screening Screening: screeningsData) {
-                String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
-                writer.write(text);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "exportCSV", "Failed to write data to CSV file. See: " + e);
-        }
-        finally {
-            writer.flush();
-            writer.close();
-        }
+
+        PrintStream file = new PrintStream("../cinego/ScreeningsExport2.csv");
+        boolean append = true;
+        CsvDriver.writeToCsv(FilmDAO.getCSVResultSet(), file, append);
+
+
+        // Clean up
+//        conn.close();
+
+
+
+        //ALTERNATIVE SOLUTION
+//        String FILENAME = "log.csv";
+//
+//        File directoryDownload = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+//        File logDir = new File(directoryDownload, FILENAME);
+//        try {
+//            logDir.createNewFile();
+//            CSVWriter csvWriter = new CSVWriter(new FileWriter(logDir));
+//            Cursor curCSV = ourDatabase.rawQuery("SELECT * FROM practiceReport", null);
+//            csvWriter.writeNext(curCSV.getColumnNames());
+//            while (curCSV.moveToNext()) {
+//                String arrStr[] = { curCSV.getString(1)+ ",", curCSV.getString(2)+ ",",
+//                        curCSV.getString(3)+ ",", curCSV.getString(4)+ ",", curCSV.getString(5)+ ","};
+//                csvWriter.writeNext(arrStr);
+//            }
+//            csvWriter.close();
+//            curCSV.close();
+//            return true;
+//        } catch (Exception e) {
+//            Log.e("MainActivity", e.getMessage(), e);
+//            return false;
+//        }
+
+
+
     }
 
     /**

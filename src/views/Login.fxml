@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
       <ImageView fitHeight="513.0" fitWidth="758.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,10 +20,10 @@
       </ImageView>
   <AnchorPane layoutX="200.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" opacity="0.93" prefHeight="308.0" prefWidth="330.0" style="-fx-background-color: ffffff;">
          <children>
-            <TextField fx:id="txtUsername" layoutX="63.0" layoutY="169.0" prefHeight="27.0" prefWidth="218.0" promptText="Username" />
-            <PasswordField fx:id="txtPassword" layoutX="63.0" layoutY="211.0" prefHeight="27.0" prefWidth="218.0" promptText="Password" />
-            <Button layoutX="35.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginCust" onKeyPressed="#loginCust" prefHeight="27.0" prefWidth="120.0" text=" Customer Login" />
-            <Button layoutX="180.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginEmpl" onKeyPressed="#loginEmpl"  prefHeight="27.0" prefWidth="120.0" text=" Employee Login" />
+            <TextField fx:id="usernameTextField" layoutX="63.0" layoutY="169.0" prefHeight="27.0" prefWidth="218.0" promptText="Username" />
+            <PasswordField fx:id="passwordTextField" layoutX="63.0" layoutY="211.0" prefHeight="27.0" prefWidth="218.0" promptText="Password" />
+            <Button layoutX="35.0" layoutY="254.0" mnemonicParsing="false" onAction="#customerLoginBtnHandler" onKeyPressed="#customerLoginBtnHandler" prefHeight="27.0" prefWidth="120.0" text=" Customer Login" />
+            <Button layoutX="180.0" layoutY="254.0" mnemonicParsing="false" onAction="#employeeLoginBtnHandler" onKeyPressed="#employeeLoginBtnHandler" prefHeight="27.0" prefWidth="120.0" text=" Employee Login" />
             <ImageView fitHeight="91.0" fitWidth="88.0" layoutX="121.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/cinestar.png" />
@@ -34,7 +34,7 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Label fx:id="loginUnsuccessful" alignment="CENTER" contentDisplay="CENTER" layoutY="146.0" prefHeight="17.0" prefWidth="330.0" textAlignment="CENTER" textFill="#d31414" />
+            <Label fx:id="loginUnsuccessfulMessage" alignment="CENTER" contentDisplay="CENTER" layoutY="146.0" prefHeight="17.0" prefWidth="330.0" textAlignment="CENTER" textFill="#d31414" />
          </children>
          <opaqueInsets>
             <Insets />

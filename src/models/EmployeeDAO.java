@@ -48,9 +48,9 @@ public class EmployeeDAO {
     public static Employee login(String username, String password) throws SQLException, ClassNotFoundException {
         // TODO: Switch to prepared statements?
 
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(username),
-                new PreparedStatementArg(password)
+        Object[] preparedStatementArgs = {
+                username,
+                password
         };
 
         ResultSet results = SQLiteConnection.executeQuery("SELECT * FROM Employee WHERE username=? AND password=?", preparedStatementArgs);

@@ -9,6 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * The screening of the film.
+ * Contains the properties corresponding to the columns in the database for the screening.
+ * Has getter and setter functions to store data retrieved from the {@link ScreeningDAO} class.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class Screening {
 
     public static void main(String[] args) throws ParseException {

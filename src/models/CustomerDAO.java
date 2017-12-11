@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.SQLiteConnection;
 
+import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -34,9 +35,7 @@ public class CustomerDAO {
     public static Customer getById(int id) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Customer WHERE id=?";
 
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id),
-        };
+        Object[] preparedStatementArgs = {id};
 
         ResultSet results = SQLiteConnection.executeQuery(query, preparedStatementArgs);
 
@@ -72,9 +71,9 @@ public class CustomerDAO {
         // TODO: Switch to prepared statements?
         String query = "SELECT * FROM Customer WHERE username=? AND password=?";
 
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(username),
-                new PreparedStatementArg(password)
+        Object[] preparedStatementArgs = {
+                username,
+                password
         };
 
         ResultSet results = SQLiteConnection.executeQuery(query, preparedStatementArgs);
@@ -91,11 +90,11 @@ public class CustomerDAO {
 
         String query = "UPDATE Customer SET firstName = ?, lastName = ? , email = ? WHERE id = ?";
 
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(firstName),
-                new PreparedStatementArg(lastName),
-                new PreparedStatementArg(email),
-                new PreparedStatementArg(id)
+        Object[] preparedStatementArgs = {
+                firstName,
+                lastName,
+                email,
+                id
         };
         SQLiteConnection.executeUpdate(query, preparedStatementArgs);
     }

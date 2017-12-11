@@ -7,6 +7,14 @@ import utils.SQLiteConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The Data access object responsible for getting and saving the {@link Booking} data.
+ * <p>
+ * Based on the DAO design pattern.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class BookingDAO {
     public static void main(String[] args) {
         try {
@@ -21,20 +29,29 @@ public class BookingDAO {
 
     }
 
+    /**
+     * Check if a seat for a certain screening has been booked
+     *
+     * @param seatId      the seat id
+     * @param screeningId the screening id
+     * @return {@link} the booking of that seat for that screening
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static Booking getBooking(int seatId, int screeningId) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(seatId),
-                new PreparedStatementArg(screeningId),
+        Object[] preparedStatementArgs = {
+                seatId,
+                screeningId,
         };
 
         ResultSet resultSetBookings = SQLiteConnection.executeQuery(
                 "SELECT * FROM Booking\n" +
-                "WHERE seatId = ? AND screeningId = ?", preparedStatementArgs);
+                        "WHERE seatId = ? AND screeningId = ?", preparedStatementArgs);
 
         ObservableList<Booking> bookings = getBookingList(resultSetBookings);
 
         if (bookings.size() == 1) {
-        return bookings.get(0);
+            return bookings.get(0);
         } else {
             return null;
         }
@@ -65,12 +82,11 @@ public class BookingDAO {
     }
 
     public static void insertBooking(int customerId, boolean paidFor, int seatId, int screeningId) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(customerId),
-                new PreparedStatementArg(paidFor),
-                new PreparedStatementArg(seatId),
-                new PreparedStatementArg(screeningId),
-        };
+        Object[] preparedStatementArgs = {
+                customerId,
+                paidFor,
+                seatId,
+                screeningId};
 
         SQLiteConnection.execute(
                 "INSERT INTO Booking\n" +
@@ -82,9 +98,7 @@ public class BookingDAO {
     }
 
     public static void deleteBooking(int id) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id)
-        };
+        Object[] preparedStatementArgs = {(id)};
 
         SQLiteConnection.execute(
                 "DELETE FROM Booking\n" +

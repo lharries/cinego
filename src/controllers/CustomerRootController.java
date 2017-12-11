@@ -1,29 +1,28 @@
-package application;
+package controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.embed.swing.SwingFXUtils;
+import application.Main;
+import application.Navigation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import models.User;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * This class controls all the customer views and allows user to switch between
+ * the respective scenes.
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
 public class CustomerRootController implements Initializable {
 
 
@@ -41,12 +40,6 @@ public class CustomerRootController implements Initializable {
     @FXML
     protected Label custFirstNameLabel;
 
-    @FXML
-    private ImageView logo;
-
-    @FXML
-    private ImageView logoutImg;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,28 +51,10 @@ public class CustomerRootController implements Initializable {
         Main.user.firstNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
 
         Main.user.lastNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
-
-        //sets the logos for the roots
-//        BufferedImage bufferedLogo = null;
-//        BufferedImage bufferedLogout = null;
-//        BufferedImage bufferedBackground = null;
-//        try {
-//            bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
-//            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
-////            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
-//        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
-////        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-//        this.logo.setImage(logo);
-//        this.logoutImg.setImage(logout);
-//        this.backgroundImg.setImage(background);
     }
 
     /**
-     * Purpose: method to be called by different user controllers to set their respective views to the
+     * method to be called by different user controllers to set their respective views to the
      * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
@@ -90,7 +65,7 @@ public class CustomerRootController implements Initializable {
 
 
     /**
-     * Purpose: opens the user's ProgramView (scene located within customerRoot) where they can see the list of
+     * opens the user's ProgramView (scene located within customerRoot) where they can see the list of
      * available movies
      *
      * @param event
@@ -107,7 +82,7 @@ public class CustomerRootController implements Initializable {
     }
 
     /**
-     * Purpose: opens the user's Profile (scene located within customerRoot) where they can see their movie history,
+     * opens the user's Profile (scene located within customerRoot) where they can see their movie history,
      * booked movies and edit their own profile details
      * available movies
      *
@@ -126,7 +101,7 @@ public class CustomerRootController implements Initializable {
 
 
     /**
-     * Purpose: opens the cinema room's seat selection view based on the movie selected in the customerProgramView.
+     * opens the cinema room's seat selection view based on the movie selected in the customerProgramView.
      * Customers can book a movie in this view
      * <p>
      * available movies
@@ -143,7 +118,7 @@ public class CustomerRootController implements Initializable {
 
 
     /**
-     * Purpose: logs user out of cinema system
+     * logs user out of cinema system
      *
      * @param event
      * @version: logout 1.0

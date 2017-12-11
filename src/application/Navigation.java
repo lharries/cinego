@@ -1,6 +1,8 @@
 package application;
 
 import javafx.fxml.FXMLLoader;
+import controllers.CustomerRootController;
+import controllers.EmployeeRootController;
 
 import java.io.IOException;
 
@@ -21,7 +23,7 @@ public class Navigation {
 
     //user scenes
     public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
-    public static final String CUST_PROGRAM_VIEW = "/views/Movies.fxml";
+    public static final String CUST_PROGRAM_VIEW = "/views/CustomerMovies.fxml";
     public static final String CUST_BOOKING_VIEW = "/views/CustomerBooking.fxml";
 
     //employee scenes

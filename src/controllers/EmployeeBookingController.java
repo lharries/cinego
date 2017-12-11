@@ -1,28 +1,30 @@
-package application;
+package controllers;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import models.*;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * View controller allowing employee to see which seats have been booked for a particular screening
+ * clicking on a booked seat shows the customers booking information
+ */
 public class EmployeeBookingController implements Initializable {
+
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
     public static Screening selectedScreening;
 
@@ -30,56 +32,54 @@ public class EmployeeBookingController implements Initializable {
     public Label remainingSeatsNumber;
     public Label bookedSeatsNumber;
 
-    @FXML
-    private ImageView backgroundImg;
-
-    ArrayList<Seat> selectedSeats;
-
 
     //TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
-//
-//        //TODO: Remove this (just for dev)
-//        try {
-//            selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-        createSeatingPlan();
+        initSeatingPlan();
 
     }
 
+    /**
+     * Opens the home view
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void openHomeView(ActionEvent event) throws IOException {
         EmployeeRootController controller = new EmployeeRootController();
         controller.openHomeView(event);
     }
 
-    private void createSeatingPlan() {
+    /**
+     * Create the graphical layout of the seating plan. The booked seats can be click to show customer information
+     */
+    private void initSeatingPlan() {
 
         int bookedSeatsCount = 0;
 
         gridPaneSeats.getChildren().clear();
 
-        initGridLines();
+        // adds the labels for the columns and rows
+        initGridLabels();
+
+        // adds the seats with their bookings to the grid
         String[] rows = new String[]{"A", "B", "C", "D", "E"};
         for (int i = 0; i < 5; i++) {
             for (int j = 1; j < 9; j++) {
                 try {
                     Seat seat = SeatDAO.getSeatByLocation(j, rows[i]);
 
-//                    System.out.println(getClass().getResource("/resources/seat.png"));
+                    if (seat == null) {
+                        LOGGER.logp(Level.WARNING, "EmployeeBookingController", "initSeatingPlan", "Unable to find seat");
+                        return;
+                    }
 
                     // normal seat
-                    ImageView seatViewImage = new ImageView(getClass().getResource("/resources/seat.png").toString());
+                    ImageView seatViewImage = new ImageView(getClass().getResource("/resources/avaliable-seat.png").toString());
                     seatViewImage.setFitWidth(60.0);
                     seatViewImage.setFitHeight(60.0);
 
@@ -99,28 +99,34 @@ public class EmployeeBookingController implements Initializable {
                     Booking bookingInSeat = BookingDAO.getBooking(seat.getId(), selectedScreening.getId());
 
                     if (bookingInSeat != null) {
+                        // the seat has been booked
                         bookedSeatsCount++;
+
                         btn.setGraphic(takenSeatImage);
+
                         btn.setOnMouseClicked(event -> showBookingDetails(bookingInSeat));
                     } else {
                         btn.setDisable(true);
                     }
 
-                    System.out.println(BookingDAO.getBooking(seat.getId(), selectedScreening.getId()));
-
                     //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "EmployeeBookingController", "initSeatingPlan", "Unable to create seat" + e);
                 }
             }
         }
 
+        // show booking stats
         bookedSeatsNumber.setText(String.valueOf(bookedSeatsCount));
         remainingSeatsNumber.setText(String.valueOf(40 - bookedSeatsCount));
     }
 
-    public void initGridLines() {
+    /**
+     * Add the cinema seats labels i.e. row letters A - E and column numbers 1 - 8
+     */
+    public void initGridLabels() {
 
         // Rows
         for (int row = 0; row < 5; row++) {
@@ -145,6 +151,11 @@ public class EmployeeBookingController implements Initializable {
         }
     }
 
+    /**
+     * Show the seats booking details in a dialog box
+     *
+     * @param booking the booking of this seat
+     */
     public void showBookingDetails(Booking booking) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         // Get the Stage
@@ -162,6 +173,7 @@ public class EmployeeBookingController implements Initializable {
                 alert.setContentText("Error: Unable to find customer");
             }
         } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "EmployeeBookingController", "showBookingDetails", "unable to find customer" + e);
             e.printStackTrace();
         }
 

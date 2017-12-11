@@ -5,10 +5,15 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Defines the structure used for the {@link Customer} and {@link Employee} models.
+ * <p>
+ * Contains the properties corresponding to the columns in the database for the {@link Customer} and {@link Employee} models.
+ * Has getter and setter functions to store data retrieved from the DAO class.
+ *
+ * @author lukeharries kaiklasen
+ */
 public class User {
-
-    //TODO: missing phone number to be declared here and in all other classes where necessary. Will we use phone number?
-
 
     private IntegerProperty id;
     private StringProperty firstName;

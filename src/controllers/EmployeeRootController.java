@@ -1,17 +1,15 @@
-package application;
+package controllers;
 
-import javafx.embed.swing.SwingFXUtils;
+import application.Main;
+import application.Navigation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +21,7 @@ import java.util.logging.Logger;
  * This class controls all the employee views and allows user to switch between
  * the respective scenes.
  *
- * @author Luke Harries, Kai Klasen
+ * @author lukeharries kaiklasen
  * @version 1.0
  *
  */
@@ -76,7 +74,7 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     *Purpose: method to be called by different employee controllers to set their respective views to the
+      method to be called by different employee controllers to set their respective views to the
      *center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
@@ -97,7 +95,7 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     * Purpose: opens the employee's Home View (scene located within employeeRoot) where they can see the movies
+     * opens the employee's Home View (scene located within employeeRoot) where they can see the movies
      *
      * @param event
      */
@@ -128,8 +126,7 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     * Purpose: logs user out of cinema system
-     * @version: logout 1.0
+     * logs user out of cinema system
      * @param event
      */
     @FXML

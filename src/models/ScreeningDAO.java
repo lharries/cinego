@@ -97,8 +97,6 @@ public class ScreeningDAO {
         );
     }
 
-    //TODO: @Kai write method so it can be used in CustomerProfileController to fill the Booking's table
-
     public static Screening getScreeningById(int id) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
                 new PreparedStatementArg(id)
@@ -121,6 +119,5 @@ public class ScreeningDAO {
         return screening;
 
     }
-
 
 }

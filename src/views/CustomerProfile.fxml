@@ -29,8 +29,8 @@
       <TextField fx:id="custLastNameField" editable="false" layoutX="112.0" layoutY="341.0" promptText="Last name" />
       <TextField fx:id="custEmailField" editable="false" layoutX="121.0" layoutY="436.0" promptText="you@gmail.com" />
       <TextField fx:id="custPhone" editable="false" layoutX="129.0" layoutY="524.0" promptText="+44 78345 123646" />
-      <Button fx:id="updateProfileBttn" layoutX="154.0" layoutY="577.0" mnemonicParsing="false" onAction="#updateCustomerProfile" text="update" />
-      <Button fx:id="cancelUpdatingProfileBttn" disable="true" layoutX="75.0" layoutY="577.0" mnemonicParsing="false" onAction="#cancelUpdating" text="Cancel" />
+      <Button fx:id="cancelUpdatingProfileBttn" disable="true" layoutX="135.0" layoutY="576.0" mnemonicParsing="false" onAction="#cancelUpdating" text="Cancel" />
+      <Button fx:id="updateProfileBttn" layoutX="236.0" layoutY="576.0" mnemonicParsing="false" onAction="#updateCustomerProfile" text="update" />
       <Label layoutX="135.0" layoutY="497.0" text="Your phone Number" />
       <Label layoutX="130.0" layoutY="310.0" text="Last name" />
       <Label layoutX="119.0" layoutY="216.0" text="First name" />
@@ -40,10 +40,9 @@
       <!--Bookings table-->
       <TableView fx:id="bookingsTable" layoutX="483.0" layoutY="134.0" onMouseClicked="#getSelectedBooking" prefHeight="488.0" prefWidth="711.0">
          <columns>
-            <TableColumn fx:id="titleColBookingTable" prefWidth="136.5" text="Title" />
-            <TableColumn fx:id="dateColBookingTable" prefWidth="105.5" text="Date" />
-            <!--<TableColumn fx:id="timeColBookingTable" prefWidth="97.5" text="Time" />-->
-            <TableColumn fx:id="seatsColBookingTable" prefWidth="97.5" text="Seats" />
+            <TableColumn fx:id="titleColBookingTable" prefWidth="223.2364501953125" text="Title" />
+            <TableColumn fx:id="dateColBookingTable" prefWidth="389.2635498046875" text="Date" />
+            <TableColumn fx:id="seatsColBookingTable" prefWidth="98.0325927734375" text="Seats" />
          </columns>
       </TableView>
       <Button fx:id="deleteBooking" disable="true" layoutX="1083.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />

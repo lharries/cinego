@@ -57,21 +57,21 @@ public class EmployeeRootController implements Initializable {
         emplFirstName.setText(Main.user.getFirstName());
         emplLastName.setText(Main.user.getLastName());
 
-        BufferedImage bufferedLogo = null;
-        BufferedImage bufferedLogout = null;
-//        BufferedImage bufferedBackground = null;
-        try {
-            bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
-            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
-//            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
-        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
-//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.logo.setImage(logo);
-        this.logoutImg.setImage(logout);
+//        BufferedImage bufferedLogo = null;
+//        BufferedImage bufferedLogout = null;
+////        BufferedImage bufferedBackground = null;
+//        try {
+//            bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
+//            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
+////            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
+//        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
+////        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        this.logo.setImage(logo);
+//        this.logoutImg.setImage(logout);
 //        this.background.setImage(background);
     }
 

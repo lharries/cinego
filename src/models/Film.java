@@ -4,6 +4,11 @@ import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -76,8 +81,13 @@ public class Film {
         return this.title;
     }
 
-    public String getImagePath() {
-        return "/resources/" + this.imagePath.get();
+    public String getImagePath() throws UnsupportedEncodingException {
+        File directory = new File(".");
+        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+        File newMovie = new File(moviesDirectory, this.imagePath.get());
+
+        System.out.println("file:" + newMovie.getAbsolutePath());
+        return "file:" + newMovie.getAbsolutePath();
     }
 
     public void setImagePath(String imagePath) {
@@ -168,19 +178,16 @@ public class Film {
     }
 
     public FilteredList<Screening> getUpcomingScreenings() {
-        return screenings.get().filtered(new Predicate<Screening>() {
-            @Override
-            public boolean test(Screening screening) {
-                try {
-                    Date today = new Date();
-                    Date screeningDate = screening.getDateObject();
+        return screenings.get().filtered(screening -> {
+            try {
+                Date today = new Date();
+                Date screeningDate = screening.getDateObject();
 
-                    return today.compareTo(screeningDate) <= 0;
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-            };
+                return today.compareTo(screeningDate) <= 0;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return false;
+            }
         });
     }
 }

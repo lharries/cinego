@@ -15,21 +15,18 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.converter.DateTimeStringConverter;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,7 +100,8 @@ public class EmployeeHomeController implements Initializable {
     private DatePicker datePicker;
 
     //reused variables in validation and creation of movies and screenings
-    private String title, path, relativePath, description, screeningTime, screeningDate, movieTitle;
+    private String title, movieFileName, description, screeningTime, screeningDate, movieTitle;
+    private Date dateTime;
     private Film film;
     public static int screenID;
 
@@ -151,47 +149,71 @@ public class EmployeeHomeController implements Initializable {
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
         //read image file & check if file not null
-        BufferedImage image = null;
-        File chosenFile = null;
-        File file = null;
-        String filename = addTitle.getText();
-        chosenFile = fileChooser.showOpenDialog(null);
+        File chosenFile = fileChooser.showOpenDialog(null);
+
         if (chosenFile != null) {
-            path = chosenFile.getAbsolutePath();
-            chosenFile = new File(path);
-            System.out.println(path);
 
-//            URL f = getClass().getResource("resources");
-//            System.out.println(f);
+            // This seems to work but puts it in the wrong movies folder
+            // locate the moviesDir
+            String nameOfMovie = "name-of-new-movie.jpg";
+            File directory = new File(".");
+            File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+            File newMovie = new File(moviesDirectory, nameOfMovie);
+            System.out.println(moviesDirectory);
 
-//            try {
-            File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-            Path parent = f.toPath();
-            Path resources = Paths.get(parent.toString(), "resources");
-            System.out.println(resources);
-
-            relativePath = "hello.png";
-//            System.out.println("resources");
-//            System.out.println(resources);
-//            File movieImages = new File(resources.toString());
-//            System.out.println(movieImages);
-//            System.out.println(Arrays.toString(movieImages.list()));
-//            URL string = getClass().getResource("../resources");
-
-//            URL movieImages = getClass().getResource("../../movie-images");
-//            System.out.println(movieImages);
-
-//            String resourcesPath = string.getPath();
-//
-            File newFile = new File(resources.toString() + "/hello.png");
 //
             try {
-                newFile.createNewFile();
-                System.out.println(newFile);
-                Files.copy(chosenFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                newMovie.createNewFile();
+                Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                movieFileName = nameOfMovie;
+                System.out.println(newMovie.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+
+//            System.out.println(path);
+//
+////            URL f = getClass().getResource("resources");
+////            System.out.println(f);
+//
+////            try {
+//
+//            File currentDir = new File (".");
+//            System.out.println(currentDir.toPath());
+//            File parentDir = currentDir.getParentFile();
+//            System.out.println(parentDir.toPath());
+
+//
+//            File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+//            Path parent = f.toPath().getParent();
+//            System.out.println(parent.toString());
+//            Path resources = Paths.get(parent.toString(), "/resources");
+//
+//            movieFileName = "turtle.png";
+////            System.out.println("resources");
+////            System.out.println(resources);
+////            File movieImages = new File(resources.toString());
+////            System.out.println(movieImages);
+////            System.out.println(Arrays.toString(movieImages.list()));
+////            URL string = getClass().getResource("../resources");
+//
+////            URL movieImages = getClass().getResource("../../movie-images");
+////            System.out.println(movieImages);
+//
+////            String resourcesPath = string.getPath();
+////
+//            // TODO: Switch to random string
+//            File newFile = new File(resources.toString() + "/turtle.png");
+//            System.out.println(newFile.getAbsolutePath().toString());
+////
+//            try {
+//                newFile.createNewFile();
+//                System.out.println(newFile);
+//                Files.copy(chosenFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             //got the source file, need to get the resources directory adjcaent to it, then create the new file in that
 
@@ -223,8 +245,8 @@ public class EmployeeHomeController implements Initializable {
 //            }
 
 //
-//                relativePath = "helloooooo" + ".jpg";
-//                file = new File(relativePath);
+//                movieFileName = "helloooooo" + ".jpg";
+//                file = new File(movieFileName);
 //                ImageIO.write(image, "jpg", file);
 //                ImageIO.write(image, "jpg", file);
         }
@@ -249,7 +271,7 @@ public class EmployeeHomeController implements Initializable {
         //gets the input values and checks if they're correctly filled in
         title = addTitle.getText();
         description = addDescription.getText();
-        if (title.isEmpty() || description.isEmpty() || path.isEmpty()) {
+        if (title.isEmpty() || description.isEmpty() || movieFileName == null) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
         } else {
@@ -281,7 +303,7 @@ public class EmployeeHomeController implements Initializable {
         description = addDescription.getText();
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title, description, relativePath);
+        FilmDAO.insertFilm(title, description, movieFileName);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         addTitle.clear();
@@ -307,11 +329,20 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         //get input values and check for validity
-        movieTitle = movieSelectionBox.getValue() + "";
-        screeningTime = timePicker.getValue() + "";
-        screeningDate = datePicker.getValue() + "";
+        movieTitle = String.valueOf(movieSelectionBox.getValue());
+        screeningTime = String.valueOf(timePicker.getValue());
+        screeningDate = String.valueOf(datePicker.getValue());
 
-        if (movieTitle.equals("null") || screeningTime.equals("null") || screeningDate.equals("null")) {
+
+        // convert the dateTime to the correct format
+        try {
+            String dateTimeString = screeningDate + " " + screeningTime;
+            dateTime = new SimpleDateFormat("yyyy-MM-DD HH:mm").parse(dateTimeString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (movieTitle == null || screeningTime == null || dateTime == null) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
 
@@ -342,7 +373,7 @@ public class EmployeeHomeController implements Initializable {
         //TODO: input validation - only when all three fields used + correct input then activate button
 
         //access input values & create date-time
-        String date = screeningDate + " " + screeningTime;
+        String date = dateTime.toString();
         film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
 

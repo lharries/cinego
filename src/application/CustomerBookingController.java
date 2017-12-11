@@ -116,6 +116,7 @@ public class CustomerBookingController implements Initializable {
             System.out.println("Clicked confirm");
             createBooking();
             alert.close();
+            createSeatingPlan();
         }
 
     }

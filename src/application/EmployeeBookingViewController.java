@@ -47,16 +47,16 @@ public class EmployeeBookingViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        BufferedImage bufferedBackground = null;
-        try {
-            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
-            //background alternative
-//         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.backgroundImg.setImage(background);
+//        BufferedImage bufferedBackground = null;
+//        try {
+//            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
+//            //background alternative
+////         bufferedBackground = ImageIO.read(new File("src/resources/cinBackground.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        this.backgroundImg.setImage(background);
     }
 
 }

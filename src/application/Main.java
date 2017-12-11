@@ -64,12 +64,6 @@ public class Main extends Application {
 
 //		AquaFX.style();
 
-		try {
-			user = CustomerDAO.login("customer", "customerpassword");
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
 		launch(args);
 	}
 }

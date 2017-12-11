@@ -6,18 +6,22 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.CacheHint;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import models.Film;
 import models.FilmDAO;
@@ -81,6 +85,9 @@ public class MoviesController implements Initializable {
     private Label selectedFilmDescription;
 
     @FXML
+    private StackPane selectedTrailerPane;
+
+    @FXML
     private Group screeningTimes;
 
     @FXML
@@ -99,19 +106,19 @@ public class MoviesController implements Initializable {
         moviesVBox.setSpacing(10.0);
 
         updateFilmList();
-
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchText = searchField.getText();
-            System.out.println("Key up:");
-            System.out.println(searchField.getText());
-            updateFilmList();
-        });
-
-        try {
-            setColorsOfDatePicker();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+//
+//        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+//            searchText = searchField.getText();
+//            System.out.println("Key up:");
+//            System.out.println(searchField.getText());
+//            updateFilmList();
+//        });
+//
+//        try {
+//            setColorsOfDatePicker();
+//        } catch (SQLException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -141,37 +148,60 @@ public class MoviesController implements Initializable {
     }
 
     private void selectFilm(Film film, Rectangle rectangle) {
-        selectedFilm = film;
 
+        selectedFilm = film;
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
 
-        // Try and get the film if it's found
-//        try {
-////            System.out.println(film.getImagePath());
-////            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
-//            selectedFilmImage.setImage(new Image(film.getImagePath()));
-//            selectedFilmImage.setVisible(true);
-//        } catch (IllegalArgumentException e) {
-//            System.err.println("Cant locate the image: ");
-//            selectedFilmImage.setVisible(false);
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        } catch (NullPointerException e) {
-//            System.err.println("Unable to find film");
-//            e.printStackTrace();
+        //TODO: get trailer to work with hardcoded URL
+        //TODO: handle if no URL has been uploaded
+        //TODO: store URL in db, add to query etc.
+
+        WebView webview = new WebView();
+        String youtubeUrl = "https://www.youtube.com/watch?v=6ZfuNTqbHE8".replace("watch?v=", "embed/");
+
+//        "https://www.youtube.com/embed/6AgjRgr65BQ"
+//        "https://www.youtube.com/embed/64QXmeV3FtI"
+//        "http://www.imdb.com/list/ls053181649/videoplayer/vi3114711065?ref_=hm_hp_i_1"
+
+        webview.getEngine().load(youtubeUrl);
+
+            //adjust the Ytube link to "embed/" -> shows only the embedded movie view
+
+        webview.setPrefSize(100, 100);
+
+        selectedTrailerPane.getChildren().setAll(webview);
+
+
+//
+//
+//        // Try and get the film if it's found
+////        try {
+//////            System.out.println(film.getImagePath());
+//////            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
+////            selectedFilmImage.setImage(new Image(film.getImagePath()));
+////            selectedFilmImage.setVisible(true);
+////        } catch (IllegalArgumentException e) {
+////            System.err.println("Cant locate the image: ");
+////            selectedFilmImage.setVisible(false);
+////        } catch (UnsupportedEncodingException e) {
+////            e.printStackTrace();
+////        } catch (NullPointerException e) {
+////            System.err.println("Unable to find film");
+////            e.printStackTrace();
+////        }
+//        // TODO: Set image and set screening times
+//
+//        for (Rectangle otherRectangles : rectangleArrayList) {
+//            otherRectangles.setStrokeWidth(0.0);
 //        }
-        // TODO: Set image and set screening times
-
-        for (Rectangle otherRectangles :
-                rectangleArrayList) {
-            otherRectangles.setStrokeWidth(0.0);
-        }
-
-        rectangle.setStrokeWidth(5.0);
-        selectedFilmGroup.setVisible(true);
-
-        addScreeningsToView();
+//
+//        rectangle.setStrokeWidth(5.0);
+//        selectedFilmGroup.setVisible(true);
+//
+//        addScreeningsToView();
+//
+//        });
     }
 
     private void addFilmToList(Film film, boolean isSelected) {
@@ -223,6 +253,8 @@ public class MoviesController implements Initializable {
             imageView.setY(30.0);
             imageView.setFitHeight(145.0);
             imageView.setFitWidth(134.0);
+            imageView.setCache(true);
+            imageView.setCacheHint(CacheHint.SPEED);
         } catch (IllegalArgumentException e) {
             System.err.println("Unable to find film:");
         } catch (UnsupportedEncodingException e) {

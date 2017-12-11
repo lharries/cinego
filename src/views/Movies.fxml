@@ -8,9 +8,11 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -18,7 +20,6 @@
 
 <!--TODO: Remove the header and footer-->
 
-<?import javafx.scene.effect.ColorAdjust?>
 <AnchorPane prefHeight="750" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MoviesController">
    <children>
        <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
@@ -51,6 +52,7 @@
             </Text>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="237.0" layoutX="4.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
             <Label fx:id="selectedFilmDescription" layoutX="5.0" layoutY="232.0" prefHeight="91.0" prefWidth="207.0" text="Description" />
+            <StackPane fx:id="selectedTrailerPane" layoutX="6.0" layoutY="-6.0" prefHeight="238.0" prefWidth="351.0" />
          </children>
       </Group>
       <TabPane layoutX="944.0" layoutY="489.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">

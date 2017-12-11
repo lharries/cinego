@@ -11,7 +11,9 @@ import com.stripe.net.RequestOptions;
 /**
  * Custom payments handler for stripe! Api keys are only test keys. In production mode you would
  * need to either keep the source code hidden and the jar file inaccessible or have separate employee and customer
- * applications to keep the customer api key safe
+ * applications to keep the secret api key safe
+ *
+ * @author lukeharries kaiklasen
  */
 public class PaymentsUtil {
 

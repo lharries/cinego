@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component inheritJdk="true">
 	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="sqlite-jdbc-3.21.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/sqlite-jdbc-3.21.0.jar!/"/>
+	</lib>
+	<lib name="csvjdbc-1.0-34.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/csvjdbc-1.0-34.jar!/"/>
+	</lib>
+	<lib name="stripe-java-5.25.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/stripe-java-5.25.0.jar!/"/>
+	</lib>
+	<lib name="gson-2.6.2.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/gson-2.6.2.jar!/"/>
+	</lib>
 </component>

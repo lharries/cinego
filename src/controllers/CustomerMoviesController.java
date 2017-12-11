@@ -46,7 +46,7 @@ import java.util.ResourceBundle;
  */
 
 
-public class MoviesController implements Initializable {
+public class CustomerMoviesController implements Initializable {
 
     private Film selectedFilm;
 

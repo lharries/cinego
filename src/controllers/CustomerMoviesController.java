@@ -177,6 +177,8 @@ public class CustomerMoviesController implements Initializable {
             e.printStackTrace();
         }
 
+        selectedFilmGroup.setVisible(false);
+
         // hide the borders of all films
         for (Rectangle otherRectangles :
                 movieRectanglesArrayList) {

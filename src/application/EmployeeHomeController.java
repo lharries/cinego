@@ -109,7 +109,7 @@ public class EmployeeHomeController implements Initializable {
     private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab;
 
     @FXML
-    private TextField addTitle;
+    private TextField addTitle, trailerURL;
 
     @FXML
     private TextArea addDescription;
@@ -122,7 +122,7 @@ public class EmployeeHomeController implements Initializable {
 
     //reused variables in validation and creation of movies and screenings
 
-    private String title, movieFileName, description, screeningTime, screeningDate, movieTitle;
+    private String title, movieFileName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
     private Date dateTime;
     private Film film;
     public static int selectedScreeningId;
@@ -196,7 +196,6 @@ public class EmployeeHomeController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
 //            System.out.println(path);
 //
@@ -298,7 +297,10 @@ public class EmployeeHomeController implements Initializable {
 
         title = addTitle.getText();
         description = addDescription.getText();
-        if (title.isEmpty() || description.isEmpty() || movieFileName == null) {
+        movieTrailerURL = trailerURL.getText();
+
+
+        if (title.isEmpty() || description.isEmpty() || movieFileName == null || movieTrailerURL.isEmpty()) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
         } else {
@@ -328,16 +330,13 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createMovie() throws SQLException, ClassNotFoundException {
 
-        //store input in local variables to used for TableView and database input
-        title = addTitle.getText();
-        description = addDescription.getText();
-
         //adds the newly created movie to the database
         FilmDAO.insertFilm(title, description, movieFileName);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         addTitle.clear();
         addDescription.clear();
+        trailerURL.clear();
         populateMoviesTable();
         populateMovieSelectionBox();
     }

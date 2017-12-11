@@ -38,21 +38,19 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * Allows the customer to browse through a list of films and select the films by date
+ * <p>
  * Sources:
  * - https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
  * - https://stackoverflow.com/questions/24700765/how-to-hide-a-pannable-scrollbar-in-javafx
  * - https://stackoverflow.com/questions/42542312/javafx-datepicker-color-single-cell
  * - https://stackoverflow.com/questions/21242110/convert-java-util-date-to-java-time-localdate
  */
-
-
 public class CustomerMoviesController implements Initializable {
 
     private Film selectedFilm;
 
     private Date selectedDate;
-
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
     private String searchText = "";
 
@@ -146,21 +144,18 @@ public class CustomerMoviesController implements Initializable {
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
 
-        // Try and get the film if it's found
-//        try {
-////            System.out.println(film.getImagePath());
-////            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
-//            selectedFilmImage.setImage(new Image(film.getImagePath()));
-//            selectedFilmImage.setVisible(true);
-//        } catch (IllegalArgumentException e) {
-//            System.err.println("Cant locate the image: ");
-//            selectedFilmImage.setVisible(false);
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        } catch (NullPointerException e) {
-//            System.err.println("Unable to find film");
-//            e.printStackTrace();
-//        }
+        try {
+            selectedFilmImage.setImage(new Image(film.getImagePath()));
+            selectedFilmImage.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Cant locate the image: ");
+            selectedFilmImage.setVisible(false);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("Unable to find film");
+            e.printStackTrace();
+        }
         // TODO: Set image and set screening times
 
         for (Rectangle otherRectangles :
@@ -329,7 +324,7 @@ public class CustomerMoviesController implements Initializable {
 
 
     public void datePickerHandler(ActionEvent actionEvent) {
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
             if (datePicker.getValue() != null)
                 selectedDate = dateFormat.parse(String.valueOf(datePicker.getValue()));

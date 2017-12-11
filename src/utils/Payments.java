@@ -8,18 +8,33 @@ import com.stripe.exception.*;
 import com.stripe.model.*;
 import com.stripe.net.RequestOptions;
 
+/**
+ * Custom payments handler for stripe! Api keys are only test keys. In production mode you would
+ * need to either keep the source code hidden and the jar file inaccessible or have separate employee and customer
+ * applications to keep the customer api key safe
+ */
 public class Payments {
 
-    public static void main(String[] args) {
-        Token token = null;
+    /**
+     * Charge the credit card details using stripe
+     *
+     * @param price       the price in dollars to charge
+     * @param cardNumber  the card number
+     * @param expiryMonth the expiry month
+     * @param expiryYear  the expiry year
+     * @param cvc         the cvc number
+     * @return whether the charge was successful
+     */
+    public static boolean chargeCreditCard(int price, long cardNumber, int expiryMonth, int expiryYear, int cvc) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
         try {
-            token = createToken(4242424242424242L, 12, 2018, 131);
-            createCharge(token, 100);
+            Token token = createToken(cardNumber, expiryMonth, expiryYear, cvc);
+            createCharge(token, price);
+            return true;
 
         } catch (CardException | APIException | InvalidRequestException | AuthenticationException | APIConnectionException e) {
             e.printStackTrace();
+            throw e;
         }
-
     }
 
     /**
@@ -70,7 +85,7 @@ public class Payments {
      * @param token The token from which the credit card was made
      * @return
      */
-    private static Token createCharge(Token token, int price) {
+    private static void createCharge(Token token, int price) {
         String privateApiKey = "sk_test_EgItpWbz0JklAlzlo4zpQSsn";
 
         RequestOptions requestOptions = (new RequestOptions.RequestOptionsBuilder()).setApiKey(privateApiKey).build();

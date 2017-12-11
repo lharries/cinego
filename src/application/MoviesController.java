@@ -106,19 +106,19 @@ public class MoviesController implements Initializable {
         moviesVBox.setSpacing(10.0);
 
         updateFilmList();
-//
-//        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-//            searchText = searchField.getText();
-//            System.out.println("Key up:");
-//            System.out.println(searchField.getText());
-//            updateFilmList();
-//        });
-//
-//        try {
-//            setColorsOfDatePicker();
-//        } catch (SQLException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchText = searchField.getText();
+            System.out.println("Key up:");
+            System.out.println(searchField.getText());
+            updateFilmList();
+        });
+
+        try {
+            setColorsOfDatePicker();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -153,54 +153,58 @@ public class MoviesController implements Initializable {
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
 
-        //TODO: get trailer to work with hardcoded URL
-        //TODO: handle if no URL has been uploaded
-        //TODO: store URL in db, add to query etc.
 
-        WebView webview = new WebView();
-        String youtubeUrl = "https://www.youtube.com/watch?v=6ZfuNTqbHE8".replace("watch?v=", "embed/");
+        //TODO: store URL in db, add to query etc.
+        //TODO: handle if no URL has been uploaded
+
+
+        String trailerURLString = film.getTrailerURL();
+       if(trailerURLString != null){
+           WebView webview = new WebView();
+           String youtubeUrl = trailerURLString.replace("watch?v=", "embed/");
+//        String youtubeUrl = "https://www.youtube.com/watch?v=6ZfuNTqbHE8".replace("watch?v=", "embed/");
 
 //        "https://www.youtube.com/embed/6AgjRgr65BQ"
 //        "https://www.youtube.com/embed/64QXmeV3FtI"
 //        "http://www.imdb.com/list/ls053181649/videoplayer/vi3114711065?ref_=hm_hp_i_1"
-
-        webview.getEngine().load(youtubeUrl);
-
+            webview.getEngine().load(youtubeUrl);
             //adjust the Ytube link to "embed/" -> shows only the embedded movie view
 
-        webview.setPrefSize(100, 100);
+//        webview.setPrefSize(100, 100);
+            selectedTrailerPane.getChildren().setAll(webview);
 
-        selectedTrailerPane.getChildren().setAll(webview);
+       }
 
 
-//
-//
-//        // Try and get the film if it's found
-////        try {
-//////            System.out.println(film.getImagePath());
-//////            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
-////            selectedFilmImage.setImage(new Image(film.getImagePath()));
-////            selectedFilmImage.setVisible(true);
-////        } catch (IllegalArgumentException e) {
-////            System.err.println("Cant locate the image: ");
-////            selectedFilmImage.setVisible(false);
-////        } catch (UnsupportedEncodingException e) {
-////            e.printStackTrace();
-////        } catch (NullPointerException e) {
-////            System.err.println("Unable to find film");
-////            e.printStackTrace();
-////        }
-//        // TODO: Set image and set screening times
-//
-//        for (Rectangle otherRectangles : rectangleArrayList) {
-//            otherRectangles.setStrokeWidth(0.0);
-//        }
-//
-//        rectangle.setStrokeWidth(5.0);
-//        selectedFilmGroup.setVisible(true);
-//
-//        addScreeningsToView();
-//
+
+
+
+        // Try and get the film if it's found
+        try {
+//            System.out.println(film.getImagePath());
+//            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
+            selectedFilmImage.setImage(new Image(film.getImagePath()));
+            selectedFilmImage.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Cant locate the image: ");
+            selectedFilmImage.setVisible(false);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("Unable to find film");
+            e.printStackTrace();
+        }
+        // TODO: Set image and set screening times
+
+        for (Rectangle otherRectangles : rectangleArrayList) {
+            otherRectangles.setStrokeWidth(0.0);
+        }
+
+        rectangle.setStrokeWidth(5.0);
+        selectedFilmGroup.setVisible(true);
+
+        addScreeningsToView();
+
 //        });
     }
 
@@ -223,7 +227,7 @@ public class MoviesController implements Initializable {
         group.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("Clicked");
+//                System.out.println("Clicked");
                 selectFilm(film, rectangle);
             }
         });
@@ -272,15 +276,17 @@ public class MoviesController implements Initializable {
 
         // TODO: Remove the other screenings
 
+        //TODO: @Kai if trailerURL is null then don't display
         if (imageView != null) {
             group.getChildren().addAll(rectangle, title, description, imageView, screenings);
         } else {
             group.getChildren().addAll(rectangle, title, description, screenings);
-
         }
 
         moviesVBox.getChildren().add(group);
 
+
+        //TODO: add trailerURL as parameter
         if (isSelected) {
             selectFilm(film, rectangle);
         }

@@ -59,14 +59,6 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-
-		try {
-			user = CustomerDAO.login("customer", "customerpassword");
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			LOGGER.logp(Level.WARNING, "Main", "main", "Failed to login user - either customer or employee. See: " + e);
-		}
-
 		launch(args);
 	}
 }

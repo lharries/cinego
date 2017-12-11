@@ -2,6 +2,8 @@ package models;
 
 import javafx.beans.property.*;
 
+import java.sql.SQLException;
+
 public class Booking {
 
     private IntegerProperty id;
@@ -96,15 +98,7 @@ public class Booking {
         this.seat.set(seat);
     }
 
-    public Customer getCustomer() {
-        return customer.get();
-    }
-
-    public ObjectProperty<Customer> customerProperty() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer.set(customer);
+    public Customer getCustomer() throws SQLException, ClassNotFoundException {
+        return CustomerDAO.getById(getCustomerId());
     }
 }

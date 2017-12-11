@@ -25,6 +25,7 @@ import models.Screening;
 import models.ScreeningDAO;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -146,14 +147,20 @@ public class MoviesController implements Initializable {
         selectedFilmDescription.setText(film.getDescription());
 
         // Try and get the film if it's found
-        try {
-            selectedFilmImage.setImage(new Image(film.getImagePath()));
-            selectedFilmImage.setVisible(true);
-        } catch (IllegalArgumentException e) {
-            System.err.println("Cant locate the image: ");
-            System.err.println(film.getImagePath());
-            selectedFilmImage.setVisible(false);
-        }
+//        try {
+////            System.out.println(film.getImagePath());
+////            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
+//            selectedFilmImage.setImage(new Image(film.getImagePath()));
+//            selectedFilmImage.setVisible(true);
+//        } catch (IllegalArgumentException e) {
+//            System.err.println("Cant locate the image: ");
+//            selectedFilmImage.setVisible(false);
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (NullPointerException e) {
+//            System.err.println("Unable to find film");
+//            e.printStackTrace();
+//        }
         // TODO: Set image and set screening times
 
         for (Rectangle otherRectangles :
@@ -209,6 +216,7 @@ public class MoviesController implements Initializable {
 
         ImageView imageView = null;
         try {
+            System.out.println(film.getImagePath());
             Image image = new Image(film.getImagePath());
             imageView = new ImageView(image);
             imageView.setX(230.0);
@@ -216,10 +224,13 @@ public class MoviesController implements Initializable {
             imageView.setFitHeight(145.0);
             imageView.setFitWidth(134.0);
         } catch (IllegalArgumentException e) {
-            System.err.print("Unable to find film");
-            System.err.println(film.getImagePath());
+            System.err.println("Unable to find film:");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("nullpointer");
+            e.printStackTrace();
         }
-
 
         Label screenings = new Label(film.getScreeningsDescription());
         screenings.setLayoutX(15.0);

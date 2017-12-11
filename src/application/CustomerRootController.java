@@ -60,21 +60,21 @@ public class CustomerRootController implements Initializable {
         Main.user.lastNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
 
         //sets the logos for the roots
-        BufferedImage bufferedLogo = null;
-        BufferedImage bufferedLogout = null;
+//        BufferedImage bufferedLogo = null;
+//        BufferedImage bufferedLogout = null;
 //        BufferedImage bufferedBackground = null;
-        try {
-            bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
-            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
-//            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
-        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
-//        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-        this.logo.setImage(logo);
-        this.logoutImg.setImage(logout);
+//        try {
+//            bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
+//            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
+////            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
+//        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
+////        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
+//        this.logo.setImage(logo);
+//        this.logoutImg.setImage(logout);
 //        this.backgroundImg.setImage(background);
     }
 

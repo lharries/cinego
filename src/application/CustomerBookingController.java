@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.BookingDAO;
@@ -65,6 +66,15 @@ public class CustomerBookingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // TODO REmove this
+        try {
+            selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         movieTitle.setText(selectedScreening.getFilmTitle());
         try {
             screeningDate.setText(selectedScreening.getMediumDate());
@@ -106,11 +116,16 @@ public class CustomerBookingController implements Initializable {
             System.out.println("Clicked confirm");
             createBooking();
             alert.close();
+            createSeatingPlan();
         }
 
     }
 
     private void createSeatingPlan() {
+
+        gridPaneSeats.getChildren().clear();
+
+        initGridLines();
         String[] rows = new String[]{"A", "B", "C", "D", "E"};
         for (int i = 0; i < 5; i++) {
             for (int j = 1; j < 9; j++) {
@@ -134,17 +149,38 @@ public class CustomerBookingController implements Initializable {
 
                     Button btn = new Button();
                     btn.setGraphic(seatViewImage);
-                    btn.setOnAction((ActionEvent e) -> {
-                        if (selectedSeats.contains(seat)) {
-                            selectedSeats.remove(seat);
-                            btn.setGraphic(seatViewImage);
-                        } else {
-                            selectedSeats.add(seat);
-                            btn.setGraphic(selectedSeatImage);
-                        }
-                        System.out.println(seat.getId());
-                        displaySelectedSeats();
-                    });
+
+                    Booking bookingInSeat = BookingDAO.getBooking(seat.getId(), selectedScreening.getId());
+
+                    if (bookingInSeat != null) {
+                        btn.setGraphic(takenSeatImage);
+                        btn.setOnAction((ActionEvent e) -> {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                            alert.setTitle("Seat Booked");
+                            alert.setHeaderText("Error - Seat already booked");
+                            alert.setContentText("Please select a seat which has not yet been booked");
+
+                            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                            alert.getButtonTypes().setAll(buttonTypeCancel);
+
+                            alert.show();
+                        });
+                    } else {
+                        btn.setOnAction((ActionEvent e) -> {
+                            if (selectedSeats.contains(seat)) {
+                                selectedSeats.remove(seat);
+                                btn.setGraphic(seatViewImage);
+                            } else {
+                                selectedSeats.add(seat);
+                                btn.setGraphic(selectedSeatImage);
+                            }
+                            displaySelectedSeats();
+                        });
+                    }
+
+                    System.out.println(BookingDAO.getBooking(seat.getId(), selectedScreening.getId()));
 
                     //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
@@ -172,6 +208,32 @@ public class CustomerBookingController implements Initializable {
                 e.printStackTrace();
                 LOGGER.logp(Level.WARNING, "CustomerBookingController", "createBooking", "Failed to create a customer booking. See: " + e);
             }
+        }
+        createSeatingPlan();
+    }
+
+    public void initGridLines() {
+
+        // Rows
+        for (int row = 0; row < 5; row++) {
+            Label text = new Label(Character.toString((char) (65 + row)));
+            System.out.println(text);
+            text.setFont(new Font(30.0));
+            text.setLayoutX(-10.0);
+            text.setLayoutY(0);
+            text.toFront();
+            gridPaneSeats.add(text, 0, row);
+        }
+
+        // columns
+        for (int column = 1; column < 9; column++) {
+            Label text = new Label(String.valueOf(column));
+            System.out.println(text);
+            text.setFont(new Font(30.0));
+            text.setLayoutX(-10.0);
+            text.setLayoutY(0);
+            text.toFront();
+            gridPaneSeats.add(text, column, 5);
         }
     }
 

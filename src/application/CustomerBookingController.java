@@ -3,19 +3,15 @@ package application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import models.*;
 
 import java.net.URL;
@@ -52,15 +48,8 @@ public class CustomerBookingController implements Initializable {
     @FXML
     private GridPane gridPaneSeats;
 
-
-    //TODO: make cinema seats selectable (change colour, store seat identifier, disable booked seats to be chosen
-    //TODO: add booking summary at the side: display (push) movie title, date + time, populate seatListView with chosen seats (Row + Column)
-    //TODO: fxids= movieTitle, screeningDate, Time, seatListView, bookingConfirmationClickHandler
-
     //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
-
-
-    //TODO: @Kai test button behind chair image if it makes it clickable and colours whether that's enough to make the chair turn green / red
+    // TODO: Changes the colors of the buttons?
 
 
     //renders the background image for the scene + commented out code to load chair image into button's background
@@ -74,15 +63,6 @@ public class CustomerBookingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        // TODO REmove this
-        try {
-            selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         movieTitle.setText(selectedScreening.getFilmTitle());
         try {
             screeningDate.setText(selectedScreening.getMediumDate());
@@ -90,11 +70,7 @@ public class CustomerBookingController implements Initializable {
             e.printStackTrace();
         }
 
-        System.out.println(selectedScreening);
-        System.out.println(selectedScreening.getDate());
-
-        createSeatingPlan();
-
+        initSeatingPlan();
 
     }
 
@@ -126,12 +102,12 @@ public class CustomerBookingController implements Initializable {
             System.out.println("Clicked confirm");
             createBooking();
             alert.close();
-            createSeatingPlan();
+            initSeatingPlan();
         }
 
     }
 
-    private void createSeatingPlan() {
+    private void initSeatingPlan() {
 
         gridPaneSeats.getChildren().clear();
 
@@ -220,7 +196,7 @@ public class CustomerBookingController implements Initializable {
                 e.printStackTrace();
             }
         }
-        createSeatingPlan();
+        initSeatingPlan();
     }
 
     public void initGridLines() {

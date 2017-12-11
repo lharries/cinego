@@ -74,7 +74,7 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     *Purpose: method to be called by different employee controllers to set their respective views to the
+      method to be called by different employee controllers to set their respective views to the
      *center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
@@ -95,7 +95,7 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     * Purpose: opens the employee's Home View (scene located within employeeRoot) where they can see the movies
+     * opens the employee's Home View (scene located within employeeRoot) where they can see the movies
      *
      * @param event
      */
@@ -126,7 +126,7 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     * Purpose: logs user out of cinema system
+     * logs user out of cinema system
      * @version: logout 1.0
      * @param event
      */

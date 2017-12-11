@@ -36,9 +36,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Allows the customer to browse through a list of films and select the films by date
+ * <p>
+ * Design Pattern: MVC
  * <p>
  * Sources:
  * - https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
@@ -48,14 +52,18 @@ import java.util.ResourceBundle;
  */
 public class CustomerMoviesController implements Initializable {
 
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
+
+    /**
+     * The film which has been selected and therefore displayed in the main panel
+     */
     private Film selectedFilm;
 
     private Date selectedDate;
 
     private String searchText = "";
 
-    private ArrayList<Rectangle> rectangleArrayList = new ArrayList<>();
-
+    private ArrayList<Rectangle> movieRectanglesArrayList = new ArrayList<>();
 
     @FXML
     public ScrollPane moviesScrollPane;
@@ -89,7 +97,7 @@ public class CustomerMoviesController implements Initializable {
 
         selectedFilmGroup.setVisible(false);
 
-        // Hide the horizontal scroll bar
+        // Hide the horizontal scroll bar of the movies list
         moviesScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         // Setup the spacing for the vertical list of films
@@ -98,6 +106,7 @@ public class CustomerMoviesController implements Initializable {
 
         updateFilmList();
 
+        // listener for changing the search text
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchText = searchField.getText();
             System.out.println("Key up:");
@@ -110,9 +119,11 @@ public class CustomerMoviesController implements Initializable {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Update the sidebar showing the list of films according to the filers
+     */
     private void updateFilmList() {
 
         moviesVBox.getChildren().clear();
@@ -123,6 +134,8 @@ public class CustomerMoviesController implements Initializable {
                 // set the first film to be selected
                 Film film = films.get(i);
                 boolean isSelected = (i == 0);
+
+                // filter by title, description and date
                 if (film.getTitle().toLowerCase().contains(searchText.toLowerCase()) || film.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
                     if (selectedDate == null || film.hasScreeningOnDate(selectedDate)) {
                         addFilmToList(films.get(i), isSelected);
@@ -130,14 +143,20 @@ public class CustomerMoviesController implements Initializable {
 
                 }
 
-                System.out.println(films.get(i).getUpcomingScreenings());
-
             }
         } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "updateFilmList",
+                    "Unable to get films" + e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * Display the film in the main panel
+     *
+     * @param film      the film which has been select
+     * @param rectangle the rectangle containing the film, used to alter the border
+     */
     private void selectFilm(Film film, Rectangle rectangle) {
         selectedFilm = film;
 
@@ -148,27 +167,35 @@ public class CustomerMoviesController implements Initializable {
             selectedFilmImage.setImage(new Image(film.getImagePath()));
             selectedFilmImage.setVisible(true);
         } catch (IllegalArgumentException e) {
-            System.err.println("Cant locate the image: ");
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unable to find the film" + e);
             selectedFilmImage.setVisible(false);
         } catch (UnsupportedEncodingException e) {
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unsuppoerted encoding" + e);
             e.printStackTrace();
         } catch (NullPointerException e) {
-            System.err.println("Unable to find film");
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unable to find the film" + e);
             e.printStackTrace();
         }
-        // TODO: Set image and set screening times
 
+        // hide the borders of all films
         for (Rectangle otherRectangles :
-                rectangleArrayList) {
+                movieRectanglesArrayList) {
             otherRectangles.setStrokeWidth(0.0);
         }
 
+        // show the gold border of the selected film
         rectangle.setStrokeWidth(5.0);
-        selectedFilmGroup.setVisible(true);
 
+        // add the screenings to the view
         addScreeningsToView();
     }
 
+    /**
+     * Create the film object to be displayed and add it to the list of films
+     *
+     * @param film       the film
+     * @param isSelected whether the film has been selected, used to set the first film as selected
+     */
     private void addFilmToList(Film film, boolean isSelected) {
 
         Group group = new Group();
@@ -178,13 +205,14 @@ public class CustomerMoviesController implements Initializable {
         rectangle.setArcHeight(5.0);
         rectangle.setArcWidth(5.0);
         rectangle.setStyle("-fx-padding: 5 5 5 5;");
+
         // The border of the rectangle which appears when the film is selected
         rectangle.setStroke(Color.GOLD);
         rectangle.setStrokeType(StrokeType.CENTERED);
         rectangle.setStrokeWidth(0.0);
 
         // To enable turning off the selection color
-        rectangleArrayList.add(rectangle);
+        movieRectanglesArrayList.add(rectangle);
         group.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -209,31 +237,25 @@ public class CustomerMoviesController implements Initializable {
         Font descriptionFont = new Font(15.0);
         description.setFont(descriptionFont);
 
-        ImageView imageView = null;
-        try {
-            System.out.println(film.getImagePath());
-            Image image = new Image(film.getImagePath());
-            imageView = new ImageView(image);
-            imageView.setX(230.0);
-            imageView.setY(30.0);
-            imageView.setFitHeight(145.0);
-            imageView.setFitWidth(134.0);
-        } catch (IllegalArgumentException e) {
-            System.err.println("Unable to find film:");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            System.err.println("nullpointer");
-            e.printStackTrace();
-        }
-
+        // screenings
         Label screenings = new Label(film.getScreeningsDescription());
         screenings.setLayoutX(15.0);
         screenings.setLayoutY(120.0);
         Font screeningFont = new Font(15.0);
         screenings.setFont(screeningFont);
 
-        // TODO: Remove the other screenings
+        ImageView imageView = null;
+        try {
+            Image image = new Image(film.getImagePath());
+            imageView = new ImageView(image);
+            imageView.setX(230.0);
+            imageView.setY(30.0);
+            imageView.setFitHeight(145.0);
+            imageView.setFitWidth(134.0);
+        } catch (IllegalArgumentException | UnsupportedEncodingException | NullPointerException e) {
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "addFilmToList", "Unable to get the film image" + e);
+            e.printStackTrace();
+        }
 
         if (imageView != null) {
             group.getChildren().addAll(rectangle, title, description, imageView, screenings);
@@ -249,47 +271,9 @@ public class CustomerMoviesController implements Initializable {
         }
     }
 
-    private void createFilm() {
-
-//        Group filmGroup = new Group();
-//        filmGroup.setLayoutX(10.0);
-//        filmGroup.setLayoutY(15.0);
-//        Rectangle background = new Rectangle();
-//        background.setArcHeight(5.0);
-//        background.setArcWidth(5.0);
-//        background.setFill(Color.BLACK);
-//        background.setHeight(150.0);
-//        background.setWidth(367.0);
-//
-//        filmGroup.getChildren().add(background);
-//
-//        filmGroup.toFront();
-//
-//        moviesAnchorPane.getChildren().add(filmGroup);
-
-
-//        filmGroup.getChildren().add()
-
-//        <Group layoutX="10.0" layoutY="15.0">
-//                     <children>
-//                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" stroke="#2f3c4d" strokeType="INSIDE" width="367.0" />
-//                        <ImageView fitHeight="216.0" fitWidth="88.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-//                           <image>
-//                              <Image url="@../resources/TheBrokenPoster.jpg" />
-//                           </image>
-//                        </ImageView>
-//                        <Text layoutX="29.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Broken">
-//                           <font>
-//                              <Font size="25.0" />
-//                           </font>
-//                        </Text>
-//                        <Label layoutX="34.0" layoutY="65.0" text="Label" />
-//                        <Label layoutX="108.0" layoutY="66.0" text="Label" />
-//                        <Label layoutX="33.0" layoutY="102.0" text="Date" />
-//                     </children>
-//                  </Group>
-    }
-
+    /**
+     * Add the screenings button to the view
+     */
     private void addScreeningsToView() {
         // TODO: Switch to flowpane or tabs
         double xPosition = 0.0;
@@ -306,15 +290,15 @@ public class CustomerMoviesController implements Initializable {
                         CustomerBookingController.selectedScreening = screening;
                         Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
                     } catch (IOException e) {
-                        // TODO: Add loggin LOGGER.logp(Level.WARNING, "CustomerRootController", "openBookingView", "Failed to load CustomerBooking View. See: " + e);
-                        System.err.println(e);
+                        LOGGER.logp(Level.WARNING, "CustomerMoviesController",
+                                "addScreeningsToView", "Unable to load customer booking view" + e);
                         e.printStackTrace();
                     }
                 });
 
                 screeningTimes.getChildren().add(screeningButton);
 
-                xPosition += 100.0;
+                xPosition += 130.0;
 
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -323,6 +307,11 @@ public class CustomerMoviesController implements Initializable {
     }
 
 
+    /**
+     * Handle the date picker being used
+     *
+     * @param actionEvent
+     */
     public void datePickerHandler(ActionEvent actionEvent) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
@@ -334,6 +323,11 @@ public class CustomerMoviesController implements Initializable {
         updateFilmList();
     }
 
+    /**
+     * Clear all the filters and show all the films
+     *
+     * @param actionEvent
+     */
     public void showAllFilms(ActionEvent actionEvent) {
         datePicker.setValue(null);
         selectedDate = null;
@@ -342,6 +336,12 @@ public class CustomerMoviesController implements Initializable {
         updateFilmList();
     }
 
+    /**
+     * Change the date picker colors to show which dates have films showing on that date
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public void setColorsOfDatePicker() throws SQLException, ClassNotFoundException {
         ObservableList<Screening> screenings = ScreeningDAO.getScreeningObservableList();
 

@@ -1,9 +1,6 @@
 package controllers;
 
-
-//import com.sun.deploy.Environment;
 import application.Main;
-
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,56 +8,40 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-//import org.relique.jdbc.csv.CsvDriver;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
 import org.relique.jdbc.csv.CsvDriver;
 
-
-//import sun.tools.java.Environment;
-
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  * The EmployeeHomeController implements functionality specific to the EmployeeHome.fxml file which is part
  * of the cinema booking system - 'Cinego'.
  *
- * @author Luke Harries, Kai Klasen
+ * @author lukeharries, kaikalsen
  * @version 1.0
  */
-
-//@author (classes and interfaces only, required)
-//@version (classes and interfaces only, required. See footnote 1)
-//@param (methods and constructors only)
-//@return (methods only)
-//@exception (@throws is a synonym added in Javadoc 1.2)
-
-
 public class EmployeeHomeController implements Initializable {
 
     //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
@@ -76,15 +57,6 @@ public class EmployeeHomeController implements Initializable {
 
     @FXML
     private Button toSeatBooking, deleteBooking;
-
-    @FXML
-    private ImageView backgroundImg, moviePoster;
-
-    @FXML
-    private AnchorPane AnchorPane;
-
-    @FXML
-    private TableView ScreeningsTable;
 
     @FXML
     private TableView<Film> moviesTable;
@@ -118,7 +90,10 @@ public class EmployeeHomeController implements Initializable {
 
     //reused variables in validation and creation of movies and screenings
 
-    private String title, movieFileName, description, screeningTime, screeningDate, movieTitle;
+    private String title;
+    private String movieFileName;
+    private String description;
+    private String movieTitle;
     private Date dateTime;
     private Film film;
     public static int selectedScreeningId;
@@ -178,7 +153,6 @@ public class EmployeeHomeController implements Initializable {
             File newMovie = new File(moviesDirectory, nameOfMovie);
             System.out.println(moviesDirectory);
 
-//
             try {
                 newMovie.createNewFile();
                 Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -187,85 +161,6 @@ public class EmployeeHomeController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-//            System.out.println(path);
-//
-////            URL f = getClass().getResource("resources");
-////            System.out.println(f);
-//
-////            try {
-//
-//            File currentDir = new File (".");
-//            System.out.println(currentDir.toPath());
-//            File parentDir = currentDir.getParentFile();
-//            System.out.println(parentDir.toPath());
-
-//
-//            File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-//            Path parent = f.toPath().getParent();
-//            System.out.println(parent.toString());
-//            Path resources = Paths.get(parent.toString(), "/resources");
-//
-//            movieFileName = "turtle.png";
-////            System.out.println("resources");
-////            System.out.println(resources);
-////            File movieImages = new File(resources.toString());
-////            System.out.println(movieImages);
-////            System.out.println(Arrays.toString(movieImages.list()));
-////            URL string = getClass().getResource("../resources");
-//
-////            URL movieImages = getClass().getResource("../../movie-images");
-////            System.out.println(movieImages);
-//
-////            String resourcesPath = string.getPath();
-////
-//            // TODO: Switch to random string
-//            File newFile = new File(resources.toString() + "/turtle.png");
-//            System.out.println(newFile.getAbsolutePath().toString());
-////
-//            try {
-//                newFile.createNewFile();
-//                System.out.println(newFile);
-//                Files.copy(chosenFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            //got the source file, need to get the resources directory adjcaent to it, then create the new file in that
-
-//            String newFilePath = f.getParent() + "/hello.jpg";
-//            File newFile = new File(newFilePath);
-//            try {
-//
-//                String[] list  = f.list((dir, name) -> {
-//                    return Objects.equals(name, "resources");
-//                });
-//                System.out.println(Arrays.toString(list));
-//                newFile.createNewFile();
-//                System.out.println(newFile);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-////
-//                System.out.println(f.getAbsolutePath());
-//                image = ImageIO.read(chosenFile);
-//                file = new File("/resources/hello.jpg");
-//                System.out.println(file.getAbsolutePath());
-//                file.createNewFile();
-//                Files.copy(chosenFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//
-//                ImageIO.write(image, "jpg", file);
-//                System.out.println(file.getAbsolutePath());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-//
-//                movieFileName = "helloooooo" + ".jpg";
-//                file = new File(movieFileName);
-//                ImageIO.write(image, "jpg", file);
-//                ImageIO.write(image, "jpg", file);
         }
     }
 
@@ -351,8 +246,8 @@ public class EmployeeHomeController implements Initializable {
 
         //get input values and check for validity
         movieTitle = String.valueOf(movieSelectionBox.getValue());
-        screeningTime = String.valueOf(timePicker.getValue());
-        screeningDate = String.valueOf(datePicker.getValue());
+        String screeningTime = String.valueOf(timePicker.getValue());
+        String screeningDate = String.valueOf(datePicker.getValue());
 
 
         // convert the dateTime to the correct format
@@ -402,13 +297,8 @@ public class EmployeeHomeController implements Initializable {
         film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
 
-//        DateTimeStringConverter date2 = new DateTimeStringConverter();
-//        date2.fromString(date);
-
-
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
-
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -420,7 +310,7 @@ public class EmployeeHomeController implements Initializable {
     /**
      * Exports a list of relevant screening and movie statistics to directory: "../cinego/ScreeningsExport.csv"
      * Source:  - https://community.oracle.com/thread/2397100
-     *          - http://csvjdbc.sourceforge.net/
+     * - http://csvjdbc.sourceforge.net/
      *
      * @throws IOException
      */

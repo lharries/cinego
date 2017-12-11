@@ -86,7 +86,7 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Purpose: opens a new stage with the user views loaded into the center of the overarching
+     * opens a new stage with the user views loaded into the center of the overarching
      * customerRoot view when a system user logs in as a user. Additionally this method hides the
      * login screen.
      *
@@ -126,7 +126,7 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Purpose: Static method that sets the scene and adds styling via the CSS stylesheet with a
+     * Static method that sets the scene and adds styling via the CSS stylesheet with a
      * BorderPane as a parameter.
      *
      * @param root
@@ -139,7 +139,7 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Purpose: loads the user view's layout: BorderPane. Fetches BorderPane's controller and stores it in
+     * loads the user view's layout: BorderPane. Fetches BorderPane's controller and stores it in
      * the Navigation class to be used later on.
      *
      * @return BorderPane 'customerRoot'
@@ -169,7 +169,7 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Purpose: loads the employee view's layout: BorderPane. Fetches BorderPane's controller and stores it in
+     * loads the employee view's layout: BorderPane. Fetches BorderPane's controller and stores it in
      * the Navigation class to be used later on.
      *
      * @return BorderPane 'employeeRoot'

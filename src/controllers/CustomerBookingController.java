@@ -27,6 +27,8 @@ import java.util.logging.Logger;
 /**
  * The graphical layout of the cinema allowing booking multiple seats for a particular screening
  * <p>
+ * Design Pattern: MVC
+ * <p>
  * Source:
  * - Dialog boxes http://code.makery.ch/blog/javafx-dialogs-official/
  */

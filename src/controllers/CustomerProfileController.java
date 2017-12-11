@@ -4,12 +4,10 @@ import application.Main;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -23,18 +21,19 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
-
-
-
-public class CustomerProfileController implements Initializable{
+/**
+ * GUI showing the customers profile info and their upcoming bookings
+ * <p>
+ * Design Pattern: MVC
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
+public class CustomerProfileController implements Initializable {
 
 
     @FXML
     private Button updateProfileBttn, editProfileBttn;
-    @FXML
-    private ImageView backgroundImg;
     @FXML
     private TextField custFirstNameField, custLastNameField, custEmailField, custPhone;
     @FXML
@@ -43,8 +42,6 @@ public class CustomerProfileController implements Initializable{
     private TableView<Booking> bookingsTable;
     @FXML
     private TableColumn titleColBookingTable, dateColBookingTable, seatsColBookingTable;
-    @FXML
-    private ObservableList<Screening> screeningData;
 
     private boolean textFieldEditable = false;
 
@@ -80,8 +77,9 @@ public class CustomerProfileController implements Initializable{
         //TODO: populate the entire BookingsTable with customer's bookings
 
         //retrieve title column data
-        titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
-            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
+        titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking, String> param) {
                 try {
                     Screening screening = ScreeningDAO.getScreeningById(param.getValue().getScreeningId());
                     if (screening == null) {
@@ -97,8 +95,9 @@ public class CustomerProfileController implements Initializable{
         });
 
         //retrieve date column data
-        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
-            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
+        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking, String> param) {
                 try {
                     Screening screening = ScreeningDAO.getScreeningById(param.getValue().getScreeningId());
                     if (screening == null) {
@@ -113,8 +112,9 @@ public class CustomerProfileController implements Initializable{
         });
 
         //retrieve seat column data
-        seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
-            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
+        seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking, String> param) {
                 try {
                     Seat seat = SeatDAO.getSeatsById(param.getValue().getSeatId());
                     return new ReadOnlyObjectWrapper<String>(seat.getName());
@@ -130,7 +130,7 @@ public class CustomerProfileController implements Initializable{
     /**
      * Populates bookingsTable with data related to customer's bookings
      */
-    private void populateBookingsTable(){
+    private void populateBookingsTable() {
 
         try {
             bookingsTable.setItems(BookingDAO.getBookingObservableList());
@@ -143,7 +143,6 @@ public class CustomerProfileController implements Initializable{
     /**
      * Called by clicking the editProfile button and then calls the enableCustProfileFields
      * method in order to set the fields to be editable and change the prompttext to normal text
-     *
      */
     @FXML
     private void setCustProfileEditable() {
@@ -153,14 +152,12 @@ public class CustomerProfileController implements Initializable{
     }
 
     /**
-     *
-     *
      * @param textFieldEditable
      */
 
-    private void enableCustProfileFields(boolean textFieldEditable){
+    private void enableCustProfileFields(boolean textFieldEditable) {
 
-        if(textFieldEditable){
+        if (textFieldEditable) {
 
             //buttons
             updateProfileBttn.setDisable(!textFieldEditable);
@@ -178,7 +175,8 @@ public class CustomerProfileController implements Initializable{
 //        custPhone.setText(Main.user.getPhone());
             custPhone.setEditable(textFieldEditable);
 
-        } if(!textFieldEditable){
+        }
+        if (!textFieldEditable) {
 
             //buttons
             updateProfileBttn.setDisable(!textFieldEditable);
@@ -205,17 +203,16 @@ public class CustomerProfileController implements Initializable{
     /**
      * Purpose: called upon clicking the update profile button. Updates the database with the user's
      * input data upon click event.
-     *
      */
     @FXML
-    private void updateCustomerProfile(){
+    private void updateCustomerProfile() {
 
         //Updates the user's information in the database
         Main.user.setFirstName(custFirstNameField.getText());
         Main.user.setLastName(custLastNameField.getText());
         Main.user.setEmail(custEmailField.getText());
         try {
-            CustomerDAO.updateCustomerDetails(Main.user.getFirstName(),Main.user.getLastName(),Main.user.getEmail(), Main.user.getId());
+            CustomerDAO.updateCustomerDetails(Main.user.getFirstName(), Main.user.getLastName(), Main.user.getEmail(), Main.user.getId());
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             LOGGER.logp(Level.WARNING, "CustomerProfileController", "updateCustomerProfile", "Failed to run db UPDATE query. See: " + e);
@@ -227,7 +224,7 @@ public class CustomerProfileController implements Initializable{
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
         alert.setTitle("Cinego");
         alert.setHeaderText("Profile Update");
-        alert.setContentText("Your profile was successfully updated, "+ Main.user.getFirstName());
+        alert.setContentText("Your profile was successfully updated, " + Main.user.getFirstName());
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(e -> popup.hide());
         popup.show();
@@ -238,17 +235,16 @@ public class CustomerProfileController implements Initializable{
     }
 
     @FXML
-    private void cancelUpdating(){
+    private void cancelUpdating() {
 
         enableCustProfileFields(false);
     }
 
     /**
      * Stores the bookingID of a selected movie into int bookingID which can then be used to delete the booking
-     *
      */
     @FXML
-    private void getSelectedBooking(){
+    private void getSelectedBooking() {
 
         try {
             selectedScreening = ScreeningDAO.getScreeningById(bookingsTable.getSelectionModel().getSelectedItem().getScreeningId());
@@ -261,24 +257,23 @@ public class CustomerProfileController implements Initializable{
     }
 
     /**
-     *
      * Source:
-     *  - https://www.youtube.com/watch?v=oZUGMpGQxgQ
+     * - https://www.youtube.com/watch?v=oZUGMpGQxgQ
      */
     @FXML
     private void deleteMovieBooking() throws ParseException {
 
         //checks if selected screening instance is in the past.
-        if (selectedScreening.isInPast()){
+        if (selectedScreening.isInPast()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
             popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
             alert.setTitle("Cinego");
             alert.setHeaderText("Booking in the past");
-            alert.setContentText("You can't cancel a past booking, "+ Main.user.getFirstName());
+            alert.setContentText("You can't cancel a past booking, " + Main.user.getFirstName());
             alert.showAndWait();
 
-        }else{
+        } else {
 
             //Declares & instantiates alert prompting user to confirm deleting booking
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -286,10 +281,10 @@ public class CustomerProfileController implements Initializable{
             popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
             alert.setTitle("Cinego");
             alert.setHeaderText("Delete Booking");
-            alert.setContentText("Are you sure you want to delete your booking, "+ Main.user.getFirstName());
+            alert.setContentText("Are you sure you want to delete your booking, " + Main.user.getFirstName());
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
             ButtonType buttonTypeConfirm = new ButtonType("Delete booking");
-            alert.getButtonTypes().setAll(buttonTypeCancel,buttonTypeConfirm);
+            alert.getButtonTypes().setAll(buttonTypeCancel, buttonTypeConfirm);
 
             //waiting for user decision: deletes booking from db upon confirmation & cancel deletion if wanted
             Optional<ButtonType> result = alert.showAndWait();

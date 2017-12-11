@@ -1,5 +1,6 @@
-package application;
+package controllers;
 
+import application.Main;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;

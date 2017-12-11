@@ -1,8 +1,8 @@
-package application;
+package controllers;
 
 
 //import com.sun.deploy.Environment;
-import com.sun.javafx.tools.packager.Log;
+import application.Main;
 
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -23,21 +22,18 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+//import org.relique.jdbc.csv.CsvDriver;
 import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
-import org.omg.CORBA.Environment;
-
-//import org.relique.jdbc.csv.CsvDriver;
 import org.relique.jdbc.csv.CsvDriver;
 
 
 //import sun.tools.java.Environment;
 
 
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;

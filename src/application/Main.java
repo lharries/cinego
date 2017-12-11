@@ -1,66 +1,61 @@
 package application;
-	
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import models.CustomerDAO;
-import models.Employee;
 import models.User;
 
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main extends Application {
 
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
-	private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+    /**
+     * The user which is logged in
+     */
+    public static User user;
 
-	public static User user;
+    /**
+     * Purpose: runs the Java application and opens the GUI
+     *
+     * @param primaryStage the primary stage for this application, onto which the application scene can be set
+     */
+    @Override
+    public void start(Stage primaryStage) {
+        try {
 
-	private static Parent root;
+            //launches the login view upon running program
+            Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 
-	public static Employee employee;
+            // TODO: Kai please state what this is for
+            root.setCache(true);
+            root.setCacheHint(CacheHint.SPEED);
 
-	public static Scene scene;
+            // create the root scene
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-	protected static Stage primaryStage;
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "Main", "start", "Failed to render primaryStage. See: " + e);
+        }
+    }
 
-
-	/**
-	 * Purpose: runs the Java application and opens the GUI
-	 *
-	 * @param primaryStage
-	 */
-	@Override
-	public void start(Stage primaryStage) {
-		try {	
-
-			Main.primaryStage = primaryStage;
-			//launches the loginCust view upon running program
-
-			root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
-			root.setCache(true);
-			root.setCacheHint(CacheHint.SPEED);
-			Scene scene = new Scene(root);
-
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-			primaryStage.setScene(scene);
-			primaryStage.setResizable(false);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-			LOGGER.logp(Level.WARNING, "Main", "start", "Failed to render primaryStage. See: " + e);
-		}
-	}
-	
-	public static void main(String[] args) {
-
-		launch(args);
-	}
+    /**
+     * Launches the main application
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
 

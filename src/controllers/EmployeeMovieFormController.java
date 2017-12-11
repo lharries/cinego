@@ -1,52 +1,43 @@
-package application;
-
+package controllers;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import models.Screening;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-// TODO: Can we delete this controller?
-public class EmployeeBookingViewController implements Initializable {
+public class EmployeeMovieFormController implements Initializable {
 
-    @FXML
-    private Label Time;
-
-    @FXML
-    private Label Date;
-
-    @FXML
-    private Label movieTitle;
-
-    @FXML
-    private PieChart seatsBookedPieChart;
 
     @FXML
     private ImageView backgroundImg;
 
-//TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
+    @FXML
+    private void returnToMoviesView(){
+
+        //ToDo: add ability to change back to movies view
+    }
 
     @FXML
-    private void openHomeView(ActionEvent event) throws IOException {
-        EmployeeRootController controller = new EmployeeRootController();
-        controller.openHomeView(event);
+    private void addMovie(){
+        //TODO: add ability to add a new movie to database based on the input data from each field
+        //TODO: question: how do we add an image? Via internet URL or do we actually have to create an upload so the image is stored in the project's directory / the database?
+
+        //TODO: FEATURE add ability to select multiple dates and screening times to create multiple movies at once!
+        //TODO: FEATURE add ability to delete movies accidentally created / created with errors (would have to ensure that no seats booked yet if allow employee to delete the movies)
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
 //        BufferedImage bufferedBackground = null;
 //        try {
 //            bufferedBackground = ImageIO.read(new File("src/resources/cinWallpaper.png"));
@@ -58,5 +49,4 @@ public class EmployeeBookingViewController implements Initializable {
 //        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
 //        this.backgroundImg.setImage(background);
     }
-
 }

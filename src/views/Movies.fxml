@@ -19,7 +19,7 @@
 <!--TODO: Remove the header and footer-->
 
 <?import javafx.scene.effect.ColorAdjust?>
-<AnchorPane prefHeight="750" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MoviesController">
+<AnchorPane prefHeight="750" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MoviesController">
    <children>
        <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
            <image>

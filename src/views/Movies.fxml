@@ -50,7 +50,7 @@
                   <Font size="40.0" />
                </font>
             </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="237.0" layoutX="4.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#596679" height="237.0" layoutX="4.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
             <Label fx:id="selectedFilmDescription" layoutX="5.0" layoutY="232.0" prefHeight="91.0" prefWidth="207.0" text="Description" />
             <StackPane fx:id="selectedTrailerPane" layoutX="6.0" layoutY="-6.0" prefHeight="238.0" prefWidth="351.0" />
          </children>

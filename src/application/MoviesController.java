@@ -153,30 +153,20 @@ public class MoviesController implements Initializable {
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
 
-
-        //TODO: store URL in db, add to query etc.
         //TODO: handle if no URL has been uploaded
 
-
         String trailerURLString = film.getTrailerURL();
+        //loads trailer into view
        if(trailerURLString != null){
            WebView webview = new WebView();
            String youtubeUrl = trailerURLString.replace("watch?v=", "embed/");
-//        String youtubeUrl = "https://www.youtube.com/watch?v=6ZfuNTqbHE8".replace("watch?v=", "embed/");
-
-//        "https://www.youtube.com/embed/6AgjRgr65BQ"
-//        "https://www.youtube.com/embed/64QXmeV3FtI"
-//        "http://www.imdb.com/list/ls053181649/videoplayer/vi3114711065?ref_=hm_hp_i_1"
-            webview.getEngine().load(youtubeUrl);
-            //adjust the Ytube link to "embed/" -> shows only the embedded movie view
-
-//        webview.setPrefSize(100, 100);
-            selectedTrailerPane.getChildren().setAll(webview);
-
+           webview.getEngine().load(youtubeUrl);
+           selectedTrailerPane.getChildren().setAll(webview);
+       }else{
+           Label errorTrailer = new Label("Sorry, this movie trailer is currently unavailable");
+           errorTrailer.setWrapText(true);
+           selectedTrailerPane.getChildren().addAll(errorTrailer);
        }
-
-
-
 
 
         // Try and get the film if it's found

@@ -165,6 +165,7 @@ public class EmployeeHomeController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
 
+
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
@@ -172,23 +173,26 @@ public class EmployeeHomeController implements Initializable {
 
         //read image file & check if file not null
         File chosenFile = fileChooser.showOpenDialog(null);
-
         if (chosenFile != null) {
 
-            // This seems to work but puts it in the wrong movies folder
+            String fileType = (chosenFile.toString().substring(chosenFile.toString().length()-4,chosenFile.toString().length()));
+            Random rnd = new Random();
+            int rndNum = 1000000 + rnd.nextInt(9000000);
+            String rndNameOfMovie = Integer.toString(rndNum)+fileType;
+
             // locate the moviesDir
-            String nameOfMovie = "name-of-new-movie.jpg";
+//            String nameOfMovie = "name-of-new-movie.jpg";
             File directory = new File(".");
             File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-            File newMovie = new File(moviesDirectory, nameOfMovie);
-            System.out.println(moviesDirectory);
+            File newMovie = new File(moviesDirectory, rndNameOfMovie);
+//            System.out.println(moviesDirectory);
 
 //
             try {
                 newMovie.createNewFile();
                 Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                movieFileName = nameOfMovie;
-                System.out.println(newMovie.getAbsolutePath());
+                movieFileName = rndNameOfMovie;
+//                System.out.println(newMovie.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -225,7 +229,7 @@ public class EmployeeHomeController implements Initializable {
 //
 ////            String resourcesPath = string.getPath();
 ////
-//            // TODO: Switch to random string
+
 //            File newFile = new File(resources.toString() + "/turtle.png");
 //            System.out.println(newFile.getAbsolutePath().toString());
 ////
@@ -354,25 +358,33 @@ public class EmployeeHomeController implements Initializable {
         alert.setTitle("Cinego");
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
-        //get input values and check for validity
+        //get input values
         movieTitle = String.valueOf(movieSelectionBox.getValue());
         screeningTime = String.valueOf(timePicker.getValue());
         screeningDate = String.valueOf(datePicker.getValue());
-
+        Date now = new Date();
 
         // convert the dateTime to the correct format
         try {
             String dateTimeString = screeningDate + " " + screeningTime;
-            dateTime = new SimpleDateFormat("yyyy-MM-DD HH:mm").parse(dateTimeString);
+            dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateTimeString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        //perform validity checks: empty & dateSelected < now
         if (movieTitle == null || screeningTime == null || dateTime == null) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
-
-        } else {
+        }
+        if(now.compareTo(dateTime) > 0){
+            alert.setHeaderText("Error: screening date in the past");
+            alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
+            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> popup.hide());
+            popup.show();
+            delay.play();
+        }
+        else {
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
             PauseTransition delay = new PauseTransition(Duration.seconds(4));
@@ -382,13 +394,8 @@ public class EmployeeHomeController implements Initializable {
 
             createScreening();
         }
-        PauseTransition delay = new PauseTransition(Duration.seconds(4));
-        delay.setOnFinished(e -> popup.hide());
-        popup.show();
-        delay.play();
-
-
     }
+
 
 
     /**

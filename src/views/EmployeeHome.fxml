@@ -40,9 +40,8 @@
       <!--Screening table, screening creation HBox-->
       <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="60.0" onMouseClicked="#getScreeningID" prefHeight="317.0" prefWidth="526.0">
          <columns>
-            <TableColumn fx:id="titleColScreenTab" prefWidth="176.66278076171875" text="Title" />
-            <TableColumn fx:id="dateColScreenTab" prefWidth="200.2381591796875" text="Date" />
-            <TableColumn fx:id="timeColScreenTab" minWidth="0.0" prefWidth="148.7618408203125" text="Time" />
+            <TableColumn fx:id="titleColScreenTab" prefWidth="261.0" text="Title" />
+            <TableColumn fx:id="dateColScreenTab" prefWidth="264.0" text="Date" />
          </columns>
       </TableView>
 

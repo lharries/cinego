@@ -106,7 +106,7 @@ public class EmployeeHomeController implements Initializable {
     private HBox hBox;
 
     @FXML
-    private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab, timeColScreenTab;
+    private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab;
 
     @FXML
     private TextField addTitle, trailerURL;
@@ -140,14 +140,12 @@ public class EmployeeHomeController implements Initializable {
 
         //set moviesTable headers - 'moviesTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-//        urlCol.setCellValueFactory(new PropertyValueFactory<Film, String>("imagePath"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
         populateMoviesTable();
 
         //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
-        timeColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
         populateScreeningsTable();
         populateMovieSelectionBox();
 
@@ -331,7 +329,7 @@ public class EmployeeHomeController implements Initializable {
     private void createMovie() throws SQLException, ClassNotFoundException {
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title, description, movieFileName);
+        FilmDAO.insertFilm(title, description, movieFileName, movieTrailerURL);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         addTitle.clear();

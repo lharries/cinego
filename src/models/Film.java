@@ -28,6 +28,7 @@ public class Film {
     private StringProperty title;
     private StringProperty imagePath;
     private StringProperty description;
+    private StringProperty trailerURL;
 
 
     public Film() {
@@ -35,6 +36,7 @@ public class Film {
         this.title = new SimpleStringProperty();
         this.imagePath = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
+        this.trailerURL = new SimpleStringProperty();
     }
 
 
@@ -107,6 +109,18 @@ public class Film {
 
     public StringProperty descriptionProperty() {
         return this.description;
+    }
+
+    public String getTrailerURL(){
+        return this.trailerURL.get();
+    }
+
+    public void setTrailerURL(String trailerURL){
+        this.trailerURL.set(trailerURL);
+    }
+
+    public StringProperty trailerURLProperty() {
+        return this.trailerURL;
     }
 
     public ObservableList<Screening> getScreenings() {

@@ -1,11 +1,16 @@
 package application;
 
+
+//import com.sun.deploy.Environment;
+import com.sun.javafx.tools.packager.Log;
+
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -22,6 +27,14 @@ import models.Film;
 import models.FilmDAO;
 import models.Screening;
 import models.ScreeningDAO;
+import org.omg.CORBA.Environment;
+
+//import org.relique.jdbc.csv.CsvDriver;
+import org.relique.jdbc.csv.CsvDriver;
+
+
+//import sun.tools.java.Environment;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -410,36 +423,30 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Exports a list of relevant screening data to directory: "../cinego/ScreeningsExport.csv"
-     * - Source: https://community.oracle.com/thread/2397100
+     * Exports a list of relevant screening and movie statistics to directory: "../cinego/ScreeningsExport.csv"
+     * Source:  - https://community.oracle.com/thread/2397100
+     *          - http://csvjdbc.sourceforge.net/
      *
      * @throws IOException
      */
     @FXML
-    private void exportToCSV() throws IOException {
+    private void exportToCSV() throws IOException, ClassNotFoundException, SQLException {
 
-        //TODO: add following data to csv export: movie title, dates, times and number of booked and available seats.
+        //TODO: add further statistics to CSV file
 
-        //writes data into .csv file
-        Writer writer = null;
-        File file;
-        file = new File("../cinego/ScreeningsExport.csv");
-        try {
-            writer = new BufferedWriter(new FileWriter(file));
-            for (Screening Screening : screeningsData) {
-                String text = Screening.getId() + "," + Screening.getFilmId() + "," + Screening.getDate() + "\n";
-                writer.write(text);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "exportCSV", "Failed to write data to CSV file. See: " + e);
-        } finally {
-            writer.flush();
-            writer.close();
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(file);
-            }
-        }
+        PrintStream file = new PrintStream("../cinego/ScreeningsExport.csv");
+        boolean append = true;
+        CsvDriver.writeToCsv(FilmDAO.getCSVResultSet(), file, append);
+
+        //Informs user of successfully exporting CSV file
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert.setTitle("Cinego");
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+        alert.setHeaderText("CVS Export");
+        alert.setContentText("Your csv export was successful, " + Main.user.getFirstName());
+
+
     }
 
     /**
@@ -456,7 +463,7 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void deleteScreening() {
 
-        //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
+        //TODO: add checking if no booking functionality! Ability to delete screening or edit screening unless customers have booked a ticket for the movie
 
         //Prompts user to confirm deleting the selected screening
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

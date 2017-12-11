@@ -5,21 +5,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import models.CustomerDAO;
 import models.Employee;
 import models.User;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main extends Application {
 
-	//trying to import Glyphicons into the app
-//	static {
-//		Font.loadFont(Main.class.getResource("/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf").toExternalForm(), 10);
-//	}
 
+	private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
 	public static User user;
 
@@ -29,8 +27,7 @@ public class Main extends Application {
 
 	public static Scene scene;
 
-	//Dead code?
-	protected static Stage loginStage, primaryStage;
+	protected static Stage primaryStage;
 
 
 	/**
@@ -57,13 +54,11 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
+			LOGGER.logp(Level.WARNING, "Main", "start", "Failed to render primaryStage. See: " + e);
 		}
 	}
 	
 	public static void main(String[] args) {
-
-//		AquaFX.style();
-
 		launch(args);
 	}
 }

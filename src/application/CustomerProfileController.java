@@ -16,52 +16,69 @@ import models.*;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+
+
+
 
 public class CustomerProfileController implements Initializable{
 
+
     @FXML
     private Button updateProfileBttn, editProfileBttn;
-
     @FXML
     private ImageView backgroundImg;
-
     @FXML
     private TextField custFirstNameField, custLastNameField, custEmailField, custPhone;
-
     @FXML
     private Button deleteBooking, cancelUpdatingProfileBttn;
-
-    boolean textFieldEditable = false;
-
     @FXML
     private TableView<Booking> bookingsTable;
-
     @FXML
-    private TableColumn titleColBookingTable, dateColBookingTable, timeColBookingTable, seatsColBookingTable;
-
+    private TableColumn titleColBookingTable, dateColBookingTable, seatsColBookingTable;
     @FXML
     private ObservableList<Screening> screeningData;
 
-    public static int bookingID;
+    private boolean textFieldEditable = false;
+
+    private static int bookingID;
+
+    private Screening selectedScreening;
+
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
 
+    /**
+     * Initializes the customer profile including Textfields and bookingsTable. Disables editing the Textfields
+     * unless chosen by customer
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //initializes customer profile input fields and sets them to not editable
         enableCustProfileFields(textFieldEditable);
         editProfileBttn.requestFocus();
         initCellFactories();
-
         populateBookingsTable();
-
     }
 
+
+    /**
+     * Initialises the bookingsTable columns with customer-specific bookings data
+     */
     private void initCellFactories() {
 
         //TODO: populate the entire BookingsTable with customer's bookings
 
+        //retrieve title column data
         titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
             @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
                 try {
@@ -78,12 +95,27 @@ public class CustomerProfileController implements Initializable{
             }
         });
 
+        //retrieve date column data
+        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
+            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
+                try {
+                    Screening screening = ScreeningDAO.getScreeningById(param.getValue().getScreeningId());
+                    if (screening == null) {
+                        return new ReadOnlyObjectWrapper<String>("Screening not found");
+                    }
+                    return new ReadOnlyObjectWrapper<String>(screening.getDate());
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return new ReadOnlyObjectWrapper<String>("");
+            }
+        });
+
+        //retrieve seat column data
         seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking,String>, ObservableValue<String>>() {
             @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Booking,String> param) {
                 try {
                     Seat seat = SeatDAO.getSeatsById(param.getValue().getSeatId());
-//                    Film film = FilmDAO.getFilmById(screening.getFilmId());
-//                    return new ReadOnlyObjectWrapper<String>(film.getTitle());
                     return new ReadOnlyObjectWrapper<String>(seat.getName());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
@@ -92,66 +124,19 @@ public class CustomerProfileController implements Initializable{
             }
         });
 
-
-
-//        dateColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Screening,String>, ObservableValue<String>>() {
-//            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Screening,String> param) {
-//                try {
-//                    return new ReadOnlyObjectWrapper<String>(param.getValue().getMediumDate());
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                    return new ReadOnlyObjectWrapper<String>("");
-//                }
-//            }
-//        });
-
-//        seatsColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Seat,Integer>, ObservableValue<Integer() {
-//            @Override public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Seat,Integer> param) {
-//                try {
-//                    return new ReadOnlyObjectWrapper<Integer>(FilmDAO.getFilmById(param.getValue().getId()).getTitle());
-//                } catch (SQLException | ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//                return new ReadOnlyObjectWrapper<String>("");
-//            }
-//        });
     }
 
     /**
-     * Purpose: updates the moviesTable with movie specific data from the database
+     * Populates bookingsTable with data related to customer's bookings
      */
     private void populateBookingsTable(){
-//
-//        try {
-//            screeningData = ScreeningDAO.get();
-
 
         try {
             bookingsTable.setItems(BookingDAO.getBookingObservableList());
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "CustomerProfileController", "populateBookingsTable", "Failed to populate the bookingsTable. See: " + e);
         }
-
-    //CURRENT SOLUTION
-//        try {
-//            bookingsTable.setItems(ScreeningDAO.getScreeningObservableList());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-//            moviesTable.setItems(moviesData);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
     }
 
     /**
@@ -230,10 +215,9 @@ public class CustomerProfileController implements Initializable{
         Main.user.setEmail(custEmailField.getText());
         try {
             CustomerDAO.updateCustomerDetails(Main.user.getFirstName(),Main.user.getLastName(),Main.user.getEmail(), Main.user.getId());
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "CustomerProfileController", "updateCustomerProfile", "Failed to run db UPDATE query. See: " + e);
         }
 
         //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
@@ -265,37 +249,60 @@ public class CustomerProfileController implements Initializable{
     @FXML
     private void getSelectedBooking(){
 
-        bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
-        System.err.print(bookingID);
-        deleteBooking.setDisable(false);
-
-    }
-
-    @FXML
-    private void deleteMovieBooking(){
-
-        //TODO 2: Add error popup for movies that are in the past (can't delete them!)
-        //TODO 3: delete the actual booking with a JDialogBOx pop-up asking if you're sure to delete (https://www.youtube.com/watch?v=oZUGMpGQxgQ)
-        //TODO: add ability to select movies from the list and delete them (see employeeHomeController: getScreeningID() )
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-        alert.setTitle("Cinego");
-        alert.setHeaderText("Delete Booking");
-        alert.setContentText("Are you sure you want to delete your booking, "+ Main.user.getFirstName());
-        alert.showAndWait();
-
         try {
-            BookingDAO.deleteBooking(bookingID);
-        } catch (SQLException e) {
+            selectedScreening = ScreeningDAO.getScreeningById(bookingsTable.getSelectionModel().getSelectedItem().getScreeningId());
+            bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
+            deleteBooking.setDisable(false);
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "CustomerProfileController", "getSelectedBooking", "Failed to fetch selected screening object or bookingID. See: " + e);
         }
-
-        populateBookingsTable();
-        deleteBooking.setDisable(true);
     }
 
+    /**
+     *
+     * Source:
+     *  - https://www.youtube.com/watch?v=oZUGMpGQxgQ
+     */
+    @FXML
+    private void deleteMovieBooking() throws ParseException {
+
+        //checks if selected screening instance is in the past.
+        if (selectedScreening.isInPast()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+            popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+            alert.setTitle("Cinego");
+            alert.setHeaderText("Booking in the past");
+            alert.setContentText("You can't cancel a past booking, "+ Main.user.getFirstName());
+            alert.showAndWait();
+
+        }else{
+
+            //Declares & instantiates alert prompting user to confirm deleting booking
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+            popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+            alert.setTitle("Cinego");
+            alert.setHeaderText("Delete Booking");
+            alert.setContentText("Are you sure you want to delete your booking, "+ Main.user.getFirstName());
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType buttonTypeConfirm = new ButtonType("Delete booking");
+            alert.getButtonTypes().setAll(buttonTypeCancel,buttonTypeConfirm);
+
+            //waiting for user decision: deletes booking from db upon confirmation & cancel deletion if wanted
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeConfirm) {
+                try {
+                    BookingDAO.deleteBooking(bookingID);
+                    populateBookingsTable();
+                    deleteBooking.setDisable(true);
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "CustomerProfileController", "deleteMovieBooking", "Failed to run db DELETE query. See: " + e);
+                }
+            }
+            alert.close();
+        }
+    }
 }

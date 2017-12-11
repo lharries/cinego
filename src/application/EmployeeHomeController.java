@@ -2,7 +2,6 @@ package application;
 
 
 //import com.sun.deploy.Environment;
-import com.sun.javafx.tools.packager.Log;
 
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
@@ -10,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -23,11 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import models.Film;
-import models.FilmDAO;
-import models.Screening;
-import models.ScreeningDAO;
-import org.omg.CORBA.Environment;
+import models.*;
 
 //import org.relique.jdbc.csv.CsvDriver;
 import org.relique.jdbc.csv.CsvDriver;
@@ -36,8 +30,6 @@ import org.relique.jdbc.csv.CsvDriver;
 //import sun.tools.java.Environment;
 
 
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -79,16 +71,16 @@ public class EmployeeHomeController implements Initializable {
 
 
     @FXML
-    private Button toSeatBooking, deleteBooking;
+    private Button toSeatBooking, deleteScreening, editMovieButton, updateMovieButton, createMovieButton, moviePosterBttn;
 
-    @FXML
-    private ImageView backgroundImg, moviePoster;
-
-    @FXML
-    private AnchorPane AnchorPane;
-
-    @FXML
-    private TableView ScreeningsTable;
+//    @FXML
+//    private ImageView backgroundImg, moviePoster;
+//
+//    @FXML
+//    private AnchorPane AnchorPane;
+//
+//    @FXML
+//    private TableView ScreeningsTable;
 
     @FXML
     private TableView<Film> moviesTable;
@@ -102,8 +94,8 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private ObservableList<Screening> screeningsData;
 
-    @FXML
-    private HBox hBox;
+//    @FXML
+//    private HBox hBox;
 
     @FXML
     private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab;
@@ -125,7 +117,7 @@ public class EmployeeHomeController implements Initializable {
     private String title, movieFileName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
     private Date dateTime;
     private Film film;
-    public static int selectedScreeningId;
+    public static int selectedScreeningId, selectedMovieId;
 
 
     /**
@@ -460,7 +452,7 @@ public class EmployeeHomeController implements Initializable {
     private void getScreeningID() {
         selectedScreeningId = screeningsTable.getSelectionModel().getSelectedItem().getId();
         toSeatBooking.setDisable(false);
-        deleteBooking.setDisable(false);
+        deleteScreening.setDisable(false);
     }
 
 
@@ -468,26 +460,53 @@ public class EmployeeHomeController implements Initializable {
     private void deleteScreening() {
 
         //TODO: add checking if no booking functionality! Ability to delete screening or edit screening unless customers have booked a ticket for the movie
+        boolean noBookings = false;
 
-        //Prompts user to confirm deleting the selected screening
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-        alert.setTitle("Cinego");
-        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-        alert.setHeaderText("Warning: deleting screening");
-        alert.setContentText("Are you sure you want to delete this screening, " + Main.user.getFirstName() + " ?");
+        try {
 
-        //Deletes movie depending on user response
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            try {
-                ScreeningDAO.deleteScreening(selectedScreeningId);
-                populateScreeningsTable();
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "deleteScreening", "Failed to delete screening from screeningTable. See: " + e);
+            Booking booking = BookingDAO.getBookingsByScreeningId(selectedScreeningId);
+
+            if(booking == null) {
+                noBookings = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "deleteScreening", "Failed to get Bookings with screening id from screeningTable. See: " + e);
+            e.printStackTrace();
+        }
+
+        if(!noBookings){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+            alert.setTitle("Cinego");
+            popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+            alert.setHeaderText("Warning: screening is booked");
+            alert.setContentText("You can't delete a screening with existing bookings, " + Main.user.getFirstName() + " !");
+            alert.showAndWait();
+        }
+        else{
+            //Prompts user to confirm deleting the selected screening
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+            alert.setTitle("Cinego");
+            popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+            alert.setHeaderText("Warning: deleting screening");
+            alert.setContentText("Are you sure you want to delete this screening, " + Main.user.getFirstName() + " ?");
+//            alert.showAndWait();
+
+            //Deletes movie depending on user response
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    ScreeningDAO.deleteScreening(selectedScreeningId);
+                    populateScreeningsTable();
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "EmployeeHomeController", "deleteScreening", "Failed to delete screening from screeningTable. See: " + e);
+                }
             }
         }
+
+
     }
 
     /**
@@ -548,4 +567,73 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
+
+
+    @FXML
+    private void getMovieID(){
+        selectedMovieId = moviesTable.getSelectionModel().getSelectedItem().getId();
+        System.out.println("\n\n\n"+selectedMovieId+"\n\n\n");
+        editMovieButton.setDisable(false);
+//        updateMovieButton.setDisable(false);
+    }
+
+
+    @FXML
+    private void editMovie() {
+
+        //enable and disable buttons
+        createMovieButton.setDisable(true);
+        updateMovieButton.setDisable(false);
+
+        //fill components with movie's data
+        try {
+            Film film = FilmDAO.getFilmById(selectedMovieId);
+//            title = film.getTitle();
+//            description = film.getDescription();
+//            movieTrailerURL = film.getTrailerURL();
+
+//            addTitle.setText(title);
+//            addDescription.setText(description);
+//            trailerURL.setText(movieTrailerURL);
+
+            addTitle.setText(film.getTitle());
+            addDescription.setText(film.getDescription());
+            trailerURL.setText(film.getTrailerURL());
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editMovie", "Failed to load movie's data into film object. See: " + e);
+        }
+    }
+
+   @FXML
+   private void updateMovie(){
+
+        //read out and store new values from components if changed
+       title = addTitle.getText();
+       description = addDescription.getText();
+       movieTrailerURL = trailerURL.getText();
+
+       try {
+           FilmDAO.updateMovieDetails(title, description,movieTrailerURL,selectedMovieId);
+       } catch (SQLException | ClassNotFoundException e) {
+           LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateMovie", "Failed to update database with edited movie data. See: " + e);
+           e.printStackTrace();
+       }
+       editMovieButton.setDisable(true);
+       updateMovieButton.setDisable(true);
+       createMovieButton.setDisable(false);
+
+
+       addTitle.clear();
+       addDescription.clear();
+       trailerURL.clear();
+
+//       custFirstNameField.setPromptText(Main.user.getFirstName());
+//       custFirstNameField.setEditable(textFieldEditable);
+
+       populateMoviesTable();
+       populateScreeningsTable();
+
+   }
 }

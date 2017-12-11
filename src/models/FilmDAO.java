@@ -24,19 +24,20 @@ public class FilmDAO {
     }
 
     public static Film getFilmById(int id) throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = SQLiteConnection.executeQuery("SELECT * FROM Film", null);
+
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{new PreparedStatementArg(id)};
+        ResultSet resultSet = SQLiteConnection.executeQuery("SELECT * FROM Film WHERE id = ?", preparedStatementArgs);
 
         // TODO deal with not being able to do .next();
         resultSet.next();
-            Film film = new Film();
-            film.setId(resultSet.getInt("id"));
-            film.setTitle(resultSet.getString("title"));
-            film.setDescription(resultSet.getString("description"));
-            film.setImagePath(resultSet.getString("imagePath"));
-            film.setTrailerURL(resultSet.getString("trailerURL"));
-            //added
-            return film;
+        Film film = new Film();
+        film.setId(resultSet.getInt("id"));
+        film.setTitle(resultSet.getString("title"));
+        film.setDescription(resultSet.getString("description"));
+        film.setImagePath(resultSet.getString("imagePath"));
+        film.setTrailerURL(resultSet.getString("trailerURL"));
 
+        return film;
     }
 
     private static Film getFilmFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
@@ -93,6 +94,24 @@ public class FilmDAO {
 
         return resultSetFilms;
     }
+
+
+    //TODO: add updating image url to query & method parameter
+    public static void updateMovieDetails(String title, String description, String trailerURL, int movieId) throws SQLException, ClassNotFoundException {
+
+        String query = "UPDATE Film SET title = ?, description = ? , trailerURL = ? WHERE id = ?";
+
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
+                new PreparedStatementArg(title),
+                new PreparedStatementArg(description),
+                new PreparedStatementArg(trailerURL),
+                new PreparedStatementArg(movieId)
+        };
+        SQLiteConnection.executeUpdate(query, preparedStatementArgs);
+    }
+
+
+
 
 
 }

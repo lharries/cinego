@@ -21,6 +21,23 @@ public class BookingDAO {
 
     }
 
+
+    public static Booking getBookingsByScreeningId(int screeningId) throws SQLException, ClassNotFoundException {
+        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{new PreparedStatementArg(screeningId)};
+        ResultSet resultSetBookings = SQLiteConnection.executeQuery(
+                "SELECT * FROM Booking\n" +
+                        "WHERE screeningId = ?", preparedStatementArgs);
+
+        ObservableList<Booking> bookings = getBookingList(resultSetBookings);
+
+        if (bookings.size() > 0) {
+            return bookings.get(0);
+        } else {
+            return null;
+        }
+    }
+
+
     public static Booking getBooking(int seatId, int screeningId) throws SQLException, ClassNotFoundException {
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
                 new PreparedStatementArg(seatId),

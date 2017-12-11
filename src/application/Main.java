@@ -59,7 +59,14 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+
+		try {
+			user = CustomerDAO.login("customer", "customerpassword");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} launch(args);
 	}
 }
 

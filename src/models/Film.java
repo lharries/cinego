@@ -4,6 +4,12 @@ import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +28,6 @@ public class Film {
     private StringProperty title;
     private StringProperty imagePath;
     private StringProperty description;
-    private ListProperty<Screening> screenings;
 
 
     public Film() {
@@ -30,7 +35,6 @@ public class Film {
         this.title = new SimpleStringProperty();
         this.imagePath = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
-        this.screenings = new SimpleListProperty<Screening>();
     }
 
 
@@ -76,8 +80,13 @@ public class Film {
         return this.title;
     }
 
-    public String getImagePath() {
-        return this.imagePath.get();
+    public String getImagePath() throws UnsupportedEncodingException {
+        File directory = new File(".");
+        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+        File newMovie = new File(moviesDirectory, this.imagePath.get());
+
+        System.out.println("file:" + newMovie.getAbsolutePath());
+        return "file:" + newMovie.getAbsolutePath();
     }
 
     public void setImagePath(String imagePath) {
@@ -101,15 +110,12 @@ public class Film {
     }
 
     public ObservableList<Screening> getScreenings() {
-        return screenings.get();
-    }
-
-    public ListProperty<Screening> screeningsProperty() {
-        return screenings;
-    }
-
-    public void setScreenings(ObservableList<Screening> screenings) {
-        this.screenings.set(screenings);
+        try {
+            return ScreeningDAO.getScreeningObservableListByFilmId(this.getId());
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getScreeningsDescription() {
@@ -168,21 +174,15 @@ public class Film {
     }
 
     public FilteredList<Screening> getUpcomingScreenings() {
-        return screenings.get().filtered(new Predicate<Screening>() {
-            @Override
-            public boolean test(Screening screening) {
-                try {
-                    Date today = new Date();
-                    Date screeningDate = screening.getDateObject();
-
-                    return today.compareTo(screeningDate) <= 0;
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    return false;
-                }
+        return getScreenings().filtered(screening -> {
+            try {
+                Date today = new Date();
+                Date screeningDate = screening.getDateObject();
+                return today.compareTo(screeningDate) <= 0;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return false;
             }
-
-            ;
         });
     }
 }

@@ -331,7 +331,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Exports a list of relevant screening data to directory: "../cinego/ScreeningsExport.csv"
+     * Exports a list of relevant screening and movie statistics to directory: "../cinego/ScreeningsExport.csv"
      * Source:  - https://community.oracle.com/thread/2397100
      *          - http://csvjdbc.sourceforge.net/
      *
@@ -342,41 +342,17 @@ public class EmployeeHomeController implements Initializable {
 
         //TODO: add further statistics to CSV file
 
-
-        PrintStream file = new PrintStream("../cinego/ScreeningsExport2.csv");
+        PrintStream file = new PrintStream("../cinego/ScreeningsExport.csv");
         boolean append = true;
         CsvDriver.writeToCsv(FilmDAO.getCSVResultSet(), file, append);
 
-
-        // Clean up
-//        conn.close();
-
-
-
-        //ALTERNATIVE SOLUTION
-//        String FILENAME = "log.csv";
-//
-//        File directoryDownload = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-//        File logDir = new File(directoryDownload, FILENAME);
-//        try {
-//            logDir.createNewFile();
-//            CSVWriter csvWriter = new CSVWriter(new FileWriter(logDir));
-//            Cursor curCSV = ourDatabase.rawQuery("SELECT * FROM practiceReport", null);
-//            csvWriter.writeNext(curCSV.getColumnNames());
-//            while (curCSV.moveToNext()) {
-//                String arrStr[] = { curCSV.getString(1)+ ",", curCSV.getString(2)+ ",",
-//                        curCSV.getString(3)+ ",", curCSV.getString(4)+ ",", curCSV.getString(5)+ ","};
-//                csvWriter.writeNext(arrStr);
-//            }
-//            csvWriter.close();
-//            curCSV.close();
-//            return true;
-//        } catch (Exception e) {
-//            Log.e("MainActivity", e.getMessage(), e);
-//            return false;
-//        }
-
-
+        //Informs user of successfully exporting CSV file
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert.setTitle("Cinego");
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+        alert.setHeaderText("CVS Export");
+        alert.setContentText("Your csv export was successful, " + Main.user.getFirstName());
 
     }
 
@@ -396,7 +372,7 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void deleteScreening() {
 
-        //TODO: add ability to delete screening or edit screening unless customers have booked a ticket for the movie
+        //TODO: add checking if no booking functionality! Ability to delete screening or edit screening unless customers have booked a ticket for the movie
 
         //Prompts user to confirm deleting the selected screening
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -472,14 +448,5 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
-    private void populateTimePicker(){
-
-//        timePicker.getSelectionModel().
-//
-//        Screening screening = new Screening();
-//        timePicker.setValue(screening.getDate());
-
-
-    }
 
 }

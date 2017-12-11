@@ -1,6 +1,7 @@
-1,1,Sun Dec 03 11:00:00 GMT 2017
-2,2,Sun Dec 30 12:00:00 GMT 2017
-3,3,Sun Dec 03 13:00:00 GMT 2017
-16,28,2017-11-23 18:00
-17,31,2017-12-14 20:00
-18,30,2017-12-15 19:00
+title,description,date,seatsBooked,seatsAvailable
+The broken film,a film about a broken man,Sun Dec 03 11:00:00 GMT 2017,0,40
+,,Sun Dec 30 12:00:00 GMT 2017,3,37
+,,Sun Dec 03 13:00:00 GMT 2017,10,30
+Moonlight,moons shines bright,2017-11-23 18:00,0,40
+Moolight,test,2017-12-14 20:00,0,40
+asdasd,asdasd,2017-12-15 19:00,0,40

@@ -30,19 +30,19 @@ public class BookingDAO {
     }
 
     public static Booking getBooking(int seatId, int screeningId) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(seatId),
-                new PreparedStatementArg(screeningId),
+        Object[] preparedStatementArgs = {
+                seatId,
+                screeningId,
         };
 
         ResultSet resultSetBookings = SQLiteConnection.executeQuery(
                 "SELECT * FROM Booking\n" +
-                "WHERE seatId = ? AND screeningId = ?", preparedStatementArgs);
+                        "WHERE seatId = ? AND screeningId = ?", preparedStatementArgs);
 
         ObservableList<Booking> bookings = getBookingList(resultSetBookings);
 
         if (bookings.size() == 1) {
-        return bookings.get(0);
+            return bookings.get(0);
         } else {
             return null;
         }
@@ -73,12 +73,11 @@ public class BookingDAO {
     }
 
     public static void insertBooking(int customerId, boolean paidFor, int seatId, int screeningId) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(customerId),
-                new PreparedStatementArg(paidFor),
-                new PreparedStatementArg(seatId),
-                new PreparedStatementArg(screeningId),
-        };
+        Object[] preparedStatementArgs = {
+                customerId,
+                paidFor,
+                seatId,
+                screeningId};
 
         SQLiteConnection.execute(
                 "INSERT INTO Booking\n" +
@@ -90,9 +89,7 @@ public class BookingDAO {
     }
 
     public static void deleteBooking(int id) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id)
-        };
+        Object[] preparedStatementArgs = {(id)};
 
         SQLiteConnection.execute(
                 "DELETE FROM Booking\n" +

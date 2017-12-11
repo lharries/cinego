@@ -57,10 +57,10 @@ public class SeatDAO {
      * @throws ClassNotFoundException
      */
     public static void insertSeat(int column, String row, String name) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(column),
-                new PreparedStatementArg(row),
-                new PreparedStatementArg(name)
+        Object[] args = {
+                column,
+                row,
+                name
         };
 
         SQLiteConnection.execute(
@@ -68,7 +68,7 @@ public class SeatDAO {
                         "(column, row, name)\n" +
                         "VALUES\n" +
                         "(?, ?, ?);",
-                preparedStatementArgs
+                args
         );
     }
 
@@ -81,14 +81,14 @@ public class SeatDAO {
      * @throws ClassNotFoundException
      */
     public static void deleteSeat(int id) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id)
+        Object[] args = {
+                id
         };
 
         SQLiteConnection.execute(
                 "DELETE FROM Seat\n" +
                         "WHERE id = ?",
-                preparedStatementArgs
+                args
         );
     }
 
@@ -102,13 +102,13 @@ public class SeatDAO {
      * @throws ClassNotFoundException
      */
     public static Seat getSeatByLocation(int column, String row) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(column),
-                new PreparedStatementArg(row),
+        Object[] args = {
+                column,
+                row,
         };
 
         ResultSet resultSetSeats = SQLiteConnection.executeQuery(
-                "SELECT * FROM Seat WHERE column = ? AND row = ?", preparedStatementArgs);
+                "SELECT * FROM Seat WHERE column = ? AND row = ?", args);
 
         if (resultSetSeats != null) {
             return getSeatList(resultSetSeats).get(0);
@@ -129,14 +129,14 @@ public class SeatDAO {
     public static Seat getSeatsById(int id) throws SQLException, ClassNotFoundException {
 
 
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id)
+        Object[] args = {
+                id
         };
 
         ResultSet resultSetSeats = SQLiteConnection.executeQuery(
                 "SELECT * FROM Seat\n" +
                         "WHERE id = ?",
-                preparedStatementArgs
+                args
         );
 
         if (resultSetSeats != null) {

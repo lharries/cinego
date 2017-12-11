@@ -1,7 +1,6 @@
 package utils;
 
 import com.sun.rowset.CachedRowSetImpl;
-import models.PreparedStatementArg;
 
 import java.sql.*;
 
@@ -41,7 +40,7 @@ public class SQLiteConnection {
         }
     }
 
-    public static void execute(String query, PreparedStatementArg[] args) throws SQLException, ClassNotFoundException {
+    public static void execute(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
         PreparedStatement statement = null;
 
@@ -71,7 +70,7 @@ public class SQLiteConnection {
 
     }
 
-    public static ResultSet executeQuery(String query, PreparedStatementArg[] args) throws SQLException, ClassNotFoundException {
+    public static ResultSet executeQuery(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
         PreparedStatement statement = null;
         ResultSet results = null;
@@ -110,7 +109,7 @@ public class SQLiteConnection {
         return cachedRowSet;
     }
 
-    public static int executeUpdate(String query, PreparedStatementArg[] args) throws SQLException, ClassNotFoundException {
+    public static int executeUpdate(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
 
         PreparedStatement statement = null;
@@ -142,17 +141,17 @@ public class SQLiteConnection {
 
     }
 
-    private static PreparedStatement setArgsPreparedStatement(PreparedStatement preparedStatement, PreparedStatementArg[] args) throws SQLException {
+    private static PreparedStatement setArgsPreparedStatement(PreparedStatement preparedStatement, Object[] args) throws SQLException {
 
         int parameterIndex = 1;
 
-        for (PreparedStatementArg arg : args) {
-            if (arg.getType().equals("Integer")) {
-                preparedStatement.setInt(parameterIndex, arg.getIntArg());
-            } else if (arg.getType().equals("String")) {
-                preparedStatement.setString(parameterIndex, arg.getStringArg());
-            } else if (arg.getType().equals("Boolean")) {
-                preparedStatement.setBoolean(parameterIndex, arg.getBooleanArg());
+        for (Object arg : args) {
+            if (arg.getClass().equals(Integer.class)) {
+                preparedStatement.setInt(parameterIndex, (Integer) arg);
+            } else if (arg.getClass().equals(String.class)) {
+                preparedStatement.setString(parameterIndex, (String) arg);
+            } else if (arg.getClass().equals(Boolean.class)) {
+                preparedStatement.setBoolean(parameterIndex, (Boolean) arg);
             }
             parameterIndex++;
         }

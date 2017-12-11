@@ -70,18 +70,18 @@ public class ScreeningDAO {
     public static ObservableList<Screening> getScreeningObservableListByFilmId(int filmId) throws SQLException, ClassNotFoundException {
         ResultSet resultSetScreenings = SQLiteConnection.executeQuery(
                 "SELECT * FROM Screening\n" +
-                        "WHERE filmId = ?", new PreparedStatementArg[]{
-                        new PreparedStatementArg(filmId)
+                        "WHERE filmId = ?", new Object[]{
+                        filmId
                 });
 
         return getScreeningList(resultSetScreenings);
     }
 
     public static void insertScreening(int filmId, String date, String filmTitle) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(filmId),
-                new PreparedStatementArg(date),
-                new PreparedStatementArg(filmTitle)
+        Object[] preparedStatementArgs = {
+                filmId,
+                date,
+                filmTitle
         };
 
         SQLiteConnection.execute(
@@ -94,8 +94,8 @@ public class ScreeningDAO {
     }
 
     public static void deleteScreening(int id) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id)
+        Object[] preparedStatementArgs = {
+                id
         };
 
         SQLiteConnection.execute(
@@ -106,8 +106,8 @@ public class ScreeningDAO {
     }
 
     public static Screening getScreeningById(int id) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
-                new PreparedStatementArg(id)
+        Object[] preparedStatementArgs = {
+                id
         };
 
         ResultSet resultSet = SQLiteConnection.executeQuery("SELECT * FROM Screening\n" +

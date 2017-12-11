@@ -36,13 +36,13 @@ public class FilmDAO {
 
         // TODO deal with not being able to do .next();
         resultSet.next();
-            Film film = new Film();
-            film.setId(resultSet.getInt("id"));
-            film.setTitle(resultSet.getString("title"));
-            film.setDescription(resultSet.getString("description"));
-            film.setFileName(resultSet.getString("fileName"));
-            //added
-            return film;
+        Film film = new Film();
+        film.setId(resultSet.getInt("id"));
+        film.setTitle(resultSet.getString("title"));
+        film.setDescription(resultSet.getString("description"));
+        film.setFileName(resultSet.getString("fileName"));
+        //added
+        return film;
 
     }
 
@@ -81,15 +81,15 @@ public class FilmDAO {
     }
 
     public static void insertFilm(String title, String description, String fileName) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{new PreparedStatementArg(title), new PreparedStatementArg(description), new PreparedStatementArg(fileName)};
+        Object[] args = {title, description, fileName};
 
-        SQLiteConnection.execute("INSERT INTO Film\n" + "(title, description, fileName)\n" + "VALUES\n" + "(?, ?, ?);", preparedStatementArgs);
+        SQLiteConnection.execute("INSERT INTO Film\n" + "(title, description, fileName)\n" + "VALUES\n" + "(?, ?, ?);", args);
     }
 
     public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {
-        PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{new PreparedStatementArg(id)};
+        Object[] args = {id};
 
-        SQLiteConnection.execute("DELETE FROM Film\n" + "WHERE id = ?", preparedStatementArgs);
+        SQLiteConnection.execute("DELETE FROM Film\n" + "WHERE id = ?", args);
     }
 
 

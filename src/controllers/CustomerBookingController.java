@@ -236,6 +236,10 @@ public class CustomerBookingController implements Initializable {
             }
         }
         initSeatingPlan();
+
+        // clear the list of selected seats
+        selectedSeats.removeAll(selectedSeats);
+        updateListOfSelectedSeats();
     }
 
     /**

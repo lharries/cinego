@@ -2,7 +2,7 @@ package models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utils.SQLiteConnection;
+import utils.SQLiteUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +46,7 @@ public class ScreeningDAO {
     }
 
     public static ObservableList<Screening> getScreeningObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetScreenings = SQLiteConnection.executeQuery("SELECT * FROM Screening", null);
+        ResultSet resultSetScreenings = SQLiteUtil.executeQuery("SELECT * FROM Screening", null);
 
         return getScreeningList(resultSetScreenings);
     }
@@ -68,7 +68,7 @@ public class ScreeningDAO {
     }
 
     public static ObservableList<Screening> getScreeningObservableListByFilmId(int filmId) throws SQLException, ClassNotFoundException {
-        ResultSet resultSetScreenings = SQLiteConnection.executeQuery(
+        ResultSet resultSetScreenings = SQLiteUtil.executeQuery(
                 "SELECT * FROM Screening\n" +
                         "WHERE filmId = ?", new Object[]{
                         filmId
@@ -84,7 +84,7 @@ public class ScreeningDAO {
                 filmTitle
         };
 
-        SQLiteConnection.execute(
+        SQLiteUtil.execute(
                 "INSERT INTO Screening\n" +
                         "(filmId, date, filmTitle)\n" +
                         "VALUES\n" +
@@ -98,7 +98,7 @@ public class ScreeningDAO {
                 id
         };
 
-        SQLiteConnection.execute(
+        SQLiteUtil.execute(
                 "DELETE FROM Screening\n" +
                         "WHERE id = ?",
                 preparedStatementArgs
@@ -110,7 +110,7 @@ public class ScreeningDAO {
                 id
         };
 
-        ResultSet resultSet = SQLiteConnection.executeQuery("SELECT * FROM Screening\n" +
+        ResultSet resultSet = SQLiteUtil.executeQuery("SELECT * FROM Screening\n" +
                 "WHERE id = ?", preparedStatementArgs);
 
         // TODO deal with not being able to do .next();

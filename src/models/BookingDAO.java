@@ -2,7 +2,7 @@ package models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utils.SQLiteConnection;
+import utils.SQLiteUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +44,7 @@ public class BookingDAO {
                 screeningId,
         };
 
-        ResultSet resultSetBookings = SQLiteConnection.executeQuery(
+        ResultSet resultSetBookings = SQLiteUtil.executeQuery(
                 "SELECT * FROM Booking\n" +
                         "WHERE seatId = ? AND screeningId = ?", preparedStatementArgs);
 
@@ -58,7 +58,7 @@ public class BookingDAO {
     }
 
     public static ObservableList<Booking> getBookingObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetBookings = SQLiteConnection.executeQuery("SELECT * FROM Booking", null);
+        ResultSet resultSetBookings = SQLiteUtil.executeQuery("SELECT * FROM Booking", null);
 
         return getBookingList(resultSetBookings);
     }
@@ -88,7 +88,7 @@ public class BookingDAO {
                 seatId,
                 screeningId};
 
-        SQLiteConnection.execute(
+        SQLiteUtil.execute(
                 "INSERT INTO Booking\n" +
                         "(customerId, paidFor, seatId, screeningId)\n" +
                         "VALUES\n" +
@@ -100,7 +100,7 @@ public class BookingDAO {
     public static void deleteBooking(int id) throws SQLException, ClassNotFoundException {
         Object[] preparedStatementArgs = {(id)};
 
-        SQLiteConnection.execute(
+        SQLiteUtil.execute(
                 "DELETE FROM Booking\n" +
                         "WHERE id = ?",
                 preparedStatementArgs

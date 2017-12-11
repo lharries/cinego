@@ -2,7 +2,7 @@ package models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utils.SQLiteConnection;
+import utils.SQLiteUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class SeatDAO {
      * @throws ClassNotFoundException
      */
     public static ObservableList<Seat> getSeatObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetSeats = SQLiteConnection.executeQuery("SELECT * FROM Seat", null);
+        ResultSet resultSetSeats = SQLiteUtil.executeQuery("SELECT * FROM Seat", null);
 
         return getSeatList(resultSetSeats);
     }
@@ -63,7 +63,7 @@ public class SeatDAO {
                 name
         };
 
-        SQLiteConnection.execute(
+        SQLiteUtil.execute(
                 "INSERT INTO Seat\n" +
                         "(column, row, name)\n" +
                         "VALUES\n" +
@@ -85,7 +85,7 @@ public class SeatDAO {
                 id
         };
 
-        SQLiteConnection.execute(
+        SQLiteUtil.execute(
                 "DELETE FROM Seat\n" +
                         "WHERE id = ?",
                 args
@@ -107,7 +107,7 @@ public class SeatDAO {
                 row,
         };
 
-        ResultSet resultSetSeats = SQLiteConnection.executeQuery(
+        ResultSet resultSetSeats = SQLiteUtil.executeQuery(
                 "SELECT * FROM Seat WHERE column = ? AND row = ?", args);
 
         if (resultSetSeats != null) {
@@ -133,7 +133,7 @@ public class SeatDAO {
                 id
         };
 
-        ResultSet resultSetSeats = SQLiteConnection.executeQuery(
+        ResultSet resultSetSeats = SQLiteUtil.executeQuery(
                 "SELECT * FROM Seat\n" +
                         "WHERE id = ?",
                 args

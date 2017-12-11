@@ -12,9 +12,9 @@ import java.sql.*;
  * - http://www.swtestacademy.com/database-operations-javafx/
  * - https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html
  *
- * @author lukeharries
+ * @author lukeharries kaiklasen
  */
-public class SQLiteConnection {
+public class SQLiteUtil {
 
     public static Connection connection;
 

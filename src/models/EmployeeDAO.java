@@ -2,7 +2,7 @@ package models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utils.SQLiteConnection;
+import utils.SQLiteUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,7 +53,7 @@ public class EmployeeDAO {
                 password
         };
 
-        ResultSet results = SQLiteConnection.executeQuery("SELECT * FROM Employee WHERE username=? AND password=?", preparedStatementArgs);
+        ResultSet results = SQLiteUtil.executeQuery("SELECT * FROM Employee WHERE username=? AND password=?", preparedStatementArgs);
         if (results != null) {
             return getEmployeeFromResultSet(results);
         } else {
@@ -62,7 +62,7 @@ public class EmployeeDAO {
     }
 
     public static ObservableList<Employee> getEmployeeObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetEmployees = SQLiteConnection.executeQuery("SELECT * FROM Employee", null);
+        ResultSet resultSetEmployees = SQLiteUtil.executeQuery("SELECT * FROM Employee", null);
 
         return getEmployeeList(resultSetEmployees);
     }

@@ -2,9 +2,8 @@ package models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utils.SQLiteConnection;
+import utils.SQLiteUtil;
 
-import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -37,7 +36,7 @@ public class CustomerDAO {
 
         Object[] preparedStatementArgs = {id};
 
-        ResultSet results = SQLiteConnection.executeQuery(query, preparedStatementArgs);
+        ResultSet results = SQLiteUtil.executeQuery(query, preparedStatementArgs);
 
         if (results.next()) {
             Customer customer = new Customer();
@@ -76,7 +75,7 @@ public class CustomerDAO {
                 password
         };
 
-        ResultSet results = SQLiteConnection.executeQuery(query, preparedStatementArgs);
+        ResultSet results = SQLiteUtil.executeQuery(query, preparedStatementArgs);
         if (results != null) {
             return getCustomerFromResultSet(results);
         } else {
@@ -96,12 +95,12 @@ public class CustomerDAO {
                 email,
                 id
         };
-        SQLiteConnection.executeUpdate(query, preparedStatementArgs);
+        SQLiteUtil.executeUpdate(query, preparedStatementArgs);
     }
 
 
     private static ObservableList<Customer> getCustomerObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetCustomers = SQLiteConnection.executeQuery("SELECT * FROM Customer", null);
+        ResultSet resultSetCustomers = SQLiteUtil.executeQuery("SELECT * FROM Customer", null);
 
         return getCustomerList(resultSetCustomers);
     }

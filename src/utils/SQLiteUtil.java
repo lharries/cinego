@@ -14,7 +14,7 @@ import java.sql.*;
  *
  * @author lukeharries
  */
-public class SQLiteConnection {
+public class SQLiteUtil {
 
     public static Connection connection;
 

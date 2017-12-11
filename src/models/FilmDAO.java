@@ -2,7 +2,7 @@ package models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utils.SQLiteConnection;
+import utils.SQLiteUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +32,7 @@ public class FilmDAO {
     }
 
     public static Film getFilmById(int id) throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = SQLiteConnection.executeQuery("SELECT * FROM Film", null);
+        ResultSet resultSet = SQLiteUtil.executeQuery("SELECT * FROM Film", null);
 
         // TODO deal with not being able to do .next();
         resultSet.next();
@@ -60,7 +60,7 @@ public class FilmDAO {
     }
 
     public static ObservableList<Film> getFilmObservableList() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetFilms = SQLiteConnection.executeQuery("SELECT * FROM Film", null);
+        ResultSet resultSetFilms = SQLiteUtil.executeQuery("SELECT * FROM Film", null);
 
         return getFilmList(resultSetFilms);
     }
@@ -83,18 +83,18 @@ public class FilmDAO {
     public static void insertFilm(String title, String description, String fileName) throws SQLException, ClassNotFoundException {
         Object[] args = {title, description, fileName};
 
-        SQLiteConnection.execute("INSERT INTO Film\n" + "(title, description, fileName)\n" + "VALUES\n" + "(?, ?, ?);", args);
+        SQLiteUtil.execute("INSERT INTO Film\n" + "(title, description, fileName)\n" + "VALUES\n" + "(?, ?, ?);", args);
     }
 
     public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {
         Object[] args = {id};
 
-        SQLiteConnection.execute("DELETE FROM Film\n" + "WHERE id = ?", args);
+        SQLiteUtil.execute("DELETE FROM Film\n" + "WHERE id = ?", args);
     }
 
 
     public static ResultSet getCSVResultSet() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetFilms = SQLiteConnection.executeQuery("SELECT film.title, film.description, screening.date, COUNT (booking.seatId) AS seatsBooked, (40- COUNT(booking.seatId)) AS seatsAvailable\n" + "FROM screening\n" + "LEFT JOIN Film ON screening.filmId = Film.id\n" + "LEFT JOIN Booking ON screening.id = Booking.screeningId\n" + "GROUP BY screening.id;", null);
+        ResultSet resultSetFilms = SQLiteUtil.executeQuery("SELECT film.title, film.description, screening.date, COUNT (booking.seatId) AS seatsBooked, (40- COUNT(booking.seatId)) AS seatsAvailable\n" + "FROM screening\n" + "LEFT JOIN Film ON screening.filmId = Film.id\n" + "LEFT JOIN Booking ON screening.id = Booking.screeningId\n" + "GROUP BY screening.id;", null);
 
         return resultSetFilms;
 

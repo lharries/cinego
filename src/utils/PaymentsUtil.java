@@ -13,7 +13,7 @@ import com.stripe.net.RequestOptions;
  * need to either keep the source code hidden and the jar file inaccessible or have separate employee and customer
  * applications to keep the customer api key safe
  */
-public class Payments {
+public class PaymentsUtil {
 
     /**
      * Charge the credit card details using stripe

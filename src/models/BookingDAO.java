@@ -26,7 +26,22 @@ public class BookingDAO {
             System.out.println(e);
 
         }
+    }
 
+
+    public static Booking getBookingsByScreeningId(int screeningId) throws SQLException, ClassNotFoundException {
+        Object[] preparedStatementArgs = {screeningId};
+        ResultSet resultSetBookings = SQLiteUtil.executeQuery(
+                "SELECT * FROM Booking\n" +
+                        "WHERE screeningId = ?", preparedStatementArgs);
+
+        ObservableList<Booking> bookings = getBookingList(resultSetBookings);
+
+        if (bookings.size() > 0) {
+            return bookings.get(0);
+        } else {
+            return null;
+        }
     }
 
     /**

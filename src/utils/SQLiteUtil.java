@@ -158,7 +158,6 @@ public class SQLiteUtil {
 
 
         PreparedStatement statement = null;
-        int changesMade;
 
         try {
             connect();
@@ -169,7 +168,7 @@ public class SQLiteUtil {
                 statement = createPreparedStatement(statement, args);
             }
 
-            changesMade = statement.executeUpdate();
+            statement.executeUpdate();
 
         } catch (SQLException exception) {
             System.out.println("Unable to perform the query");

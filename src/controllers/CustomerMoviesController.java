@@ -7,17 +7,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.CacheHint;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import models.Film;
 import models.FilmDAO;
@@ -85,6 +88,9 @@ public class CustomerMoviesController implements Initializable {
 
     @FXML
     private Label selectedFilmDescription;
+
+    @FXML
+    private StackPane selectedTrailerPane;
 
     @FXML
     private Group screeningTimes;
@@ -158,28 +164,48 @@ public class CustomerMoviesController implements Initializable {
      * @param rectangle the rectangle containing the film, used to alter the border
      */
     private void selectFilm(Film film, Rectangle rectangle) {
-        selectedFilm = film;
 
+        selectedFilm = film;
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
 
+        selectedFilmGroup.setVisible(true);
+
+
+        //TODO: handle if no URL has been uploaded
+
+        String trailerURLString = film.getTrailerURL();
+        //loads trailer into view
+        if (trailerURLString != null) {
+            WebView webview = new WebView();
+            String youtubeUrl = trailerURLString.replace("watch?v=", "embed/");
+            webview.getEngine().load(youtubeUrl);
+            selectedTrailerPane.getChildren().setAll(webview);
+        } else {
+            Label errorTrailer = new Label("Sorry, this movie trailer is currently unavailable");
+            errorTrailer.setWrapText(true);
+            selectedTrailerPane.getChildren().addAll(errorTrailer);
+        }
+
+
+        // Try and get the film if it's found
         try {
+//            System.out.println(film.getImagePath());
+//            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
             selectedFilmImage.setImage(new Image(film.getImagePath()));
             selectedFilmImage.setVisible(true);
         } catch (IllegalArgumentException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unable to find the film" + e);
+            System.err.println("Cant locate the image: ");
             selectedFilmImage.setVisible(false);
         } catch (UnsupportedEncodingException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unsuppoerted encoding" + e);
             e.printStackTrace();
         } catch (NullPointerException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unable to find the film" + e);
+            System.err.println("Unable to find film");
             e.printStackTrace();
         }
+        // TODO: Set image and set screening times
 
-        selectedFilmGroup.setVisible(true);
-
-        // hide the borders of all films
+// hide the borders of all films
         for (Rectangle otherRectangles :
                 movieRectanglesArrayList) {
             otherRectangles.setStrokeWidth(0.0);
@@ -190,6 +216,8 @@ public class CustomerMoviesController implements Initializable {
 
         // add the screenings to the view
         addScreeningsToView();
+
+//        });
     }
 
     /**
@@ -218,7 +246,7 @@ public class CustomerMoviesController implements Initializable {
         group.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("Clicked");
+//                System.out.println("Clicked");
                 selectFilm(film, rectangle);
             }
         });
@@ -254,23 +282,51 @@ public class CustomerMoviesController implements Initializable {
             imageView.setY(30.0);
             imageView.setFitHeight(145.0);
             imageView.setFitWidth(134.0);
-        } catch (IllegalArgumentException | UnsupportedEncodingException | NullPointerException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "addFilmToList", "Unable to get the film image" + e);
+            imageView.setCache(true);
+            imageView.setCacheHint(CacheHint.SPEED);
+        } catch (
+                IllegalArgumentException e)
+
+        {
+            System.err.println("Unable to find film:");
+        } catch (
+                UnsupportedEncodingException e)
+
+        {
+            e.printStackTrace();
+        } catch (
+                NullPointerException e)
+
+        {
+            System.err.println("nullpointer");
             e.printStackTrace();
         }
 
-        if (imageView != null) {
-            group.getChildren().addAll(rectangle, title, description, imageView, screenings);
-        } else {
-            group.getChildren().addAll(rectangle, title, description, screenings);
+        // TODO: Remove the other screenings
 
+        //TODO: @Kai if trailerURL is null then don't display
+        if (imageView != null)
+
+        {
+            group.getChildren().addAll(rectangle, title, description, imageView, screenings);
+        } else
+
+        {
+            group.getChildren().addAll(rectangle, title, description, screenings);
         }
 
-        moviesVBox.getChildren().add(group);
+        moviesVBox.getChildren().
 
-        if (isSelected) {
+                add(group);
+
+
+        //TODO: add trailerURL as parameter
+        if (isSelected)
+
+        {
             selectFilm(film, rectangle);
         }
+
     }
 
     /**

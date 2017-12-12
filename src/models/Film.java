@@ -27,18 +27,18 @@ import java.util.Objects;
 public class Film {
     private IntegerProperty id;
     private StringProperty title;
-    private StringProperty fileName;
+    private StringProperty imageName;
     private StringProperty description;
+    private StringProperty trailerURL;
 
 
     public Film() {
         this.id = new SimpleIntegerProperty();
         this.title = new SimpleStringProperty();
-        this.fileName = new SimpleStringProperty();
+        this.imageName = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
+        this.trailerURL = new SimpleStringProperty();
     }
-
-    //TODO: missing Trailer link?
 
     public Integer getId() {
         return this.id.get();
@@ -64,16 +64,24 @@ public class Film {
         return this.title;
     }
 
-    public String getFileName() {
-        return this.fileName.get();
+    public String getImageName() {
+        return this.imageName.get();
     }
 
-    public void setFileName(String fileName) {
-        this.fileName.set(fileName);
+    public void setImageName(String imageName) {
+        this.imageName.set(imageName);
     }
 
-    public StringProperty fileNameProperty() {
-        return this.fileName;
+    public StringProperty imageNameProperty() {
+        return this.imageName;
+    }
+
+    public String getImagePath() throws UnsupportedEncodingException {
+        File directory = new File(".");
+        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+        File newMovie = new File(moviesDirectory, this.getImageName());
+
+        return "file:" + newMovie.getAbsolutePath();
     }
 
     public String getDescription() {
@@ -147,6 +155,18 @@ public class Film {
         return false;
     }
 
+    public String getTrailerURL() {
+        return trailerURL.get();
+    }
+
+    public StringProperty trailerURLProperty() {
+        return trailerURL;
+    }
+
+    public void setTrailerURL(String trailerURL) {
+        this.trailerURL.set(trailerURL);
+    }
+
     @Override
     public String toString() {
         return getTitle();
@@ -165,18 +185,5 @@ public class Film {
         });
     }
 
-    /**
-     * Converts the imagepath
-     *
-     * @return
-     * @throws UnsupportedEncodingException
-     */
-    public String getImagePath() throws UnsupportedEncodingException {
-        File directory = new File(".");
-        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-        File newMovie = new File(moviesDirectory, this.getFileName());
 
-        System.out.println("file:" + newMovie.getAbsolutePath());
-        return "file:" + newMovie.getAbsolutePath();
-    }
 }

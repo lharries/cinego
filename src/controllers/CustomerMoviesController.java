@@ -170,6 +170,7 @@ public class CustomerMoviesController implements Initializable {
         selectedFilm = film;
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
+        selectedFilmDescription.setWrapText(true);
 
         selectedFilmGroup.setVisible(true);
 
@@ -259,8 +260,8 @@ public class CustomerMoviesController implements Initializable {
         title.setFont(titleFont);
 
         // TODO: Limit the size of the description
-        Text description = new Text(film.getDescription());
-        description.maxWidth(200.0);
+        Label description = new Label(film.getDescription());
+        description.setMaxWidth(200.0);
         description.setLayoutX(15.0);
         description.setLayoutY(50.0);
         Font descriptionFont = new Font(15.0);
@@ -272,6 +273,7 @@ public class CustomerMoviesController implements Initializable {
         screenings.setLayoutY(120.0);
         Font screeningFont = new Font(15.0);
         screenings.setFont(screeningFont);
+        screenings.setMaxWidth(200.0);
 
         ImageView imageView = null;
         try {

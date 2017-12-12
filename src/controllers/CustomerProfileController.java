@@ -246,13 +246,16 @@ public class CustomerProfileController implements Initializable {
     @FXML
     private void getSelectedBooking() {
 
-        try {
-            selectedScreening = ScreeningDAO.getScreeningById(bookingsTable.getSelectionModel().getSelectedItem().getScreeningId());
-            bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
-            deleteBooking.setDisable(false);
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "CustomerProfileController", "getSelectedBooking", "Failed to fetch selected screening object or bookingID. See: " + e);
+        Booking booking = bookingsTable.getSelectionModel().getSelectedItem();
+        if (booking != null) {
+            try {
+                selectedScreening = ScreeningDAO.getScreeningById(booking.getScreeningId());
+                bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
+                deleteBooking.setDisable(false);
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "CustomerProfileController", "getSelectedBooking", "Failed to fetch selected screening object or bookingID. See: " + e);
+            }
         }
     }
 

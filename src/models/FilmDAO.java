@@ -94,7 +94,7 @@ public class FilmDAO {
 
 
     public static ResultSet getCSVResultSet() throws SQLException, ClassNotFoundException {
-        ResultSet resultSetFilms = SQLiteUtil.executeQuery("SELECT film.title, film.description, screening.date, COUNT (booking.seatId) AS seatsBooked, (40- COUNT(booking.seatId)) AS seatsAvailable\n" + "FROM screening\n" + "LEFT JOIN Film ON screening.filmId = Film.id\n" + "LEFT JOIN Booking ON screening.id = Booking.screeningId\n" + "GROUP BY screening.id;", null);
+        ResultSet resultSetFilms = SQLiteUtil.executeQuery("SELECT film.title, film.description, screening.date, COUNT (booking.seatId) AS seatsBooked, (40- COUNT(booking.seatId)) AS seatsAvailable, ((40- COUNT(booking.seatId)) / 40) AS lostSales\n" + "FROM screening\n" + "LEFT JOIN Film ON screening.filmId = Film.id\n" + "LEFT JOIN Booking ON screening.id = Booking.screeningId\n" + "GROUP BY screening.id;", null);
 
         return resultSetFilms;
 

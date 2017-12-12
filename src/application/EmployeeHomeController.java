@@ -15,9 +15,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -101,10 +98,10 @@ public class EmployeeHomeController implements Initializable {
     private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab;
 
     @FXML
-    private TextField addTitle, trailerURL;
+    private TextField titleTextField, trailerURLTextField;
 
     @FXML
-    private TextArea addDescription;
+    private TextArea descriptionTextArea;
 
     @FXML
     private ComboBox movieSelectionBox, timePicker;
@@ -288,9 +285,9 @@ public class EmployeeHomeController implements Initializable {
 
         //gets the input values and checks if they're correctly filled in
 
-        title = addTitle.getText();
-        description = addDescription.getText();
-        movieTrailerURL = trailerURL.getText();
+        title = titleTextField.getText();
+        description = descriptionTextArea.getText();
+        movieTrailerURL = trailerURLTextField.getText();
 
 
         if (title.isEmpty() || description.isEmpty() || movieFileName == null || movieTrailerURL.isEmpty()) {
@@ -299,10 +296,10 @@ public class EmployeeHomeController implements Initializable {
         } else {
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
+//            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+//            delay.setOnFinished(e -> popup.hide());
+//            popup.show();
+//            delay.play();
 
             createMovie();
         }
@@ -327,9 +324,9 @@ public class EmployeeHomeController implements Initializable {
         FilmDAO.insertFilm(title, description, movieFileName, movieTrailerURL);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
-        addTitle.clear();
-        addDescription.clear();
-        trailerURL.clear();
+        titleTextField.clear();
+        descriptionTextArea.clear();
+        trailerURLTextField.clear();
         populateMoviesTable();
         populateMovieSelectionBox();
     }
@@ -406,13 +403,8 @@ public class EmployeeHomeController implements Initializable {
         film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
 
-//        DateTimeStringConverter date2 = new DateTimeStringConverter();
-//        date2.fromString(date);
-
-
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
-
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -431,7 +423,7 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void exportToCSV() throws IOException, ClassNotFoundException, SQLException {
 
-        //TODO: add further statistics to CSV file
+        //TODO: additional / extra statistics to CSV file
 
         PrintStream file = new PrintStream("../cinego/ScreeningsExport.csv");
         boolean append = true;
@@ -444,8 +436,6 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
         alert.setHeaderText("CVS Export");
         alert.setContentText("Your csv export was successful, " + Main.user.getFirstName());
-
-
     }
 
     /**
@@ -494,7 +484,7 @@ public class EmployeeHomeController implements Initializable {
             popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
             alert.setHeaderText("Warning: deleting screening");
             alert.setContentText("Are you sure you want to delete this screening, " + Main.user.getFirstName() + " ?");
-//            alert.showAndWait();
+            alert.showAndWait();
 
             //Deletes movie depending on user response
             Optional<ButtonType> result = alert.showAndWait();
@@ -575,7 +565,6 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void getMovieID(){
         selectedMovieId = moviesTable.getSelectionModel().getSelectedItem().getId();
-        System.out.println("\n\n\n"+selectedMovieId+"\n\n\n");
         editMovieButton.setDisable(false);
 //        updateMovieButton.setDisable(false);
     }
@@ -595,13 +584,13 @@ public class EmployeeHomeController implements Initializable {
 //            description = film.getDescription();
 //            movieTrailerURL = film.getTrailerURL();
 
-//            addTitle.setText(title);
-//            addDescription.setText(description);
-//            trailerURL.setText(movieTrailerURL);
+//            titleTextField.setText(title);
+//            descriptionTextArea.setText(description);
+//            trailerURLTextField.setText(movieTrailerURL);
 
-            addTitle.setText(film.getTitle());
-            addDescription.setText(film.getDescription());
-            trailerURL.setText(film.getTrailerURL());
+            titleTextField.setText(film.getTitle());
+            descriptionTextArea.setText(film.getDescription());
+            trailerURLTextField.setText(film.getTrailerURL());
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -613,9 +602,9 @@ public class EmployeeHomeController implements Initializable {
    private void updateMovie(){
 
         //read out and store new values from components if changed
-       title = addTitle.getText();
-       description = addDescription.getText();
-       movieTrailerURL = trailerURL.getText();
+       title = titleTextField.getText();
+       description = descriptionTextArea.getText();
+       movieTrailerURL = trailerURLTextField.getText();
 
        try {
            FilmDAO.updateMovieDetails(title, description,movieTrailerURL,selectedMovieId);
@@ -627,13 +616,22 @@ public class EmployeeHomeController implements Initializable {
        updateMovieButton.setDisable(true);
        createMovieButton.setDisable(false);
 
+       titleTextField.clear();
+       descriptionTextArea.clear();
+       trailerURLTextField.clear();
 
-       addTitle.clear();
-       addDescription.clear();
-       trailerURL.clear();
+       //Inform user of successful updating of movie
+       Alert alert = new Alert(Alert.AlertType.INFORMATION);
+       Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+       alert.setTitle("Cinego");
+       popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+       alert.setHeaderText("Success: updated film");
+       alert.setContentText("You have successfully updated the film "+titleTextField.getText()+", "+Main.user.getFirstName());
+       PauseTransition delay = new PauseTransition(Duration.seconds(4));
+       delay.setOnFinished(e -> popup.hide());
+       popup.show();
+       delay.play();
 
-//       custFirstNameField.setPromptText(Main.user.getFirstName());
-//       custFirstNameField.setEditable(textFieldEditable);
 
        populateMoviesTable();
        populateScreeningsTable();

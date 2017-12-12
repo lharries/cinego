@@ -70,9 +70,9 @@
          </font>
       </Label>
       <HBox fx:id="hBox" layoutX="53.0" layoutY="416.0" prefHeight="30.0" prefWidth="534.0" spacing="15.0">
-         <TextField fx:id="addTitle" layoutX="1054.0" layoutY="503.0" prefHeight="30.0" prefWidth="194.0" promptText="Title" />
+         <TextField fx:id="titleTextField" layoutX="1054.0" layoutY="503.0" prefHeight="30.0" prefWidth="194.0" promptText="Title" />
          <Button fx:id="moviePosterBttn" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#uploadMovieImage" onKeyPressed="#uploadMovieImage" prefHeight="30.0" prefWidth="153.0" text="img upload" />
-         <TextField fx:id="trailerURL" promptText="Ytube URL: https://www.youtube.com/watch?v=6ZfuNTqbHE8" />
+         <TextField fx:id="trailerURLTextField" promptText="Ytube URL: https://www.youtube.com/watch?v=6ZfuNTqbHE8" />
       </HBox>
       <!--<HBox fx:id="hBox2" layoutX="52.0" layoutY="461.0" prefHeight="232.0" prefWidth="534.0" spacing="15.0">-->
          <!--<children>-->
@@ -80,7 +80,7 @@
               <content>
                 <AnchorPane fx:id="thisPane" minHeight="0.0" minWidth="0.0" prefHeight="230.0" prefWidth="359.0">
                      <children>
-                        <TextArea fx:id="addDescription" prefHeight="233.0" prefWidth="359.0" promptText="Movie description..." />
+                        <TextArea fx:id="descriptionTextArea" prefHeight="233.0" prefWidth="359.0" promptText="Movie description..." />
                      </children>
                   </AnchorPane>
               </content>

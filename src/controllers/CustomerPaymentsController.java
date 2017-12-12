@@ -67,8 +67,6 @@ public class CustomerPaymentsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        processingPaymentText.setVisible(false);
-
         price = 5 * seats.size() * 100;
 
         totalCostText.setText("£" + String.valueOf(price / 100));
@@ -222,9 +220,9 @@ public class CustomerPaymentsController implements Initializable {
      */
     private String confirmEmail() {
         TextInputDialog dialog = new TextInputDialog(Main.user.getEmail());
-        dialog.setTitle("Email");
-        dialog.setHeaderText("Email to send QR code tickets");
-        dialog.setContentText("Please confirm your email to which we will send you tickets:");
+        dialog.setTitle("Payment Success");
+        dialog.setHeaderText("Payment Success!");
+        dialog.setContentText("Payment success! Please confirm your email to which we will send you tickets:");
 
         Optional<String> result = dialog.showAndWait();
 

@@ -70,6 +70,5 @@
             <Image url="@../resources/logo-stripe.png" />
          </image>
       </ImageView>
-      <Text fx:id="processingPaymentText" fill="#00ff4a" layoutX="541.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Processing payment..." textAlignment="CENTER" wrappingWidth="331.0000001043081" />
     </children>
 </AnchorPane>

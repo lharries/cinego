@@ -22,6 +22,7 @@ import models.*;
 
 //import org.relique.jdbc.csv.CsvDriver;
 import org.relique.jdbc.csv.CsvDriver;
+import utils.CSVUtils;
 
 
 //import sun.tools.java.Environment;
@@ -334,13 +335,10 @@ public class EmployeeHomeController implements Initializable {
      * @throws IOException
      */
     @FXML
-    private void exportToCSV() throws IOException, ClassNotFoundException, SQLException {
+    private void exportData() throws IOException, ClassNotFoundException, SQLException {
 
         //TODO: additional / extra statistics to CSV file
-
-        PrintStream file = new PrintStream("../cinego/ScreeningsExport.csv");
-        boolean append = true;
-        CsvDriver.writeToCsv(FilmDAO.getCSVResultSet(), file, append);
+        CSVUtils.exportToCSV();
 
         //Informs user of successfully exporting CSV file
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -349,6 +347,7 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
         alert.setHeaderText("CVS Export");
         alert.setContentText("Your csv export was successful, " + Main.user.getFirstName());
+        alert.showAndWait();
     }
 
     /**
@@ -365,13 +364,10 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void deleteScreening() {
 
-        //TODO: add checking if no booking functionality! Ability to delete screening or edit screening unless customers have booked a ticket for the movie
         boolean noBookings = false;
 
         try {
-
             Booking booking = BookingDAO.getBookingsByScreeningId(selectedScreeningId);
-
             if(booking == null) {
                 noBookings = true;
             }

@@ -114,7 +114,7 @@
          <children>
             <Button fx:id="toSeatBooking" disable="true" mnemonicParsing="false" onAction="#openSeatsBooked" prefHeight="27.0" prefWidth="168.0" text="view booking" />
             <Button fx:id="deleteScreening" disable="true" mnemonicParsing="false" onAction="#deleteScreening" prefHeight="27.0" prefWidth="157.0" text="delete screening" />
-            <Button fx:id="exportCSVHandler" mnemonicParsing="false" onAction="#exportToCSV" prefHeight="30.0" prefWidth="149.0" text="export" />
+            <Button fx:id="exportCSVHandler" mnemonicParsing="false" onAction="#exportData" prefHeight="30.0" prefWidth="149.0" text="export" />
          </children>
       </HBox>
 

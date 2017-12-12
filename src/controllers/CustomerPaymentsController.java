@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import models.*;
+import utils.EmailsUtil;
 import utils.PaymentsUtil;
 
 import java.io.IOException;
@@ -115,6 +116,11 @@ public class CustomerPaymentsController implements Initializable {
 
                 showSuccessModal();
 
+                //send ticket with QR code
+                String email = confirmEmail();
+                String emailContent = EmailsUtil.createBookingEmailContent(selectedScreening.getMediumDate(), selectedScreening.getFilmTitle(), seats);
+                EmailsUtil.sendEmail(email, "Ticket for Cinego", emailContent);
+
                 try {
                     Navigation.loadCustFxml(Navigation.CUST_PROFILE_VIEW);
                 } catch (IOException e) {
@@ -211,6 +217,27 @@ public class CustomerPaymentsController implements Initializable {
             }
         }
 
+    }
+
+    /**
+     * Reference: http://code.makery.ch/blog/javafx-dialogs-official/
+     *
+     * @return the email
+     */
+    private String confirmEmail() {
+        TextInputDialog dialog = new TextInputDialog(Main.user.getEmail());
+        dialog.setTitle("Email");
+        dialog.setHeaderText("Email for tickets");
+        dialog.setContentText("Please confirm your email to which we will send you tickets:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            System.err.println("Unable to get email");
+            return Main.user.getEmail();
+        }
     }
 
 }

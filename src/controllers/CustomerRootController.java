@@ -7,9 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,7 +29,6 @@ import java.util.logging.Logger;
 public class CustomerRootController implements Initializable {
 
 
-    //TODO: make the logout button hoverable so the mouse changes / the colour changes so the user knows there is something clickable
     //TODO: add a 'Goodbye, xx' message to login screen that disappears after some seconds
 
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
@@ -40,16 +42,25 @@ public class CustomerRootController implements Initializable {
     @FXML
     protected Label custFirstNameLabel;
 
+    @FXML
+    private ImageView logoutImg, logo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //set user first + last name and sets logout image
         custFirstNameLabel.setText(Main.user.getFirstName());
         custLastNameLabel.setText(Main.user.getLastName());
+        File file = new File("src/resources/logout.png");
+        Image image = new Image(file.toURI().toString());
+        logoutImg.setImage(image);
+        file = new File("src/resources/cinestar.png");
+        image = new Image(file.toURI().toString());
+        logo.setImage(image);
+
 
         //set user's first + lastname onto root
         Main.user.firstNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
-
         Main.user.lastNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
     }
 

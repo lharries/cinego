@@ -18,6 +18,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,7 +57,7 @@ public class CustomerPaymentsController implements Initializable {
 
     public static ArrayList<Seat> seats;
 
-    public Integer price = 100; // TODO Change this, just for testing
+    public Integer price; // TODO Change this, just for testing
 
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
@@ -64,9 +65,9 @@ public class CustomerPaymentsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        price = 5 * seats.size();
+        price = 5 * seats.size() * 100;
 
-        totalCostText.setText("£" + String.valueOf(price));
+        totalCostText.setText("£" + String.valueOf(price / 100));
         try {
             selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
         } catch (SQLException e) {
@@ -75,24 +76,26 @@ public class CustomerPaymentsController implements Initializable {
             e.printStackTrace();
         } // TODO: Remove just for testing
 
-        try {
-            screeningText.setText(selectedScreening.getMediumDate());
-        } catch (ParseException e) {
-            LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "initialize", "unable to get screening medium date" + e);
-            e.printStackTrace();
-        }
+        screeningText.setText(selectedScreening.getMediumDate());
 
-        try {
+        try
+
+        {
             Film film = selectedScreening.getFilm();
             if (film != null) {
                 filmText.setText(film.getTitle());
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException |
+                ClassNotFoundException e)
+
+        {
             LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "initialize", "unable to get film" + e);
             e.printStackTrace();
         }
 
-        if (seats != null && seats.size() > 0) {
+        if (seats != null && seats.size() > 0)
+
+        {
             ObservableList<Seat> seatObservableList = FXCollections.observableList(seats);
             selectedSeatsList.setItems(seatObservableList);
         }
@@ -109,6 +112,9 @@ public class CustomerPaymentsController implements Initializable {
             try {
                 PaymentsUtil.chargeCreditCard(paymentInfo);
                 createBooking();
+
+                showSuccessModal();
+
                 try {
                     Navigation.loadCustFxml(Navigation.CUST_PROFILE_VIEW);
                 } catch (IOException e) {
@@ -127,6 +133,21 @@ public class CustomerPaymentsController implements Initializable {
             errorMessageText.setVisible(true);
         }
 
+    }
+
+    private void showSuccessModal() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Payment successful");
+        alert.setHeaderText("Payment successful");
+        alert.setContentText("Thank you for booking!\n" +
+                "We'll see you at " + selectedScreening.getMediumDate() + " to see " +
+                selectedScreening.getFilmTitle());
+
+        ButtonType buttonTypeDone = new ButtonType("Done", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeDone);
+
+        alert.show();
     }
 
     public void cancelBtnHandler(ActionEvent actionEvent) {

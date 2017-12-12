@@ -60,7 +60,6 @@ public class ScreeningDAO {
             screening.setFilmId(resultSet.getInt("filmId"));
             screening.setDate(resultSet.getString("date"));
             //added
-            screening.setFilmTitle(resultSet.getString("filmTitle"));
             screeningList.add(screening);
         }
 
@@ -122,7 +121,6 @@ public class ScreeningDAO {
         screening.setId(resultSet.getInt("id"));
         screening.setFilmId(resultSet.getInt("filmId"));
         screening.setDate(resultSet.getString("date"));
-        screening.setFilmTitle(resultSet.getString("filmTitle"));
 
         return screening;
 

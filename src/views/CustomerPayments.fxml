@@ -33,8 +33,8 @@
         </Text>
         <Line endX="300.0" layoutX="550.0" layoutY="330.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
         <Line endX="300.0" layoutX="545.0" layoutY="539.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-        <Button layoutX="724.0" layoutY="591.0" mnemonicParsing="false" onAction="#payBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Pay" />
-        <Button layoutX="491.0" layoutY="592.0" mnemonicParsing="false" onAction="#cancelBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Cancel" />
+        <Button layoutX="724.0" layoutY="584.0" mnemonicParsing="false" onAction="#payBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Pay" />
+        <Button layoutX="491.0" layoutY="584.0" mnemonicParsing="false" onAction="#cancelBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Cancel" />
         <Label layoutX="543.0" layoutY="394.0" text="Card Number" />
         <TextField fx:id="cardNumberField" layoutX="641.0" layoutY="389.0" prefHeight="27.0" prefWidth="210.0" text="4242 4242 4242 4242" />
         <Label layoutX="543.0" layoutY="439.0" text="Expiry Date" />
@@ -66,5 +66,10 @@
       <Text layoutX="78.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The payment processing api keys are in test mode, therefore only the card with number 4242 42424 42424 42424 will work." wrappingWidth="243.771484375" />
       <ListView fx:id="selectedSeatsList" layoutX="624.0" layoutY="167.0" prefHeight="112.0" prefWidth="200.0" />
       <Label layoutX="538.0" layoutY="173.0" text="Seats:" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="602.0" layoutY="611.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/logo-stripe.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

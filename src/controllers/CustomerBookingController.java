@@ -77,12 +77,8 @@ public class CustomerBookingController implements Initializable {
 
         filmTitle.setText(selectedScreening.getFilmTitle());
 
-        try {
-            screeningDate.setText(selectedScreening.getMediumDate());
-        } catch (ParseException e) {
-            LOGGER.logp(Level.WARNING, "CustomerBookingController", "initialize", "unable to parse the screening date" + e);
-            e.printStackTrace();
-        }
+        screeningDate.setText(selectedScreening.getMediumDate());
+
 
         initSeatingPlan();
     }
@@ -104,7 +100,7 @@ public class CustomerBookingController implements Initializable {
 
         alert.setTitle("Confirm Booking");
         alert.setHeaderText("Confirm Booking");
-        alert.setContentText("Do you wish to book " + String.valueOf(selectedSeats.size()) + " seats");
+        alert.setContentText("Do you wish to pay for " + String.valueOf(selectedSeats.size()) + " seats");
 
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         ButtonType buttonTypeOne = new ButtonType("Pay Now");

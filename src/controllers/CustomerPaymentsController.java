@@ -25,6 +25,8 @@ import java.util.logging.Logger;
 
 public class CustomerPaymentsController implements Initializable {
     @FXML
+    private Text processingPaymentText;
+    @FXML
     private Label filmText;
 
     @FXML
@@ -80,17 +82,12 @@ public class CustomerPaymentsController implements Initializable {
             if (film != null) {
                 filmText.setText(film.getTitle());
             }
-        } catch (SQLException |
-                ClassNotFoundException e)
-
-        {
+        } catch (SQLException | ClassNotFoundException e) {
             LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "initialize", "unable to get film" + e);
             e.printStackTrace();
         }
 
-        if (seats != null && seats.size() > 0)
-
-        {
+        if (seats != null && seats.size() > 0) {
             ObservableList<Seat> seatObservableList = FXCollections.observableList(seats);
             selectedSeatsList.setItems(seatObservableList);
         }
@@ -104,8 +101,13 @@ public class CustomerPaymentsController implements Initializable {
 
         if (paymentInfo.isValid()) {
             try {
+
+                processingPaymentText.setVisible(true);
+
                 PaymentsUtil.chargeCreditCard(paymentInfo);
                 createBooking();
+
+                processingPaymentText.setVisible(false);
 
                 showSuccessModal();
 
@@ -122,6 +124,7 @@ public class CustomerPaymentsController implements Initializable {
                 }
                 // TODO: Display success message
             } catch (CardException | APIException | AuthenticationException | APIConnectionException | InvalidRequestException e) {
+                processingPaymentText.setVisible(false);
                 errorMessageText.setText("Message from stripe API: " + e.getMessage());
                 errorMessageText.setVisible(true);
                 e.printStackTrace();
@@ -203,7 +206,7 @@ public class CustomerPaymentsController implements Initializable {
                 seats) {
 
             try {
-                BookingDAO.insertBooking(Main.user.getId(), true, seat.getId(), selectedScreening.getId());
+                BookingDAO.insertBooking(Main.user.getId(), seat.getId(), selectedScreening.getId());
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
                 LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "createBooking", "Unable to create the booking" + e);

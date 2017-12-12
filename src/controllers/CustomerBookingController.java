@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,7 @@ public class CustomerBookingController implements Initializable {
      * The screening which has been selected
      */
     static Screening selectedScreening;
+    public Button confirmBookingButton;
 
     /**
      * The seats which have been selected to book
@@ -71,10 +73,15 @@ public class CustomerBookingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         filmTitle.setText(selectedScreening.getFilmTitle());
 
         screeningDate.setText(selectedScreening.getMediumDate());
 
+        // disable the button as not seats have been selected
+        confirmBookingButton.setDisable(true);
+        
+        // set the total cost to 0 as no seats have been selected
         updateTotalCost();
 
         initSeatingPlan();
@@ -173,18 +180,7 @@ public class CustomerBookingController implements Initializable {
 
                         // handle the seat btn being clicked
                         btn.setOnAction((ActionEvent e) -> {
-                            if (!selectedSeats.contains(seat)) {
-                                // the seat has not yet been selected so add it to the list of selected seats
-                                selectedSeats.add(seat);
-                                btn.setGraphic(selectedSeatImage);
-                            } else {
-                                // the seat has already been selected so now remove it
-                                selectedSeats.remove(seat);
-                                btn.setGraphic(seatViewImage);
-                            }
-                            // refresh the list of selected seats
-                            updateTotalCost();
-                            updateListOfSelectedSeats();
+                            seatClickedHandler(seat, selectedSeatImage, seatViewImage, btn);
                         });
                     } else {
                         // the seat has been booked so show an error message
@@ -212,6 +208,31 @@ public class CustomerBookingController implements Initializable {
                 }
             }
         }
+    }
+
+    private void seatClickedHandler(Seat seat, ImageView selectedSeatImage, ImageView seatViewImage, Button btn) {
+        if (!selectedSeats.contains(seat)) {
+            // the seat has not yet been selected so add it to the list of selected seats
+            selectedSeats.add(seat);
+            btn.setGraphic(selectedSeatImage);
+
+            confirmBookingButton.setDisable(false);
+
+
+        } else {
+            // the seat has already been selected so now remove it
+            selectedSeats.remove(seat);
+            btn.setGraphic(seatViewImage);
+
+            if (selectedSeats.size() == 0) {
+                confirmBookingButton.setDisable(true);
+            }
+        }
+        // refresh the list of selected seats
+        updateTotalCost();
+        updateListOfSelectedSeats();
+
+
     }
 
     /**

@@ -103,7 +103,7 @@
                 <Font size="25.0" />
             </font>
         </Text>
-        <Button fx:id="bookingConfirmationClickHandler" layoutX="1002.0" layoutY="595.0" mnemonicParsing="false" onAction="#confirmBookingBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking" />
+        <Button fx:id="confirmBookingButton" layoutX="1002.0" layoutY="595.0" mnemonicParsing="false" onAction="#confirmBookingBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Confirm Booking" />
         <Text layoutX="946.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" wrappingWidth="90.07814260572195">
             <font>
                 <Font size="25.0" />

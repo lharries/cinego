@@ -13,4 +13,9 @@
 	<lib name="gson-2.6.2.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/gson-2.6.2.jar!/"/>
 	</lib>
+	<lib name="sendgrid-java-latest.jar" scope="COMPILE">
+		<srcroot url="jar://$MODULE_DIR$/src/sendgrid-java-latest.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/src/sendgrid-java-latest.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/sendgrid-java-latest.jar!/"/>
+	</lib>
 </component>

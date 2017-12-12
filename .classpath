@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="src/csvjdbc-1.0-34.jar"/>
 	<classpathentry kind="lib" path="src/stripe-java-5.25.0.jar"/>
 	<classpathentry kind="lib" path="src/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="src/sendgrid-java-latest.jar" sourcepath="src/sendgrid-java-latest.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

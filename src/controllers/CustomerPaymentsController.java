@@ -3,6 +3,7 @@ package controllers;
 import application.Main;
 import application.Navigation;
 import com.stripe.exception.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,8 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CustomerPaymentsController implements Initializable {
-    @FXML
-    private Text processingPaymentText;
+
     @FXML
     private Label filmText;
 
@@ -67,6 +67,8 @@ public class CustomerPaymentsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        processingPaymentText.setVisible(false);
+
         price = 5 * seats.size() * 100;
 
         totalCostText.setText("£" + String.valueOf(price / 100));
@@ -100,41 +102,39 @@ public class CustomerPaymentsController implements Initializable {
         getCardInfo();
 
         if (paymentInfo.isValid()) {
-            try {
-
-                processingPaymentText.setVisible(true);
-
-                PaymentsUtil.chargeCreditCard(paymentInfo);
-                createBooking();
-
-                processingPaymentText.setVisible(false);
-
-                showSuccessModal();
-
-                //send ticket with QR code
-                String email = confirmEmail();
-                String emailContent = EmailsUtil.createBookingEmailContent(selectedScreening.getMediumDate(), selectedScreening.getFilmTitle(), seats);
-                EmailsUtil.sendEmail(email, "Ticket for Cinego", emailContent);
-
-                try {
-                    Navigation.loadCustFxml(Navigation.CUST_PROFILE_VIEW);
-                } catch (IOException e) {
-                    LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "createBooking", "Unable to switch to the profile" + e);
-                    e.printStackTrace();
-                }
-                // TODO: Display success message
-            } catch (CardException | APIException | AuthenticationException | APIConnectionException | InvalidRequestException e) {
-                processingPaymentText.setVisible(false);
-                errorMessageText.setText("Message from stripe API: " + e.getMessage());
-                errorMessageText.setVisible(true);
-                e.printStackTrace();
-            }
+            chargeCreditCard();
 
         } else {
             errorMessageText.setText("Invalid payment info");
             errorMessageText.setVisible(true);
         }
 
+    }
+
+    private void chargeCreditCard() {
+
+        try {
+            PaymentsUtil.chargeCreditCard(paymentInfo);
+            createBooking();
+
+            showSuccessModal();
+
+            //send ticket with QR code
+            String email = confirmEmail();
+            String emailContent = EmailsUtil.createBookingEmailContent(selectedScreening.getMediumDate(), selectedScreening.getFilmTitle(), seats);
+            EmailsUtil.sendEmail(email, "Ticket for Cinego", emailContent);
+
+            try {
+                Navigation.loadCustFxml(Navigation.CUST_PROFILE_VIEW);
+            } catch (IOException e) {
+                LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "createBooking", "Unable to switch to the profile" + e);
+                e.printStackTrace();
+            }
+        } catch (CardException | APIException | AuthenticationException | APIConnectionException | InvalidRequestException e) {
+            errorMessageText.setText("Message from stripe API: " + e.getMessage());
+            errorMessageText.setVisible(true);
+            e.printStackTrace();
+        }
     }
 
     private void showSuccessModal() {

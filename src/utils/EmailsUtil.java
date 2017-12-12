@@ -1,11 +1,14 @@
 package utils;
 
+import application.Main;
 import com.sendgrid.*;
+import models.Seat;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
- * Send emails using the sendGridApi
+ * Send an email with the booking details and a QR code to the customer
  * <p>
  * Source:
  * - https://app.sendgrid.com/guide/integrate/langs/java
@@ -15,21 +18,25 @@ import java.io.IOException;
  */
 public class EmailsUtil {
 
+    /**
+     * The apiKey for sendgrid. In production mode this would be kept in a system environment file and out of
+     * access from the public.
+     */
     private static String apiKey = "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";
 
-    public static void main(String[] args) {
-        sendEmail("luke.harries.17@ucl.ac.uk", "Header", "Content",
-                "Luke Harries. 21st December. The hills have eyes too");
-    }
-
-    public static void sendEmail(String toEmail, String headerText, String contentText, String bookingInfo) {
+    /**
+     * Sends an email to the customer
+     * <p>
+     * Source: - https://app.sendgrid.com/guide/integrate/langs/java
+     *
+     * @param headerText  the message header
+     * @param contentText the message content
+     */
+    public static void sendEmail(String headerText, String contentText) {
         Email from = new Email("luke.harries.17@ucl.ac.uk");
         String subject = headerText;
         Email to = new Email("luke.harries.17@ucl.ac.uk");
-        Content content = new Content("text/html", contentText +
-                "<br><br><img src=\"https://api.qrserver.com/v1/create-qr-code/?data=+"
-                + bookingInfo +
-                "+&amp;size=400x400\" alt=\"Your ticket\" title=\"Your ticket\" />");
+        Content content = new Content("text/html", contentText);
 
         Mail mail = new Mail(from, subject, to, content);
 
@@ -52,5 +59,54 @@ public class EmailsUtil {
             }
         }
 
+    }
+
+    /**
+     * Creates the booking email content containing the qr code and the screening information
+     *
+     * @param screeningDate the date and time of the screening
+     * @param filmName      the name of the film
+     * @param seats         the seats which have been booked
+     * @return
+     */
+    public static String createBookingEmailContent(String screeningDate, String filmName, ArrayList<Seat> seats) {
+        StringBuilder emailContent = new StringBuilder();
+
+        // intro text
+        emailContent.append("Hi ").append(Main.user.getFirstName()).append(" ").append(Main.user.getLastName());
+        emailContent.append("<br>");
+        emailContent.append("Thanks for booking with Cinego! <br>");
+        emailContent.append("<br>");
+        emailContent.append("We look forward to see you at: ");
+        emailContent.append(screeningDate);
+        emailContent.append("<br>");
+        emailContent.append("For: ");
+        emailContent.append(filmName);
+        emailContent.append("<br>");
+
+        // seat info
+        emailContent.append("You have booked the following seats:<br>");
+        for (Seat seat :
+                seats) {
+            emailContent.append("- ").append(seat.getName());
+        }
+
+        emailContent.append("<br>Please find your ticket attached below.<br>");
+        emailContent.append("We look forward to seeing you on the night<br>");
+
+        // qr code
+        emailContent.append("<br><br><img src=\"https://api.qrserver.com/v1/create-qr-code/?data=+");
+        emailContent.append(screeningDate);
+        emailContent.append(" ");
+        emailContent.append(filmName);
+        emailContent.append(" ");
+        for (Seat seat :
+                seats) {
+            emailContent.append(seat.getName()).append(" ");
+        }
+        emailContent.append(".");
+        emailContent.append("+&amp;size=400x400\" alt=\"Your ticket\" title=\"Your ticket\" />");
+
+        return emailContent.toString();
     }
 }

@@ -32,10 +32,10 @@ public class EmailsUtil {
      * @param headerText  the message header
      * @param contentText the message content
      */
-    public static void sendEmail(String headerText, String contentText) {
+    public static void sendEmail(String toEmail, String headerText, String contentText) {
         Email from = new Email("luke.harries.17@ucl.ac.uk");
         String subject = headerText;
-        Email to = new Email("luke.harries.17@ucl.ac.uk");
+        Email to = new Email(toEmail);
         Content content = new Content("text/html", contentText);
 
         Mail mail = new Mail(from, subject, to, content);

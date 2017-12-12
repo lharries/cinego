@@ -150,7 +150,6 @@ public class LoginController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
 
         // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
-        System.out.println(getClass().getResourceAsStream(Navigation.CUST_ROOT));
         BorderPane customerRoot = (BorderPane) loader.load(getClass().getResourceAsStream(Navigation.CUST_ROOT));
 
 

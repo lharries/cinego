@@ -25,12 +25,6 @@ import java.util.logging.Logger;
  */
 public class Screening {
 
-    public static void main(String[] args) throws ParseException {
-        Screening screening = new Screening();
-        screening.setDate(new Date().toString());
-        System.out.println(screening.getShortDate());
-    }
-
     private static DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
     private static DateFormat mediumFormat = new SimpleDateFormat("HH:mm EEEE dd/MM", Locale.ENGLISH);
     private static DateFormat shortFormat = new SimpleDateFormat("EEE HH:mm", Locale.ENGLISH);

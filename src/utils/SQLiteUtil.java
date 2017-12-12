@@ -1,8 +1,11 @@
 package utils;
 
 import com.sun.rowset.CachedRowSetImpl;
+import controllers.EmployeeRootController;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Connects to the database and performs the key functions of execute, querying and updating the database.
@@ -19,6 +22,8 @@ import java.sql.*;
  * @author lukeharries kaiklasen
  */
 public class SQLiteUtil {
+
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
     private static Connection connection;
 
@@ -79,8 +84,7 @@ public class SQLiteUtil {
             statement.execute();
 
         } catch (SQLException exception) {
-            System.out.println("Unable to perform the query");
-            System.out.println(query);
+            LOGGER.logp(Level.WARNING, "SQLiteUtil", "execute", "Unable to perform query" + exception);
             throw exception;
         } finally {
             if (statement != null) {
@@ -126,8 +130,6 @@ public class SQLiteUtil {
             cachedRowSet.populate(results);
 
         } catch (SQLException exception) {
-            System.out.println("Unable to perform the query");
-            System.out.println(query);
             throw exception;
         } finally {
             if (results != null) {
@@ -171,7 +173,7 @@ public class SQLiteUtil {
             statement.executeUpdate();
 
         } catch (SQLException exception) {
-            System.out.println("Unable to perform the query");
+            LOGGER.logp(Level.WARNING, "SQLiteUtil", "executeUpdate", "Unable to perform query" + exception);
             throw exception;
         } finally {
             if (statement != null) {

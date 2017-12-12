@@ -96,8 +96,7 @@ public class PaymentsUtil {
         chargeMap.put("currency", "GBP");
         chargeMap.put("source", token.getId());
         try {
-            Charge charge = Charge.create(chargeMap, requestOptions);
-            System.out.println(charge);
+            Charge.create(chargeMap, requestOptions);
         } catch (StripeException e) {
             e.printStackTrace();
         }

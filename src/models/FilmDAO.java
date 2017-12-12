@@ -19,17 +19,6 @@ public class FilmDAO {
 
     // TODO Log the errors
 
-    public static void main(String[] args) {
-
-        try {
-            insertFilm("Test", "description -13;24;/' ", "image path", "trailer URL");
-            System.out.println(getFilmObservableList());
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
 
     public static Film getFilmById(int id) throws SQLException, ClassNotFoundException {
         Object[] preparedStatementArgs = {id};

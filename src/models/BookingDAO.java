@@ -16,17 +16,6 @@ import java.sql.SQLException;
  * @version 1.0.0
  */
 public class BookingDAO {
-    public static void main(String[] args) {
-        try {
-            insertBooking(1, false, 3, 2);
-            deleteBooking(1);
-            System.out.println(getBookingObservableList());
-
-        } catch (Exception e) {
-            System.out.println(e);
-
-        }
-    }
 
 
     public static Booking getBookingsByScreeningId(int screeningId) throws SQLException, ClassNotFoundException {

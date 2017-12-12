@@ -18,17 +18,6 @@ import java.util.Date;
  */
 public class ScreeningDAO {
 
-    public static void main(String[] args) {
-        try {
-
-            String dateString = new Date().toString();
-
-            insertScreening(1, dateString);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
     private static Screening getScreeningFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         if (resultSet.next()) {
             Screening screening = new Screening();

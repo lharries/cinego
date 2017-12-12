@@ -10,27 +10,6 @@ import java.sql.SQLException;
 
 public class CustomerDAO {
 
-    public static void main(String[] args) {
-
-
-        // Example of how to use the login
-        try {
-            Customer customer = login("customer", "password");
-            if (customer != null) {
-                System.out.println(customer.getFirstName());
-                System.out.println(customer.getLastName());
-                System.out.println(customer.getEmail());
-                System.out.println(customer.getUsername());
-            } else {
-                System.out.println("Unable to login");
-
-            }
-        } catch (Exception e) {
-            System.out.println("Printing the error");
-            System.err.print(e);
-        }
-    }
-
     public static Customer getById(int id) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Customer WHERE id=?";
 

@@ -131,7 +131,6 @@ public class EmployeeBookingController implements Initializable {
         // Rows
         for (int row = 0; row < 5; row++) {
             Label text = new Label(Character.toString((char) (65 + row)));
-            System.out.println(text);
             text.setFont(new Font(30.0));
             text.setLayoutX(-10.0);
             text.setLayoutY(0);
@@ -142,7 +141,6 @@ public class EmployeeBookingController implements Initializable {
         // columns
         for (int column = 1; column < 9; column++) {
             Label text = new Label(String.valueOf(column));
-            System.out.println(text);
             text.setFont(new Font(30.0));
             text.setLayoutX(-10.0);
             text.setLayoutY(0);

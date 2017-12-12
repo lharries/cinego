@@ -115,8 +115,6 @@ public class CustomerMoviesController implements Initializable {
         // listener for changing the search text
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchText = searchField.getText();
-            System.out.println("Key up:");
-            System.out.println(searchField.getText());
             updateFilmList();
         });
 

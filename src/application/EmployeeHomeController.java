@@ -132,6 +132,9 @@ public class EmployeeHomeController implements Initializable {
 
         //set moviesTable headers - 'moviesTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+
+//        moviesTable.setStyle("-fx-font: blue");
+//                textLabel.textColor = [UIColor redColor];
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
         populateMoviesTable();
 

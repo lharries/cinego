@@ -30,3 +30,4 @@
 .button:hovered{
     opacity: 0.1;
 }
+.root { -fx-selection-bar-text: firebrick; }

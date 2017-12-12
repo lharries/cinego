@@ -2,6 +2,8 @@ package controllers;
 
 import application.Main;
 import javafx.animation.PauseTransition;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import models.*;
 import utils.CSVUtils;
@@ -105,7 +108,9 @@ public class EmployeeHomeController implements Initializable {
         populateFilmsTable();
 
         //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
-        titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
+        titleColScreenTab.setCellValueFactory(
+                (Callback<TableColumn.CellDataFeatures<Screening, String>, ObservableValue<String>>)
+                        param -> new ReadOnlyObjectWrapper<String>(param.getValue().getFilmTitle()));
         dateColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("date"));
         populateScreeningsTable();
         populateMovieSelectionBox();
@@ -306,10 +311,14 @@ public class EmployeeHomeController implements Initializable {
      * Extracts the screeningsID upon selecting a screening from the screeningsTable
      */
     @FXML
-    private void getScreeningID() {
-        selectedScreeningId = screeningsTable.getSelectionModel().getSelectedItem().getId();
-        toSeatBooking.setDisable(false);
-        deleteScreening.setDisable(false);
+    private void screeningRowClickHandler() {
+        Screening selectedScreening = screeningsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedScreening != null) {
+            selectedScreeningId = selectedScreening.getId();
+            toSeatBooking.setDisable(false);
+            deleteScreening.setDisable(false);
+        }
     }
 
     /**

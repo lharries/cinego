@@ -38,7 +38,7 @@
       <!--</ImageView>-->
 
       <!--Screening table, screening creation HBox-->
-      <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="60.0" onMouseClicked="#getScreeningID" prefHeight="317.0" prefWidth="526.0">
+      <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="60.0" onMouseClicked="#screeningRowClickHandler" prefHeight="317.0" prefWidth="526.0">
          <columns>
             <TableColumn fx:id="titleColScreenTab" prefWidth="261.0" text="Title" />
             <TableColumn fx:id="dateColScreenTab" prefWidth="264.0" text="Date" />

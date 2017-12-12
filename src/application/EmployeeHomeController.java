@@ -21,7 +21,6 @@ import javafx.util.Duration;
 import models.*;
 
 //import org.relique.jdbc.csv.CsvDriver;
-import org.relique.jdbc.csv.CsvDriver;
 import utils.CSVUtils;
 
 
@@ -57,28 +56,9 @@ import java.util.logging.Logger;
 
 public class EmployeeHomeController implements Initializable {
 
-    //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
-
-
-    //TODO: add loggers to the validation for us
-
-    //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT
-    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
-
-    private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
-
 
     @FXML
-    private Button toSeatBooking, deleteScreening, editMovieButton, updateMovieButton, createMovieButton, moviePosterBttn;
-
-//    @FXML
-//    private ImageView backgroundImg, moviePoster;
-//
-//    @FXML
-//    private AnchorPane AnchorPane;
-//
-//    @FXML
-//    private TableView ScreeningsTable;
+    private Button toSeatBooking, deleteScreening, editFilmButton, updateFilmButton, createFilmButton;
 
     @FXML
     private TableView<Film> moviesTable;
@@ -91,9 +71,6 @@ public class EmployeeHomeController implements Initializable {
 
     @FXML
     private ObservableList<Screening> screeningsData;
-
-//    @FXML
-//    private HBox hBox;
 
     @FXML
     private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab;
@@ -115,7 +92,11 @@ public class EmployeeHomeController implements Initializable {
     private String title, movieFileName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
     private Date dateTime;
     private Film film;
-    public static int selectedScreeningId, selectedMovieId;
+    public static int selectedScreeningId, selectedFilmId;
+
+    private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
+
+
 
 
     /**
@@ -198,11 +179,9 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         //gets the input values and checks if they're correctly filled in
-
         title = titleTextField.getText();
         description = descriptionTextArea.getText();
         movieTrailerURL = trailerURLTextField.getText();
-
 
         if (title.isEmpty() || description.isEmpty() || movieFileName == null || movieTrailerURL.isEmpty()) {
             alert.setHeaderText("Error: invalid input fields");
@@ -210,11 +189,6 @@ public class EmployeeHomeController implements Initializable {
         } else {
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
-//            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-//            delay.setOnFinished(e -> popup.hide());
-//            popup.show();
-//            delay.play();
-
             createMovie();
         }
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
@@ -299,8 +273,6 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
-
-
     /**
      * Creates a new screening to inserting the user data into the database and re-populating the screeningTable
      *
@@ -360,6 +332,9 @@ public class EmployeeHomeController implements Initializable {
         deleteScreening.setDisable(false);
     }
 
+    /**
+     * Enables the employee delete a movie if it currently doesn't have any bookings
+     */
 
     @FXML
     private void deleteScreening() {
@@ -468,34 +443,29 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
-
-
+    /**
+     * Retrieves the filmId of the selected film object in the film table (not screening table)
+     */
     @FXML
-    private void getMovieID(){
-        selectedMovieId = moviesTable.getSelectionModel().getSelectedItem().getId();
-        editMovieButton.setDisable(false);
-//        updateMovieButton.setDisable(false);
+    private void getFilmID(){
+        selectedFilmId = moviesTable.getSelectionModel().getSelectedItem().getId();
+        editFilmButton.setDisable(false);
     }
 
-
+    /**
+     * Allows the employee to edit any selected film. This method fills the input fields with the previous data and
+     * thereby enabling the employee to edit the details.
+     */
     @FXML
     private void editFilm() {
 
         //enable and disable buttons
-        createMovieButton.setDisable(true);
-        updateMovieButton.setDisable(false);
+        createFilmButton.setDisable(true);
+        updateFilmButton.setDisable(false);
 
         //fill components with movie's data
         try {
-            Film film = FilmDAO.getFilmById(selectedMovieId);
-//            title = film.getTitle();
-//            description = film.getDescription();
-//            movieTrailerURL = film.getTrailerURL();
-
-//            titleTextField.setText(title);
-//            descriptionTextArea.setText(description);
-//            trailerURLTextField.setText(movieTrailerURL);
-
+            Film film = FilmDAO.getFilmById(selectedFilmId);
             titleTextField.setText(film.getTitle());
             descriptionTextArea.setText(film.getDescription());
             trailerURLTextField.setText(film.getTrailerURL());
@@ -506,6 +476,11 @@ public class EmployeeHomeController implements Initializable {
         }
     }
 
+
+    /**
+     * Upon "updating" a film's data, the changed data is being pushed into the database
+     * to ensure data consistency across user sessions.
+     */
    @FXML
    private void updateFilm(){
 
@@ -515,14 +490,14 @@ public class EmployeeHomeController implements Initializable {
        movieTrailerURL = trailerURLTextField.getText();
 
        try {
-           FilmDAO.updateMovieDetails(title, description,movieTrailerURL,selectedMovieId);
+           FilmDAO.updateMovieDetails(title, description,movieTrailerURL, selectedFilmId);
        } catch (SQLException | ClassNotFoundException e) {
            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilm", "Failed to update database with edited movie data. See: " + e);
            e.printStackTrace();
        }
-       editMovieButton.setDisable(true);
-       updateMovieButton.setDisable(true);
-       createMovieButton.setDisable(false);
+       editFilmButton.setDisable(true);
+       updateFilmButton.setDisable(true);
+       createFilmButton.setDisable(false);
 
        //Inform user of successful updating of movie
        Alert alert = new Alert(Alert.AlertType.INFORMATION);

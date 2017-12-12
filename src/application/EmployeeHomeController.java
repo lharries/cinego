@@ -129,9 +129,6 @@ public class EmployeeHomeController implements Initializable {
 
         //set moviesTable headers - 'moviesTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-
-//        moviesTable.setStyle("-fx-font: blue");
-//                textLabel.textColor = [UIColor redColor];
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
         populateMoviesTable();
 
@@ -155,7 +152,6 @@ public class EmployeeHomeController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
 
-
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
@@ -171,99 +167,16 @@ public class EmployeeHomeController implements Initializable {
             String rndNameOfMovie = Integer.toString(rndNum)+fileType;
 
             // locate the moviesDir
-//            String nameOfMovie = "name-of-new-movie.jpg";
             File directory = new File(".");
             File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
             File newMovie = new File(moviesDirectory, rndNameOfMovie);
-//            System.out.println(moviesDirectory);
-
-//
             try {
                 newMovie.createNewFile();
                 Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 movieFileName = rndNameOfMovie;
-//                System.out.println(newMovie.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-//            System.out.println(path);
-//
-////            URL f = getClass().getResource("resources");
-////            System.out.println(f);
-//
-////            try {
-//
-//            File currentDir = new File (".");
-//            System.out.println(currentDir.toPath());
-//            File parentDir = currentDir.getParentFile();
-//            System.out.println(parentDir.toPath());
-
-//
-//            File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-//            Path parent = f.toPath().getParent();
-//            System.out.println(parent.toString());
-//            Path resources = Paths.get(parent.toString(), "/resources");
-//
-//            movieFileName = "turtle.png";
-////            System.out.println("resources");
-////            System.out.println(resources);
-////            File movieImages = new File(resources.toString());
-////            System.out.println(movieImages);
-////            System.out.println(Arrays.toString(movieImages.list()));
-////            URL string = getClass().getResource("../resources");
-//
-////            URL movieImages = getClass().getResource("../../movie-images");
-////            System.out.println(movieImages);
-//
-////            String resourcesPath = string.getPath();
-////
-
-//            File newFile = new File(resources.toString() + "/turtle.png");
-//            System.out.println(newFile.getAbsolutePath().toString());
-////
-//            try {
-//                newFile.createNewFile();
-//                System.out.println(newFile);
-//                Files.copy(chosenFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            //got the source file, need to get the resources directory adjcaent to it, then create the new file in that
-
-//            String newFilePath = f.getParent() + "/hello.jpg";
-//            File newFile = new File(newFilePath);
-//            try {
-//
-//                String[] list  = f.list((dir, name) -> {
-//                    return Objects.equals(name, "resources");
-//                });
-//                System.out.println(Arrays.toString(list));
-//                newFile.createNewFile();
-//                System.out.println(newFile);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-////
-//                System.out.println(f.getAbsolutePath());
-//                image = ImageIO.read(chosenFile);
-//                file = new File("/resources/hello.jpg");
-//                System.out.println(file.getAbsolutePath());
-//                file.createNewFile();
-//                Files.copy(chosenFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//
-//                ImageIO.write(image, "jpg", file);
-//                System.out.println(file.getAbsolutePath());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-//
-//                movieFileName = "helloooooo" + ".jpg";
-//                file = new File(movieFileName);
-//                ImageIO.write(image, "jpg", file);
-//                ImageIO.write(image, "jpg", file);
         }
     }
 
@@ -571,7 +484,7 @@ public class EmployeeHomeController implements Initializable {
 
 
     @FXML
-    private void editMovie() {
+    private void editFilm() {
 
         //enable and disable buttons
         createMovieButton.setDisable(true);
@@ -594,12 +507,12 @@ public class EmployeeHomeController implements Initializable {
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editMovie", "Failed to load movie's data into film object. See: " + e);
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editFilm", "Failed to load movie's data into film object. See: " + e);
         }
     }
 
    @FXML
-   private void updateMovie(){
+   private void updateFilm(){
 
         //read out and store new values from components if changed
        title = titleTextField.getText();
@@ -609,7 +522,7 @@ public class EmployeeHomeController implements Initializable {
        try {
            FilmDAO.updateMovieDetails(title, description,movieTrailerURL,selectedMovieId);
        } catch (SQLException | ClassNotFoundException e) {
-           LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateMovie", "Failed to update database with edited movie data. See: " + e);
+           LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilm", "Failed to update database with edited movie data. See: " + e);
            e.printStackTrace();
        }
        editMovieButton.setDisable(true);

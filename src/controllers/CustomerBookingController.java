@@ -1,6 +1,5 @@
 package controllers;
 
-import application.Main;
 import application.Navigation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +18,6 @@ import models.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -47,7 +45,7 @@ public class CustomerBookingController implements Initializable {
     private ArrayList<Seat> selectedSeats = new ArrayList<>();
 
     @FXML
-    private Text totalCost;
+    private Text totalCostText;
 
     @FXML
     private Label Time;
@@ -67,6 +65,7 @@ public class CustomerBookingController implements Initializable {
     @FXML
     private GridPane gridPaneSeats;
 
+    private int totalCost = 0;
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
     //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
@@ -79,6 +78,7 @@ public class CustomerBookingController implements Initializable {
 
         screeningDate.setText(selectedScreening.getMediumDate());
 
+        updateTotalCost();
 
         initSeatingPlan();
     }
@@ -188,6 +188,7 @@ public class CustomerBookingController implements Initializable {
                                 btn.setGraphic(seatViewImage);
                             }
                             // refresh the list of selected seats
+                            updateTotalCost();
                             updateListOfSelectedSeats();
                         });
                     } else {
@@ -251,6 +252,12 @@ public class CustomerBookingController implements Initializable {
             text.toFront();
             gridPaneSeats.add(text, column, 5);
         }
+    }
+
+    public void updateTotalCost() {
+        totalCost = selectedSeats.size() * 5;
+
+        totalCostText.setText("£" + String.valueOf(totalCost));
     }
 
 

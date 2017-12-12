@@ -88,7 +88,7 @@ public class EmailsUtil {
         emailContent.append("You have booked the following seats:<br>");
         for (Seat seat :
                 seats) {
-            emailContent.append("- ").append(seat.getName());
+            emailContent.append(" - ").append(seat.getName());
         }
 
         emailContent.append("<br>Please find your ticket attached below.<br>");
@@ -96,6 +96,7 @@ public class EmailsUtil {
 
         // qr code
         emailContent.append("<br><br><img src=\"https://api.qrserver.com/v1/create-qr-code/?data=+");
+        emailContent.append(Main.user.getFirstName()).append(" ").append(Main.user.getLastName());
         emailContent.append(screeningDate);
         emailContent.append(" ");
         emailContent.append(filmName);

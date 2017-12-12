@@ -431,12 +431,19 @@ public class EmployeeHomeController implements Initializable {
      * Retrieves the filmId of the selected film object in the film table (not screening table)
      */
     @FXML
-    private void getFilmID() {
+    private void filmRowClickedHandler() {
         Film selectedFilm = filmsTable.getSelectionModel().getSelectedItem();
 
         if (selectedFilm != null) {
             selectedFilmId = selectedFilm.getId();
             editFilmButton.setDisable(false);
+            createFilmButton.setDisable(false);
+            updateFilmButton.setDisable(true);
+
+            titleTextField.clear();
+            descriptionTextArea.clear();
+            trailerURLTextField.clear();
+            filmImageName = null;
 
         }
     }
@@ -446,10 +453,11 @@ public class EmployeeHomeController implements Initializable {
      * thereby enabling the employee to edit the details.
      */
     @FXML
-    private void editFilm() {
+    private void editFilmBtnHandler() {
 
         //enable and disable buttons
         createFilmButton.setDisable(true);
+        editFilmButton.setDisable(true);
         updateFilmButton.setDisable(false);
 
         //fill components with movie's data
@@ -462,7 +470,7 @@ public class EmployeeHomeController implements Initializable {
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editFilm", "Failed to load movie's data into film object. See: " + e);
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editFilmBtnHandler", "Failed to load movie's data into film object. See: " + e);
         }
     }
 
@@ -472,7 +480,7 @@ public class EmployeeHomeController implements Initializable {
      * to ensure data consistency across user sessions.
      */
     @FXML
-    private void updateFilm() {
+    private void updateFilmBtnHandler() {
 
         //read out and store new values from components if changed
         title = titleTextField.getText();
@@ -482,7 +490,7 @@ public class EmployeeHomeController implements Initializable {
         try {
             FilmDAO.updateFilm(title, description, filmImageName, movieTrailerURL, selectedFilmId);
         } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilm", "Failed to update database with edited movie data. See: " + e);
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilmBtnHandler", "Failed to update database with edited movie data. See: " + e);
             e.printStackTrace();
         }
         editFilmButton.setDisable(true);

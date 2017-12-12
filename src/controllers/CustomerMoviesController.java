@@ -1,6 +1,8 @@
 package controllers;
 
 import application.Navigation;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -257,9 +259,8 @@ public class CustomerMoviesController implements Initializable {
         title.setFont(titleFont);
 
         // TODO: Limit the size of the description
-        Label description = new Label(film.getDescription());
-        description.setWrapText(true);
-        description.setMaxWidth(200.0);
+        Text description = new Text(film.getDescription());
+        description.maxWidth(200.0);
         description.setLayoutX(15.0);
         description.setLayoutY(50.0);
         Font descriptionFont = new Font(15.0);

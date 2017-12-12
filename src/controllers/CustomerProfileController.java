@@ -35,7 +35,7 @@ public class CustomerProfileController implements Initializable {
     @FXML
     private Button updateProfileBttn, editProfileBttn;
     @FXML
-    private TextField custFirstNameField, custLastNameField, custEmailField, custPhone;
+    private TextField custFirstNameField, custLastNameField, custEmailField;
     @FXML
     private Button deleteBooking, cancelUpdatingProfileBttn;
     @FXML
@@ -171,10 +171,6 @@ public class CustomerProfileController implements Initializable {
             custLastNameField.setEditable(textFieldEditable);
             custEmailField.setText(Main.user.getEmail());
             custEmailField.setEditable(textFieldEditable);
-            //TODO: store customer's phone number in database
-//        custPhone.setText(Main.user.getPhone());
-            custPhone.setEditable(textFieldEditable);
-
         }
         if (!textFieldEditable) {
 
@@ -193,9 +189,6 @@ public class CustomerProfileController implements Initializable {
             custEmailField.clear();
             custEmailField.setPromptText(Main.user.getEmail());
             custEmailField.setEditable(textFieldEditable);
-            //TODO: store customer's phone number in database
-//        custPhone.setText(Main.user.getPhone());
-            custPhone.setEditable(textFieldEditable);
         }
 
     }
@@ -218,7 +211,7 @@ public class CustomerProfileController implements Initializable {
             LOGGER.logp(Level.WARNING, "CustomerProfileController", "updateCustomerProfile", "Failed to run db UPDATE query. See: " + e);
         }
 
-        //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
+        //pop-up to inform user about successfully updating data - References: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
@@ -246,18 +239,21 @@ public class CustomerProfileController implements Initializable {
     @FXML
     private void getSelectedBooking() {
 
-        try {
-            selectedScreening = ScreeningDAO.getScreeningById(bookingsTable.getSelectionModel().getSelectedItem().getScreeningId());
-            bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
-            deleteBooking.setDisable(false);
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "CustomerProfileController", "getSelectedBooking", "Failed to fetch selected screening object or bookingID. See: " + e);
+        Booking booking = bookingsTable.getSelectionModel().getSelectedItem();
+        if (booking != null) {
+            try {
+                selectedScreening = ScreeningDAO.getScreeningById(booking.getScreeningId());
+                bookingID = bookingsTable.getSelectionModel().getSelectedItem().getId();
+                deleteBooking.setDisable(false);
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "CustomerProfileController", "getSelectedBooking", "Failed to fetch selected screening object or bookingID. See: " + e);
+            }
         }
     }
 
     /**
-     * Source:
+     * References:
      * - https://www.youtube.com/watch?v=oZUGMpGQxgQ
      */
     @FXML

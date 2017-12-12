@@ -2,14 +2,19 @@ package controllers;
 
 import application.Main;
 import application.Navigation;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +28,6 @@ import java.util.logging.Logger;
  *
  * @author lukeharries kaiklasen
  * @version 1.0
- *
  */
 public class EmployeeRootController implements Initializable {
 
@@ -55,43 +59,16 @@ public class EmployeeRootController implements Initializable {
         emplFirstName.setText(Main.user.getFirstName());
         emplLastName.setText(Main.user.getLastName());
 
-//        BufferedImage bufferedLogo = null;
-//        BufferedImage bufferedLogout = null;
-////        BufferedImage bufferedBackground = null;
-//        try {
-//            bufferedLogo = ImageIO.read(new File("src/resources/cinestar.png"));
-//            bufferedLogout = ImageIO.read(new File("src/resources/logout.png"));
-////            bufferedBackground = ImageIO.read(new File("src/resources/cinemaWallpaper.png"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Image logo = SwingFXUtils.toFXImage(bufferedLogo, null);
-//        Image logout = SwingFXUtils.toFXImage(bufferedLogout, null);
-////        Image background = SwingFXUtils.toFXImage(bufferedBackground, null);
-//        this.logo.setImage(logo);
-//        this.logoutImg.setImage(logout);
-//        this.background.setImage(background);
     }
 
     /**
-      method to be called by different employee controllers to set their respective views to the
-     *center of the parent borderPane: 'empPane' . This Pane is a child of the stage
+     * method to be called by different employee controllers to set their respective views to the
+     * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
-     *
      */
-    public void setCenter(javafx.scene.Node node){
+    public void setCenter(javafx.scene.Node node) {
         employeePane.setCenter(node);
-    }
-
-    @FXML
-    public void openMovieFormView(ActionEvent event) {
-        try {
-            Navigation.loadEmplFxml(Navigation.EMPL_MOVIE_VIEW);
-        } catch (IOException e) {
-            LOGGER.logp(Level.WARNING, "EmployeeRootController", "openMovieFormView", "Failed to load Employee MovieForm View. See: " + e);
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -111,8 +88,6 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     *
-     *
      * @param event
      */
     @FXML
@@ -127,10 +102,11 @@ public class EmployeeRootController implements Initializable {
 
     /**
      * logs user out of cinema system
+     *
      * @param event
      */
     @FXML
-    public void logout(ActionEvent event){
+    public void logout(ActionEvent event) {
 
         ((javafx.scene.Node) event.getSource()).getScene().getWindow().hide();
         Main main = new Main();

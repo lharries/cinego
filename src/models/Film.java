@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -18,7 +19,7 @@ import java.util.Objects;
  * Contains the properties corresponding to the columns in the database for the film.
  * Has getter and setter functions to store data retrieved from the {@link FilmDAO} class.
  * <p>
- * Source:
+ * References:
  * - https://stackoverflow.com/questions/3395286/remove-last-character-of-a-stringbuilder
  *
  * @author lukeharries kaiklasen
@@ -27,18 +28,18 @@ import java.util.Objects;
 public class Film {
     private IntegerProperty id;
     private StringProperty title;
-    private StringProperty fileName;
+    private StringProperty imageName;
     private StringProperty description;
+    private StringProperty trailerURL;
 
 
     public Film() {
         this.id = new SimpleIntegerProperty();
         this.title = new SimpleStringProperty();
-        this.fileName = new SimpleStringProperty();
+        this.imageName = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
+        this.trailerURL = new SimpleStringProperty();
     }
-
-    //TODO: missing Trailer link?
 
     public Integer getId() {
         return this.id.get();
@@ -64,16 +65,24 @@ public class Film {
         return this.title;
     }
 
-    public String getFileName() {
-        return this.fileName.get();
+    public String getImageName() {
+        return this.imageName.get();
     }
 
-    public void setFileName(String fileName) {
-        this.fileName.set(fileName);
+    public void setImageName(String imageName) {
+        this.imageName.set(imageName);
     }
 
-    public StringProperty fileNameProperty() {
-        return this.fileName;
+    public StringProperty imageNameProperty() {
+        return this.imageName;
+    }
+
+    public String getImagePath() throws UnsupportedEncodingException {
+        File directory = new File(".");
+        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+        File newMovie = new File(moviesDirectory, this.getImageName());
+
+        return "file:" + newMovie.getAbsolutePath();
     }
 
     public String getDescription() {
@@ -147,6 +156,18 @@ public class Film {
         return false;
     }
 
+    public String getTrailerURL() {
+        return trailerURL.get();
+    }
+
+    public StringProperty trailerURLProperty() {
+        return trailerURL;
+    }
+
+    public void setTrailerURL(String trailerURL) {
+        this.trailerURL.set(trailerURL);
+    }
+
     @Override
     public String toString() {
         return getTitle();
@@ -166,17 +187,28 @@ public class Film {
     }
 
     /**
-     * Converts the imagepath
+     * Reference:
+     * - https://stackoverflow.com/questions/2517709/comparing-two-java-util-dates-to-see-if-they-are-in-the-same-day
      *
+     * @param selectedDate
      * @return
-     * @throws UnsupportedEncodingException
      */
-    public String getImagePath() throws UnsupportedEncodingException {
-        File directory = new File(".");
-        File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-        File newMovie = new File(moviesDirectory, this.getFileName());
+    public FilteredList<Screening> getScreeningsByDate(Date selectedDate) {
+        return getScreenings().filtered(screening -> {
+            try {
+                Calendar selectedDay = Calendar.getInstance();
+                selectedDay.setTime(selectedDate);
 
-        System.out.println("file:" + newMovie.getAbsolutePath());
-        return "file:" + newMovie.getAbsolutePath();
+                Calendar filmDay = Calendar.getInstance();
+                filmDay.setTime(screening.getDateObject());
+                return selectedDay.get(Calendar.DAY_OF_YEAR) == filmDay.get(Calendar.DAY_OF_YEAR)
+                        && selectedDay.get(Calendar.YEAR) == filmDay.get(Calendar.YEAR);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return false;
+            }
+        });
     }
+
+
 }

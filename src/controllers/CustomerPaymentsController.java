@@ -69,19 +69,14 @@ public class CustomerPaymentsController implements Initializable {
         price = 5 * seats.size() * 100;
 
         totalCostText.setText("£" + String.valueOf(price / 100));
-        try {
-            selectedScreening = ScreeningDAO.getScreeningObservableList().get(0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } // TODO: Remove just for testing
 
+        initSummaryData();
+    }
+
+    private void initSummaryData() {
         screeningText.setText(selectedScreening.getMediumDate());
 
-        try
-
-        {
+        try {
             Film film = selectedScreening.getFilm();
             if (film != null) {
                 filmText.setText(film.getTitle());
@@ -100,7 +95,6 @@ public class CustomerPaymentsController implements Initializable {
             ObservableList<Seat> seatObservableList = FXCollections.observableList(seats);
             selectedSeatsList.setItems(seatObservableList);
         }
-
 
     }
 

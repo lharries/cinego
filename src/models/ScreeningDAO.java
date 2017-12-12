@@ -23,7 +23,7 @@ public class ScreeningDAO {
 
             String dateString = new Date().toString();
 
-            insertScreening(1, dateString, "hardCodedTitle");
+            insertScreening(1, dateString);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -35,10 +35,6 @@ public class ScreeningDAO {
             screening.setId(resultSet.getInt("id"));
             screening.setFilmId(resultSet.getInt("filmId"));
             screening.setDate(resultSet.getString("date"));
-
-            //added
-//            screening.setFilmTitle(resultSet.getString("filmTitle"));
-
             return screening;
         } else {
             return null;
@@ -76,18 +72,17 @@ public class ScreeningDAO {
         return getScreeningList(resultSetScreenings);
     }
 
-    public static void insertScreening(int filmId, String date, String filmTitle) throws SQLException, ClassNotFoundException {
+    public static void insertScreening(int filmId, String date) throws SQLException, ClassNotFoundException {
         Object[] preparedStatementArgs = {
                 filmId,
-                date,
-                filmTitle
+                date
         };
 
         SQLiteUtil.execute(
                 "INSERT INTO Screening\n" +
-                        "(filmId, date, filmTitle)\n" +
+                        "(filmId, date)\n" +
                         "VALUES\n" +
-                        "(?, ?, ?);",
+                        "(?, ?);",
                 preparedStatementArgs
         );
     }

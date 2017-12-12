@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Send an email with the booking details and a QR code to the customer
  * <p>
- * Source:
+ * References:
  * - https://app.sendgrid.com/guide/integrate/langs/java
  *
  * @author lukeharries kaiklasen
@@ -27,7 +27,8 @@ public class EmailsUtil {
     /**
      * Sends an email to the customer
      * <p>
-     * Source: - https://app.sendgrid.com/guide/integrate/langs/java
+     * References:
+     * - https://app.sendgrid.com/guide/integrate/langs/java
      *
      * @param headerText  the message header
      * @param contentText the message content

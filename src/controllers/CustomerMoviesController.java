@@ -1,23 +1,28 @@
 package controllers;
 
 import application.Navigation;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.CacheHint;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import models.Film;
 import models.FilmDAO;
@@ -87,6 +92,9 @@ public class CustomerMoviesController implements Initializable {
     private Label selectedFilmDescription;
 
     @FXML
+    private StackPane selectedTrailerPane;
+
+    @FXML
     private Group screeningTimes;
 
     @FXML
@@ -129,16 +137,17 @@ public class CustomerMoviesController implements Initializable {
         moviesVBox.getChildren().clear();
         // Get the films from the db and add them to the list of films
         try {
+            boolean isSelected = true;
             ObservableList<Film> films = FilmDAO.getFilmObservableList();
             for (int i = 0; i < films.size(); i++) {
                 // set the first film to be selected
                 Film film = films.get(i);
-                boolean isSelected = (i == 0);
 
                 // filter by title, description and date
                 if (film.getTitle().toLowerCase().contains(searchText.toLowerCase()) || film.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
                     if (selectedDate == null || film.hasScreeningOnDate(selectedDate)) {
                         addFilmToList(films.get(i), isSelected);
+                        isSelected = false;
                     }
 
                 }
@@ -158,28 +167,47 @@ public class CustomerMoviesController implements Initializable {
      * @param rectangle the rectangle containing the film, used to alter the border
      */
     private void selectFilm(Film film, Rectangle rectangle) {
-        selectedFilm = film;
 
+        selectedFilm = film;
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
+        selectedFilmDescription.setWrapText(true);
 
+        selectedFilmGroup.setVisible(true);
+
+
+        //TODO: handle if no URL has been uploaded
+
+        String trailerURLString = film.getTrailerURL();
+        //loads trailer into view
+        if (trailerURLString != null) {
+            WebView webview = new WebView();
+            String youtubeUrl = trailerURLString.replace("watch?v=", "embed/");
+            webview.getEngine().load(youtubeUrl);
+            selectedTrailerPane.getChildren().setAll(webview);
+        } else {
+            Label errorTrailer = new Label("Sorry, this movie trailer is currently unavailable");
+            errorTrailer.setWrapText(true);
+            selectedTrailerPane.getChildren().addAll(errorTrailer);
+        }
+
+
+        // Try and get the film if it's found
         try {
             selectedFilmImage.setImage(new Image(film.getImagePath()));
             selectedFilmImage.setVisible(true);
         } catch (IllegalArgumentException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unable to find the film" + e);
+            System.err.println("Cant locate the image: ");
             selectedFilmImage.setVisible(false);
         } catch (UnsupportedEncodingException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unsuppoerted encoding" + e);
             e.printStackTrace();
         } catch (NullPointerException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Unable to find the film" + e);
+            System.err.println("Unable to find film");
             e.printStackTrace();
         }
+        // TODO: Set image and set screening times
 
-        selectedFilmGroup.setVisible(true);
-
-        // hide the borders of all films
+// hide the borders of all films
         for (Rectangle otherRectangles :
                 movieRectanglesArrayList) {
             otherRectangles.setStrokeWidth(0.0);
@@ -190,6 +218,8 @@ public class CustomerMoviesController implements Initializable {
 
         // add the screenings to the view
         addScreeningsToView();
+
+//        });
     }
 
     /**
@@ -218,33 +248,30 @@ public class CustomerMoviesController implements Initializable {
         group.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("Clicked");
+//                System.out.println("Clicked");
                 selectFilm(film, rectangle);
             }
         });
 
         // TODO: split the text over multiple lines
         Label title = new Label(film.getTitle());
+        title.setWrapText(true);
+        title.setMaxWidth(200.0);
+        title.setMaxHeight(60.0);
         title.setLayoutX(15.0);
-        title.setLayoutY(10.0);
+        title.setLayoutY(20.0);
         Font titleFont = new Font(25.0);
         title.setFont(titleFont);
 
         // TODO: Limit the size of the description
         Label description = new Label(film.getDescription());
-        description.setWrapText(true);
         description.setMaxWidth(200.0);
+        description.setMaxHeight(80.0);
+        description.setWrapText(true);
         description.setLayoutX(15.0);
-        description.setLayoutY(50.0);
+        description.setLayoutY(80.0);
         Font descriptionFont = new Font(15.0);
         description.setFont(descriptionFont);
-
-        // screenings
-        Label screenings = new Label(film.getScreeningsDescription());
-        screenings.setLayoutX(15.0);
-        screenings.setLayoutY(120.0);
-        Font screeningFont = new Font(15.0);
-        screenings.setFont(screeningFont);
 
         ImageView imageView = null;
         try {
@@ -254,23 +281,51 @@ public class CustomerMoviesController implements Initializable {
             imageView.setY(30.0);
             imageView.setFitHeight(145.0);
             imageView.setFitWidth(134.0);
-        } catch (IllegalArgumentException | UnsupportedEncodingException | NullPointerException e) {
-            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "addFilmToList", "Unable to get the film image" + e);
+            imageView.setCache(true);
+            imageView.setCacheHint(CacheHint.SPEED);
+        } catch (
+                IllegalArgumentException e)
+
+        {
+            System.err.println("Unable to find film:");
+        } catch (
+                UnsupportedEncodingException e)
+
+        {
+            e.printStackTrace();
+        } catch (
+                NullPointerException e)
+
+        {
+            System.err.println("nullpointer");
             e.printStackTrace();
         }
 
-        if (imageView != null) {
-            group.getChildren().addAll(rectangle, title, description, imageView, screenings);
-        } else {
-            group.getChildren().addAll(rectangle, title, description, screenings);
+        // TODO: Remove the other screenings
 
+        //TODO: @Kai if trailerURL is null then don't display
+        if (imageView != null)
+
+        {
+            group.getChildren().addAll(rectangle, title, description, imageView);
+        } else
+
+        {
+            group.getChildren().addAll(rectangle, title, description);
         }
 
-        moviesVBox.getChildren().add(group);
+        moviesVBox.getChildren().
 
-        if (isSelected) {
+                add(group);
+
+
+        //TODO: add trailerURL as parameter
+        if (isSelected)
+
+        {
             selectFilm(film, rectangle);
         }
+
     }
 
     /**
@@ -278,33 +333,41 @@ public class CustomerMoviesController implements Initializable {
      */
     private void addScreeningsToView() {
         // TODO: Switch to flowpane or tabs
-        double xPosition = 0.0;
-        screeningTimes.getChildren().clear();
-        for (Screening screening :
-                selectedFilm.getUpcomingScreenings()) {
-            try {
-                Button screeningButton = new Button();
-                screeningButton.setText(screening.getShortDate());
-                screeningButton.setLayoutX(xPosition);
-                screeningButton.setLayoutY(0);
-                screeningButton.setOnAction((event) -> {
-                    try {
-                        CustomerBookingController.selectedScreening = screening;
-                        Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
-                    } catch (IOException e) {
-                        LOGGER.logp(Level.WARNING, "CustomerMoviesController",
-                                "addScreeningsToView", "Unable to load customer booking view" + e);
-                        e.printStackTrace();
-                    }
-                });
 
-                screeningTimes.getChildren().add(screeningButton);
+        if (selectedDate != null) {
 
-                xPosition += 130.0;
+            double xPosition = 0.0;
+            screeningTimes.getChildren().clear();
+            for (Screening screening :
+                    selectedFilm.getScreeningsByDate(selectedDate)) {
+                try {
+                    Button screeningButton = new Button();
+                    screeningButton.setText(screening.getShortDate());
+                    screeningButton.setLayoutX(xPosition);
+                    screeningButton.setLayoutY(0);
+                    screeningButton.setOnAction((event) -> {
+                        try {
+                            CustomerBookingController.selectedScreening = screening;
+                            Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
+                        } catch (IOException e) {
+                            LOGGER.logp(Level.WARNING, "CustomerMoviesController",
+                                    "addScreeningsToView", "Unable to load customer booking view" + e);
+                            e.printStackTrace();
+                        }
+                    });
 
-            } catch (ParseException e) {
-                e.printStackTrace();
+                    screeningTimes.getChildren().add(screeningButton);
+
+                    xPosition += 130.0;
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
+        } else {
+            screeningTimes.getChildren().clear();
+            Label label = new Label("Please select a date to view screenings");
+            screeningTimes.getChildren().add(label);
         }
     }
 
@@ -319,6 +382,7 @@ public class CustomerMoviesController implements Initializable {
         try {
             if (datePicker.getValue() != null)
                 selectedDate = dateFormat.parse(String.valueOf(datePicker.getValue()));
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -333,6 +397,7 @@ public class CustomerMoviesController implements Initializable {
     public void showAllFilms(ActionEvent actionEvent) {
         datePicker.setValue(null);
         selectedDate = null;
+        addScreeningsToView();
         searchText = "";
         searchField.setText("");
         updateFilmList();

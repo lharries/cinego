@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -178,6 +179,30 @@ public class Film {
                 Date today = new Date();
                 Date screeningDate = screening.getDateObject();
                 return today.compareTo(screeningDate) <= 0;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
+
+    /**
+     * Reference:
+     * - https://stackoverflow.com/questions/2517709/comparing-two-java-util-dates-to-see-if-they-are-in-the-same-day
+     *
+     * @param selectedDate
+     * @return
+     */
+    public FilteredList<Screening> getScreeningsByDate(Date selectedDate) {
+        return getScreenings().filtered(screening -> {
+            try {
+                Calendar selectedDay = Calendar.getInstance();
+                selectedDay.setTime(selectedDate);
+
+                Calendar filmDay = Calendar.getInstance();
+                filmDay.setTime(screening.getDateObject());
+                return selectedDay.get(Calendar.DAY_OF_YEAR) == filmDay.get(Calendar.DAY_OF_YEAR)
+                        && selectedDay.get(Calendar.YEAR) == filmDay.get(Calendar.YEAR);
             } catch (ParseException e) {
                 e.printStackTrace();
                 return false;

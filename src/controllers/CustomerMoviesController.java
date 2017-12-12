@@ -267,14 +267,6 @@ public class CustomerMoviesController implements Initializable {
         Font descriptionFont = new Font(15.0);
         description.setFont(descriptionFont);
 
-        // screenings
-        Label screenings = new Label(film.getScreeningsDescription());
-        screenings.setLayoutX(15.0);
-        screenings.setLayoutY(120.0);
-        Font screeningFont = new Font(15.0);
-        screenings.setFont(screeningFont);
-        screenings.setMaxWidth(200.0);
-
         ImageView imageView = null;
         try {
             Image image = new Image(film.getImagePath());
@@ -335,33 +327,41 @@ public class CustomerMoviesController implements Initializable {
      */
     private void addScreeningsToView() {
         // TODO: Switch to flowpane or tabs
-        double xPosition = 0.0;
-        screeningTimes.getChildren().clear();
-        for (Screening screening :
-                selectedFilm.getUpcomingScreenings()) {
-            try {
-                Button screeningButton = new Button();
-                screeningButton.setText(screening.getShortDate());
-                screeningButton.setLayoutX(xPosition);
-                screeningButton.setLayoutY(0);
-                screeningButton.setOnAction((event) -> {
-                    try {
-                        CustomerBookingController.selectedScreening = screening;
-                        Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
-                    } catch (IOException e) {
-                        LOGGER.logp(Level.WARNING, "CustomerMoviesController",
-                                "addScreeningsToView", "Unable to load customer booking view" + e);
-                        e.printStackTrace();
-                    }
-                });
 
-                screeningTimes.getChildren().add(screeningButton);
+        if (selectedDate != null) {
 
-                xPosition += 130.0;
+            double xPosition = 0.0;
+            screeningTimes.getChildren().clear();
+            for (Screening screening :
+                    selectedFilm.getScreeningsByDate(selectedDate)) {
+                try {
+                    Button screeningButton = new Button();
+                    screeningButton.setText(screening.getShortDate());
+                    screeningButton.setLayoutX(xPosition);
+                    screeningButton.setLayoutY(0);
+                    screeningButton.setOnAction((event) -> {
+                        try {
+                            CustomerBookingController.selectedScreening = screening;
+                            Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
+                        } catch (IOException e) {
+                            LOGGER.logp(Level.WARNING, "CustomerMoviesController",
+                                    "addScreeningsToView", "Unable to load customer booking view" + e);
+                            e.printStackTrace();
+                        }
+                    });
 
-            } catch (ParseException e) {
-                e.printStackTrace();
+                    screeningTimes.getChildren().add(screeningButton);
+
+                    xPosition += 130.0;
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
+        } else {
+            screeningTimes.getChildren().clear();
+            Label label = new Label("Please select a date to view screenings");
+            screeningTimes.getChildren().add(label);
         }
     }
 
@@ -390,6 +390,7 @@ public class CustomerMoviesController implements Initializable {
     public void showAllFilms(ActionEvent actionEvent) {
         datePicker.setValue(null);
         selectedDate = null;
+        addScreeningsToView();
         searchText = "";
         searchField.setText("");
         updateFilmList();

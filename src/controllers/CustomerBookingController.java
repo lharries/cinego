@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  * <p>
  * Design Pattern: MVC
  * <p>
- * Source:
+ * References:
  * - Dialog boxes http://code.makery.ch/blog/javafx-dialogs-official/
  */
 public class CustomerBookingController implements Initializable {
@@ -68,7 +68,7 @@ public class CustomerBookingController implements Initializable {
     private int totalCost = 0;
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
-    //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
+    //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client References: https://codereview.stackexchange.com/questions/114005/javafx-email-client
 
 
     @Override

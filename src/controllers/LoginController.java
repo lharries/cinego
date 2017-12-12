@@ -25,7 +25,7 @@ import models.EmployeeDAO;
 
 public class LoginController implements Initializable {
 
-    //TODO: FEATURE add password reset functionality via e-Mail sent to user e-Mail client source: https://codereview.stackexchange.com/questions/114005/javafx-email-client
+    //TODO: FEATURE add password reset functionality via e-Mail sent to user e-Mail client References: https://codereview.stackexchange.com/questions/114005/javafx-email-client
 
     /**
      * The login stage

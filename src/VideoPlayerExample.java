@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 
 /**
- * SOURCE:
+ * References:
  * - https://stackoverflow.com/questions/18758041/play-a-youtube-video-using-javafx
  * - https://docs.oracle.com/javafx/2/api/javafx/scene/web/WebView.html
  *

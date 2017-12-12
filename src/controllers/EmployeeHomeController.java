@@ -47,7 +47,7 @@ public class EmployeeHomeController implements Initializable {
     //TODO: add loggers to the validation for us
 
     //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT
-    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality source: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
+    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality References: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
 
     @FXML
     private Button deleteBooking;
@@ -290,7 +290,7 @@ public class EmployeeHomeController implements Initializable {
 
     /**
      * Exports a list of relevant screening and movie statistics to directory: "../cinego/ScreeningsExport.csv"
-     * Source:  - https://community.oracle.com/thread/2397100
+     * References:  - https://community.oracle.com/thread/2397100
      * - http://csvjdbc.sourceforge.net/
      *
      * @throws IOException

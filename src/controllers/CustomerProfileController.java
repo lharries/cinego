@@ -211,7 +211,7 @@ public class CustomerProfileController implements Initializable {
             LOGGER.logp(Level.WARNING, "CustomerProfileController", "updateCustomerProfile", "Failed to run db UPDATE query. See: " + e);
         }
 
-        //pop-up to inform user about successfully updating data - source: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
+        //pop-up to inform user about successfully updating data - References: https://stackoverflow.com/questions/39281622/javafx-how-to-show-temporary-popup-osd-when-action-performed
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
@@ -253,7 +253,7 @@ public class CustomerProfileController implements Initializable {
     }
 
     /**
-     * Source:
+     * References:
      * - https://www.youtube.com/watch?v=oZUGMpGQxgQ
      */
     @FXML

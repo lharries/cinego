@@ -18,7 +18,7 @@ import java.util.Objects;
  * Contains the properties corresponding to the columns in the database for the film.
  * Has getter and setter functions to store data retrieved from the {@link FilmDAO} class.
  * <p>
- * Source:
+ * References:
  * - https://stackoverflow.com/questions/3395286/remove-last-character-of-a-stringbuilder
  *
  * @author lukeharries kaiklasen

@@ -18,8 +18,9 @@ import java.sql.SQLException;
 public class CSVUtils {
 
     /**
-     * Exports a list of relevant screening and movie statistics to directory: "../cinego/ScreeningsExport.csv"
-     * Source:  - https://community.oracle.com/thread/2397100
+     * Exports a list of relevant screening and movie statistics to directory: "./ScreeningsExport.csv"
+     * References:
+     * - https://community.oracle.com/thread/2397100
      * - http://csvjdbc.sourceforge.net/
      *
      * @throws IOException

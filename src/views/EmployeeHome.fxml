@@ -23,7 +23,7 @@
    <children>
 
    <!--Background image-->
-      <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true">
          <image>
          <Image backgroundLoading="true" url="@../resources/cinBackgroundSML.jpg" />
          </image>

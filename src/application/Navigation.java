@@ -1,8 +1,8 @@
 package application;
 
-import javafx.fxml.FXMLLoader;
 import controllers.CustomerRootController;
 import controllers.EmployeeRootController;
+import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 

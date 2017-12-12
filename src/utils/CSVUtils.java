@@ -3,11 +3,8 @@ package utils;
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import models.FilmDAO;
 import org.relique.jdbc.csv.CsvDriver;
-import sun.security.krb5.internal.crypto.Des;
 
 import java.awt.*;
 import java.io.File;

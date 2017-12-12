@@ -1,13 +1,14 @@
 package utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.stripe.Stripe;
 import com.stripe.exception.*;
-import com.stripe.model.*;
+import com.stripe.model.Charge;
+import com.stripe.model.Token;
 import com.stripe.net.RequestOptions;
 import models.PaymentInfo;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Custom payments handler for stripe! Api keys are only test keys. In production mode you would

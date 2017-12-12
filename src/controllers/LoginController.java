@@ -1,10 +1,5 @@
 package controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 import application.Main;
 import application.Navigation;
 import javafx.event.Event;
@@ -21,6 +16,11 @@ import models.Customer;
 import models.CustomerDAO;
 import models.Employee;
 import models.EmployeeDAO;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {

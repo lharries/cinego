@@ -5,6 +5,10 @@ import com.sun.rowset.CachedRowSetImpl;
 import java.sql.*;
 
 /**
+ * Connects to the database and performs the key functions of execute, querying and updating the database.
+ * Additionally converts queries into prepared statements to protect again SQL injection
+ * Used by the DAO classes.
+ * <p>
  * Sources:
  * - http://www.w3big.com/sqlite/sqlite-java.html
  * - http://www.sqlitetutorial.net/sqlite-java/sqlite-jdbc-driver/
@@ -16,13 +20,15 @@ import java.sql.*;
  */
 public class SQLiteUtil {
 
-    public static Connection connection;
+    private static Connection connection;
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        connect();
-    }
-
+    /**
+     * connects to the sqlite database
+     *
+     * @throws SQLException           An exception that provides information on a database access
+     *                                error or other errors
+     * @throws ClassNotFoundException Unable to load the JDBC sqlite class
+     */
     private static void connect() throws SQLException, ClassNotFoundException {
 
         String sqLiteClass = "org.sqlite.JDBC";
@@ -33,6 +39,11 @@ public class SQLiteUtil {
 
     }
 
+    /**
+     * Disconnects from the database
+     *
+     * @throws SQLException
+     */
     private static void disconnect() throws SQLException {
 
         if (connection != null && !connection.isClosed()) {
@@ -40,6 +51,17 @@ public class SQLiteUtil {
         }
     }
 
+    /**
+     * Executes the SQL statement from a prepared statement formed
+     * from the query and the arguments
+     * <p>
+     * e.g. execute("DELETE FROM film WHERE id = ?;",[1])
+     *
+     * @param query the query to execute
+     * @param args  the prepared statement parameters
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static void execute(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
         PreparedStatement statement = null;
@@ -51,7 +73,7 @@ public class SQLiteUtil {
             statement = connection.prepareStatement(query);
 
             if (args != null) {
-                statement = setArgsPreparedStatement(statement, args);
+                statement = createPreparedStatement(statement, args);
             }
 
             statement.execute();
@@ -70,6 +92,18 @@ public class SQLiteUtil {
 
     }
 
+    /**
+     * Executes the SQL statement query from a prepared statement formed
+     * from the query and the arguments
+     * <p>
+     * e.g. executeQuery("SELECT * FROM film WHERE id = ?;",[1])
+     *
+     * @param query the query to execute
+     * @param args  the arguments for the prepared statement
+     * @return the results of the query
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static ResultSet executeQuery(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
         PreparedStatement statement = null;
@@ -83,7 +117,7 @@ public class SQLiteUtil {
             statement = connection.prepareStatement(query);
 
             if (args != null) {
-                statement = setArgsPreparedStatement(statement, args);
+                statement = createPreparedStatement(statement, args);
             }
             results = statement.executeQuery();
 
@@ -109,7 +143,18 @@ public class SQLiteUtil {
         return cachedRowSet;
     }
 
-    public static int executeUpdate(String query, Object[] args) throws SQLException, ClassNotFoundException {
+    /**
+     * Executes the SQL statement update from a prepared statement formed
+     * from the query and the arguments
+     * <p>
+     * e.g. executeQuery("UPDATE film SET 'title' = ? WHERE id = ?",["King Kong", 1])
+     *
+     * @param query the query to execute
+     * @param args  the arguments for the prepared statement
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public static void executeUpdate(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
 
         PreparedStatement statement = null;
@@ -121,7 +166,7 @@ public class SQLiteUtil {
             statement = connection.prepareStatement(query);
 
             if (args != null) {
-                statement = setArgsPreparedStatement(statement, args);
+                statement = createPreparedStatement(statement, args);
             }
 
             changesMade = statement.executeUpdate();
@@ -137,11 +182,18 @@ public class SQLiteUtil {
             disconnect();
         }
 
-        return changesMade;
-
     }
 
-    private static PreparedStatement setArgsPreparedStatement(PreparedStatement preparedStatement, Object[] args) throws SQLException {
+    /**
+     * creates the prepared statement given a the prepareStatement object where
+     * the query has been set, and the arguments
+     *
+     * @param preparedStatement the preparedstatement to add in the arguments
+     * @param args              an array of the objects which are to be added to the prepared statement
+     * @return
+     * @throws SQLException
+     */
+    private static PreparedStatement createPreparedStatement(PreparedStatement preparedStatement, Object[] args) throws SQLException {
 
         int parameterIndex = 1;
 

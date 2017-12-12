@@ -25,6 +25,8 @@
                 <ColorAdjust saturation="-0.88" />
             </effect>
         </ImageView>
+        <Rectangle fx:id="rect1" fill="#2f3c4d" height="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1280.0" />
+        <Rectangle fx:id="rect" fill="#868c94" height="2.5" stroke="TRANSPARENT" strokeType="INSIDE" width="640.0" />
         <Rectangle arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="635.0" layoutX="449.0" layoutY="42.0" stroke="BLACK" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" width="495.0" />
         <Text layoutX="534.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payments:" textAlignment="CENTER" wrappingWidth="316.9052734375">
             <font>

@@ -12,19 +12,22 @@
     <top>
         <AnchorPane prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d"
-                           strokeType="INSIDE" width="1280.0"/>
-                <Line endX="1279.0" layoutX="0.0" layoutY="50.0" startX="0.0" stroke="#596679" strokeMiterLimit="100.0"
-                      strokeWidth="2.0"/>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625"
-                           strokeType="INSIDE" width="1280.0"/>
+                <Rectangle fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
+                <Line endX="1279.0" layoutX="0.0" layoutY="50.0" startX="0.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+                <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
                 <Label layoutX="23.0" layoutY="13.0" text="Employee" textFill="WHITE">
                     <font>
-                        <Font size="25.0"/>
+                        <Font size="25.0" />
                     </font>
                 </Label>
-                <Label fx:id="emplFirstName" layoutX="194.0" layoutY="20.0" text="First Name" textFill="WHITE"/>
-                <Label fx:id="emplLastName" layoutX="298.0" layoutY="20.0" text="Last Name" textFill="WHITE"/>
+                <Label fx:id="emplFirstName" layoutX="195.0" layoutY="12.0" prefHeight="30.0" prefWidth="180.0" text="First Name" textFill="WHITE">
+                    <font>
+                        <Font size="25.0" />
+                    </font></Label>
+                <Label fx:id="emplLastName" layoutX="365.0" layoutY="12.0" prefHeight="30.0" prefWidth="180.0" text="Last Name" textFill="WHITE">
+                    <font>
+                        <Font size="25.0" />
+                    </font></Label>
 
                 <ImageView fx:id="logoutImg" fitHeight="41.0" fitWidth="41.0" layoutX="1214.0" layoutY="5.0">
                     <!--<image>-->
@@ -33,43 +36,37 @@
                 </ImageView>
                 <Label layoutX="1153.0" layoutY="14.0" text="Logout" textFill="WHITE">
                     <font>
-                        <Font size="17.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
-                <Button fx:id="logout" layoutX="1150.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout"
-                        opacity="0.0" prefHeight="43.0" prefWidth="106.0" text="Logout"/>
+                <Button fx:id="logout" layoutX="1150.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" opacity="0.0" prefHeight="43.0" prefWidth="106.0" text="Logout" />
 
             </children>
         </AnchorPane>
     </top>
     <center>
-        <ImageView fx:id="background" fitHeight="750.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true"
-                   preserveRatio="true" scaleZ="100.0" BorderPane.alignment="CENTER">
+        <ImageView fx:id="background" fitHeight="750.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" scaleZ="100.0" BorderPane.alignment="CENTER">
             <!--<image>-->
             <!--<Image url="@../resources/films.jpg" />-->
             <!--</image>-->
             <effect>
-                <ColorAdjust saturation="-0.88"/>
+                <ColorAdjust saturation="-0.88" />
             </effect>
         </ImageView>
     </center>
     <bottom>
         <AnchorPane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625"
-                           strokeType="INSIDE" width="1280.0"/>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="45.0" layoutX="609.0" layoutY="3.0"
-                           stroke="#f3f3f3" strokeType="INSIDE" width="43.0"/>
-                <ImageView fx:id="logo" fitHeight="40.0" fitWidth="40.0" layoutX="611.0" layoutY="4.0"
-                           pickOnBounds="true" preserveRatio="true">
+                <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="46.0" layoutX="678.0" layoutY="5.0" stroke="#f3f3f3" strokeType="INSIDE" width="46.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="678.0" AnchorPane.rightAnchor="556.0" AnchorPane.topAnchor="2.0" />
+                <ImageView fx:id="logo" fitHeight="42.0" fitWidth="42.0" layoutX="680.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="558.0" AnchorPane.topAnchor="4.0">
                     <!--<image>-->
                     <!--<Image url="@cinestar.png" />-->
                     <!--</image>-->
                 </ImageView>
-                <Text fill="WHITE" layoutY="-17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo"
-                      wrappingWidth="134.02083206176758" x="100.0" y="50.0">
+                <Text fill="WHITE" layoutX="431.0" layoutY="-12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">
                     <font>
-                        <Font size="34.0"/>
+                        <Font size="34.0" />
                     </font>
                 </Text>
             </children>

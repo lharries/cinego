@@ -1,6 +1,7 @@
 package controllers;
 
 import application.Navigation;
+import com.sun.javafx.scene.control.skin.ColorPickerSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,9 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -166,6 +169,7 @@ public class CustomerBookingController implements Initializable {
 
                     // selected seat
                     ImageView selectedSeatImage = new ImageView("/resources/selected-seat.png");
+                    //
                     selectedSeatImage.setFitWidth(60.0);
                     selectedSeatImage.setFitHeight(60.0);
 

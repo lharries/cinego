@@ -6,10 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,10 +32,7 @@ public class EmployeeRootController implements Initializable {
     private BorderPane employeePane;
 
     @FXML
-    private ImageView logo;
-
-    @FXML
-    private ImageView logoutImg;
+    private ImageView logoutImg, logo;
 
     @FXML
     private Label emplFirstName;
@@ -49,6 +48,14 @@ public class EmployeeRootController implements Initializable {
         //sets user's name onto root
         emplFirstName.setText(Main.user.getFirstName());
         emplLastName.setText(Main.user.getLastName());
+        File file = new File("src/resources/logout.png");
+        Image image = new Image(file.toURI().toString());
+        logoutImg.setImage(image);
+
+        file = new File("src/resources/cinestar.png");
+        image = new Image(file.toURI().toString());
+        logo.setImage(image);
+
 
     }
 

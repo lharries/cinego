@@ -1,6 +1,5 @@
 package application;
 
-
 //import com.sun.deploy.Environment;
 
 import javafx.animation.PauseTransition;
@@ -10,36 +9,31 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.*;
 
-//import org.relique.jdbc.csv.CsvDriver;
-import org.relique.jdbc.csv.CsvDriver;
-
-
-//import sun.tools.java.Environment;
-
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.Optional;
+import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+//import org.relique.jdbc.csv.CsvDriver;
+//import sun.tools.java.Environment;
 
 
 /**
@@ -49,14 +43,6 @@ import java.util.logging.Logger;
  * @author Luke Harries, Kai Klasen
  * @version 1.0
  */
-
-//@author (classes and interfaces only, required)
-//@version (classes and interfaces only, required. See footnote 1)
-//@param (methods and constructors only)
-//@return (methods only)
-//@exception (@throws is a synonym added in Javadoc 1.2)
-
-
 public class EmployeeHomeController implements Initializable {
 
     //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
@@ -101,10 +87,10 @@ public class EmployeeHomeController implements Initializable {
     private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab;
 
     @FXML
-    private TextField addTitle, trailerURL;
+    private TextField titleTextfield, trailerURLTextfield;
 
     @FXML
-    private TextArea addDescription;
+    private TextArea descriptionTextArea;
 
     @FXML
     private ComboBox movieSelectionBox, timePicker;
@@ -119,9 +105,9 @@ public class EmployeeHomeController implements Initializable {
     private Film film;
     public static int selectedScreeningId, selectedMovieId;
 
-    FileChooser fileChooser;
-    File chosenFile;
-
+    private FileChooser fileChooser;
+    private File chosenFile;
+    private boolean updatingMovie;
 
 
     /**
@@ -136,9 +122,6 @@ public class EmployeeHomeController implements Initializable {
 
         //set moviesTable headers - 'moviesTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-
-//        moviesTable.setStyle("-fx-font: blue");
-//                textLabel.textColor = [UIColor redColor];
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
         populateMoviesTable();
 
@@ -153,13 +136,13 @@ public class EmployeeHomeController implements Initializable {
     /**
      * Allows the employee to select a movie poster to be uploaded by copying the image into a local file and naming it
      * after the chosen movie title. Upload takes place only after 'createMovieButton' is clicked
-     *
+     * <p>
      * Sources:
      * - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
      * - https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java
      */
     @FXML
-    private void uploadMovieImage(Event event) {
+    private void uploadMovieImage() {
 
         fileChooser = new FileChooser();
 
@@ -168,8 +151,27 @@ public class EmployeeHomeController implements Initializable {
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
-        //read image file & check if file not null
+        //stores reference to file object
         chosenFile = fileChooser.showOpenDialog(null);
+
+        if (chosenFile != null) {
+            String fileType = (chosenFile.toString().substring(chosenFile.toString().length() - 4, chosenFile.toString().length()));
+            Random rnd = new Random();
+            int rndNum = 1000000 + rnd.nextInt(9000000);
+            String rndNumPosterName = Integer.toString(rndNum) + fileType;
+
+            // locate the moviesDir
+            File directory = new File(".");
+            File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+            File newMoviePoster = new File(moviesDirectory,rndNumPosterName);
+            try {
+                newMoviePoster.createNewFile();
+                Files.copy(chosenFile.toPath(), newMoviePoster.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                movieFileName = rndNumPosterName;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -180,7 +182,7 @@ public class EmployeeHomeController implements Initializable {
      * @throws ClassNotFoundException
      */
     @FXML
-    private void movieValidation() throws SQLException, ClassNotFoundException {
+    private void movieValidation() throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
 
         //creates alert to be used in both cases: correct & incorrect inputs
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -188,52 +190,45 @@ public class EmployeeHomeController implements Initializable {
         alert.setTitle("Cinego");
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
-        //gets the input values and checks if they're correctly filled in
-        title = addTitle.getText();
-        description = addDescription.getText();
-        movieTrailerURL = trailerURL.getText();
-        if (title.isEmpty() || description.isEmpty() || movieFileName == null || movieTrailerURL.isEmpty()) {
+        //Initialize a new film and fill it with employee's input data
+        if (film == null) {
+            film = new Film();
+        }
+
+//        if (title.isEmpty() || description.isEmpty() || movieFileName == null || movieTrailerURL.isEmpty()) {
+        if(film.getTitle() == null || film.getImagePath() == null || film.getDescription() == null || film.getTrailerURL() == null ){
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
+            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> popup.hide());
+            popup.show();
+            delay.play();
 
             //if inputs are valid: copies the image to project directory + calls createMovie()
         } else {
 
-            if (chosenFile != null) {
+            if(updatingMovie){
+                updateMovie();
+            } else{
+                film.setTitle(titleTextfield.getText());
+                film.setDescription(descriptionTextArea.getText());
+                film.setTrailerURL(trailerURLTextfield.getText());
+                //TODO: test if this returns the correct path @Luke!!
+                film.setImagePath(chosenFile.getPath());
 
-                String fileType = (chosenFile.toString().substring(chosenFile.toString().length() - 4, chosenFile.toString().length()));
-                Random rnd = new Random();
-                int rndNum = 1000000 + rnd.nextInt(9000000);
-                String rndNumPosterName = Integer.toString(rndNum) + fileType;
-
-                // locate the moviesDir
-                File directory = new File(".");
-                File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-                File newMovie = new File(moviesDirectory, rndNumPosterName);
-
-                try {
-                    newMovie.createNewFile();
-                    Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    movieFileName = rndNumPosterName;
-//                System.out.println(newMovie.getAbsolutePath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                createMovie();
             }
-
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
-//            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-//            delay.setOnFinished(e -> popup.hide());
-//            popup.show();
-//            delay.play();
-
-            createMovie();
+            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> popup.hide());
+            popup.show();
+            delay.play();
         }
-        PauseTransition delay = new PauseTransition(Duration.seconds(4));
-        delay.setOnFinished(e -> popup.hide());
-        popup.show();
-        delay.play();
+//        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+//        delay.setOnFinished(e -> popup.hide());
+//        popup.show();
+//        delay.play();
 
     }
 
@@ -248,16 +243,40 @@ public class EmployeeHomeController implements Initializable {
     private void createMovie() throws SQLException, ClassNotFoundException {
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title, description, movieFileName, movieTrailerURL);
+//        if (film.getId() == null) {
 
-        //resets input fields to default + updates moviesTable & movieSelectionBox + resets chosenFile to null
-        addTitle.clear();
-        addDescription.clear();
-        trailerURL.clear();
-        chosenFile = null;
+        FilmDAO.insertFilm(film.getTitle(), film.getDescription(), movieFileName, film.getTrailerURL());
+
+//        } else {
+//            editMovieButton.setDisable(true);
+//            updateMovieButton.setDisable(true);
+//            createMovieButton.setDisable(false);
+//
+//            FilmDAO.updateMovieDetails(title, description, movieFileName, film.getId());
+//            populateScreeningsTable();
+//        }
+
+        //read out and store new values from components if changed
+//        title = titleTextfield.getText();
+//        description = descriptionTextArea.getText();
+//        movieTrailerURL = trailerURLTextfield.getText();
+//
+//        try {
+//            FilmDAO.updateMovieDetails(title, description, movieTrailerURL, selectedMovieId);
+//        } catch (SQLException | ClassNotFoundException e) {
+//            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateMovie", "Failed to update database with edited movie data. See: " + e);
+//            e.printStackTrace();
+//        }
 
         populateMoviesTable();
         populateMovieSelectionBox();
+
+        //resets input fields to default + updates moviesTable & movieSelectionBox + resets chosenFile to null
+        titleTextfield.clear();
+        descriptionTextArea.clear();
+        trailerURLTextfield.clear();
+        chosenFile = null;
+
     }
 
     /**
@@ -277,7 +296,7 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         //get input values
-        movieTitle = movieSelectionBox.getSelectionModel().isEmpty() ? null :  String.valueOf(movieSelectionBox.getValue());
+        movieTitle = movieSelectionBox.getSelectionModel().isEmpty() ? null : String.valueOf(movieSelectionBox.getValue());
         screeningTime = String.valueOf(timePicker.getValue());
         screeningDate = String.valueOf(datePicker.getValue());
         Date now = new Date();
@@ -288,49 +307,27 @@ public class EmployeeHomeController implements Initializable {
             dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateTimeString);
         } catch (ParseException e) {
             // date is noted as invalid
-            LOGGER.logp(Level.INFO, "CustomerBookingController",
-                    "validateScreening", "unable to parse date as invalid input. See Google exception handling style guide." + e);
+            LOGGER.logp(Level.INFO, "CustomerBookingController", "validateScreening", "unable to parse date as invalid input. See Google exception handling style guide." + e);
         }
         //perform validity checks: empty & dateSelected < now
-        if (movieTitle != null && screeningTime != null && dateTime != null && now.compareTo(dateTime) < 0){
+        if (movieTitle != null && screeningTime != null && dateTime != null && now.compareTo(dateTime) < 0) {
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
             createScreening();
 
-        }else if(movieTitle == null || screeningTime == null || dateTime == null) {
+        } else if (movieTitle == null || screeningTime == null || dateTime == null) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
-        }else if(now.compareTo(dateTime) > 0){
+        } else if (now.compareTo(dateTime) > 0) {
             alert.setHeaderText("Error: screening date in the past");
             alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
-
         }
-
-//
-//
-//
-//        if (movieTitle == null || screeningTime == null || dateTime == null) {
-//            alert.setHeaderText("Error: invalid input fields");
-//            alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
-//        }
-//        else if(now.compareTo(dateTime) > 0){
-//            alert.setHeaderText("Error: screening date in the past");
-//            alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
-//
-//        }
-//        else {
-//            alert.setHeaderText("Success: screening created");
-//            alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
-//
-//            createScreening();
-//        }
 
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(e -> popup.hide());
         popup.show();
         delay.play();
     }
-
 
 
     /**
@@ -358,33 +355,6 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Exports a list of relevant screening and movie statistics to directory: "../cinego/ScreeningsExport.csv"
-     * Source:  - https://community.oracle.com/thread/2397100
-     *          - http://csvjdbc.sourceforge.net/
-     *
-     * @throws IOException
-     */
-    @FXML
-    private void exportToCSV() throws IOException, ClassNotFoundException, SQLException {
-
-        //TODO: add further statistics to CSV file
-
-        PrintStream file = new PrintStream("../cinego/ScreeningsExport.csv");
-        boolean append = true;
-        CsvDriver.writeToCsv(FilmDAO.getCSVResultSet(), file, append);
-
-        //Informs user of successfully exporting CSV file
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-        alert.setTitle("Cinego");
-        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-        alert.setHeaderText("CVS Export");
-        alert.setContentText("Your csv export was successful, " + Main.user.getFirstName());
-
-
-    }
-
-    /**
      * Extracts the screeningsID upon selecting a screening from the screeningsTable
      */
     @FXML
@@ -404,7 +374,7 @@ public class EmployeeHomeController implements Initializable {
 
             Booking booking = BookingDAO.getBookingsByScreeningId(selectedScreeningId);
 
-            if(booking == null) {
+            if (booking == null) {
                 noBookingsForScreening = true;
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -412,7 +382,7 @@ public class EmployeeHomeController implements Initializable {
             e.printStackTrace();
         }
 
-        if(!noBookingsForScreening){
+        if (!noBookingsForScreening) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
             alert.setTitle("Cinego");
@@ -420,8 +390,7 @@ public class EmployeeHomeController implements Initializable {
             alert.setHeaderText("Warning: screening is booked");
             alert.setContentText("You can't delete a screening with existing bookings, " + Main.user.getFirstName() + " !");
             alert.showAndWait();
-        }
-        else{
+        } else {
             //Prompts user to confirm deleting the selected screening
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -443,7 +412,6 @@ public class EmployeeHomeController implements Initializable {
                 }
             }
         }
-
 
     }
 
@@ -506,11 +474,9 @@ public class EmployeeHomeController implements Initializable {
     }
 
 
-
     @FXML
-    private void getMovieID(){
+    private void getMovieID() {
         selectedMovieId = moviesTable.getSelectionModel().getSelectedItem().getId();
-        System.out.println("\n\n\n"+selectedMovieId+"\n\n\n");
         editMovieButton.setDisable(false);
     }
 
@@ -522,54 +488,68 @@ public class EmployeeHomeController implements Initializable {
         createMovieButton.setDisable(true);
         updateMovieButton.setDisable(false);
 
+        //Retrieves selected film's data from db and fills the components with these
+        try {
+            film = FilmDAO.getFilmById(selectedMovieId);
+            titleTextfield.setText(film.getTitle());
+            descriptionTextArea.setText(film.getDescription());
+            trailerURLTextfield.setText(film.getTrailerURL());
+
+            //sets chosenFile to equal the previously uploaded movie poster
+            chosenFile = new File(film.getImagePath());
+
+        } catch (SQLException |UnsupportedEncodingException| ClassNotFoundException e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editMovie", "Failed to load movie's data into film object. See: " + e);
+        }
+
+        //TODO: store in chosenFile the already uploaded movie poster via .getAbsolutePath(film.getImagePath) or something
+
+        updatingMovie = true;
+
+//        //calls validation to check if inputs are correct
 //        try {
 //            movieValidation();
-//        } catch (SQLException | ClassNotFoundException e) {
+//        } catch (SQLException | ClassNotFoundException | UnsupportedEncodingException e) {
 //            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editMovie", "Input field validation returns a null value. See: " + e);
 //            e.printStackTrace();
 //        }
 
-        //fill components with movie's data
-        try {
-            Film film = FilmDAO.getFilmById(selectedMovieId);
-            addTitle.setText(film.getTitle());
-            addDescription.setText(film.getDescription());
-            trailerURL.setText(film.getTrailerURL());
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editMovie", "Failed to load movie's data into film object. See: " + e);
-        }
     }
 
-   @FXML
-   private void updateMovie(){
+    @FXML
+    private void updateMovie() {
 
         //read out and store new values from components if changed
-       title = addTitle.getText();
-       description = addDescription.getText();
-       movieTrailerURL = trailerURL.getText();
-
-       try {
-           FilmDAO.updateMovieDetails(title, description,movieTrailerURL,selectedMovieId);
-       } catch (SQLException | ClassNotFoundException e) {
-           LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateMovie", "Failed to update database with edited movie data. See: " + e);
-           e.printStackTrace();
-       }
-       editMovieButton.setDisable(true);
-       updateMovieButton.setDisable(true);
-       createMovieButton.setDisable(false);
+        title = titleTextfield.getText();
+        description = descriptionTextArea.getText();
+        movieTrailerURL = trailerURLTextfield.getText();
 
 
-       addTitle.clear();
-       addDescription.clear();
-       trailerURL.clear();
+        try {
+            FilmDAO.updateMovieDetails(title, description, movieTrailerURL, selectedMovieId);
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateMovie", "Failed to update database with edited movie data. See: " + e);
+            e.printStackTrace();
+        }
+        editMovieButton.setDisable(true);
+        updateMovieButton.setDisable(true);
+        createMovieButton.setDisable(false);
+
+        titleTextfield.clear();
+        descriptionTextArea.clear();
+        trailerURLTextfield.clear();
 
 //       custFirstNameField.setPromptText(Main.user.getFirstName());
 //       custFirstNameField.setEditable(textFieldEditable);
 
-       populateMoviesTable();
-       populateScreeningsTable();
+        populateMoviesTable();
+        populateScreeningsTable();
 
-   }
+    }
+
+    @FXML
+    private void exportToCSV() throws IOException, ClassNotFoundException, SQLException {
+        utils.CSVUtil.exportToCSV();
+    }
 }

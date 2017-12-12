@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerPaymentsController">
+    <children>
+
+        <!--Background image-->
+        <ImageView fitHeight="786.0" fitWidth="1388.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image backgroundLoading="true" url="@../resources/cinWallpaperSML.jpg" />
+            </image>
+            <effect>
+                <ColorAdjust saturation="-0.88" />
+            </effect>
+        </ImageView>
+        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="635.0" layoutX="449.0" layoutY="42.0" stroke="BLACK" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" width="495.0" />
+        <Text layoutX="534.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payments:" textAlignment="CENTER" wrappingWidth="316.9052734375">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <Line endX="300.0" layoutX="550.0" layoutY="310.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Line endX="300.0" layoutX="545.0" layoutY="570.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Button layoutX="724.0" layoutY="591.0" mnemonicParsing="false" onAction="#payBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Pay" />
+        <Button layoutX="491.0" layoutY="592.0" mnemonicParsing="false" onAction="#cancelBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Cancel" />
+        <Label layoutX="543.0" layoutY="364.0" text="Card Number" />
+        <TextField fx:id="cardNumberField" layoutX="641.0" layoutY="359.0" prefHeight="27.0" prefWidth="210.0" text="4242 4242 4242 4242" />
+        <Label layoutX="543.0" layoutY="409.0" text="Expiry Date" />
+        <Label layoutX="544.0" layoutY="465.0" text="CVC Number" />
+        <TextField fx:id="expiryDateMonthField" layoutX="639.0" layoutY="412.0" prefHeight="27.0" prefWidth="61.0" text="12" />
+        <TextField fx:id="cvcField" layoutX="641.0" layoutY="460.0" prefHeight="27.0" prefWidth="48.0" text="130" />
+        <ChoiceBox fx:id="cardTypeChoiceBox" layoutX="640.0" layoutY="511.0" prefWidth="150.0" />
+        <Label layoutX="545.0" layoutY="515.0" text="Card Type" />
+        <TextField fx:id="expiryDateYearField" layoutX="728.0" layoutY="411.0" prefHeight="27.0" prefWidth="61.0" text="18" />
+        <Label layoutX="543.0" layoutY="426.0" text="MM/YY" />
+        <Text layoutX="536.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking Summary:" textAlignment="CENTER" wrappingWidth="316.9052734375">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <Line endX="300.0" layoutX="552.0" layoutY="65.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <TableView fx:id="selectedSeatsTable" layoutX="592.0" layoutY="118.0" prefHeight="132.0" prefWidth="200.0">
+            <columns>
+                <TableColumn prefWidth="100.383544921875" text="Seat" />
+                <TableColumn prefWidth="98.616455078125" text="Cost" />
+            </columns>
+        </TableView>
+        <Label layoutX="602.0" layoutY="269.0" text="Total:" />
+        <Label fx:id="totalCostText" layoutX="695.0" layoutY="269.0" text="Cost" />
+        <Label layoutX="641.0" layoutY="386.0" text="Test Card: 4242 42424 42424 42424" textFill="#9e9e9e" />
+        <Text fx:id="errorMessageText" fill="RED" layoutX="526.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="331.0000001043081" />
+    </children>
+</AnchorPane>

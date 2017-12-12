@@ -25,6 +25,7 @@ public class Navigation {
     public static final String CUST_PROFILE_VIEW = "/views/CustomerProfile.fxml";
     public static final String CUST_PROGRAM_VIEW = "/views/CustomerMovies.fxml";
     public static final String CUST_BOOKING_VIEW = "/views/CustomerBooking.fxml";
+    public static final String CUST_PAYMENTS_VIEW = "/views/CustomerPayments.fxml";
 
     //employee scenes
     public static final String EMPL_HOME_VIEW = "/views/EmployeeHome.fxml";

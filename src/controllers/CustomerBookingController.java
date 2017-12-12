@@ -1,6 +1,7 @@
 package controllers;
 
 import application.Main;
+import application.Navigation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -105,7 +107,7 @@ public class CustomerBookingController implements Initializable {
         alert.setContentText("Do you wish to book " + String.valueOf(selectedSeats.size()) + " seats");
 
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        ButtonType buttonTypeOne = new ButtonType("Book");
+        ButtonType buttonTypeOne = new ButtonType("Pay Now");
 
         alert.getButtonTypes().setAll(buttonTypeCancel, buttonTypeOne);
 
@@ -113,9 +115,16 @@ public class CustomerBookingController implements Initializable {
 
         if (result.get() == buttonTypeOne) {
             // customer has choosen to book the seats
-            createBooking();
             alert.close();
-            initSeatingPlan();
+            try {
+                CustomerPaymentsController.selectedScreening = selectedScreening;
+                CustomerPaymentsController.seats = selectedSeats;
+                Navigation.loadCustFxml(Navigation.CUST_PAYMENTS_VIEW);
+            } catch (IOException e) {
+                LOGGER.logp(Level.WARNING, "CustomerBookingController",
+                        "confirmBookingBtnHandler", "Unable to switch to payments view" + e);
+                e.printStackTrace();
+            }
         }
 
     }
@@ -220,28 +229,6 @@ public class CustomerBookingController implements Initializable {
     private void updateListOfSelectedSeats() {
         ObservableList<Seat> seatObservableList = FXCollections.observableList(selectedSeats);
         seatListView.setItems(seatObservableList);
-    }
-
-    /**
-     * Create the booking object in the database and then refresh the GUI
-     */
-    private void createBooking() {
-        for (Seat selectedSeat :
-                selectedSeats) {
-
-            try {
-                BookingDAO.insertBooking(Main.user.getId(), true, selectedSeat.getId(), selectedScreening.getId());
-                // TODO: Success message
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-                LOGGER.logp(Level.WARNING, "CustomerBookingController", "createBooking", "Failed to create a customer booking. See: " + e);
-            }
-        }
-        initSeatingPlan();
-
-        // clear the list of selected seats
-        selectedSeats.removeAll(selectedSeats);
-        updateListOfSelectedSeats();
     }
 
     /**

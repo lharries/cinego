@@ -33,7 +33,7 @@ public class Main extends Application {
         try {
 
             //launches the login view upon running program
-            Parent root = FXMLLoader.load(getClass().getResource("/views/CustomerPayment.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 
             // TODO: Kai please state what this is for
             root.setCache(true);

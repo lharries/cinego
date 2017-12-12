@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -50,20 +49,14 @@
             </font>
         </Text>
         <Line endX="300.0" layoutX="552.0" layoutY="65.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-        <TableView fx:id="selectedSeatsTable" layoutX="592.0" layoutY="156.0" prefHeight="132.0" prefWidth="200.0">
-            <columns>
-                <TableColumn prefWidth="100.383544921875" text="Seat" />
-                <TableColumn prefWidth="98.616455078125" text="Cost" />
-            </columns>
-        </TableView>
-        <Label layoutX="604.0" layoutY="296.0" text="Total:" />
-        <Label fx:id="totalCostText" layoutX="697.0" layoutY="296.0" text="Cost" />
+        <Label layoutX="545.0" layoutY="296.0" text="Total:" />
+        <Label fx:id="totalCostText" layoutX="638.0" layoutY="296.0" text="Cost" />
         <Label layoutX="641.0" layoutY="416.0" text="Test Card: 4242 42424 42424 42424" textFill="#9e9e9e" />
         <Text fx:id="errorMessageText" fill="RED" layoutX="526.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="331.0000001043081" />
-      <Label layoutX="615.0" layoutY="105.0" text="Film:" />
-      <Label fx:id="filmText" layoutX="708.0" layoutY="105.0" text="Film" />
-      <Label layoutX="614.0" layoutY="130.0" text="Screening:" />
-      <Label fx:id="screeningText" layoutX="707.0" layoutY="130.0" text="Screening" />
+      <Label layoutX="541.0" layoutY="110.0" text="Film:" />
+      <Label fx:id="filmText" layoutX="634.0" layoutY="110.0" text="Film" />
+      <Label layoutX="540.0" layoutY="135.0" text="Screening:" />
+      <Label fx:id="screeningText" layoutX="633.0" layoutY="135.0" text="Screening" />
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="163.0" layoutX="56.0" layoutY="42.0" stroke="BLACK" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" width="288.0" />
       <Text layoutX="42.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note:" textAlignment="CENTER" wrappingWidth="316.9052734375">
          <font>
@@ -71,5 +64,7 @@
          </font>
       </Text>
       <Text layoutX="78.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The payment processing api keys are in test mode, therefore only the card with number 4242 42424 42424 42424 will work." wrappingWidth="243.771484375" />
+      <ListView fx:id="selectedSeatsList" layoutX="624.0" layoutY="167.0" prefHeight="112.0" prefWidth="200.0" />
+      <Label layoutX="538.0" layoutY="173.0" text="Seats:" />
     </children>
 </AnchorPane>

@@ -279,7 +279,7 @@ public class EmployeeHomeController implements Initializable {
         int filmId = film.getId();
 
         //adds the newly created screening to the database
-        ScreeningDAO.insertScreening(filmId, date, movieTitle);
+        ScreeningDAO.insertScreening(filmId, date);
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);

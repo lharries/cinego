@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class PaymentInfo {
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
-    private Double price;
+    private Integer price;
     private Long cardNumber;
     private Integer expiryMonth;
     private Integer expiryYear;
@@ -25,7 +25,7 @@ public class PaymentInfo {
         this.cvc = cvc;
     }
 
-    public PaymentInfo(Double price, Long cardNumber, Integer expiryMonth, Integer expiryYear, Integer cvc) {
+    public PaymentInfo(Integer price, Long cardNumber, Integer expiryMonth, Integer expiryYear, Integer cvc) {
         this.price = price;
         this.cardNumber = cardNumber;
         this.expiryMonth = expiryMonth;
@@ -33,11 +33,11 @@ public class PaymentInfo {
         this.cvc = cvc;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

@@ -7,6 +7,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.*;
 import com.stripe.model.*;
 import com.stripe.net.RequestOptions;
+import models.PaymentInfo;
 
 /**
  * Custom payments handler for stripe! Api keys are only test keys. In production mode you would
@@ -20,17 +21,13 @@ public class PaymentsUtil {
     /**
      * Charge the credit card details using stripe
      *
-     * @param price       the price in dollars to charge
-     * @param cardNumber  the card number
-     * @param expiryMonth the expiry month
-     * @param expiryYear  the expiry year
-     * @param cvc         the cvc number
+     * @param paymentInfo The {@link PaymentInfo} object including which card to charge and how much
      * @return whether the charge was successful
      */
-    public static boolean chargeCreditCard(int price, long cardNumber, int expiryMonth, int expiryYear, int cvc) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+    public static boolean chargeCreditCard(PaymentInfo paymentInfo) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
         try {
-            Token token = createToken(cardNumber, expiryMonth, expiryYear, cvc);
-            createCharge(token, price);
+            Token token = createToken(paymentInfo.getCardNumber(), paymentInfo.getExpiryMonth(), paymentInfo.getExpiryYear(), paymentInfo.getCvc());
+            createCharge(token, paymentInfo.getPrice());
             return true;
 
         } catch (CardException | APIException | InvalidRequestException | AuthenticationException | APIConnectionException e) {
@@ -92,11 +89,10 @@ public class PaymentsUtil {
 
         RequestOptions requestOptions = (new RequestOptions.RequestOptionsBuilder()).setApiKey(privateApiKey).build();
 
-
         //        charge the card
         Map<String, Object> chargeMap = new HashMap<String, Object>();
         chargeMap.put("amount", price);
-        chargeMap.put("currency", "usd");
+        chargeMap.put("currency", "GBP");
         chargeMap.put("source", token.getId());
         try {
             Charge charge = Charge.create(chargeMap, requestOptions);

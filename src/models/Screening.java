@@ -2,6 +2,7 @@ package models;
 
 import javafx.beans.property.*;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -117,6 +118,10 @@ public class Screening {
         Date today = new Date();
 
         return today.compareTo(getDateObject()) > 0;
+    }
+
+    public Film getFilm() throws SQLException, ClassNotFoundException {
+        return FilmDAO.getFilmById(this.getFilmId());
     }
 
 }

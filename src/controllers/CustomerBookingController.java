@@ -164,6 +164,7 @@ public class CustomerBookingController implements Initializable {
 
                     // selected seat
                     ImageView selectedSeatImage = new ImageView("/resources/selected-seat.png");
+                    //
                     selectedSeatImage.setFitWidth(60.0);
                     selectedSeatImage.setFitHeight(60.0);
 

@@ -89,7 +89,7 @@ public class EmployeeHomeController implements Initializable {
 
     //reused variables in validation and creation of movies and screenings
 
-    private String title, filmFileName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
+    private String title, filmImageName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
     private Date dateTime;
     private Film film;
     public static int selectedScreeningId, selectedFilmId;
@@ -146,12 +146,12 @@ public class EmployeeHomeController implements Initializable {
             String fileType = (chosenFile.toString().substring(chosenFile.toString().length()-4,chosenFile.toString().length()));
             Random rnd = new Random();
             int rndNum = 1000000 + rnd.nextInt(9000000);
-            filmFileName = Integer.toString(rndNum)+fileType;
+            filmImageName = Integer.toString(rndNum)+fileType;
 
             // locate the moviesDir
             File directory = new File(".");
             File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-            File newMovie = new File(moviesDirectory, filmFileName);
+            File newMovie = new File(moviesDirectory, filmImageName);
             try {
                 newMovie.createNewFile();
                 Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -182,7 +182,7 @@ public class EmployeeHomeController implements Initializable {
         description = descriptionTextArea.getText();
         movieTrailerURL = trailerURLTextField.getText();
 
-        if (title.isEmpty() || description.isEmpty() || filmFileName == null || movieTrailerURL.isEmpty()) {
+        if (title.isEmpty() || description.isEmpty() || filmImageName == null || movieTrailerURL.isEmpty()) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
         } else {
@@ -208,7 +208,7 @@ public class EmployeeHomeController implements Initializable {
     private void createFilm() throws SQLException, ClassNotFoundException {
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title, description, filmFileName, movieTrailerURL);
+        FilmDAO.insertFilm(title, description, filmImageName, movieTrailerURL);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         titleTextField.clear();
@@ -468,7 +468,7 @@ public class EmployeeHomeController implements Initializable {
             titleTextField.setText(film.getTitle());
             descriptionTextArea.setText(film.getDescription());
             trailerURLTextField.setText(film.getTrailerURL());
-            filmFileName = film.getImagePath()
+            filmImageName = film.getImageName();
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -490,7 +490,7 @@ public class EmployeeHomeController implements Initializable {
        movieTrailerURL = trailerURLTextField.getText();
 
        try {
-           FilmDAO.updateMovieDetails(title, description, filmFileName, movieTrailerURL, selectedFilmId);
+           FilmDAO.updateFilm(title, description, filmImageName, movieTrailerURL, selectedFilmId);
        } catch (SQLException | ClassNotFoundException e) {
            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilm", "Failed to update database with edited movie data. See: " + e);
            e.printStackTrace();

@@ -6,18 +6,13 @@ import javafx.collections.transformation.FilteredList;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 /**
  * Source:
@@ -26,7 +21,7 @@ import java.util.function.Predicate;
 public class Film {
     private IntegerProperty id;
     private StringProperty title;
-    private StringProperty imagePath;
+    private StringProperty imageName;
     private StringProperty description;
     private StringProperty trailerURL;
 
@@ -34,7 +29,7 @@ public class Film {
     public Film() {
         this.id = new SimpleIntegerProperty();
         this.title = new SimpleStringProperty();
-        this.imagePath = new SimpleStringProperty();
+        this.imageName = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
         this.trailerURL = new SimpleStringProperty();
     }
@@ -85,18 +80,23 @@ public class Film {
     public String getImagePath() throws UnsupportedEncodingException {
         File directory = new File(".");
         File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-        File newMovie = new File(moviesDirectory, this.imagePath.get());
+        File newMovie = new File(moviesDirectory, this.getImageName());
 
         System.out.println("file:" + newMovie.getAbsolutePath());
+        System.out.println(getImageName());
         return "file:" + newMovie.getAbsolutePath();
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath.set(imagePath);
+    public String getImageName() {
+        return this.imageName.get();
     }
 
-    public StringProperty imagePathProperty() {
-        return this.imagePath;
+    public void setImageName(String imageName) {
+        this.imageName.set(imageName);
+    }
+
+    public StringProperty imageNameProperty() {
+        return this.imageName;
     }
 
     public String getDescription() {
@@ -109,18 +109,6 @@ public class Film {
 
     public StringProperty descriptionProperty() {
         return this.description;
-    }
-
-    public String getTrailerURL(){
-        return this.trailerURL.get();
-    }
-
-    public void setTrailerURL(String trailerURL){
-        this.trailerURL.set(trailerURL);
-    }
-
-    public StringProperty trailerURLProperty() {
-        return this.trailerURL;
     }
 
     public ObservableList<Screening> getScreenings() {
@@ -198,5 +186,17 @@ public class Film {
                 return false;
             }
         });
+    }
+
+    public String getTrailerURL() {
+        return trailerURL.get();
+    }
+
+    public StringProperty trailerURLProperty() {
+        return trailerURL;
+    }
+
+    public void setTrailerURL(String trailerURL) {
+        this.trailerURL.set(trailerURL);
     }
 }

@@ -34,7 +34,7 @@ public class FilmDAO {
         film.setId(resultSet.getInt("id"));
         film.setTitle(resultSet.getString("title"));
         film.setDescription(resultSet.getString("description"));
-        film.setImagePath(resultSet.getString("imagePath"));
+        film.setImageName(resultSet.getString("imageName"));
         film.setTrailerURL(resultSet.getString("trailerURL"));
 
         return film;
@@ -46,7 +46,7 @@ public class FilmDAO {
             film.setId(resultSet.getInt("id"));
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
-            film.setImagePath(resultSet.getString("imagePath"));
+            film.setImageName(resultSet.getString("imageName"));
             film.setTrailerURL(resultSet.getString("trailerURL"));
             return film;
         } else {
@@ -68,7 +68,7 @@ public class FilmDAO {
             film.setId(resultSet.getInt("id"));
             film.setTitle(resultSet.getString("title"));
             film.setDescription(resultSet.getString("description"));
-            film.setImagePath(resultSet.getString("imagePath"));
+            film.setImageName(resultSet.getString("imageName"));
             film.setTrailerURL(resultSet.getString("trailerURL"));
 
             filmList.add(film);
@@ -97,16 +97,16 @@ public class FilmDAO {
 
 
     //TODO: add updating image url to query & method parameter
-    public static void updateMovieDetails(String title, String description, String filmFileName, String trailerURL, int movieId) throws SQLException, ClassNotFoundException {
+    public static void updateFilm(String title, String description, String imageName, String trailerURL, int id) throws SQLException, ClassNotFoundException {
 
-        String query = "UPDATE Film SET title = ?, description = ? , imagePath = ?, trailerURL = ? WHERE id = ?";
+        String query = "UPDATE Film SET title = ?, description = ? , imageName = ?, trailerURL = ? WHERE id = ?";
 
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
                 new PreparedStatementArg(title),
                 new PreparedStatementArg(description),
-                new PreparedStatementArg(filmFileName),
+                new PreparedStatementArg(imageName),
                 new PreparedStatementArg(trailerURL),
-                new PreparedStatementArg(movieId)
+                new PreparedStatementArg(id)
         };
         SQLiteConnection.executeUpdate(query, preparedStatementArgs);
     }

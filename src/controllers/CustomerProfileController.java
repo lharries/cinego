@@ -74,8 +74,6 @@ public class CustomerProfileController implements Initializable {
      */
     private void initCellFactories() {
 
-        //TODO: populate the entire BookingsTable with customer's bookings
-
         //retrieve title column data
         titleColBookingTable.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Booking, String>, ObservableValue<String>>() {
             @Override

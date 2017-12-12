@@ -17,9 +17,6 @@ import java.sql.SQLException;
  */
 public class FilmDAO {
 
-    // TODO Log the errors
-
-
     public static Film getFilmById(int id) throws SQLException, ClassNotFoundException {
         Object[] preparedStatementArgs = {id};
         ResultSet resultSet = SQLiteUtil.executeQuery("SELECT * FROM Film WHERE id = ?", preparedStatementArgs);
@@ -91,8 +88,6 @@ public class FilmDAO {
         return resultSetFilms;
     }
 
-
-    //TODO: add updating image url to query & method parameter
     public static void updateFilm(String title, String description, String imageName, String trailerURL, Integer id) throws SQLException, ClassNotFoundException {
 
         String query = "UPDATE Film SET title = ?, description = ? , imageName = ?, trailerURL = ? WHERE id = ?";

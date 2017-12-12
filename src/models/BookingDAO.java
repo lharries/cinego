@@ -74,7 +74,6 @@ public class BookingDAO {
             Booking booking = new Booking();
             booking.setId(resultSet.getInt("id"));
             booking.setCustomerId(resultSet.getInt("customerId"));
-            booking.setPaidFor(resultSet.getBoolean("paidFor"));
             booking.setSeatId(resultSet.getInt("seatId"));
             booking.setScreeningId(resultSet.getInt("screeningId"));
 
@@ -85,18 +84,17 @@ public class BookingDAO {
         return bookingList;
     }
 
-    public static void insertBooking(int customerId, boolean paidFor, int seatId, int screeningId) throws SQLException, ClassNotFoundException {
+    public static void insertBooking(int customerId, int seatId, int screeningId) throws SQLException, ClassNotFoundException {
         Object[] preparedStatementArgs = {
                 customerId,
-                paidFor,
                 seatId,
                 screeningId};
 
         SQLiteUtil.execute(
                 "INSERT INTO Booking\n" +
-                        "(customerId, paidFor, seatId, screeningId)\n" +
+                        "(customerId, seatId, screeningId)\n" +
                         "VALUES\n" +
-                        "(?, ?, ?, ?);",
+                        "(?, ?, ?);",
                 preparedStatementArgs
         );
     }

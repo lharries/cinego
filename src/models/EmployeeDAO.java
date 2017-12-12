@@ -25,8 +25,6 @@ public class EmployeeDAO {
     }
 
     public static Employee login(String username, String password) throws SQLException, ClassNotFoundException {
-        // TODO: Switch to prepared statements?
-
         Object[] preparedStatementArgs = {
                 username,
                 password

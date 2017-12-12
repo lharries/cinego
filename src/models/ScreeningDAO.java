@@ -96,7 +96,6 @@ public class ScreeningDAO {
         ResultSet resultSet = SQLiteUtil.executeQuery("SELECT * FROM Screening\n" +
                 "WHERE id = ?", preparedStatementArgs);
 
-        // TODO deal with not being able to do .next();
         if (resultSet.wasNull() || !resultSet.next()) {
             return null;
         }

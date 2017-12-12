@@ -171,9 +171,6 @@ public class CustomerMoviesController implements Initializable {
 
         selectedFilmGroup.setVisible(true);
 
-
-        //TODO: handle if no URL has been uploaded
-
         String trailerURLString = film.getTrailerURL();
         //loads trailer into view
         if (trailerURLString != null) {
@@ -201,9 +198,8 @@ public class CustomerMoviesController implements Initializable {
             System.err.println("Unable to find film");
             e.printStackTrace();
         }
-        // TODO: Set image and set screening times
 
-// hide the borders of all films
+        // hide the borders of all films
         for (Rectangle otherRectangles :
                 movieRectanglesArrayList) {
             otherRectangles.setStrokeWidth(0.0);
@@ -215,7 +211,6 @@ public class CustomerMoviesController implements Initializable {
         // add the screenings to the view
         addScreeningsToView();
 
-//        });
     }
 
     /**
@@ -249,7 +244,6 @@ public class CustomerMoviesController implements Initializable {
             }
         });
 
-        // TODO: split the text over multiple lines
         Label title = new Label(film.getTitle());
         title.setWrapText(true);
         title.setMaxWidth(200.0);
@@ -259,7 +253,6 @@ public class CustomerMoviesController implements Initializable {
         Font titleFont = new Font(25.0);
         title.setFont(titleFont);
 
-        // TODO: Limit the size of the description
         Label description = new Label(film.getDescription());
         description.setMaxWidth(200.0);
         description.setMaxHeight(80.0);
@@ -297,28 +290,15 @@ public class CustomerMoviesController implements Initializable {
             e.printStackTrace();
         }
 
-        // TODO: Remove the other screenings
-
-        //TODO: @Kai if trailerURL is null then don't display
-        if (imageView != null)
-
-        {
+        if (imageView != null) {
             group.getChildren().addAll(rectangle, title, description, imageView);
-        } else
-
-        {
+        } else {
             group.getChildren().addAll(rectangle, title, description);
         }
 
-        moviesVBox.getChildren().
+        moviesVBox.getChildren().add(group);
 
-                add(group);
-
-
-        //TODO: add trailerURL as parameter
-        if (isSelected)
-
-        {
+        if (isSelected) {
             selectFilm(film, rectangle);
         }
 
@@ -328,7 +308,7 @@ public class CustomerMoviesController implements Initializable {
      * Add the screenings button to the view
      */
     private void addScreeningsToView() {
-        // TODO: Switch to flowpane or tabs
+        // TODO: Switch to flowpane?
 
         if (selectedDate != null) {
 

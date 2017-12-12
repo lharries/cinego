@@ -46,7 +46,6 @@ public class CustomerDAO {
     }
 
     public static Customer login(String username, String password) throws SQLException, ClassNotFoundException {
-        // TODO: Switch to prepared statements?
         String query = "SELECT * FROM Customer WHERE username=? AND password=?";
 
         Object[] preparedStatementArgs = {

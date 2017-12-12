@@ -25,8 +25,6 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    //TODO: FEATURE add password reset functionality via e-Mail sent to user e-Mail client References: https://codereview.stackexchange.com/questions/114005/javafx-email-client
-
     /**
      * The login stage
      */
@@ -104,7 +102,7 @@ public class LoginController implements Initializable {
 
             if (empl != null) {
                 Main.user = empl;
-                // TODO : Switch to the correct view
+
                 ((Node) event.getSource()).getScene().getWindow().hide();
                 try {
                     primaryStage.setScene(createScene(loadEmpBorderPane()));
@@ -116,7 +114,6 @@ public class LoginController implements Initializable {
             } else {
                 loginUnsuccessfulMessage.setText("Invalid login - please try again");
                 usernameTextField.requestFocus();
-                //TODO - add timer to set Label back to blank after 3 seconds
             }
         } catch (SQLException e) {
             e.printStackTrace();

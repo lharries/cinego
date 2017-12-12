@@ -46,12 +46,6 @@ public class EmployeeHomeController implements Initializable {
 
     //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
 
-
-    //TODO: add loggers to the validation for us
-
-    //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT
-    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality References: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
-
     @FXML
     private Button deleteBooking;
 
@@ -276,8 +270,6 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
-        //TODO: input validation - only when all three fields used + correct input then activate button
-
         //access input values & create date-time
         String date = dateTime.toString();
         Film film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
@@ -303,7 +295,6 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void exportData() throws IOException, ClassNotFoundException, SQLException {
 
-        //TODO: additional / extra statistics to CSV file
         CSVUtils.exportToCSV();
     }
 
@@ -378,8 +369,6 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void openSeatsBooked(ActionEvent event) {
-        //TODO: @Luke: open a movie's specific "seats booked overview" +
-
 
         try {
             EmployeeBookingController.selectedScreening = ScreeningDAO.getScreeningById(selectedScreeningId);

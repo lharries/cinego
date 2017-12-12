@@ -32,10 +32,6 @@ public class EmployeeBookingController implements Initializable {
     public Label remainingSeatsNumber;
     public Label bookedSeatsNumber;
 
-
-    //TODO: populate the above fxids= 'Time' + 'Date' + 'Title' + 'seatsBookedPieChart' with their respective data based on the route the employee came from (which movie the employee entered the view from)
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initSeatingPlan();
@@ -109,7 +105,6 @@ public class EmployeeBookingController implements Initializable {
                         btn.setDisable(true);
                     }
 
-                    //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();

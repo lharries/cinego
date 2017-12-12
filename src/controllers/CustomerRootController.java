@@ -25,10 +25,6 @@ import java.util.logging.Logger;
  */
 public class CustomerRootController implements Initializable {
 
-
-    //TODO: make the logout button hoverable so the mouse changes / the colour changes so the user knows there is something clickable
-    //TODO: add a 'Goodbye, xx' message to login screen that disappears after some seconds
-
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
 
     @FXML

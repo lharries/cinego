@@ -35,10 +35,6 @@ public class Main extends Application {
             //launches the login view upon running program
             Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
 
-            // TODO: Kai please state what this is for
-            root.setCache(true);
-            root.setCacheHint(CacheHint.SPEED);
-
             // create the root scene
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

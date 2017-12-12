@@ -68,9 +68,6 @@ public class CustomerBookingController implements Initializable {
     private int totalCost = 0;
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
-    //TODO: FEATURE send booking confirmation to user's E-Mail address via   e-Mail client References: https://codereview.stackexchange.com/questions/114005/javafx-email-client
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -124,8 +121,6 @@ public class CustomerBookingController implements Initializable {
         }
 
     }
-
-    // TODO: Display booking summary
 
     /**
      * Create the graphical layout of the seating plan with different images
@@ -210,7 +205,6 @@ public class CustomerBookingController implements Initializable {
                         });
                     }
 
-                    //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();

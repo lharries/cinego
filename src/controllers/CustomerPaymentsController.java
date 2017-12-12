@@ -57,7 +57,7 @@ public class CustomerPaymentsController implements Initializable {
 
     public static ArrayList<Seat> seats;
 
-    public Integer price; // TODO Change this, just for testing
+    public Integer price;
 
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 

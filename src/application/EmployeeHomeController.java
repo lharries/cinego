@@ -119,6 +119,10 @@ public class EmployeeHomeController implements Initializable {
     private Film film;
     public static int selectedScreeningId, selectedMovieId;
 
+    FileChooser fileChooser;
+    File chosenFile;
+
+
 
     /**
      * Sets the column titles of both tables and populates them with data from the database,
@@ -147,8 +151,9 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Allows the employee to upload a movie poster by copying the image into a local file and naming it
-     * after the chosen movie title
+     * Allows the employee to select a movie poster to be uploaded by copying the image into a local file and naming it
+     * after the chosen movie title. Upload takes place only after 'createMovieButton' is clicked
+     *
      * Sources:
      * - http://java-buddy.blogspot.co.uk/2013/01/use-javafx-filechooser-to-open-image.html
      * - https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java
@@ -156,8 +161,7 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void uploadMovieImage(Event event) {
 
-        FileChooser fileChooser = new FileChooser();
-
+        fileChooser = new FileChooser();
 
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
@@ -165,109 +169,7 @@ public class EmployeeHomeController implements Initializable {
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
         //read image file & check if file not null
-        File chosenFile = fileChooser.showOpenDialog(null);
-        if (chosenFile != null) {
-
-            String fileType = (chosenFile.toString().substring(chosenFile.toString().length()-4,chosenFile.toString().length()));
-            Random rnd = new Random();
-            int rndNum = 1000000 + rnd.nextInt(9000000);
-            String rndNameOfMovie = Integer.toString(rndNum)+fileType;
-
-            // locate the moviesDir
-//            String nameOfMovie = "name-of-new-movie.jpg";
-            File directory = new File(".");
-            File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-            File newMovie = new File(moviesDirectory, rndNameOfMovie);
-//            System.out.println(moviesDirectory);
-
-//
-            try {
-                newMovie.createNewFile();
-                Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                movieFileName = rndNameOfMovie;
-//                System.out.println(newMovie.getAbsolutePath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-//            System.out.println(path);
-//
-////            URL f = getClass().getResource("resources");
-////            System.out.println(f);
-//
-////            try {
-//
-//            File currentDir = new File (".");
-//            System.out.println(currentDir.toPath());
-//            File parentDir = currentDir.getParentFile();
-//            System.out.println(parentDir.toPath());
-
-//
-//            File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-//            Path parent = f.toPath().getParent();
-//            System.out.println(parent.toString());
-//            Path resources = Paths.get(parent.toString(), "/resources");
-//
-//            movieFileName = "turtle.png";
-////            System.out.println("resources");
-////            System.out.println(resources);
-////            File movieImages = new File(resources.toString());
-////            System.out.println(movieImages);
-////            System.out.println(Arrays.toString(movieImages.list()));
-////            URL string = getClass().getResource("../resources");
-//
-////            URL movieImages = getClass().getResource("../../movie-images");
-////            System.out.println(movieImages);
-//
-////            String resourcesPath = string.getPath();
-////
-
-//            File newFile = new File(resources.toString() + "/turtle.png");
-//            System.out.println(newFile.getAbsolutePath().toString());
-////
-//            try {
-//                newFile.createNewFile();
-//                System.out.println(newFile);
-//                Files.copy(chosenFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            //got the source file, need to get the resources directory adjcaent to it, then create the new file in that
-
-//            String newFilePath = f.getParent() + "/hello.jpg";
-//            File newFile = new File(newFilePath);
-//            try {
-//
-//                String[] list  = f.list((dir, name) -> {
-//                    return Objects.equals(name, "resources");
-//                });
-//                System.out.println(Arrays.toString(list));
-//                newFile.createNewFile();
-//                System.out.println(newFile);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-////
-//                System.out.println(f.getAbsolutePath());
-//                image = ImageIO.read(chosenFile);
-//                file = new File("/resources/hello.jpg");
-//                System.out.println(file.getAbsolutePath());
-//                file.createNewFile();
-//                Files.copy(chosenFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//
-//                ImageIO.write(image, "jpg", file);
-//                System.out.println(file.getAbsolutePath());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-//
-//                movieFileName = "helloooooo" + ".jpg";
-//                file = new File(movieFileName);
-//                ImageIO.write(image, "jpg", file);
-//                ImageIO.write(image, "jpg", file);
-        }
+        chosenFile = fileChooser.showOpenDialog(null);
     }
 
     /**
@@ -287,22 +189,44 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         //gets the input values and checks if they're correctly filled in
-
         title = addTitle.getText();
         description = addDescription.getText();
         movieTrailerURL = trailerURL.getText();
-
-
         if (title.isEmpty() || description.isEmpty() || movieFileName == null || movieTrailerURL.isEmpty()) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
+
+            //if inputs are valid: copies the image to project directory + calls createMovie()
         } else {
+
+            if (chosenFile != null) {
+
+                String fileType = (chosenFile.toString().substring(chosenFile.toString().length() - 4, chosenFile.toString().length()));
+                Random rnd = new Random();
+                int rndNum = 1000000 + rnd.nextInt(9000000);
+                String rndNumPosterName = Integer.toString(rndNum) + fileType;
+
+                // locate the moviesDir
+                File directory = new File(".");
+                File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
+                File newMovie = new File(moviesDirectory, rndNumPosterName);
+
+                try {
+                    newMovie.createNewFile();
+                    Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    movieFileName = rndNumPosterName;
+//                System.out.println(newMovie.getAbsolutePath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
+//            PauseTransition delay = new PauseTransition(Duration.seconds(4));
+//            delay.setOnFinished(e -> popup.hide());
+//            popup.show();
+//            delay.play();
 
             createMovie();
         }
@@ -326,10 +250,12 @@ public class EmployeeHomeController implements Initializable {
         //adds the newly created movie to the database
         FilmDAO.insertFilm(title, description, movieFileName, movieTrailerURL);
 
-        //resets input fields to default + updates moviesTable & movieSelectionBox
+        //resets input fields to default + updates moviesTable & movieSelectionBox + resets chosenFile to null
         addTitle.clear();
         addDescription.clear();
         trailerURL.clear();
+        chosenFile = null;
+
         populateMoviesTable();
         populateMovieSelectionBox();
     }
@@ -351,7 +277,7 @@ public class EmployeeHomeController implements Initializable {
         popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
 
         //get input values
-        movieTitle = String.valueOf(movieSelectionBox.getValue());
+        movieTitle = movieSelectionBox.getSelectionModel().isEmpty() ? null :  String.valueOf(movieSelectionBox.getValue());
         screeningTime = String.valueOf(timePicker.getValue());
         screeningDate = String.valueOf(datePicker.getValue());
         Date now = new Date();
@@ -361,31 +287,48 @@ public class EmployeeHomeController implements Initializable {
             String dateTimeString = screeningDate + " " + screeningTime;
             dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateTimeString);
         } catch (ParseException e) {
-            e.printStackTrace();
+            // date is noted as invalid
+            LOGGER.logp(Level.INFO, "CustomerBookingController",
+                    "validateScreening", "unable to parse date as invalid input. See Google exception handling style guide." + e);
         }
         //perform validity checks: empty & dateSelected < now
-        if (movieTitle == null || screeningTime == null || dateTime == null) {
-            alert.setHeaderText("Error: invalid input fields");
-            alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
-        }
-        if(now.compareTo(dateTime) > 0){
-            alert.setHeaderText("Error: screening date in the past");
-            alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
-        }
-        else {
+        if (movieTitle != null && screeningTime != null && dateTime != null && now.compareTo(dateTime) < 0){
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
-
             createScreening();
+
+        }else if(movieTitle == null || screeningTime == null || dateTime == null) {
+            alert.setHeaderText("Error: invalid input fields");
+            alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
+        }else if(now.compareTo(dateTime) > 0){
+            alert.setHeaderText("Error: screening date in the past");
+            alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
+
         }
+
+//
+//
+//
+//        if (movieTitle == null || screeningTime == null || dateTime == null) {
+//            alert.setHeaderText("Error: invalid input fields");
+//            alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
+//        }
+//        else if(now.compareTo(dateTime) > 0){
+//            alert.setHeaderText("Error: screening date in the past");
+//            alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
+//
+//        }
+//        else {
+//            alert.setHeaderText("Success: screening created");
+//            alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
+//
+//            createScreening();
+//        }
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
     }
 
 
@@ -399,20 +342,13 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
-        //TODO: input validation - only when all three fields used + correct input then activate button
-
         //access input values & create date-time
         String date = dateTime.toString();
         film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
         int movieID = film.getId();
 
-//        DateTimeStringConverter date2 = new DateTimeStringConverter();
-//        date2.fromString(date);
-
-
         //adds the newly created screening to the database
         ScreeningDAO.insertScreening(movieID, date, movieTitle);
-
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -462,22 +398,21 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void deleteScreening() {
 
-        //TODO: add checking if no booking functionality! Ability to delete screening or edit screening unless customers have booked a ticket for the movie
-        boolean noBookings = false;
+        boolean noBookingsForScreening = false;
 
         try {
 
             Booking booking = BookingDAO.getBookingsByScreeningId(selectedScreeningId);
 
             if(booking == null) {
-                noBookings = true;
+                noBookingsForScreening = true;
             }
         } catch (SQLException | ClassNotFoundException e) {
             LOGGER.logp(Level.WARNING, "EmployeeHomeController", "deleteScreening", "Failed to get Bookings with screening id from screeningTable. See: " + e);
             e.printStackTrace();
         }
 
-        if(!noBookings){
+        if(!noBookingsForScreening){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
             alert.setTitle("Cinego");
@@ -577,7 +512,6 @@ public class EmployeeHomeController implements Initializable {
         selectedMovieId = moviesTable.getSelectionModel().getSelectedItem().getId();
         System.out.println("\n\n\n"+selectedMovieId+"\n\n\n");
         editMovieButton.setDisable(false);
-//        updateMovieButton.setDisable(false);
     }
 
 
@@ -588,17 +522,16 @@ public class EmployeeHomeController implements Initializable {
         createMovieButton.setDisable(true);
         updateMovieButton.setDisable(false);
 
+//        try {
+//            movieValidation();
+//        } catch (SQLException | ClassNotFoundException e) {
+//            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "editMovie", "Input field validation returns a null value. See: " + e);
+//            e.printStackTrace();
+//        }
+
         //fill components with movie's data
         try {
             Film film = FilmDAO.getFilmById(selectedMovieId);
-//            title = film.getTitle();
-//            description = film.getDescription();
-//            movieTrailerURL = film.getTrailerURL();
-
-//            addTitle.setText(title);
-//            addDescription.setText(description);
-//            trailerURL.setText(movieTrailerURL);
-
             addTitle.setText(film.getTitle());
             addDescription.setText(film.getDescription());
             trailerURL.setText(film.getTrailerURL());

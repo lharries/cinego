@@ -227,7 +227,7 @@ public class CustomerPaymentsController implements Initializable {
     private String confirmEmail() {
         TextInputDialog dialog = new TextInputDialog(Main.user.getEmail());
         dialog.setTitle("Email");
-        dialog.setHeaderText("Email for tickets");
+        dialog.setHeaderText("Email to send QR code tickets");
         dialog.setContentText("Please confirm your email to which we will send you tickets:");
 
         Optional<String> result = dialog.showAndWait();

@@ -14,9 +14,9 @@
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
+            <Rectangle fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
             <Line endX="1279.0" layoutX="0.0" layoutY="50.0" startX="0.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
+            <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
             <Label layoutX="23.0" layoutY="13.0" text="Customer" textFill="WHITE">
                  <font>
                      <Font size="25.0" />
@@ -30,18 +30,18 @@
                <font>
                   <Font size="25.0" />
                </font></Label>
-            <Label alignment="CENTER" layoutX="22.0" layoutY="61.0" prefHeight="26.0" prefWidth="600.0" text="Film Program" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="BOTTOM_CENTER" layoutX="22.0" layoutY="61.0" prefHeight="39.0" prefWidth="600.0" text="Film Program" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="toProgramView" layoutX="7.0" layoutY="54.0" mnemonicParsing="false" onAction="#openProgramView" opacity="0.0" prefHeight="42.0" prefWidth="600.0" text="Program View" />
-            <Label alignment="CENTER" layoutX="662.0" layoutY="53.0" prefHeight="39.0" prefWidth="600.0" text="Your Profile" textFill="WHITE">
+            <Button fx:id="toProgramView" alignment="BOTTOM_CENTER" layoutX="7.0" layoutY="55.0" mnemonicParsing="false" onAction="#openProgramView" opacity="0.0" prefHeight="42.0" prefWidth="600.0" text="Program View" />
+            <Label alignment="BOTTOM_CENTER" layoutX="662.0" layoutY="53.0" prefHeight="46.0" prefWidth="600.0" text="Your Profile" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="toCustomerProfile" layoutX="668.0" layoutY="54.0" mnemonicParsing="false" onAction="#openProfileView" opacity="0.0" prefHeight="43.0" prefWidth="600.0" text="Customer Profile" />
+            <Button fx:id="toCustomerProfile" alignment="BOTTOM_CENTER" layoutX="668.0" layoutY="54.0" mnemonicParsing="false" onAction="#openProfileView" opacity="0.0" prefHeight="43.0" prefWidth="600.0" text="Customer Profile" />
 
              <!--Logout image-->
             <ImageView fx:id="logoutImg" fitHeight="41.0" fitWidth="41.0" layoutX="1214.0" layoutY="5.0">
@@ -71,14 +71,14 @@
    <bottom>
       <AnchorPane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="46.0" layoutX="609.0" layoutY="3.0" stroke="#f3f3f3" strokeType="INSIDE" width="46.0" AnchorPane.leftAnchor="617.0" AnchorPane.rightAnchor="617.0" />
-             <ImageView fx:id="logo" fitHeight="42.0" fitWidth="42.0" layoutX="611.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="619.0" AnchorPane.rightAnchor="619.0">
+            <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="46.0" layoutX="678.0" layoutY="5.0" stroke="#f3f3f3" strokeType="INSIDE" width="46.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="678.0" AnchorPane.rightAnchor="556.0" AnchorPane.topAnchor="2.0" />
+             <ImageView fx:id="logo" fitHeight="42.0" fitWidth="42.0" layoutX="680.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="558.0" AnchorPane.topAnchor="4.0">
                  <!--<image>-->
                      <!--<Image url="@../resources/cinestar.png" />-->
                  <!--</image>-->
              </ImageView>
-             <Text fill="WHITE" layoutX="370.0" layoutY="-12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">
+             <Text fill="WHITE" layoutX="431.0" layoutY="-12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">
                  <font>
                      <Font size="34.0" />
                  </font>

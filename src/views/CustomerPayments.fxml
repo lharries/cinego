@@ -52,7 +52,7 @@
         <Label layoutX="545.0" layoutY="296.0" text="Total:" />
         <Label fx:id="totalCostText" layoutX="638.0" layoutY="296.0" text="Cost" />
         <Label layoutX="641.0" layoutY="416.0" text="Test Card: 4242 42424 42424 42424" textFill="#9e9e9e" />
-        <Text fx:id="errorMessageText" fill="RED" layoutX="526.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="331.0000001043081" />
+        <Text fx:id="errorMessageText" fill="RED" layoutX="531.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="331.0000001043081" />
       <Label layoutX="541.0" layoutY="110.0" text="Film:" />
       <Label fx:id="filmText" layoutX="634.0" layoutY="110.0" text="Film" />
       <Label layoutX="540.0" layoutY="135.0" text="Screening:" />

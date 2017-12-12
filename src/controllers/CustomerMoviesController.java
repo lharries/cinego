@@ -137,16 +137,17 @@ public class CustomerMoviesController implements Initializable {
         moviesVBox.getChildren().clear();
         // Get the films from the db and add them to the list of films
         try {
+            boolean isSelected = true;
             ObservableList<Film> films = FilmDAO.getFilmObservableList();
             for (int i = 0; i < films.size(); i++) {
                 // set the first film to be selected
                 Film film = films.get(i);
-                boolean isSelected = (i == 0);
 
                 // filter by title, description and date
                 if (film.getTitle().toLowerCase().contains(searchText.toLowerCase()) || film.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
                     if (selectedDate == null || film.hasScreeningOnDate(selectedDate)) {
                         addFilmToList(films.get(i), isSelected);
+                        isSelected = false;
                     }
 
                 }
@@ -254,16 +255,21 @@ public class CustomerMoviesController implements Initializable {
 
         // TODO: split the text over multiple lines
         Label title = new Label(film.getTitle());
+        title.setWrapText(true);
+        title.setMaxWidth(200.0);
+        title.setMaxHeight(60.0);
         title.setLayoutX(15.0);
-        title.setLayoutY(10.0);
+        title.setLayoutY(20.0);
         Font titleFont = new Font(25.0);
         title.setFont(titleFont);
 
         // TODO: Limit the size of the description
         Label description = new Label(film.getDescription());
         description.setMaxWidth(200.0);
+        description.setMaxHeight(80.0);
+        description.setWrapText(true);
         description.setLayoutX(15.0);
-        description.setLayoutY(50.0);
+        description.setLayoutY(80.0);
         Font descriptionFont = new Font(15.0);
         description.setFont(descriptionFont);
 
@@ -301,11 +307,11 @@ public class CustomerMoviesController implements Initializable {
         if (imageView != null)
 
         {
-            group.getChildren().addAll(rectangle, title, description, imageView, screenings);
+            group.getChildren().addAll(rectangle, title, description, imageView);
         } else
 
         {
-            group.getChildren().addAll(rectangle, title, description, screenings);
+            group.getChildren().addAll(rectangle, title, description);
         }
 
         moviesVBox.getChildren().
@@ -376,6 +382,7 @@ public class CustomerMoviesController implements Initializable {
         try {
             if (datePicker.getValue() != null)
                 selectedDate = dateFormat.parse(String.valueOf(datePicker.getValue()));
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -97,13 +97,14 @@ public class FilmDAO {
 
 
     //TODO: add updating image url to query & method parameter
-    public static void updateMovieDetails(String title, String description, String trailerURL, int movieId) throws SQLException, ClassNotFoundException {
+    public static void updateMovieDetails(String title, String description, String filmFileName, String trailerURL, int movieId) throws SQLException, ClassNotFoundException {
 
-        String query = "UPDATE Film SET title = ?, description = ? , trailerURL = ? WHERE id = ?";
+        String query = "UPDATE Film SET title = ?, description = ? , imagePath = ?, trailerURL = ? WHERE id = ?";
 
         PreparedStatementArg[] preparedStatementArgs = new PreparedStatementArg[]{
                 new PreparedStatementArg(title),
                 new PreparedStatementArg(description),
+                new PreparedStatementArg(filmFileName),
                 new PreparedStatementArg(trailerURL),
                 new PreparedStatementArg(movieId)
         };

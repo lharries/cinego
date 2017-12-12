@@ -89,7 +89,7 @@ public class EmployeeHomeController implements Initializable {
 
     //reused variables in validation and creation of movies and screenings
 
-    private String title, movieFileName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
+    private String title, filmFileName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
     private Date dateTime;
     private Film film;
     public static int selectedScreeningId, selectedFilmId;
@@ -146,16 +146,15 @@ public class EmployeeHomeController implements Initializable {
             String fileType = (chosenFile.toString().substring(chosenFile.toString().length()-4,chosenFile.toString().length()));
             Random rnd = new Random();
             int rndNum = 1000000 + rnd.nextInt(9000000);
-            String rndNameOfMovie = Integer.toString(rndNum)+fileType;
+            filmFileName = Integer.toString(rndNum)+fileType;
 
             // locate the moviesDir
             File directory = new File(".");
             File moviesDirectory = new File(directory.getAbsolutePath(), "movie-images");
-            File newMovie = new File(moviesDirectory, rndNameOfMovie);
+            File newMovie = new File(moviesDirectory, filmFileName);
             try {
                 newMovie.createNewFile();
                 Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                movieFileName = rndNameOfMovie;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -170,7 +169,7 @@ public class EmployeeHomeController implements Initializable {
      * @throws ClassNotFoundException
      */
     @FXML
-    private void movieValidation() throws SQLException, ClassNotFoundException {
+    private void filmValidation() throws SQLException, ClassNotFoundException {
 
         //creates alert to be used in both cases: correct & incorrect inputs
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -183,13 +182,13 @@ public class EmployeeHomeController implements Initializable {
         description = descriptionTextArea.getText();
         movieTrailerURL = trailerURLTextField.getText();
 
-        if (title.isEmpty() || description.isEmpty() || movieFileName == null || movieTrailerURL.isEmpty()) {
+        if (title.isEmpty() || description.isEmpty() || filmFileName == null || movieTrailerURL.isEmpty()) {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
         } else {
             alert.setHeaderText("Success: movie created");
             alert.setContentText("Your movie was successfully created, " + Main.user.getFirstName());
-            createMovie();
+            createFilm();
         }
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(e -> popup.hide());
@@ -206,10 +205,10 @@ public class EmployeeHomeController implements Initializable {
      * @throws ClassNotFoundException
      */
     @FXML
-    private void createMovie() throws SQLException, ClassNotFoundException {
+    private void createFilm() throws SQLException, ClassNotFoundException {
 
         //adds the newly created movie to the database
-        FilmDAO.insertFilm(title, description, movieFileName, movieTrailerURL);
+        FilmDAO.insertFilm(title, description, filmFileName, movieTrailerURL);
 
         //resets input fields to default + updates moviesTable & movieSelectionBox
         titleTextField.clear();
@@ -469,6 +468,7 @@ public class EmployeeHomeController implements Initializable {
             titleTextField.setText(film.getTitle());
             descriptionTextArea.setText(film.getDescription());
             trailerURLTextField.setText(film.getTrailerURL());
+            filmFileName = film.getImagePath()
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -490,7 +490,7 @@ public class EmployeeHomeController implements Initializable {
        movieTrailerURL = trailerURLTextField.getText();
 
        try {
-           FilmDAO.updateMovieDetails(title, description,movieTrailerURL, selectedFilmId);
+           FilmDAO.updateMovieDetails(title, description, filmFileName, movieTrailerURL, selectedFilmId);
        } catch (SQLException | ClassNotFoundException e) {
            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilm", "Failed to update database with edited movie data. See: " + e);
            e.printStackTrace();

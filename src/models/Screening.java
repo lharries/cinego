@@ -1,13 +1,17 @@
 package models;
 
+import controllers.EmployeeRootController;
 import javafx.beans.property.*;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The screening of the film.
@@ -33,13 +37,13 @@ public class Screening {
     private IntegerProperty id;
     private IntegerProperty filmId;
     private StringProperty date;
-    private StringProperty filmTitle; // TODO Remove this
+
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
     public Screening() {
         this.id = new SimpleIntegerProperty();
         this.filmId = new SimpleIntegerProperty();
         this.date = new SimpleStringProperty();
-        this.filmTitle = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -87,15 +91,15 @@ public class Screening {
     }
 
     public String getFilmTitle() {
-        return filmTitle.get();
-    }
+        try {
+            Film film = getFilm();
+            return getFilm().getTitle();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "Screening", "getFilmTitle", "Unable to get film" + e);
+            return "Film not found";
+        }
 
-    public StringProperty filmTitleProperty() {
-        return filmTitle;
-    }
-
-    public void setFilmTitle(String filmTitle) {
-        this.filmTitle.set(filmTitle);
     }
 
     public String getShortDate() throws ParseException {
@@ -103,9 +107,16 @@ public class Screening {
         return shortFormat.format(date);
     }
 
-    public String getMediumDate() throws ParseException {
-        Date date = getDateObject();
-        return mediumFormat.format(date); // 08:54 Saturday 09/12
+    public String getMediumDate() {
+        Date date = null;
+        try {
+            date = getDateObject();
+            return mediumFormat.format(date); // 08:54 Saturday 09/12
+        } catch (ParseException e) {
+            e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "Screening", "getMediumDate", "Unable to parse date" + e);
+            return "Date not found";
+        }
     }
 
     public String getTime() throws ParseException {
@@ -117,6 +128,10 @@ public class Screening {
         Date today = new Date();
 
         return today.compareTo(getDateObject()) > 0;
+    }
+
+    public Film getFilm() throws SQLException, ClassNotFoundException {
+        return FilmDAO.getFilmById(this.getFilmId());
     }
 
 }

@@ -367,6 +367,7 @@ public class CustomerMoviesController implements Initializable {
         } else {
             screeningTimes.getChildren().clear();
             Label label = new Label("Please select a date to view screenings");
+            label.setFont(Font.font(25));
             screeningTimes.getChildren().add(label);
         }
     }

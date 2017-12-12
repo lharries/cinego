@@ -397,7 +397,6 @@ public class EmployeeHomeController implements Initializable {
             popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
             alert.setHeaderText("Warning: deleting screening");
             alert.setContentText("Are you sure you want to delete this screening, " + Main.user.getFirstName() + " ?");
-            alert.showAndWait();
 
             //Deletes movie depending on user response
             Optional<ButtonType> result = alert.showAndWait();
@@ -529,10 +528,6 @@ public class EmployeeHomeController implements Initializable {
        updateMovieButton.setDisable(true);
        createMovieButton.setDisable(false);
 
-       titleTextField.clear();
-       descriptionTextArea.clear();
-       trailerURLTextField.clear();
-
        //Inform user of successful updating of movie
        Alert alert = new Alert(Alert.AlertType.INFORMATION);
        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -545,6 +540,9 @@ public class EmployeeHomeController implements Initializable {
        popup.show();
        delay.play();
 
+       titleTextField.clear();
+       descriptionTextArea.clear();
+       trailerURLTextField.clear();
 
        populateMoviesTable();
        populateScreeningsTable();

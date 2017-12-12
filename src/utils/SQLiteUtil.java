@@ -197,7 +197,10 @@ public class SQLiteUtil {
         int parameterIndex = 1;
 
         for (Object arg : args) {
-            if (arg.getClass().equals(Integer.class)) {
+            if (arg.equals(null)) {
+                parameterIndex++;
+                continue;
+            } else if (arg.getClass().equals(Integer.class)) {
                 preparedStatement.setInt(parameterIndex, (Integer) arg);
             } else if (arg.getClass().equals(String.class)) {
                 preparedStatement.setString(parameterIndex, (String) arg);

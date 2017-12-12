@@ -59,7 +59,7 @@
       </Label>
 
    <!--Movie table, creation HBox-->
-      <TableView fx:id="moviesTable" layoutX="50.0" layoutY="60.0" onMouseClicked="#getFilmID" prefHeight="334.0" prefWidth="535.0">
+      <TableView fx:id="filmsTable" layoutX="50.0" layoutY="60.0" onMouseClicked="#getFilmID" prefHeight="334.0" prefWidth="535.0">
          <columns>
             <TableColumn fx:id="titleCol" prefWidth="158.5" text="Title" />
             <TableColumn fx:id="descriptCol" prefWidth="375.5" text="Description" />

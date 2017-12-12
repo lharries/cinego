@@ -84,10 +84,10 @@ public class FilmDAO {
     }
 
 
-    public static void insertFilm(String title, String description, String imagePath, String trailerURL) throws SQLException, ClassNotFoundException {
-        Object[] preparedStatementArgs = {title, description, imagePath, trailerURL};
+    public static void insertFilm(String title, String description, String imageName, String trailerURL) throws SQLException, ClassNotFoundException {
+        Object[] preparedStatementArgs = {title, description, imageName, trailerURL};
 
-        SQLiteUtil.execute("INSERT INTO Film\n" + "(title, description, imagePath, trailerURL)\n" + "VALUES\n" + "(?, ?, ?, ?);", preparedStatementArgs);
+        SQLiteUtil.execute("INSERT INTO Film\n" + "(title, description, imageName, trailerURL)\n" + "VALUES\n" + "(?, ?, ?, ?);", preparedStatementArgs);
     }
 
     public static void deleteFilm(int id) throws SQLException, ClassNotFoundException {
@@ -104,7 +104,7 @@ public class FilmDAO {
 
 
     //TODO: add updating image url to query & method parameter
-    public static void updateFilm(String title, String description, String imageName, String trailerURL, int id) throws SQLException, ClassNotFoundException {
+    public static void updateFilm(String title, String description, String imageName, String trailerURL, Integer id) throws SQLException, ClassNotFoundException {
 
         String query = "UPDATE Film SET title = ?, description = ? , imageName = ?, trailerURL = ? WHERE id = ?";
 

@@ -2,6 +2,7 @@ package controllers;
 
 import application.Main;
 import javafx.animation.PauseTransition;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -55,19 +56,19 @@ public class EmployeeHomeController implements Initializable {
     private Button toSeatBooking, deleteScreening, editFilmButton, updateFilmButton, createFilmButton;
 
     @FXML
-    private TableView<Film> moviesTable;
+    private TableView<Film> filmsTable;
 
     @FXML
     private TableView<Screening> screeningsTable;
 
     @FXML
-    private ObservableList<Film> moviesData;
+    private ObservableList<Film> filmObservableList;
 
     @FXML
     private ObservableList<Screening> screeningsData;
 
     @FXML
-    private TableColumn titleCol, urlCol, descriptCol, titleColScreenTab, dateColScreenTab;
+    private TableColumn titleCol, descriptCol, titleColScreenTab, dateColScreenTab;
 
     @FXML
     private TextField titleTextField, trailerURLTextField;
@@ -81,18 +82,11 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private DatePicker datePicker;
 
-    //reused variables in validation and creation of movies and screenings
-
-    private String movieFileName;
-
     private String title, filmImageName, description, screeningTime, screeningDate, movieTitle, movieTrailerURL;
     private Date dateTime;
-    private Film film;
-    public static int selectedScreeningId, selectedFilmId;
+    public static Integer selectedScreeningId, selectedFilmId;
 
     private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
-
-
 
 
     /**
@@ -105,10 +99,10 @@ public class EmployeeHomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //set moviesTable headers - 'moviesTable' + populates table
+        //set filmsTable headers - 'filmsTable' + populates table
         titleCol.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
         descriptCol.setCellValueFactory(new PropertyValueFactory<Film, String>("description"));
-        populateMoviesTable();
+        populateFilmsTable();
 
         //set screeningTable headers - 'screeningsTable' + populates movieTable & movieSelectBox
         titleColScreenTab.setCellValueFactory(new PropertyValueFactory<Screening, String>("filmTitle"));
@@ -139,10 +133,10 @@ public class EmployeeHomeController implements Initializable {
         File chosenFile = fileChooser.showOpenDialog(null);
         if (chosenFile != null) {
 
-            String fileType = (chosenFile.toString().substring(chosenFile.toString().length()-4,chosenFile.toString().length()));
+            String fileType = (chosenFile.toString().substring(chosenFile.toString().length() - 4, chosenFile.toString().length()));
             Random rnd = new Random();
             int rndNum = 1000000 + rnd.nextInt(9000000);
-            filmImageName = Integer.toString(rndNum)+fileType;
+            filmImageName = Integer.toString(rndNum) + fileType;
 
             // locate the moviesDir
             File directory = new File(".");
@@ -207,11 +201,11 @@ public class EmployeeHomeController implements Initializable {
         //adds the newly created movie to the database
         FilmDAO.insertFilm(title, description, filmImageName, movieTrailerURL);
 
-        //resets input fields to default + updates moviesTable & movieSelectionBox
+        //resets input fields to default + updates filmsTable & movieSelectionBox
         titleTextField.clear();
         descriptionTextArea.clear();
         trailerURLTextField.clear();
-        populateMoviesTable();
+        populateFilmsTable();
         populateMovieSelectionBox();
     }
 
@@ -249,15 +243,14 @@ public class EmployeeHomeController implements Initializable {
             alert.setHeaderText("Error: invalid input fields");
             alert.setContentText("Please fill in all required fields, " + Main.user.getFirstName());
         }
-        if(now.compareTo(dateTime) > 0){
+        if (now.compareTo(dateTime) > 0) {
             alert.setHeaderText("Error: screening date in the past");
             alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
             PauseTransition delay = new PauseTransition(Duration.seconds(4));
             delay.setOnFinished(e -> popup.hide());
             popup.show();
             delay.play();
-        }
-        else {
+        } else {
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
             PauseTransition delay = new PauseTransition(Duration.seconds(4));
@@ -282,11 +275,11 @@ public class EmployeeHomeController implements Initializable {
 
         //access input values & create date-time
         String date = dateTime.toString();
-        film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
-        int movieID = film.getId();
+        Film film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
+        int filmId = film.getId();
 
         //adds the newly created screening to the database
-        ScreeningDAO.insertScreening(movieID, date, movieTitle);
+        ScreeningDAO.insertScreening(filmId, date, movieTitle);
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -307,15 +300,6 @@ public class EmployeeHomeController implements Initializable {
 
         //TODO: additional / extra statistics to CSV file
         CSVUtils.exportToCSV();
-
-        //Informs user of successfully exporting CSV file
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-        alert.setTitle("Cinego");
-        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-        alert.setHeaderText("CVS Export");
-        alert.setContentText("Your csv export was successful, " + Main.user.getFirstName());
-        alert.showAndWait();
     }
 
     /**
@@ -339,7 +323,7 @@ public class EmployeeHomeController implements Initializable {
 
         try {
             Booking booking = BookingDAO.getBookingsByScreeningId(selectedScreeningId);
-            if(booking == null) {
+            if (booking == null) {
                 noBookings = true;
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -347,7 +331,7 @@ public class EmployeeHomeController implements Initializable {
             e.printStackTrace();
         }
 
-        if(!noBookings){
+        if (!noBookings) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
             alert.setTitle("Cinego");
@@ -355,8 +339,7 @@ public class EmployeeHomeController implements Initializable {
             alert.setHeaderText("Warning: screening is booked");
             alert.setContentText("You can't delete a screening with existing bookings, " + Main.user.getFirstName() + " !");
             alert.showAndWait();
-        }
-        else{
+        } else {
             //Prompts user to confirm deleting the selected screening
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -402,15 +385,19 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * Updates the moviesTable with movie specific data from the database
+     * Updates the filmsTable with movie specific data from the database
      */
-    private void populateMoviesTable() {
+    private void populateFilmsTable() {
         try {
-            moviesData = FilmDAO.getFilmObservableList();
-            moviesTable.setItems(moviesData);
+            filmObservableList = FilmDAO.getFilmObservableList();
+            filmsTable.setItems(filmObservableList);
+
+            filmObservableList.addListener((ListChangeListener<Film>) c -> {
+                filmsTable.setItems(filmObservableList);
+            });
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateMoviesTable", "Failed to load data to populate the movies table. See: " + e);
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "populateFilmsTable", "Failed to load data to populate the movies table. See: " + e);
         }
     }
 
@@ -432,6 +419,7 @@ public class EmployeeHomeController implements Initializable {
      */
     private void populateMovieSelectionBox() {
         try {
+            movieSelectionBox.getItems().clear();
             movieSelectionBox.getItems().addAll(FilmDAO.getFilmObservableList());
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -443,9 +431,14 @@ public class EmployeeHomeController implements Initializable {
      * Retrieves the filmId of the selected film object in the film table (not screening table)
      */
     @FXML
-    private void getFilmID(){
-        selectedFilmId = moviesTable.getSelectionModel().getSelectedItem().getId();
-        editFilmButton.setDisable(false);
+    private void getFilmID() {
+        Film selectedFilm = filmsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedFilm != null) {
+            selectedFilmId = selectedFilm.getId();
+            editFilmButton.setDisable(false);
+
+        }
     }
 
     /**
@@ -478,42 +471,43 @@ public class EmployeeHomeController implements Initializable {
      * Upon "updating" a film's data, the changed data is being pushed into the database
      * to ensure data consistency across user sessions.
      */
-   @FXML
-   private void updateFilm(){
+    @FXML
+    private void updateFilm() {
 
         //read out and store new values from components if changed
-       title = titleTextField.getText();
-       description = descriptionTextArea.getText();
-       movieTrailerURL = trailerURLTextField.getText();
+        title = titleTextField.getText();
+        description = descriptionTextArea.getText();
+        movieTrailerURL = trailerURLTextField.getText();
 
-       try {
-           FilmDAO.updateFilm(title, description, filmImageName, movieTrailerURL, selectedFilmId);
-       } catch (SQLException | ClassNotFoundException e) {
-           LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilm", "Failed to update database with edited movie data. See: " + e);
-           e.printStackTrace();
-       }
-       editFilmButton.setDisable(true);
-       updateFilmButton.setDisable(true);
-       createFilmButton.setDisable(false);
+        try {
+            FilmDAO.updateFilm(title, description, filmImageName, movieTrailerURL, selectedFilmId);
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilm", "Failed to update database with edited movie data. See: " + e);
+            e.printStackTrace();
+        }
+        editFilmButton.setDisable(true);
+        updateFilmButton.setDisable(true);
+        createFilmButton.setDisable(false);
 
-       //Inform user of successful updating of movie
-       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-       Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
-       alert.setTitle("Cinego");
-       popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-       alert.setHeaderText("Success: updated film");
-       alert.setContentText("You have successfully updated the film "+titleTextField.getText()+", "+Main.user.getFirstName());
-       PauseTransition delay = new PauseTransition(Duration.seconds(4));
-       delay.setOnFinished(e -> popup.hide());
-       popup.show();
-       delay.play();
+        //Inform user of successful updating of movie
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage popup = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert.setTitle("Cinego");
+        popup.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
+        alert.setHeaderText("Success: updated film");
+        alert.setContentText("You have successfully updated the film " + titleTextField.getText() + ", " + Main.user.getFirstName());
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
 
-       titleTextField.clear();
-       descriptionTextArea.clear();
-       trailerURLTextField.clear();
+        titleTextField.clear();
+        descriptionTextArea.clear();
+        trailerURLTextField.clear();
 
-       populateMoviesTable();
-       populateScreeningsTable();
+        populateFilmsTable();
+        populateScreeningsTable();
+        populateMovieSelectionBox();
 
-   }
+    }
 }

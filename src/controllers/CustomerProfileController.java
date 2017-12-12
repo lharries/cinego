@@ -35,7 +35,7 @@ public class CustomerProfileController implements Initializable {
     @FXML
     private Button updateProfileBttn, editProfileBttn;
     @FXML
-    private TextField custFirstNameField, custLastNameField, custEmailField, custPhone;
+    private TextField custFirstNameField, custLastNameField, custEmailField;
     @FXML
     private Button deleteBooking, cancelUpdatingProfileBttn;
     @FXML
@@ -171,10 +171,6 @@ public class CustomerProfileController implements Initializable {
             custLastNameField.setEditable(textFieldEditable);
             custEmailField.setText(Main.user.getEmail());
             custEmailField.setEditable(textFieldEditable);
-            //TODO: store customer's phone number in database
-//        custPhone.setText(Main.user.getPhone());
-            custPhone.setEditable(textFieldEditable);
-
         }
         if (!textFieldEditable) {
 
@@ -193,9 +189,6 @@ public class CustomerProfileController implements Initializable {
             custEmailField.clear();
             custEmailField.setPromptText(Main.user.getEmail());
             custEmailField.setEditable(textFieldEditable);
-            //TODO: store customer's phone number in database
-//        custPhone.setText(Main.user.getPhone());
-            custPhone.setEditable(textFieldEditable);
         }
 
     }

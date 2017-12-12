@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -22,19 +23,21 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
-
-      <!--Customer profile details-->
-      <Button fx:id="editProfileBttn" layoutX="158.0" layoutY="143.0" mnemonicParsing="false" onAction="#setCustProfileEditable" text="Edit profile" />
-      <TextField fx:id="custFirstNameField" editable="false" layoutX="119.0" layoutY="247.0" promptText="First name" />
-      <TextField fx:id="custLastNameField" editable="false" layoutX="112.0" layoutY="341.0" promptText="Last name" />
-      <TextField fx:id="custEmailField" editable="false" layoutX="121.0" layoutY="436.0" promptText="you@gmail.com" />
-      <TextField fx:id="custPhone" editable="false" layoutX="129.0" layoutY="524.0" promptText="+44 78345 123646" />
-      <Button fx:id="cancelUpdatingProfileBttn" disable="true" layoutX="135.0" layoutY="576.0" mnemonicParsing="false" onAction="#cancelUpdating" text="Cancel" />
-      <Button fx:id="updateProfileBttn" layoutX="236.0" layoutY="576.0" mnemonicParsing="false" onAction="#updateCustomerProfile" text="update" />
-      <Label layoutX="135.0" layoutY="497.0" text="Your phone Number" />
-      <Label layoutX="130.0" layoutY="310.0" text="Last name" />
-      <Label layoutX="119.0" layoutY="216.0" text="First name" />
-      <Label layoutX="139.0" layoutY="405.0" text="E-Mail Address" />
+      <Group layoutX="149.0" layoutY="229.0">
+         <children>
+      
+                  <!--Customer profile details-->
+            <Button fx:id="editProfileBttn" layoutX="42.0" layoutY="180.0" mnemonicParsing="false" onAction="#setCustProfileEditable" text="Edit profile" />
+            <TextField fx:id="custFirstNameField" editable="false" layoutX="1.0" layoutY="23.0" promptText="First name" />
+            <TextField fx:id="custLastNameField" editable="false" layoutX="1.0" layoutY="82.0" promptText="Last name" />
+            <TextField fx:id="custEmailField" editable="false" layoutX="1.0" layoutY="143.0" promptText="you@gmail.com" />
+            <Button fx:id="cancelUpdatingProfileBttn" disable="true" layoutX="2.0" layoutY="216.0" mnemonicParsing="false" onAction="#cancelUpdating" text="Cancel" />
+            <Button fx:id="updateProfileBttn" layoutX="96.0" layoutY="216.0" mnemonicParsing="false" onAction="#updateCustomerProfile" text="update" />
+            <Label layoutX="1.0" layoutY="58.0" text="Last name" />
+            <Label text="First name" />
+            <Label layoutX="4.0" layoutY="118.0" text="E-Mail Address" />
+         </children>
+      </Group>
       <Label layoutX="484.0" layoutY="101.0" prefHeight="17.0" prefWidth="180.0" text="Your booking history" />
 
       <!--Bookings table-->
@@ -46,6 +49,7 @@
          </columns>
       </TableView>
       <Button fx:id="deleteBooking" disable="true" layoutX="1083.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteMovieBooking" text="Delete" />
+      <Label layoutX="144.0" layoutY="101.0" prefHeight="17.0" prefWidth="180.0" text="Your Profile" />
 
    </children>
 </AnchorPane>

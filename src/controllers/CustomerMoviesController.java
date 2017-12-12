@@ -190,8 +190,6 @@ public class CustomerMoviesController implements Initializable {
 
         // Try and get the film if it's found
         try {
-//            System.out.println(film.getImagePath());
-//            System.out.println(getClass().ggetResource(film.getImagePath()).toString());
             selectedFilmImage.setImage(new Image(film.getImagePath()));
             selectedFilmImage.setVisible(true);
         } catch (IllegalArgumentException e) {

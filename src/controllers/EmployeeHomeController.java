@@ -37,7 +37,7 @@ import java.util.logging.Logger;
  * of the cinema booking system - 'Cinego'.
  *
  * @author lukeharries, kaikalsen
- * @version 1.0
+ * @version 1.0.0
  */
 public class EmployeeHomeController implements Initializable {
 

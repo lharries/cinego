@@ -23,15 +23,13 @@ import models.Employee;
 import models.EmployeeDAO;
 
 
-public class LoginController implements Initializable {
-
-    //TODO: FEATURE add password reset functionality via e-Mail sent to user e-Mail client References: https://codereview.stackexchange.com/questions/114005/javafx-email-client
-
-    /**
-     * The login stage
-     */
-    private Stage primaryStage = new Stage();
-
+/**
+ * This class controls the login view and allows the user to log into his respective profile
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
+ */
+public class LoginController{
 
     @FXML
     private TextField usernameTextField;
@@ -42,10 +40,7 @@ public class LoginController implements Initializable {
     @FXML
     private Label loginUnsuccessfulMessage;
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
+    private Stage primaryStage = new Stage();
 
     /**
      * Checks if the login details are corrected and if so opens the relevant new stage
@@ -80,9 +75,6 @@ public class LoginController implements Initializable {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-//            };
-//        });
     }
 
     /**
@@ -133,6 +125,7 @@ public class LoginController implements Initializable {
      * @return
      */
     protected Scene createScene(BorderPane root) {
+
         Scene scene = new Scene(root);
         scene.getStylesheets().setAll(getClass().getResource("/application/application.css").toExternalForm());
         return scene;
@@ -152,17 +145,10 @@ public class LoginController implements Initializable {
         // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
         System.out.println(getClass().getResourceAsStream(Navigation.CUST_ROOT));
         BorderPane customerRoot = (BorderPane) loader.load(getClass().getResourceAsStream(Navigation.CUST_ROOT));
-
-
-        //testing rendering speed
-//        customerRoot.setCache(true);
-//        customerRoot.setCacheHint(CacheHint.SPEED);
-
         CustomerRootController custRootContr = loader.getController();
 
-        // sets controller for the user root layout
+        // sets controller for the user root layout & loads first fxml file with a navigator method
         Navigation.setCustomerController(custRootContr);
-        // loads first fxml file with a navigator method
         Navigation.loadCustFxml(Navigation.CUST_PROFILE_VIEW);
 
         return customerRoot;
@@ -177,7 +163,6 @@ public class LoginController implements Initializable {
      */
     private BorderPane loadEmpBorderPane() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        // loading the intial root with BoarderPane layout. CustRoot becomes root for other screens to be added into
         BorderPane employeeRoot = (BorderPane) loader.load(getClass().getResourceAsStream(Navigation.EMPL_ROOT));
         EmployeeRootController emplRootContr = loader.getController();
 

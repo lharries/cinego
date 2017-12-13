@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * the respective scenes.
  *
  * @author lukeharries kaiklasen
- * @version 1.0
+ * @version 1.0.0
  */
 public class EmployeeRootController implements Initializable {
 

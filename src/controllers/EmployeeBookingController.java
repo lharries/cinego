@@ -21,6 +21,9 @@ import java.util.logging.Logger;
 /**
  * View controller allowing employee to see which seats have been booked for a particular screening
  * clicking on a booked seat shows the customers booking information
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
  */
 public class EmployeeBookingController implements Initializable {
 

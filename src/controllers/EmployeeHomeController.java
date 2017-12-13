@@ -249,7 +249,7 @@ public class EmployeeHomeController implements Initializable {
             alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
         }
         else if(screeningDates.contains(dateTime)) {
-            alert.setHeaderText("Error: overlapping screeningDates");
+            alert.setHeaderText("Error: overlapping screening times");
             alert.setContentText("Please choose a screening date and time slot that's still available, " + Main.user.getFirstName());
         }
         else {

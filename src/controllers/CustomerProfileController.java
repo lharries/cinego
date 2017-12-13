@@ -155,6 +155,7 @@ public class CustomerProfileController implements Initializable {
     }
 
     /**
+     * Sets the input fields to editable and populates them with prompt text
      * @param textFieldEditable
      */
 
@@ -197,7 +198,7 @@ public class CustomerProfileController implements Initializable {
     }
 
     /**
-     * Purpose: called upon clicking the update profile button. Updates the database with the user's
+     * Called upon clicking the update profile button. Updates the database with the user's
      * input data upon click event.
      */
     @FXML
@@ -256,8 +257,9 @@ public class CustomerProfileController implements Initializable {
     }
 
     /**
-     * References:
-     * - https://www.youtube.com/watch?v=oZUGMpGQxgQ
+     * Allows the customer to delete a future film booking
+     * Sources:
+     *  - https://www.youtube.com/watch?v=oZUGMpGQxgQ
      */
     @FXML
     private void deleteMovieBooking() throws ParseException {

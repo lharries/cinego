@@ -89,6 +89,7 @@ public class CustomerProfileController implements Initializable {
                     return new ReadOnlyObjectWrapper<String>(film.getTitle());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "CustomerProfileController", "initCellFactories", "Failed to load films data (title) from database. See" + e);
                 }
                 return new ReadOnlyObjectWrapper<String>("");
             }
@@ -106,6 +107,7 @@ public class CustomerProfileController implements Initializable {
                     return new ReadOnlyObjectWrapper<String>(screening.getDate());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "CustomerProfileController", "initCellFactories", "Failed to load films data (date) from database. See" + e);
                 }
                 return new ReadOnlyObjectWrapper<String>("");
             }
@@ -120,6 +122,7 @@ public class CustomerProfileController implements Initializable {
                     return new ReadOnlyObjectWrapper<String>(seat.getName());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
+                    LOGGER.logp(Level.WARNING, "CustomerProfileController", "initCellFactories", "Failed to load films data (seats) from database. See" + e);
                 }
                 return new ReadOnlyObjectWrapper<String>("");
             }

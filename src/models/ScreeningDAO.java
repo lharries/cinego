@@ -6,6 +6,7 @@ import utils.SQLiteUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -46,6 +47,30 @@ public class ScreeningDAO {
 
         return getScreeningList(resultSetScreenings);
     }
+
+
+
+
+    //TODO: KAI WROTE THESE METHODS. CHECK IF THEY'RE SOUND
+    public static ObservableList<Date> getScreeningDatesObservableList() throws SQLException, ClassNotFoundException, ParseException {
+        ResultSet resultSetScreenings = SQLiteUtil.executeQuery("SELECT date FROM Screening", null);
+        return getScreeningDateList(resultSetScreenings);
+    }
+    private static ObservableList<Date> getScreeningDateList(ResultSet resultSet) throws SQLException, ClassNotFoundException, ParseException {
+        ObservableList<Date> screeningDateList = FXCollections.observableArrayList();
+        while (resultSet.next()) {
+            Screening screeningDate = new Screening();
+            String screeningDateString = resultSet.getString("date");
+            screeningDate.setDate(screeningDateString);
+            Date screeningDateDate = screeningDate.getDateObject();
+            //added
+            screeningDateList.add(screeningDateDate);
+        }
+        return screeningDateList;
+    }
+
+
+
 
     private static ObservableList<Screening> getScreeningList(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         ObservableList<Screening> screeningList = FXCollections.observableArrayList();

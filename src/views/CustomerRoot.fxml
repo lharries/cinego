@@ -11,7 +11,9 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="customerPane" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerRootController">
-   <top>
+
+    <!--App's header -->
+    <top>
       <AnchorPane prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
@@ -42,8 +44,6 @@
                </font>
             </Label>
             <Button fx:id="toCustomerProfile" alignment="BOTTOM_CENTER" layoutX="668.0" layoutY="54.0" mnemonicParsing="false" onAction="#openProfileView" opacity="0.0" prefHeight="43.0" prefWidth="600.0" text="Customer Profile" />
-
-             <!--Logout image-->
             <ImageView fx:id="logoutImg" fitHeight="41.0" fitWidth="41.0" layoutX="1214.0" layoutY="5.0"></ImageView>
             <Label layoutX="1153.0" layoutY="14.0" text="Logout" textFill="WHITE">
                <font>
@@ -54,10 +54,14 @@
          </children>
       </AnchorPane>
     </top>
+
+    <!--App's main content area-->
     <center>
         <AnchorPane prefHeight="750.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
     </center>
-   <bottom>
+
+    <!--App' footer-->
+    <bottom>
       <AnchorPane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
@@ -72,4 +76,5 @@
          </children>
       </AnchorPane>
    </bottom>
+
 </BorderPane>

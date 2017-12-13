@@ -33,6 +33,8 @@
         <Rectangle fx:id="rect" fill="#868c94" height="2.5" stroke="TRANSPARENT" strokeType="INSIDE" width="640.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
         <Line endX="200.0" fill="#00000099" layoutX="461.0" layoutY="34.0" startX="-200.0" strokeWidth="15.0" />
+
+
         <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="264.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../resources/selected-seat.png" />

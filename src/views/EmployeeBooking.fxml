@@ -16,6 +16,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeBookingController">
    <children>
+
+      <!--background image + header details-->
       <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/cinBackgroundSML.jpg" backgroundLoading="false" />
@@ -24,8 +26,9 @@
             <ColorAdjust saturation="-0.88" />
          </effect>
       </ImageView>
-
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
+
+      <!--seating map-->
       <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="329.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/avaliable-seat.png" />
@@ -75,6 +78,8 @@
             <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="63.0" valignment="CENTER" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
+
+      <!--descriptive statistics right hand side-->
       <Label fx:id="bookedSeats" alignment="CENTER" layoutX="946.0" layoutY="122.0" prefHeight="58.0" prefWidth="152.0" text="Booked seats:" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
@@ -107,6 +112,6 @@
          </font>
       </Label>
       <Label layoutX="956.0" layoutY="295.0" prefHeight="72.0" prefWidth="277.0" text="Click on a booking for customer information" wrapText="true" />
-      <!--<PieChart fx:id="seatsBookedPieChart" layoutX="999.0" layoutY="239.0" prefHeight="208.0" prefWidth="203.0" />-->
+
    </children>
 </AnchorPane>

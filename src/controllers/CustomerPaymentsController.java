@@ -58,7 +58,7 @@ public class CustomerPaymentsController implements Initializable {
 
     public static ArrayList<Seat> seats;
 
-    public Integer price; // TODO Change this, just for testing
+    public Integer price;
 
     private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
@@ -81,17 +81,11 @@ public class CustomerPaymentsController implements Initializable {
             if (film != null) {
                 filmText.setText(film.getTitle());
             }
-        } catch (SQLException |
-                ClassNotFoundException e)
-
-        {
+        } catch (SQLException | ClassNotFoundException e) {
             LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "initialize", "unable to get film" + e);
             e.printStackTrace();
         }
-
-        if (seats != null && seats.size() > 0)
-
-        {
+        if (seats != null && seats.size() > 0) {
             ObservableList<Seat> seatObservableList = FXCollections.observableList(seats);
             selectedSeatsList.setItems(seatObservableList);
         }
@@ -125,6 +119,7 @@ public class CustomerPaymentsController implements Initializable {
             } catch (CardException | APIException | AuthenticationException | APIConnectionException | InvalidRequestException e) {
                 errorMessageText.setText("Message from stripe API: " + e.getMessage());
                 errorMessageText.setVisible(true);
+                LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "payBtnHandler", "unable to call stripe API" + e);
                 e.printStackTrace();
             }
 
@@ -168,6 +163,7 @@ public class CustomerPaymentsController implements Initializable {
         } catch (NumberFormatException e) {
             errorMessageText.setText("Invalid credit card number");
             errorMessageText.setVisible(true);
+            LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "getCardInfo", "invalid credit card number. See" + e);
             return;
         }
 
@@ -176,6 +172,7 @@ public class CustomerPaymentsController implements Initializable {
         } catch (NumberFormatException e) {
             errorMessageText.setText("Invalid expiry month");
             errorMessageText.setVisible(true);
+            LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "getCardInfo", "invalid expiry date. See" + e);
             return;
         }
         try {
@@ -183,6 +180,7 @@ public class CustomerPaymentsController implements Initializable {
         } catch (NumberFormatException e) {
             errorMessageText.setText("Invalid expiry year");
             errorMessageText.setVisible(true);
+            LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "getCardInfo", "invalid expiry year. See" + e);
             return;
         }
 
@@ -191,6 +189,7 @@ public class CustomerPaymentsController implements Initializable {
         } catch (NumberFormatException e) {
             errorMessageText.setText("Invalid cvcField");
             errorMessageText.setVisible(true);
+            LOGGER.logp(Level.WARNING, "CustomerPaymentsController", "getCardInfo", "invalid cvc number. See" + e);
             return;
         }
 

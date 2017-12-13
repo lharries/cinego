@@ -41,17 +41,6 @@ import java.util.logging.Logger;
  */
 public class EmployeeHomeController implements Initializable {
 
-    //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
-
-
-    //TODO: add loggers to the validation for us
-
-    //TODO: ASK LUKE ABOUT THE CORRECT DATE / TIME FORMAT
-    //TODO: add tooltips to buttons in order to convey additional information w.r.t. their functionality References: https://stackoverflow.com/questions/25338873/is-there-a-simple-way-to-display-hint-texts-in-javafx
-
-    @FXML
-    private Button deleteBooking;
-
     @FXML
     private Button toSeatBooking, deleteScreening, editFilmButton, updateFilmButton, createFilmButton;
 
@@ -150,6 +139,7 @@ public class EmployeeHomeController implements Initializable {
                 Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to copy the film poster file into local repository. See: " + e);
             }
         }
     }
@@ -240,6 +230,7 @@ public class EmployeeHomeController implements Initializable {
             dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateTimeString);
         } catch (ParseException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "validateScreening", "Failed to parse dateTimeString into dateTime. See: " + e);
         }
         //perform validity checks: empty & dateSelected < now
         if (movieTitle == null || screeningTime == null || dateTime == null) {
@@ -249,10 +240,6 @@ public class EmployeeHomeController implements Initializable {
         if (now.compareTo(dateTime) > 0) {
             alert.setHeaderText("Error: screening date in the past");
             alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
         }
         else if(screenings.contains(dateTime)) {
             alert.setHeaderText("Error: overlapping screenings");
@@ -377,16 +364,13 @@ public class EmployeeHomeController implements Initializable {
      */
     @FXML
     private void openSeatsBooked(ActionEvent event) {
-        //TODO: @Luke: open a movie's specific "seats booked overview" +
-
 
         try {
             EmployeeBookingController.selectedScreening = ScreeningDAO.getScreeningById(selectedScreeningId);
             EmployeeRootController emplRootController = new EmployeeRootController();
             emplRootController.openBookingView(event);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "openSeatsBooked", "Failed to load the retrieve Screening by ID and load the booking view. See: " + e);
             e.printStackTrace();
         }
         toSeatBooking.setDisable(true);
@@ -498,8 +482,8 @@ public class EmployeeHomeController implements Initializable {
         try {
             FilmDAO.updateFilm(title, description, filmImageName, movieTrailerURL, selectedFilmId);
         } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilmBtnHandler", "Failed to update database with edited movie data. See: " + e);
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilmBtnHandler", "Failed to update database with edited movie data. See: " + e);
         }
         editFilmButton.setDisable(true);
         updateFilmButton.setDisable(true);

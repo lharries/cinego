@@ -86,8 +86,10 @@ public class EmployeeHomeController implements Initializable {
      * Sets the column titles of both tables and populates them with data from the database,
      * intialises the movieSelectionBox with the latest movies and renderes the background Image of the view
      *
-     * @param location
-     * @param resources
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -152,8 +154,8 @@ public class EmployeeHomeController implements Initializable {
      * Validates user input before creating a movie.
      * Informs the user of outcome of test and only creates the movie when input is correct
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     @FXML
     private void filmValidation() throws SQLException, ClassNotFoundException {
@@ -188,8 +190,8 @@ public class EmployeeHomeController implements Initializable {
      * Method that creates a new movie by inserting the user input into the database and re-populating
      * the movieTable from the database
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     @FXML
     private void createFilm() throws SQLException, ClassNotFoundException {
@@ -209,8 +211,8 @@ public class EmployeeHomeController implements Initializable {
      * Tests if input variables to create a screening are correct.
      * Informs the user of outcome of test and only creates screening when input is correct
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     @FXML
     private void validateScreening() throws SQLException, ClassNotFoundException, ParseException {
@@ -247,12 +249,10 @@ public class EmployeeHomeController implements Initializable {
         if (now.compareTo(dateTime) > 0) {
             alert.setHeaderText("Error: screening date in the past");
             alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
-        }
-        else if(screeningDates.contains(dateTime)) {
+        } else if (screeningDates.contains(dateTime)) {
             alert.setHeaderText("Error: overlapping screening times");
             alert.setContentText("Please choose a screening date and time slot that's still available, " + Main.user.getFirstName());
-        }
-        else {
+        } else {
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
 
@@ -269,8 +269,8 @@ public class EmployeeHomeController implements Initializable {
     /**
      * Creates a new screening to inserting the user data into the database and re-populating the screeningTable
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
@@ -366,7 +366,7 @@ public class EmployeeHomeController implements Initializable {
     }
 
     /**
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     private void openSeatsBooked(ActionEvent event) {

@@ -18,6 +18,8 @@ import models.EmployeeDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -26,7 +28,9 @@ import java.sql.SQLException;
  * @author lukeharries kaiklasen
  * @version 1.0.0
  */
-public class LoginController{
+public class LoginController {
+
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
 
     @FXML
     private TextField usernameTextField;
@@ -79,7 +83,7 @@ public class LoginController{
      * customerRoot view when a system user logs in as a user. Additionally this method hides the
      * login screen.
      *
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     public void employeeLoginBtnHandler(Event event) {
@@ -106,9 +110,8 @@ public class LoginController{
                 loginUnsuccessfulMessage.setText("Invalid login - please try again");
                 usernameTextField.requestFocus();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "LoginController", "employeeLoginBtnHandler", "unable to login employee" + e);
             e.printStackTrace();
         }
     }
@@ -117,8 +120,8 @@ public class LoginController{
      * Static method that sets the scene and adds styling via the CSS stylesheet with a
      * BorderPane as a parameter.
      *
-     * @param root
-     * @return
+     * @param root root
+     * @return the scene created
      */
     protected Scene createScene(BorderPane root) {
 
@@ -132,7 +135,7 @@ public class LoginController{
      * the Navigation class to be used later on.
      *
      * @return BorderPane 'customerRoot'
-     * @throws IOException
+     * @throws IOException IOException
      */
     private BorderPane loadCustBorderPane() throws IOException {
 
@@ -154,7 +157,7 @@ public class LoginController{
      * the Navigation class to be used later on.
      *
      * @return BorderPane 'employeeRoot'
-     * @throws IOException
+     * @throws IOException IOException
      */
     private BorderPane loadEmpBorderPane() throws IOException {
         FXMLLoader loader = new FXMLLoader();

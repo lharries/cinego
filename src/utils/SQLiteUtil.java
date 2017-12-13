@@ -47,7 +47,7 @@ public class SQLiteUtil {
     /**
      * Disconnects from the database
      *
-     * @throws SQLException
+     * @throws SQLException SQLException
      */
     private static void disconnect() throws SQLException {
 
@@ -64,8 +64,8 @@ public class SQLiteUtil {
      *
      * @param query the query to execute
      * @param args  the prepared statement parameters
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static void execute(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
@@ -105,8 +105,8 @@ public class SQLiteUtil {
      * @param query the query to execute
      * @param args  the arguments for the prepared statement
      * @return the results of the query
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static ResultSet executeQuery(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
@@ -153,8 +153,8 @@ public class SQLiteUtil {
      *
      * @param query the query to execute
      * @param args  the arguments for the prepared statement
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static void executeUpdate(String query, Object[] args) throws SQLException, ClassNotFoundException {
 
@@ -192,7 +192,7 @@ public class SQLiteUtil {
      * @param preparedStatement the preparedstatement to add in the arguments
      * @param args              an array of the objects which are to be added to the prepared statement
      * @return
-     * @throws SQLException
+     * @throws SQLException SQLException
      */
     private static PreparedStatement createPreparedStatement(PreparedStatement preparedStatement, Object[] args) throws SQLException {
 

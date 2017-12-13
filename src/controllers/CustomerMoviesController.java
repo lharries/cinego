@@ -341,7 +341,7 @@ public class CustomerMoviesController implements Initializable {
     /**
      * Handle the date picker being used
      *
-     * @param actionEvent
+     * @param actionEvent actionEvent
      */
     public void datePickerHandler(ActionEvent actionEvent) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -359,7 +359,7 @@ public class CustomerMoviesController implements Initializable {
     /**
      * Clear all the filters and show all the films
      *
-     * @param actionEvent
+     * @param actionEvent actionEvent
      */
     public void showAllFilms(ActionEvent actionEvent) {
         datePicker.setValue(null);
@@ -373,8 +373,8 @@ public class CustomerMoviesController implements Initializable {
     /**
      * Change the date picker colors to show which dates have films showing on that date
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public void setColorsOfDatePicker() throws SQLException, ClassNotFoundException {
         ObservableList<Screening> screenings = ScreeningDAO.getScreeningObservableList();

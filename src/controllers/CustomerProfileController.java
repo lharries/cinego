@@ -56,8 +56,10 @@ public class CustomerProfileController implements Initializable {
      * Initializes the customer profile including Textfields and bookingsTable. Disables editing the Textfields
      * unless chosen by customer
      *
-     * @param location
-     * @param resources
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -154,6 +156,7 @@ public class CustomerProfileController implements Initializable {
 
     /**
      * Sets the input fields to editable and populates them with prompt text
+     *
      * @param textFieldEditable
      */
 
@@ -257,7 +260,7 @@ public class CustomerProfileController implements Initializable {
     /**
      * Allows the customer to delete a future film booking
      * Sources:
-     *  - https://www.youtube.com/watch?v=oZUGMpGQxgQ
+     * - https://www.youtube.com/watch?v=oZUGMpGQxgQ
      */
     @FXML
     private void deleteMovieBooking() throws ParseException {

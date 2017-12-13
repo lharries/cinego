@@ -39,8 +39,8 @@ public class BookingDAO {
      * @param seatId      the seat id
      * @param screeningId the screening id
      * @return {@link} the booking of that seat for that screening
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static Booking getBooking(int seatId, int screeningId) throws SQLException, ClassNotFoundException {
         Object[] preparedStatementArgs = {

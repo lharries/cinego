@@ -81,8 +81,8 @@ public class Booking {
      * Get the customer who made the booking
      *
      * @return the {@link Customer} the customer who made the booking
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public Customer getCustomer() throws SQLException, ClassNotFoundException {
         return CustomerDAO.getById(getCustomerId());

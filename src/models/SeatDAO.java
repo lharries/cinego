@@ -21,8 +21,8 @@ public class SeatDAO {
      * Selects all the seats from the database
      *
      * @return observable list of all the seats
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static ObservableList<Seat> getSeatObservableList() throws SQLException, ClassNotFoundException {
         ResultSet resultSetSeats = SQLiteUtil.executeQuery("SELECT * FROM Seat", null);
@@ -30,6 +30,14 @@ public class SeatDAO {
         return getSeatList(resultSetSeats);
     }
 
+    /**
+     * Convert the results set list into an observable list
+     *
+     * @param resultSet the resultSet of the seats
+     * @return Observable list of the seats
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
+     */
     private static ObservableList<Seat> getSeatList(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         ObservableList<Seat> seatList = FXCollections.observableArrayList();
 
@@ -53,8 +61,8 @@ public class SeatDAO {
      * @param column the column of the seat from 1-8
      * @param row    the row of the seat from A-E
      * @param name   the name of the seat in the format row column e.g. A9
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static void insertSeat(int column, String row, String name) throws SQLException, ClassNotFoundException {
         Object[] args = {
@@ -77,8 +85,8 @@ public class SeatDAO {
      * Removes the {@link Seat} from the database with id
      *
      * @param id the {@link Seat} instance to remove
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static void deleteSeat(int id) throws SQLException, ClassNotFoundException {
         Object[] args = {
@@ -98,8 +106,8 @@ public class SeatDAO {
      * @param column the column that the seat is in
      * @param row    the row that the seat is in
      * @return the {@link Seat} instance
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static Seat getSeatByLocation(int column, String row) throws SQLException, ClassNotFoundException {
         Object[] args = {
@@ -123,8 +131,8 @@ public class SeatDAO {
      *
      * @param id the seat id
      * @return the {@link Seat} instance
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     public static Seat getSeatsById(int id) throws SQLException, ClassNotFoundException {
 
@@ -152,8 +160,8 @@ public class SeatDAO {
      *
      * @param resultSet the seat data retrieved from the database
      * @return {@link Seat} instance
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException           SQLException
+     * @throws ClassNotFoundException ClassNotFoundException the JDBC SQLite library needs to be registered as a dependency
      */
     private static Seat getSeatFromResultSet(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         if (resultSet.next()) {

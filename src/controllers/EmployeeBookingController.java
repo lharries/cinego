@@ -44,7 +44,7 @@ public class EmployeeBookingController implements Initializable {
     /**
      * Loads the Employee Home screen where they can perform their tasks
      *
-     * @param event
+     * @param event ActionEvent
      * @throws IOException
      */
     @FXML

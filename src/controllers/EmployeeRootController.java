@@ -63,7 +63,7 @@ public class EmployeeRootController implements Initializable {
      * method to be called by different employee controllers to set their respective views to the
      * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
-     * @param node
+     * @param node node
      */
     public void setCenter(javafx.scene.Node node) {
         employeePane.setCenter(node);
@@ -72,7 +72,7 @@ public class EmployeeRootController implements Initializable {
     /**
      * opens the employee's Home View (scene located within employeeRoot) where they can see the movies
      *
-     * @param event
+     * @param event ActionEvent
      */
 
     @FXML
@@ -86,7 +86,7 @@ public class EmployeeRootController implements Initializable {
     }
 
     /**
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     public void openBookingView(ActionEvent event) {
@@ -101,7 +101,7 @@ public class EmployeeRootController implements Initializable {
     /**
      * logs user out of cinema system
      *
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     public void logout(ActionEvent event) {

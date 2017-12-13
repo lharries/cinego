@@ -190,11 +190,13 @@ public class Film {
     }
 
     /**
+     * Get the screenings for a particular date, used to show films for that date
+     * <p>
      * Reference:
      * - https://stackoverflow.com/questions/2517709/comparing-two-java-util-dates-to-see-if-they-are-in-the-same-day
      *
-     * @param selectedDate
-     * @return
+     * @param selectedDate the date to create a new movie
+     * @return a filtered list of screenings for that date
      */
     public FilteredList<Screening> getScreeningsByDate(Date selectedDate) {
         return getScreenings().filtered(screening -> {

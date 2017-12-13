@@ -45,8 +45,10 @@ public class CustomerRootController implements Initializable {
     /**
      * Initializes the customer root layer with logo, logout image and user credentials
      *
-     * @param location
-     * @param resources
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,7 +72,7 @@ public class CustomerRootController implements Initializable {
      * Called by different user controllers to set their respective views to the
      * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
-     * @param node
+     * @param node node
      */
     public void setCenter(javafx.scene.Node node) {
         customerPane.setCenter(node);
@@ -81,7 +83,7 @@ public class CustomerRootController implements Initializable {
      * Opens the user's ProgramView (scene located within customerRoot) where they can see the list of
      * available movies
      *
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     public void openProgramView(ActionEvent event) {
@@ -98,7 +100,7 @@ public class CustomerRootController implements Initializable {
      * booked movies and edit their own profile details
      * available movies
      *
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     public void openProfileView(ActionEvent event) {
@@ -113,7 +115,7 @@ public class CustomerRootController implements Initializable {
     /**
      * logs user out of cinema system
      *
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     public void logout(ActionEvent event) {

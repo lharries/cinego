@@ -5,10 +5,13 @@ import com.stripe.exception.*;
 import com.stripe.model.Charge;
 import com.stripe.model.Token;
 import com.stripe.net.RequestOptions;
+import controllers.EmployeeRootController;
 import models.PaymentInfo;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Custom payments handler for stripe! Api keys are only test keys. In production mode you would
@@ -19,11 +22,18 @@ import java.util.Map;
  */
 public class PaymentsUtil {
 
+    private static final Logger LOGGER = Logger.getLogger(EmployeeRootController.class.getName());
+
     /**
      * Charge the credit card details using stripe
      *
      * @param paymentInfo The {@link PaymentInfo} object including which card to charge and how much
      * @return whether the charge was successful
+     * @throws CardException           CardException There is a problem with the card
+     * @throws APIException            APIException there is a problem with the api
+     * @throws AuthenticationException AuthenticationException there is a problem authenticating
+     * @throws InvalidRequestException InvalidRequestException invalid request
+     * @throws APIConnectionException  APIConnectionException unable to connect to the api
      */
     public static boolean chargeCreditCard(PaymentInfo paymentInfo) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
         try {
@@ -47,11 +57,11 @@ public class PaymentsUtil {
      * @param expiryYear  the year of expiry
      * @param cvc         the cvc number
      * @return the token
-     * @throws CardException
-     * @throws APIException
-     * @throws AuthenticationException
-     * @throws InvalidRequestException
-     * @throws APIConnectionException
+     * @throws CardException           CardException There is a problem with the card
+     * @throws APIException            APIException there is a problem with the api
+     * @throws AuthenticationException AuthenticationException there is a problem authenticating
+     * @throws InvalidRequestException InvalidRequestException invalid request
+     * @throws APIConnectionException  APIConnectionException unable to connect to the api
      */
     private static Token createToken(long cardNumber, int expiryMonth, int expiryYear, int cvc) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
         String publicApiKey = "pk_test_niT9sIktsQx3n0R6btPFVeCB";
@@ -83,7 +93,6 @@ public class PaymentsUtil {
      * made accessible to the public
      *
      * @param token The token from which the credit card was made
-     * @return
      */
     private static void createCharge(Token token, int price) {
         String privateApiKey = "sk_test_EgItpWbz0JklAlzlo4zpQSsn";
@@ -96,8 +105,10 @@ public class PaymentsUtil {
         chargeMap.put("currency", "GBP");
         chargeMap.put("source", token.getId());
         try {
-            Charge.create(chargeMap, requestOptions);
+            Charge charge = Charge.create(chargeMap, requestOptions);
+            LOGGER.logp(Level.INFO, "PaymentsUtil", "createCharge", "charge created" + charge);
         } catch (StripeException e) {
+            LOGGER.logp(Level.WARNING, "PaymentsUtil", "createCharge", "Unable to create the charge" + e);
             e.printStackTrace();
         }
     }

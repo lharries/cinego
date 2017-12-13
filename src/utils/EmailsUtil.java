@@ -30,6 +30,7 @@ public class EmailsUtil {
      * References:
      * - https://app.sendgrid.com/guide/integrate/langs/java
      *
+     * @param toEmail     who you are sending the email to
      * @param headerText  the message header
      * @param contentText the message content
      */
@@ -65,7 +66,7 @@ public class EmailsUtil {
      * @param screeningDate the date and time of the screening
      * @param filmName      the name of the film
      * @param seats         the seats which have been booked
-     * @return
+     * @return the email content containing the names, dates and seats bookedg
      */
     public static String createBookingEmailContent(String screeningDate, String filmName, ArrayList<Seat> seats) {
         StringBuilder emailContent = new StringBuilder();

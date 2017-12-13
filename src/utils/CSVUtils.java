@@ -20,7 +20,11 @@ public class CSVUtils {
      * - https://community.oracle.com/thread/2397100
      * - http://csvjdbc.sourceforge.net/
      *
-     * @throws IOException
+     * @throws IOException            IOException
+     * @throws ClassNotFoundException The resources used to localize the root object, or <tt>null</tt> if
+     *                                the root object was not localized.
+     * @throws SQLException           The location used to resolve relative paths for the root object, or
+     *                                <tt>null</tt> if the location is not known.
      */
     @FXML
     public static void exportToCSV() throws IOException, ClassNotFoundException, SQLException {

@@ -7,8 +7,11 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<BorderPane fx:id="employeePane" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeRootController">
+
+<BorderPane fx:id="employeePane" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeRootController">
+
+    <!--App's header section-->
+>>>>>>> origin/cleanup-kai
     <top>
         <AnchorPane prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
@@ -30,9 +33,6 @@
                     </font></Label>
 
                 <ImageView fx:id="logoutImg" fitHeight="41.0" fitWidth="41.0" layoutX="1214.0" layoutY="5.0">
-                    <!--<image>-->
-                    <!--<Image url="@../resources/logout.png" />-->
-                    <!--</image>-->
                 </ImageView>
                 <Label layoutX="1153.0" layoutY="14.0" text="Logout" textFill="WHITE">
                     <font>
@@ -44,25 +44,23 @@
             </children>
         </AnchorPane>
     </top>
+
+    <!--App's main content section-->
     <center>
         <ImageView fx:id="background" fitHeight="750.0" fitWidth="1280.0" opacity="0.32" pickOnBounds="true" preserveRatio="true" scaleZ="100.0" BorderPane.alignment="CENTER">
-            <!--<image>-->
-            <!--<Image url="@../resources/films.jpg" />-->
-            <!--</image>-->
             <effect>
                 <ColorAdjust saturation="-0.88" />
             </effect>
         </ImageView>
     </center>
+
+    <!--App's footer section-->
     <bottom>
         <AnchorPane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
                 <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff" height="46.0" layoutX="678.0" layoutY="5.0" stroke="#f3f3f3" strokeType="INSIDE" width="46.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="678.0" AnchorPane.rightAnchor="556.0" AnchorPane.topAnchor="2.0" />
                 <ImageView fx:id="logo" fitHeight="42.0" fitWidth="42.0" layoutX="680.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="558.0" AnchorPane.topAnchor="4.0">
-                    <!--<image>-->
-                    <!--<Image url="@cinestar.png" />-->
-                    <!--</image>-->
                 </ImageView>
                 <Text fill="WHITE" layoutX="431.0" layoutY="-12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">
                     <font>
@@ -72,4 +70,5 @@
             </children>
         </AnchorPane>
     </bottom>
+
 </BorderPane>

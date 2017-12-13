@@ -28,8 +28,6 @@ import java.util.logging.Logger;
  */
 public class CustomerRootController implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
-
     @FXML
     private BorderPane customerPane;
 
@@ -42,6 +40,14 @@ public class CustomerRootController implements Initializable {
     @FXML
     private ImageView logoutImg, logo;
 
+    private static final Logger LOGGER = Logger.getLogger(CustomerRootController.class.getName());
+
+    /**
+     * Initializes the customer root layer with logo, logout image and user credentials
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -55,14 +61,13 @@ public class CustomerRootController implements Initializable {
         image = new Image(file.toURI().toString());
         logo.setImage(image);
 
-
         //set user's first + lastname onto root
         Main.user.firstNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
         Main.user.lastNameProperty().addListener((observable, oldValue, newValue) -> custFirstNameLabel.setText(newValue));
     }
 
     /**
-     * method to be called by different user controllers to set their respective views to the
+     * Called by different user controllers to set their respective views to the
      * center of the parent borderPane: 'empPane' . This Pane is a child of the stage
      *
      * @param node
@@ -73,12 +78,11 @@ public class CustomerRootController implements Initializable {
 
 
     /**
-     * opens the user's ProgramView (scene located within customerRoot) where they can see the list of
+     * Opens the user's ProgramView (scene located within customerRoot) where they can see the list of
      * available movies
      *
      * @param event
      */
-
     @FXML
     public void openProgramView(ActionEvent event) {
         try {
@@ -90,13 +94,12 @@ public class CustomerRootController implements Initializable {
     }
 
     /**
-     * opens the user's Profile (scene located within customerRoot) where they can see their movie history,
+     * Opens the user's Profile (scene located within customerRoot) where they can see their movie history,
      * booked movies and edit their own profile details
      * available movies
      *
      * @param event
      */
-
     @FXML
     public void openProfileView(ActionEvent event) {
         try {
@@ -107,29 +110,10 @@ public class CustomerRootController implements Initializable {
         }
     }
 
-
-    /**
-     * opens the cinema room's seat selection view based on the movie selected in the customerProgramView.
-     * Customers can book a movie in this view
-     * <p>
-     * available movies
-     */
-    @FXML
-    public void openBookingView() {
-        try {
-            Navigation.loadCustFxml(Navigation.CUST_BOOKING_VIEW);
-        } catch (IOException e) {
-            LOGGER.logp(Level.WARNING, "CustomerRootController", "openBookingView", "Failed to load CustomerBooking View. See: " + e);
-            e.printStackTrace();
-        }
-    }
-
-
     /**
      * logs user out of cinema system
      *
      * @param event
-     * @version: logout 1.0
      */
     @FXML
     public void logout(ActionEvent event) {

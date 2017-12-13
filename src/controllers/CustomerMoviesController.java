@@ -121,6 +121,7 @@ public class CustomerMoviesController implements Initializable {
         try {
             setColorsOfDatePicker();
         } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "initialize", "Failed to load setColorsofDatePicker. See: " + e);
             e.printStackTrace();
         }
     }
@@ -168,7 +169,6 @@ public class CustomerMoviesController implements Initializable {
         selectedFilmTitle.setText(film.getTitle());
         selectedFilmDescription.setText(film.getDescription());
         selectedFilmDescription.setWrapText(true);
-
         selectedFilmGroup.setVisible(true);
 
         String trailerURLString = film.getTrailerURL();
@@ -184,24 +184,22 @@ public class CustomerMoviesController implements Initializable {
             selectedTrailerPane.getChildren().addAll(errorTrailer);
         }
 
-
         // Try and get the film if it's found
         try {
             selectedFilmImage.setImage(new Image(film.getImagePath()));
             selectedFilmImage.setVisible(true);
         } catch (IllegalArgumentException e) {
-            System.err.println("Cant locate the image: ");
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Failed to locate the image. See: " + e);
             selectedFilmImage.setVisible(false);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
-            System.err.println("Unable to find film");
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "selectFilm", "Failed to find film. See: " + e);
             e.printStackTrace();
         }
 
         // hide the borders of all films
-        for (Rectangle otherRectangles :
-                movieRectanglesArrayList) {
+        for (Rectangle otherRectangles : movieRectanglesArrayList) {
             otherRectangles.setStrokeWidth(0.0);
         }
 
@@ -239,7 +237,6 @@ public class CustomerMoviesController implements Initializable {
         group.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-//                System.out.println("Clicked");
                 selectFilm(film, rectangle);
             }
         });
@@ -272,21 +269,13 @@ public class CustomerMoviesController implements Initializable {
             imageView.setFitWidth(134.0);
             imageView.setCache(true);
             imageView.setCacheHint(CacheHint.SPEED);
-        } catch (
-                IllegalArgumentException e)
-
-        {
-            System.err.println("Unable to find film:");
-        } catch (
-                UnsupportedEncodingException e)
-
-        {
+        } catch (IllegalArgumentException e) {
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "addFilmToList", "Failed to find film. See: " + e);
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (
-                NullPointerException e)
-
-        {
-            System.err.println("nullpointer");
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "addFilmToList", "Failed to encode. See: " + e);
+        } catch (NullPointerException e) {
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "addFilmToList", "Nullpointer. See: " + e);
             e.printStackTrace();
         }
 
@@ -308,7 +297,6 @@ public class CustomerMoviesController implements Initializable {
      * Add the screenings button to the view
      */
     private void addScreeningsToView() {
-        // TODO: Switch to flowpane?
 
         if (selectedDate != null) {
 
@@ -337,6 +325,7 @@ public class CustomerMoviesController implements Initializable {
                     xPosition += 130.0;
 
                 } catch (ParseException e) {
+                    LOGGER.logp(Level.WARNING, "CustomerMoviesController", "addScreeningsToView", "Failed to parse data. See: " + e);
                     e.printStackTrace();
                 }
             }
@@ -361,6 +350,7 @@ public class CustomerMoviesController implements Initializable {
                 selectedDate = dateFormat.parse(String.valueOf(datePicker.getValue()));
 
         } catch (ParseException e) {
+            LOGGER.logp(Level.WARNING, "CustomerMoviesController", "datePickerHandler", "Failed to parse date data. See: " + e);
             e.printStackTrace();
         }
         updateFilmList();
@@ -397,7 +387,7 @@ public class CustomerMoviesController implements Initializable {
                 LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(screening.getDateObject()));
                 allScreenDates.add(date);
             } catch (ParseException | NullPointerException e) {
-                System.err.println("Unable to parse string");
+                LOGGER.logp(Level.WARNING, "CustomerMoviesController", "setColorsOfDatePicker", "Failed to parse String. See: " + e);
                 e.printStackTrace();
             }
         }

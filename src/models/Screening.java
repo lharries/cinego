@@ -95,7 +95,6 @@ public class Screening {
             LOGGER.logp(Level.WARNING, "Screening", "getFilmTitle", "Unable to get film" + e);
             return "Film not found";
         }
-
     }
 
     public String getShortDate() throws ParseException {

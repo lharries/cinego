@@ -14,7 +14,7 @@
             <Image url="@../resources/films.jpg" />
          </image>
       </ImageView>
-  <AnchorPane layoutX="200.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" opacity="0.93" prefHeight="308.0" prefWidth="330.0" style="-fx-background-color: ffffff;">
+       <AnchorPane layoutX="200.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" opacity="0.93" prefHeight="308.0" prefWidth="330.0" style="-fx-background-color: ffffff;">
          <children>
             <TextField fx:id="usernameTextField" layoutX="63.0" layoutY="169.0" prefHeight="27.0" prefWidth="218.0" promptText="Username" />
             <PasswordField fx:id="passwordTextField" layoutX="63.0" layoutY="211.0" prefHeight="27.0" prefWidth="218.0" promptText="Password" />

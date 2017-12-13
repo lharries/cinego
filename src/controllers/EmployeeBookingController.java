@@ -21,6 +21,9 @@ import java.util.logging.Logger;
 /**
  * View controller allowing employee to see which seats have been booked for a particular screening
  * clicking on a booked seat shows the customers booking information
+ *
+ * @author lukeharries kaiklasen
+ * @version 1.0.0
  */
 public class EmployeeBookingController implements Initializable {
 
@@ -39,7 +42,7 @@ public class EmployeeBookingController implements Initializable {
     }
 
     /**
-     * Opens the home view
+     * Loads the Employee Home screen where they can perform their tasks
      *
      * @param event
      * @throws IOException
@@ -150,14 +153,12 @@ public class EmployeeBookingController implements Initializable {
      * @param booking the booking of this seat
      */
     public void showBookingDetails(Booking booking) {
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        // Get the Stage
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-
-        // Add a custom icon.
         stage.getIcons().add(new Image(this.getClass().getResource("/resources/cinestar.png").toString()));
-
         alert.setTitle("Booking Details");
+
         try {
             Customer customer = booking.getCustomer();
             if (customer != null) {
@@ -171,9 +172,7 @@ public class EmployeeBookingController implements Initializable {
         }
 
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
         alert.getButtonTypes().setAll(buttonTypeCancel);
-
         alert.show();
     }
 

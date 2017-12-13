@@ -11,6 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+
 <AnchorPane prefHeight="750" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerMoviesController">
    <children>
        <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true">
@@ -24,14 +25,25 @@
        <Rectangle fx:id="rect1" fill="#2f3c4d" height="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1280.0" />
        <Rectangle fx:id="rect" fill="#868c94" height="2.5" stroke="TRANSPARENT" strokeType="INSIDE" width="640.0" />
 
-      <Group layoutX="546.0" layoutY="742.0" />
-      <Rectangle fill="#596679" height="91.0" layoutY="10.0" opacity="0.9" stroke="#596679" strokeType="INSIDE" width="408.0" />
-      <Group layoutX="12.0" layoutY="110.0" />
-      <ScrollPane fx:id="moviesScrollPane" layoutY="100.0" opacity="0.9" prefHeight="651.0" prefWidth="408.0" style="-fx-background-color: #596679;">
-        <content>
-                  <VBox fx:id="moviesVBox" layoutY="5.0" prefHeight="684.0" prefWidth="405.0" style="-fx-background-color: #596679;" />
-        </content>
-      </ScrollPane>
+       <!--film preview - left screen side-->
+       <Group layoutX="546.0" layoutY="742.0" />
+       <Rectangle fill="#596679" height="91.0" layoutY="10.0" opacity="0.9" stroke="#596679" strokeType="INSIDE" width="408.0" />
+       <Group layoutX="12.0" layoutY="110.0" />
+       <ScrollPane fx:id="moviesScrollPane" layoutY="100.0" opacity="0.9" prefHeight="651.0" prefWidth="408.0" style="-fx-background-color: #596679;">
+           <content>
+               <VBox fx:id="moviesVBox" layoutY="5.0" prefHeight="684.0" prefWidth="405.0" style="-fx-background-color: #596679;" />
+           </content>
+       </ScrollPane>
+       <TextField fx:id="searchField" layoutX="25.0" layoutY="52.0" prefHeight="38.0" prefWidth="362.0" promptText="Search by title or description..." style="-fx-background-color: #ffffff; -fx-border-radius: 6px;">
+           <font>
+               <Font size="19.0" />
+           </font>
+       </TextField>
+       <DatePicker fx:id="datePicker" layoutX="23.0" layoutY="16.0" onAction="#datePickerHandler" />
+       <Group fx:id="screeningTimes" layoutX="555.0" layoutY="558.0" />
+       <Button layoutX="336.0" layoutY="16.0" mnemonicParsing="false" onAction="#showAllFilms" text="Clear" />
+
+       <!--detailed film view - right screen side-->
       <Group fx:id="selectedFilmGroup" layoutX="498.0" layoutY="155.328125">
          <children>
             <ImageView fx:id="selectedFilmImage" fitHeight="306.0" fitWidth="305.0" layoutX="439.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
@@ -49,13 +61,6 @@
             <StackPane fx:id="selectedTrailerPane" layoutX="6.0" layoutY="-6.0" prefHeight="238.0" prefWidth="351.0" />
          </children>
       </Group>
-      <TextField fx:id="searchField" layoutX="25.0" layoutY="52.0" prefHeight="38.0" prefWidth="362.0" promptText="Search by title or description..." style="-fx-background-color: #ffffff; -fx-border-radius: 6px;">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </TextField>
-      <DatePicker fx:id="datePicker" layoutX="23.0" layoutY="16.0" onAction="#datePickerHandler" />
-      <Group fx:id="screeningTimes" layoutX="555.0" layoutY="558.0" />
-      <Button layoutX="336.0" layoutY="16.0" mnemonicParsing="false" onAction="#showAllFilms" text="Clear" />
+
    </children>
 </AnchorPane>

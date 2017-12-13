@@ -6,7 +6,11 @@ import utils.SQLiteUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * The Data access object responsible for getting and saving the {@link Screening} data.
@@ -35,6 +39,25 @@ public class ScreeningDAO {
 
         return getScreeningList(resultSetScreenings);
     }
+
+
+    public static ObservableList<Date> getScreeningDatesObservableList() throws SQLException, ClassNotFoundException, ParseException {
+        ResultSet resultSetScreenings = SQLiteUtil.executeQuery("SELECT date FROM Screening", null);
+        return getScreeningDateList(resultSetScreenings);
+    }
+
+    private static ObservableList<Date> getScreeningDateList(ResultSet resultSet) throws SQLException, ClassNotFoundException, ParseException {
+        ObservableList<Date> screeningDateList = FXCollections.observableArrayList();
+        while (resultSet.next()) {
+            DateFormat longFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+            String screeningDateString = resultSet.getString("date");
+            Date screeningDate = longFormat.parse(screeningDateString);
+
+            screeningDateList.add(screeningDate);
+        }
+        return screeningDateList;
+    }
+
 
     private static ObservableList<Screening> getScreeningList(ResultSet resultSet) throws SQLException, ClassNotFoundException {
         ObservableList<Screening> screeningList = FXCollections.observableArrayList();

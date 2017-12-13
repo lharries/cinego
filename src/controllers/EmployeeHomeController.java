@@ -28,10 +28,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,11 +37,10 @@ import java.util.logging.Logger;
  * of the cinema booking system - 'Cinego'.
  *
  * @author lukeharries, kaikalsen
- * @version 1.0
+ * @version 1.0.0
  */
 public class EmployeeHomeController implements Initializable {
 
-    //TODO IMPORTANT: disable past dates + taken timeslots for creating a screening!
 
     @FXML
     private Button deleteBooking;
@@ -147,6 +143,7 @@ public class EmployeeHomeController implements Initializable {
                 Files.copy(chosenFile.toPath(), newMovie.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
+                LOGGER.logp(Level.WARNING, "EmployeeHomeController", "uploadMovieImage", "Failed to copy the film poster file into local repository. See: " + e);
             }
         }
     }
@@ -216,7 +213,7 @@ public class EmployeeHomeController implements Initializable {
      * @throws ClassNotFoundException
      */
     @FXML
-    private void validateScreening() throws SQLException, ClassNotFoundException {
+    private void validateScreening() throws SQLException, ClassNotFoundException, ParseException {
 
         //creates alert to be used in both cases: correct & incorrect inputs
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -228,6 +225,9 @@ public class EmployeeHomeController implements Initializable {
         movieTitle = String.valueOf(movieSelectionBox.getValue());
         screeningTime = String.valueOf(timePicker.getValue());
         screeningDate = String.valueOf(datePicker.getValue());
+        ObservableList<Date> screeningDates = ScreeningDAO.getScreeningDatesObservableList();
+
+        // to check that the screening is being created in the future
         Date now = new Date();
 
         // convert the dateTime to the correct format
@@ -236,7 +236,9 @@ public class EmployeeHomeController implements Initializable {
             dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateTimeString);
         } catch (ParseException e) {
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "validateScreening", "Failed to parse dateTimeString into dateTime. See: " + e);
         }
+
         //perform validity checks: empty & dateSelected < now
         if (movieTitle == null || screeningTime == null || dateTime == null) {
             alert.setHeaderText("Error: invalid input fields");
@@ -245,20 +247,23 @@ public class EmployeeHomeController implements Initializable {
         if (now.compareTo(dateTime) > 0) {
             alert.setHeaderText("Error: screening date in the past");
             alert.setContentText("Please select a future screening date, " + Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
-        } else {
+        }
+        else if(screeningDates.contains(dateTime)) {
+            alert.setHeaderText("Error: overlapping screeningDates");
+            alert.setContentText("Please choose a screening date and time slot that's still available, " + Main.user.getFirstName());
+        }
+        else {
             alert.setHeaderText("Success: screening created");
             alert.setContentText("Your screening was successfully added, " + Main.user.getFirstName());
-            PauseTransition delay = new PauseTransition(Duration.seconds(4));
-            delay.setOnFinished(e -> popup.hide());
-            popup.show();
-            delay.play();
 
             createScreening();
         }
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(e -> popup.hide());
+        popup.show();
+        delay.play();
+
     }
 
     /**
@@ -270,13 +275,9 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private void createScreening() throws SQLException, ClassNotFoundException {
 
-        //access input values & create date-time
-        String date = dateTime.toString();
-        Film film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
-        int filmId = film.getId();
-
         //adds the newly created screening to the database
-        ScreeningDAO.insertScreening(filmId, date);
+        Film film = (Film) movieSelectionBox.getSelectionModel().getSelectedItem();
+        ScreeningDAO.insertScreening(film.getId(), dateTime.toString());
 
         //resets input values to default + update screeningTable
         movieSelectionBox.setValue(null);
@@ -374,9 +375,8 @@ public class EmployeeHomeController implements Initializable {
             EmployeeBookingController.selectedScreening = ScreeningDAO.getScreeningById(selectedScreeningId);
             EmployeeRootController emplRootController = new EmployeeRootController();
             emplRootController.openBookingView(event);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "openSeatsBooked", "Failed to load the retrieve Screening by ID and load the booking view. See: " + e);
             e.printStackTrace();
         }
         toSeatBooking.setDisable(true);
@@ -488,8 +488,8 @@ public class EmployeeHomeController implements Initializable {
         try {
             FilmDAO.updateFilm(title, description, filmImageName, movieTrailerURL, selectedFilmId);
         } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilmBtnHandler", "Failed to update database with edited movie data. See: " + e);
             e.printStackTrace();
+            LOGGER.logp(Level.WARNING, "EmployeeHomeController", "updateFilmBtnHandler", "Failed to update database with edited movie data. See: " + e);
         }
         editFilmButton.setDisable(true);
         updateFilmButton.setDisable(true);

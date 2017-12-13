@@ -40,7 +40,7 @@
          </columns>
       </TableView>
 
-   <!--create screening-->
+   <!--create screening functionality-->
       <HBox fx:id="hBox1" layoutX="700.0" layoutY="416.0" prefHeight="32.0" prefWidth="535.0" spacing="15.0">
          <children>
             <ComboBox fx:id="movieSelectionBox" prefHeight="30.0" prefWidth="271.0" promptText="Movie" />
@@ -52,8 +52,31 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <HBox fx:id="hBox11" layoutX="700.0" layoutY="460.0" prefHeight="30.0" prefWidth="535.0" spacing="15.0">
+         <children>
+            <ComboBox fx:id="timePicker" prefHeight="30.0" prefWidth="271.0" promptText="Time">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="15:00" />
+                     <String fx:value="16:00" />
+                     <String fx:value="17:00" />
+                     <String fx:value="18:00" />
+                     <String fx:value="19:00" />
+                     <String fx:value="20:00" />
+                     <String fx:value="21:00" />
+                     <String fx:value="22:00" />
+                     <String fx:value="23:00" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Button fx:id="AddScreening" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#validateScreening" prefHeight="30.0" prefWidth="250.0" stylesheets="@../application/application.css" text="Add Screening">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
 
-   <!--Movie table, creation HBox-->
+      <!--film table, creation HBox-->
       <TableView fx:id="filmsTable" layoutX="50.0" layoutY="60.0" onMouseClicked="#filmRowClickedHandler" prefHeight="335.0" prefWidth="535.0">
          <columns>
             <TableColumn fx:id="titleCol" prefWidth="158.5" text="Title" />
@@ -65,6 +88,8 @@
             <Font size="24.0" />
          </font>
       </Label>
+
+      <!--create film-->
       <HBox fx:id="hBox" layoutX="52.0" layoutY="416.0" prefHeight="30.0" prefWidth="535.0" spacing="15.0">
          <TextField fx:id="titleTextField" layoutX="1054.0" layoutY="503.0" prefHeight="30.0" prefWidth="194.0" promptText="Title" />
          <Button fx:id="moviePosterBttn" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#uploadMovieImage" onKeyPressed="#uploadMovieImage" prefHeight="30.0" prefWidth="153.0" text="img upload" />
@@ -82,26 +107,6 @@
       <Button fx:id="createFilmButton" layoutX="432.0" layoutY="475.0" mnemonicParsing="false" onAction="#filmValidation" prefHeight="30.0" prefWidth="155.0" text="Add movie" />
       <Button fx:id="editFilmButton" disable="true" layoutX="432.0" layoutY="596.0" mnemonicParsing="false" onAction="#editFilmBtnHandler" prefHeight="30.0" prefWidth="155.0" text="Edit movie" />
       <Button fx:id="updateFilmButton" disable="true" layoutX="432.0" layoutY="646.0" mnemonicParsing="false" onAction="#updateFilmBtnHandler" prefHeight="30.0" prefWidth="155.0" text="Update" />
-      <HBox fx:id="hBox11" layoutX="700.0" layoutY="460.0" prefHeight="30.0" prefWidth="535.0" spacing="15.0">
-         <children>
-            <ComboBox fx:id="timePicker" prefHeight="30.0" prefWidth="271.0" promptText="Time">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="16:00" />
-                     <String fx:value="17:00" />
-                     <String fx:value="18:00" />
-                     <String fx:value="19:00" />
-                     <String fx:value="20:00" />
-                     <String fx:value="21:00" />
-                  </FXCollections>
-               </items>
-            </ComboBox>
-            <Button fx:id="AddScreening" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#validateScreening" prefHeight="30.0" prefWidth="250.0" stylesheets="@../application/application.css" text="Add Screening">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Button>
-         </children>
-      </HBox>
       <HBox fx:id="hBox12" layoutX="700.0" layoutY="646.0" prefHeight="30.0" prefWidth="535.0" spacing="15.0">
          <children>
             <Button fx:id="toSeatBooking" disable="true" mnemonicParsing="false" onAction="#openSeatsBooked" prefHeight="27.0" prefWidth="168.0" text="view booking" />

@@ -214,7 +214,6 @@ public class CustomerBookingController implements Initializable {
                         });
                     }
 
-                    //TODO: Set the button color to white
                     gridPaneSeats.add(btn, j, i);
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<AnchorPane fx:id="AnchorPane" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeHomeController">
+   <children>
+
+      <!--Background image-->
+      <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true">
+         <image>
+         <Image backgroundLoading="true" url="@../resources/cinBackgroundSML.jpg" />
+         </image>
+         <effect>
+            <ColorAdjust saturation="-0.88" />
+         </effect>
+      </ImageView>
+
+      <!--Screening table, screening creation HBox-->
+      <TableView fx:id="screeningsTable" layoutX="700.0" layoutY="60.0" onMouseClicked="#screeningRowClickHandler" prefHeight="335.0" prefWidth="535.0">
+         <columns>
+            <TableColumn fx:id="titleColScreenTab" prefWidth="261.0" text="Title" />
+            <TableColumn fx:id="dateColScreenTab" prefWidth="273.0" text="Date" />
+         </columns>
+      </TableView>
+
+   <!--create screening functionality-->
+      <HBox fx:id="hBox1" layoutX="700.0" layoutY="416.0" prefHeight="32.0" prefWidth="535.0" spacing="15.0">
+         <children>
+            <ComboBox fx:id="movieSelectionBox" prefHeight="30.0" prefWidth="271.0" promptText="Movie" />
+            <DatePicker fx:id="datePicker" prefHeight="30.0" prefWidth="252.0" promptText="Date" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="699.0" layoutY="25.0" prefHeight="29.0" prefWidth="527.0" text="Screenings" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <HBox fx:id="hBox11" layoutX="700.0" layoutY="460.0" prefHeight="30.0" prefWidth="535.0" spacing="15.0">
+         <children>
+            <ComboBox fx:id="timePicker" prefHeight="30.0" prefWidth="271.0" promptText="Time">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="15:00" />
+                     <String fx:value="16:00" />
+                     <String fx:value="17:00" />
+                     <String fx:value="18:00" />
+                     <String fx:value="19:00" />
+                     <String fx:value="20:00" />
+                     <String fx:value="21:00" />
+                     <String fx:value="22:00" />
+                     <String fx:value="23:00" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Button fx:id="AddScreening" layoutX="1054.0" layoutY="503.0" mnemonicParsing="false" onAction="#validateScreening" prefHeight="30.0" prefWidth="250.0" stylesheets="@../application/application.css" text="Add Screening">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
+
+      <!--film table, creation HBox-->
+      <TableView fx:id="filmsTable" layoutX="50.0" layoutY="60.0" onMouseClicked="#filmRowClickedHandler" prefHeight="335.0" prefWidth="535.0">
+         <columns>
+            <TableColumn fx:id="titleCol" prefWidth="158.5" text="Title" />
+            <TableColumn fx:id="descriptCol" prefWidth="375.5" text="Description" />
+         </columns>
+      </TableView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="25.0" prefHeight="29.0" prefWidth="531.0" text="Movies" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+
+      <!--create film-->
+      <HBox fx:id="hBox" layoutX="52.0" layoutY="416.0" prefHeight="30.0" prefWidth="535.0" spacing="15.0">
+         <TextField fx:id="titleTextField" layoutX="1054.0" layoutY="503.0" prefHeight="30.0" prefWidth="194.0" promptText="Title" />
+         <Button fx:id="moviePosterBttn" layoutX="1008.0" layoutY="210.0" mnemonicParsing="false" onAction="#uploadMovieImage" onKeyPressed="#uploadMovieImage" prefHeight="30.0" prefWidth="153.0" text="Poster upload" />
+         <TextField fx:id="trailerURLTextField" prefHeight="32.0" prefWidth="164.0" promptText="Ytube URL: https://www.youtube.com/watch?v=6ZfuNTqbHE8" />
+      </HBox>
+      <ScrollPane layoutX="50.0" layoutY="475.0" prefHeight="203.0" prefWidth="358.0">
+        <content>
+          <AnchorPane fx:id="thisPane" minHeight="0.0" minWidth="0.0" prefHeight="230.0" prefWidth="359.0">
+               <children>
+                  <TextArea fx:id="descriptionTextArea" prefHeight="233.0" prefWidth="359.0" promptText="Movie description..." />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="createFilmButton" layoutX="432.0" layoutY="475.0" mnemonicParsing="false" onAction="#filmValidation" prefHeight="30.0" prefWidth="155.0" text="Add movie" />
+      <Button fx:id="editFilmButton" disable="true" layoutX="432.0" layoutY="596.0" mnemonicParsing="false" onAction="#editFilmBtnHandler" prefHeight="30.0" prefWidth="155.0" text="Edit movie" />
+      <Button fx:id="updateFilmButton" disable="true" layoutX="432.0" layoutY="646.0" mnemonicParsing="false" onAction="#updateFilmBtnHandler" prefHeight="30.0" prefWidth="155.0" text="Update" />
+      <HBox fx:id="hBox12" layoutX="700.0" layoutY="646.0" prefHeight="30.0" prefWidth="535.0" spacing="15.0">
+         <children>
+            <Button fx:id="toSeatBooking" disable="true" mnemonicParsing="false" onAction="#openSeatsBooked" prefHeight="27.0" prefWidth="168.0" text="view booking" />
+            <Button fx:id="deleteScreening" disable="true" mnemonicParsing="false" onAction="#deleteScreening" prefHeight="27.0" prefWidth="157.0" text="delete screening" />
+            <Button fx:id="exportCSVHandler" mnemonicParsing="false" onAction="#exportData" prefHeight="30.0" prefWidth="149.0" text="export" />
+         </children>
+      </HBox>
+
+   </children>
+</AnchorPane>

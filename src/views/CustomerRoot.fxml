@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<BorderPane fx:id="customerPane" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerRootController">
+
+    <!--App's header -->
+    <top>
+      <AnchorPane prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle fill="#2f3c4d" height="50.0" layoutY="50.0" stroke="#2f3c4d" strokeType="INSIDE" width="1280.0" />
+            <Line endX="1279.0" layoutX="0.0" layoutY="50.0" startX="0.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+            <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
+            <Label layoutX="23.0" layoutY="13.0" text="Customer" textFill="WHITE">
+                 <font>
+                     <Font size="25.0" />
+                 </font>
+            </Label>
+            <Label fx:id="custFirstNameLabel" layoutX="195.0" layoutY="12.0" prefHeight="30.0" prefWidth="180.0" text="First Name" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <Label fx:id="custLastNameLabel" layoutX="365.0" layoutY="12.0" prefHeight="30.0" prefWidth="180.0" text="Last Name" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <Label alignment="BOTTOM_CENTER" layoutX="22.0" layoutY="61.0" prefHeight="39.0" prefWidth="600.0" text="Film Program" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="toProgramView" alignment="BOTTOM_CENTER" layoutX="7.0" layoutY="55.0" mnemonicParsing="false" onAction="#openProgramView" opacity="0.0" prefHeight="42.0" prefWidth="600.0" text="Program View" />
+            <Label alignment="BOTTOM_CENTER" layoutX="662.0" layoutY="53.0" prefHeight="46.0" prefWidth="600.0" text="Your Profile" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="toCustomerProfile" alignment="BOTTOM_CENTER" layoutX="668.0" layoutY="54.0" mnemonicParsing="false" onAction="#openProfileView" opacity="0.0" prefHeight="43.0" prefWidth="600.0" text="Customer Profile" />
+            <Label layoutX="1153.0" layoutY="14.0" text="Logout" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="logout" layoutX="1150.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" opacity="0.0" prefHeight="43.0" prefWidth="106.0" text="Logout" />
+         </children>
+      </AnchorPane>
+    </top>
+
+    <!--App's main content area-->
+    <center>
+        <AnchorPane prefHeight="750.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+    </center>
+
+    <!--App' footer-->
+    <bottom>
+      <AnchorPane prefHeight="50.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle fill="#071625" height="50.0" stroke="#071625" strokeType="INSIDE" width="1280.0" />
+             <Text fill="WHITE" layoutX="431.0" layoutY="-12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CineGo" wrappingWidth="134.02083206176758" x="100.0" y="50.0">
+                 <font>
+                     <Font size="34.0" />
+                 </font>
+             </Text>
+         </children>
+      </AnchorPane>
+   </bottom>
+
+</BorderPane>

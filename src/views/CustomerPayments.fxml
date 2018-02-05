@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerPaymentsController">
+    <children>
+
+        <!--Background image-->
+        <ImageView fitHeight="786.0" fitWidth="1388.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image backgroundLoading="true" url="@../resources/cinWallpaperSML.jpg" />
+            </image>
+            <effect>
+                <ColorAdjust saturation="-0.88" />
+            </effect>
+        </ImageView>
+        <Rectangle fx:id="rect1" fill="#2f3c4d" height="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1280.0" />
+        <Rectangle fx:id="rect" fill="#868c94" height="2.5" stroke="TRANSPARENT" strokeType="INSIDE" width="640.0" />
+        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="635.0" layoutX="449.0" layoutY="42.0" stroke="BLACK" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" width="495.0" />
+
+        <!--Payments window-->
+        <Text layoutX="534.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payments:" textAlignment="CENTER" wrappingWidth="316.9052734375">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <Line endX="300.0" layoutX="550.0" layoutY="330.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Line endX="300.0" layoutX="545.0" layoutY="539.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Button layoutX="724.0" layoutY="584.0" mnemonicParsing="false" onAction="#payBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Pay with Credit Card" />
+        <Button layoutX="491.0" layoutY="584.0" mnemonicParsing="false" onAction="#cancelBtnHandler" prefHeight="27.0" prefWidth="185.0" text="Cancel" />
+        <Label layoutX="543.0" layoutY="394.0" text="Card Number" />
+        <TextField fx:id="cardNumberField" layoutX="641.0" layoutY="389.0" prefHeight="27.0" prefWidth="210.0" text="4242 4242 4242 4242" />
+        <Label layoutX="543.0" layoutY="439.0" text="Expiry Date" />
+        <Label layoutX="544.0" layoutY="495.0" text="CVC Number" />
+        <TextField fx:id="expiryDateMonthField" layoutX="639.0" layoutY="442.0" prefHeight="27.0" prefWidth="61.0" text="12" />
+        <TextField fx:id="cvcField" layoutX="641.0" layoutY="490.0" prefHeight="27.0" prefWidth="48.0" text="130" />
+        <TextField fx:id="expiryDateYearField" layoutX="728.0" layoutY="441.0" prefHeight="27.0" prefWidth="61.0" text="18" />
+        <Label layoutX="543.0" layoutY="456.0" text="MM/YY" />
+        <Text layoutX="536.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking Summary:" textAlignment="CENTER" wrappingWidth="316.9052734375">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <Line endX="300.0" layoutX="552.0" layoutY="65.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+        <Label layoutX="545.0" layoutY="296.0" text="Total:" />
+        <Label fx:id="totalCostText" layoutX="638.0" layoutY="296.0" text="Cost" />
+        <Text fx:id="errorMessageText" fill="RED" layoutX="531.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="331.0000001043081" />
+      <Label layoutX="541.0" layoutY="110.0" text="Film:" />
+      <Label fx:id="filmText" layoutX="634.0" layoutY="110.0" text="Film" />
+      <Label layoutX="540.0" layoutY="135.0" text="Screening:" />
+      <Label fx:id="screeningText" layoutX="633.0" layoutY="135.0" text="Screening" />
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="185.0" layoutX="56.0" layoutY="42.0" stroke="BLACK" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" width="288.0" />
+      <Text layoutX="42.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note:" textAlignment="CENTER" wrappingWidth="316.9052734375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="78.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The payment processing api keys are in test mode, therefore only the card with number 4242 42424 42424 42424 will work." wrappingWidth="243.771484375" />
+      <ListView fx:id="selectedSeatsList" layoutX="624.0" layoutY="167.0" prefHeight="112.0" prefWidth="200.0" />
+      <Label layoutX="538.0" layoutY="173.0" text="Seats:" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="602.0" layoutY="611.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/logo-stripe.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="141.0" layoutY="177.0" mnemonicParsing="false" onAction="#skipPayBtnHandler" prefHeight="27.0" prefWidth="114.0" text="Skip Stripe" />
+
+    </children>
+</AnchorPane>

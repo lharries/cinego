@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeBookingController">
+   <children>
+
+      <!--background image + header details-->
+      <ImageView fx:id="backgroundImg" fitHeight="750.0" fitWidth="1280.0" opacity="0.2" pickOnBounds="true">
+         <image>
+            <Image backgroundLoading="false" url="@../resources/cinBackgroundSML.jpg" />
+         </image>
+         <effect>
+            <ColorAdjust saturation="-0.88" />
+         </effect>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" layoutX="217.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
+
+      <!--seating map-->
+      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="329.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/avaliable-seat.png" />
+         </image>
+      </ImageView>
+      <Line endX="200.0" fill="#00000099" layoutX="461.0" layoutY="34.0" startX="-200.0" strokeWidth="15.0" />
+      <Text layoutX="308.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="512.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/taken-seat.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="498.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Line endY="649.0" layoutX="897.0" layoutY="4.0" stroke="#c8ccd0" strokeMiterLimit="100.0" strokeWidth="2.0" />
+      <Text layoutX="936.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary statistics" textAlignment="CENTER" wrappingWidth="316.9052734375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Line endX="300.0" layoutX="947.0" layoutY="103.0" stroke="#596679" strokeMiterLimit="100.0" strokeWidth="2.0" />
+      <GridPane fx:id="gridPaneSeats" layoutY="68.0" prefHeight="442.0" prefWidth="846.0" style="-fx-alignment: center;" translateZ="300.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="70.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="83.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="63.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+
+      <!--descriptive statistics right hand side-->
+      <Label fx:id="bookedSeats" alignment="CENTER" layoutX="946.0" layoutY="122.0" prefHeight="58.0" prefWidth="152.0" text="Booked seats:" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="returnHomeClickHandler" layoutX="1006.0" layoutY="607.0" mnemonicParsing="false" onAction="#openHomeView" prefHeight="27.0" prefWidth="185.0" text="return home" />
+      <Label fx:id="bookedSeats1" alignment="CENTER" layoutX="950.0" layoutY="180.0" prefHeight="58.0" prefWidth="174.0" text="Remaining Seats:" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="bookedSeatsNumber" alignment="CENTER" layoutX="1129.0" layoutY="122.0" prefHeight="58.0" prefWidth="117.0" text="0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="remainingSeatsNumber" alignment="CENTER" layoutX="1129.0" layoutY="180.0" prefHeight="58.0" prefWidth="117.0" text="111" textAlignment="RIGHT">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="bookedSeats11" alignment="CENTER" layoutX="955.0" layoutY="238.0" prefHeight="58.0" prefWidth="117.0" text="Total Seats:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="remainingSeatsNumber1" alignment="CENTER" layoutX="1129.0" layoutY="238.0" prefHeight="58.0" prefWidth="117.0" text="40" textAlignment="RIGHT">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="956.0" layoutY="295.0" prefHeight="72.0" prefWidth="277.0" text="Click on a booking for customer information" wrapText="true" />
+
+   </children>
+</AnchorPane>

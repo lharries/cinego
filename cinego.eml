@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<contentEntry url="file://$MODULE_DIR$">
+		<excludeFolder url="file://$MODULE_DIR$/bin"/>
+	</contentEntry>
+	<lib name="stripe-java-5.25.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/stripe-java-5.25.0.jar!/"/>
+	</lib>
+	<lib name="csvjdbc-1.0-34.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/csvjdbc-1.0-34.jar!/"/>
+	</lib>
+	<lib name="gson-2.6.2.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/gson-2.6.2.jar!/"/>
+	</lib>
+	<lib name="sqlite-jdbc-3.21.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/sqlite-jdbc-3.21.0.jar!/"/>
+	</lib>
+	<lib name="sendgrid-java-latest.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/sendgrid-java-latest.jar!/"/>
+	</lib>
+</component>
